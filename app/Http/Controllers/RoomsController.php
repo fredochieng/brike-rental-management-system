@@ -68,9 +68,12 @@ class RoomsController extends Controller
         $room->save();
 
         Toastr::success('Room added successfully');
-        return back();
+        return back(); 
+    }
 
-         
+    public function roomAssignments(Request $request){
+        // $data['property'] = Property::getProperty();
+        return view('rooms.room-assignments');
     }
 
     /**

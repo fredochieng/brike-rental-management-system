@@ -120,6 +120,11 @@
                                         href="{{route('rooms.rooms-list')}}">
                                         Room Listing</a></li>
                             </ul>
+                            <ul>
+                                <li class="{{ Request::segment(2) === 'room-assignments' ? 'active' : null }}"><a
+                                        href="{{route('rooms.room-assignments')}}">
+                                        Room Assignment</a></li>
+                            </ul>
                             {{-- <ul>
                                 <li class="{{ Request::segment(2) === 'rooms-create' ? 'active' : null }}"><a
                                 href="{{route('rooms.rooms-create')}}">Add

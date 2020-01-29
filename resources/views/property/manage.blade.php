@@ -85,10 +85,14 @@
     <div class="col-lg-12 col-md-12">
         <div class="card">
             <div class="body">
+                <a href="#assignRoomModal" data-toggle="modal" data-target="#assignRoomModal"
+                    class="btn btn-info pull-right"><i class="icon-plus"></i> ASSIGN ROOM
+                </a>
                 <ul class="nav nav-tabs-new2">
                     <li class="nav-item"><a class="nav-link active show" data-toggle="tab"
                             href="#Home-new2">Variations</a>
                     </li>
+
                     {{-- <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#Profile-new2">Rooms</a></li>
                     <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#Contact-new2">Contact</a></li> --}}
                 </ul>
@@ -96,7 +100,7 @@
                     <div class="tab-pane show active" id="Home-new2">
                         <div class="table-responsive">
                             <table class="table table-hover m-b-0">
-                                <thead class="thead-info">
+                                <thead class="thead-primary">
                                     <tr>
                                         <th>#</th>
                                         <th>Name</th>
@@ -157,7 +161,7 @@
             <div class="body">
                 <div class="table-responsive">
                     <table class="table table-hover m-b-0">
-                        <thead class="thead-info">
+                        <thead class="thead-primary">
                             <tr>
                                 <th>Transaction ID</th>
                                 <th>Name</th>
@@ -207,4 +211,13 @@
         </div>
     </div>
 </div>
+@include('property.modals.modal-assign-room')
+@stop
+@section('js')
+
+<script>
+    $(function () {
+        console.log('welcome fredrick....');
+        });
+</script>
 @stop

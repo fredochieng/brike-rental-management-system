@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Property;
 use App\Models\Tenants;
+use App\Models\Rooms;
 use App\Models\PropertyCategories;
 use App\Models\PropertyVariations;
 use App\Models\Variation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Auth;
 use Kamaln7\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\Log;
@@ -161,6 +163,21 @@ class PropertyController extends Controller
         $data['currency_symbol'] = 'KES';
 
        return view('property.manage')->with($data);
+    }
+
+    public function varRoomsSelector(Request $request){
+       //Function to get the variation rooms based on the selected variation
+        $variation_val_id = Input::get('variation_val_id');
+       
+        $rooms = Rooms::getRooms()->where('variation_val_id', $variation_val_id);
+        // $rooms = Rooms::getVariationRooms($variation_val_id);
+
+        return response()->json($rooms);
+    }
+
+     public function assignRoom(Request $request){
+        // $data['property'] = Property::getProperty();
+       // return view('rooms.room-assignments')->with($data);
     }
 
     /**

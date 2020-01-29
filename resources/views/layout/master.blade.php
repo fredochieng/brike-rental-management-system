@@ -23,10 +23,9 @@
     <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
 
 
-
-
     @if (Request::segment(2) === 'property-list' || Request::segment(2) === 'tenants-list' || Request::segment(2) ===
-    'categories' || Request::segment(2) === 'variations' || Request::segment(2) === 'rooms-list')
+    'categories' || Request::segment(2) === 'variations' || Request::segment(2) === 'rooms-list' || Request::segment(2)
+    === 'room-assignments')
     <link rel="stylesheet" href="{{ asset('assets/vendor/jquery-datatable/dataTables.bootstrap4.min.css') }}" />
     <link rel="stylesheet"
         href="{{ asset('assets/vendor/jquery-datatable/fixedeader/dataTables.fixedcolumns.bootstrap4.min.css') }}" />
@@ -308,9 +307,11 @@
     <script src="{{ asset('assets/bundles/morrisscripts.bundle.js') }}"></script><!-- Morris Plugin Js -->
     <script src="{{ asset('assets/bundles/jvectormap.bundle.js') }}"></script> <!-- JVectorMap Plugin Js -->
     <script src="{{ asset('assets/bundles/knob.bundle.js') }}"></script>
+    <script src="{{ asset('/js/variationRoomsSelector.js') }}"></script>
 
     @if (Request::segment(2) === 'property-list' || Request::segment(2) === 'categories' || Request::segment(2) ===
-    'variations' || Request::segment(2) === 'tenants-list' || Request::segment(2) === 'rooms-list'
+    'variations' || Request::segment(2) === 'tenants-list' || Request::segment(2) === 'rooms-list' ||
+    Request::segment(2) === 'room-assignments'
     )
     <script src="{{ asset('assets/bundles/datatablescripts.bundle.js') }}"></script>
     <script src="{{ asset('assets/vendor/jquery-datatable/buttons/dataTables.buttons.min.js') }}"></script>
@@ -328,6 +329,10 @@
 
     @if (Request::segment(2) === 'rooms-list')
     <script src="{{ asset('/js/variationValSelector.js') }}"></script>
+    @endif
+
+    @if (Request::segment(2) === 'property-manage')
+    <script src="{{ asset('/js/variationRoomsSelector.js') }}"></script>
     @endif
 
 

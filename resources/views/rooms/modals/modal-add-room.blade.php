@@ -67,7 +67,6 @@
                     <button type="submit" class="btn btn-primary"><i class="icon-check"></i> Add Room</button>
                     <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Close</button>
                 </div>
-                </form>
                 {!! Form::close() !!}
             </div>
         </div>
