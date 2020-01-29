@@ -1,0 +1,695 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+<title>:: Lucid :: Documentation</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta name="description" content="Lucid Bootstrap 4.1.1 Admin Template">
+<meta name="author" content="WrapTheme, design by: ThemeMakker.com">
+
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<!-- VENDOR CSS -->
+<link rel="stylesheet" href="../public/assets/vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="../public/assets/vendor/font-awesome/css/font-awesome.min.css">
+
+<!-- MAIN CSS -->
+<link rel="stylesheet" href="../public/assets/css/main.css">
+<link rel="stylesheet" href="../public/assets/css/color_skins.css">
+<style>
+#left-sidebar{
+    margin-top: 65px;
+    overflow-y: scroll;
+    scrollbar-width: none;
+	-ms-overflow-style: none;
+	
+}
+#left-sidebar::-webkit-scrollbar {width: 0px;}
+.card .body{font-size: 15px;}
+.main_features li{ line-height: 35px;}
+.main_features li.divider{
+    border-bottom: 1px solid #ececec;
+    margin: 10px 0;
+    list-style: none;
+    font-size: 12px;
+    text-transform: uppercase;
+    line-height: 1;
+    color: #ff0000;
+    padding-top: 15px;
+}
+
+</style>
+</head>
+<body class="theme-cyan">
+
+<!-- Page Loader -->
+<div class="page-loader-wrapper">
+    <div class="loader">
+        <div class="m-t-30"><img src="../public/assets/img/logo-icon.svg" width="48" height="48" alt="Lucid"></div>
+        <p>Please wait...</p>        
+    </div>
+</div>
+<!-- Overlay For Sidebars -->
+
+<div id="wrapper">
+
+    <nav class="navbar navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-btn">
+                <button type="button" class="btn-toggle-offcanvas"><i class="lnr lnr-menu fa fa-bars"></i></button>
+            </div>
+
+            <div class="navbar-brand">
+                <a href="index.html"><img src="../public/assets/img/logo.svg" alt="Lucid Logo" class="img-responsive logo"></a>                
+            </div>
+            
+            <div class="navbar-right">
+                <form id="navbar-search" class="navbar-form search-form">
+                    <input value="" class="form-control" placeholder="Search here..." type="text">
+                    <button type="button" class="btn btn-default"><i class="icon-magnifier"></i></button>
+                </form>                
+
+                <div id="navbar-menu">
+                    <ul class="nav navbar-nav">
+                        <li class="d-none d-sm-block d-md-none d-lg-inline-block">
+                            <a href="#" class="icon-menu"><i class="fa fa-folder-open-o"></i></a>
+                        </li>
+                        <li class="d-none d-sm-block d-md-none d-lg-inline-block">
+                            <a href="#" class="icon-menu"><i class="icon-calendar"></i></a>
+                        </li>
+                        <li class="d-none d-sm-inline-block">
+                            <a href="#" class="icon-menu"><i class="icon-bubbles"></i></a>
+                        </li>
+                        <li class="d-none d-sm-inline-block">
+                            <a href="#" class="icon-menu"><i class="icon-envelope"></i><span class="notification-dot"></span></a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="javascript:void(0);" class="dropdown-toggle icon-menu" data-toggle="dropdown">
+                                <i class="icon-bell"></i>
+                                <span class="notification-dot"></span>
+                            </a>
+                            <ul class="dropdown-menu notifications">
+                                <li class="header"><strong>You have 4 new Notifications</strong></li>
+                                <li>
+                                    <a href="javascript:void(0);">
+                                        <div class="media">
+                                            <div class="media-left">
+                                                <i class="icon-info text-warning"></i>
+                                            </div>
+                                            <div class="media-body">
+                                                <p class="text">Campaign <strong>Holiday Sale</strong> is nearly reach budget limit.</p>
+                                                <span class="timestamp">10:00 AM Today</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>                               
+                                <li>
+                                    <a href="javascript:void(0);">
+                                        <div class="media">
+                                            <div class="media-left">
+                                                <i class="icon-like text-success"></i>
+                                            </div>
+                                            <div class="media-body">
+                                                <p class="text">Your New Campaign <strong>Holiday Sale</strong> is approved.</p>
+                                                <span class="timestamp">11:30 AM Today</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                 <li>
+                                    <a href="javascript:void(0);">
+                                        <div class="media">
+                                            <div class="media-left">
+                                                <i class="icon-pie-chart text-info"></i>
+                                            </div>
+                                            <div class="media-body">
+                                                <p class="text">Website visits from Twitter is 27% higher than last week.</p>
+                                                <span class="timestamp">04:00 PM Today</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);">
+                                        <div class="media">
+                                            <div class="media-left">
+                                                <i class="icon-info text-danger"></i>
+                                            </div>
+                                            <div class="media-body">
+                                                <p class="text">Error on website analytics configurations</p>
+                                                <span class="timestamp">Yesterday</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="footer"><a href="javascript:void(0);" class="more">See all notifications</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="javascript:void(0);" class="dropdown-toggle icon-menu" data-toggle="dropdown"><i class="icon-equalizer"></i></a>
+                            <ul class="dropdown-menu user-menu menu-icon">
+                                <li class="menu-heading">ACCOUNT SETTINGS</li>
+                                <li><a href="javascript:void(0);"><i class="icon-note"></i> <span>Basic</span></a></li>
+                                <li><a href="javascript:void(0);"><i class="icon-equalizer"></i> <span>Preferences</span></a></li>
+                                <li><a href="javascript:void(0);"><i class="icon-lock"></i> <span>Privacy</span></a></li>
+                                <li><a href="javascript:void(0);"><i class="icon-bell"></i> <span>Notifications</span></a></li>
+                                <li class="menu-heading">BILLING</li>
+                                <li><a href="javascript:void(0);"><i class="icon-credit-card"></i> <span>Payments</span></a></li>
+                                <li><a href="javascript:void(0);"><i class="icon-printer"></i> <span>Invoices</span></a></li>                                
+                                <li><a href="javascript:void(0);"><i class="icon-refresh"></i> <span>Renewals</span></a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#" class="icon-menu"><i class="icon-login"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div id="left-sidebar" class="sidebar">
+        <div class="sidebar-scroll">
+            <nav id="left-sidebar-nav" class="sidebar-nav">
+                <ul id="main-menu" class="metismenu">
+                    <li class="active"><a href="#documenter_cover"><span>Start </span></a></li>
+                    <li><a href="#overview"><span>Overview</span></a></li>
+                    <li><a href="#server_requirements"><span>Server Requirements</span></a></li>
+                    <li><a href="#installation"><span>Installation</span></a></li>
+                    <li><a href="#features"><span>Features</span></a></li>
+                    <li><a href="#template"><span>Template</span></a></li>
+                    <li><a href="#grunt_file"><span>Grunt File</span></a></li>
+                    <li><a href="#main_content"><span>Main Content</span></a></li>
+                    <li><a href="#folder_structure"><span>Folder Structure</span></a></li>
+                    <li><a href="#SCSS"><span>SCSS</span></a></li>
+                    <li><a href="#javascript"><span>Javascript</span></a></li>
+                    <li><a href="#fonts"><span>Fonts</span></a></li>
+                    <li><a href="#thank_you"><span>THANK YOU!</span></a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <div id="main-content">
+        <div class="container-fluid">
+
+            <div class="block-header">
+                <div class="row">
+                    <div class="col-lg-5 col-md-8 col-sm-12">                        
+                        <h2><a href="javascript:void(0);" class="btn btn-xs btn-link btn-toggle-fullwidth"><i class="fa fa-arrow-left"></i></a> Documentation</h2>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="index.html"><i class="icon-home"></i></a></li>
+                            <li class="breadcrumb-item active">Documentation</li>
+                        </ul>
+                    </div>            
+                    <div class="col-lg-7 col-md-4 col-sm-12 text-right">
+                        <div class="inlineblock text-center m-r-15 m-l-15 hidden-sm">
+                            <div class="sparkline text-left" data-type="line" data-width="8em" data-height="20px" data-line-Width="1" data-line-Color="#00c5dc"
+                                data-fill-Color="transparent">3,5,1,6,5,4,8,3</div>
+                            <span>Visitors</span>
+                        </div>
+                        <div class="inlineblock text-center m-r-15 m-l-15 hidden-sm">
+                            <div class="sparkline text-left" data-type="line" data-width="8em" data-height="20px" data-line-Width="1" data-line-Color="#f4516c"
+                                data-fill-Color="transparent">4,6,3,2,5,6,5,4</div>
+                            <span>Visits</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row clearfix">
+                <div class="col-sm-12 ">
+                    <div class="card" id="documenter_cover">
+                        <div class="header">
+                            <h2>Start Lucid Laravel</h2>
+                        </div>
+                        <div class="body">
+                            <h3 class="m-b-25">Lucid - Laravel + Bootstrap 4 Admin Template</h3>
+                            <ul>
+                                <li>Created:  09-Fab-2019</li>
+                                <li>latest update:  30-May-2019</li>
+                            </ul>
+                            <p>Thank you for purchasing our template. If you have any questions that are beyond the scope of this help file, please feel free to email at wraptheme@gmail.com</p>
+                            <p>If you really like our work, design, performance and support then <a href="https://themeforest.net/downloads"> please don't forgot to rate us</a> on Themeforest,<br>
+                            it really motivate us to provide something better.
+                                <span>
+                                    <i class="fa fa-star text-warning m-r-5"></i>
+                                    <i class="fa fa-star text-warning m-r-5"></i>
+                                    <i class="fa fa-star text-warning m-r-5"></i>
+                                    <i class="fa fa-star text-warning m-r-5"></i>
+                                    <i class="fa fa-star text-warning"></i>
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row clearfix">
+                <div class="col-sm-12 ">
+                    <div class="card" id="overview">
+                        <div class="header">
+                            <h2>Brief Overview</h2>
+                        </div>
+                        <div class="body">
+                            <p>Lucid Laravel Admin Template is a popular open source WebApp Laravel template for Laravel admin dashboards and admin panels. It’s responsive Admin template, which is based on the Laravel + Bootstrap 4X framework. It utilizes all of the Bootstrap components integrated with Laravel layout standards and re-styles many commonly used plugins to create a consistent design that can be used as a Larvel backend applications.</p>
+                            
+                            <div class="row">
+                                <div class="col-lg-4 col-md-6 text-center">
+                                    <i class="fa fa-flag fa-2x"></i>
+                                    <h6 class="m-t-20">Laravel 5.7</h6>
+                                    <p class="text-muted">Laravel 5.7 is latest version of Laravel framework of PHP to develop web applications following the model–view–controller (MVC) architectural pattern and based on Symfony.</p>
+                                </div>
+                                <div class="col-lg-4 col-md-6 text-center">
+                                    <i class="fa fa-heart fa-2x"></i>
+                                    <h6 class="m-t-20">Bootstrap 4X</h6>
+                                    <p class="text-muted">Bootstrap easily and efficiently scales your websites and applications with a single code base, from phones to tablets to desktops with CSS media queries.</p>                                
+                                </div>
+                                <div class="col-lg-4 col-md-6 text-center">
+                                    <i class="fa fa-gear fa-2x "></i>
+                                    <h6 class="m-t-20">Easily Customizable</h6>
+                                    <p class="text-muted">The internet is society’s true equalizer. It gives voices to the masses, as people from across the world can now express their opinions and ideals. Not since the industrial revolution, has humanity experienced such a game-changing invention.</p>
+                                </div>
+                                <div class="col-lg-4 col-md-6 text-center">
+                                    <i class="fa fa-html5 fa-2x"></i>
+                                    <h6 class="m-t-20 ">HTML5/CSS3</h6>
+                                    <p class="text-muted">HTML5 is a core technology markup language of the Internet used for structuring and presenting content for the World Wide Web.</p>
+                                </div>
+                                <div class="col-lg-4 col-md-6 text-center">
+                                    <i class="fa fa-power-off fa-2x"></i>
+                                    <h6 class="m-t-20">Integrated plugins</h6>
+                                    <p class="text-muted">You can enable one or more of the integrated Apache Cordova plugins to extend the functionality of your app. The integrated plugins are custom Apache Cordova plugins that the AppBuilder team modifies, configures and updates regularly.</p>                                
+                                </div>
+                                <div class="col-lg-4 col-md-6 text-center">
+                                    <i class="fa fa-laptop fa-2x"></i>
+                                    <h6 class="m-t-20">Responsive layout</h6>
+                                    <p class="text-muted">Let this collection of responsive designed websites across a variety of website types help get your creative and developer juices flowing. Each site features a screenshot across 4 device widths and you can see the media queries.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row clearfix">
+                <div class="col-sm-12 ">
+                    <div class="card" id="server_requirements">
+                        <div class="header">
+                            <h2>Server Requirements</h2>
+                        </div>
+                        <div class="body">
+                            <p>Please make sure your server meets the following requirements.</p>
+                            <ul>
+                                <li>PHP >= 7.1.3</li>
+                                <li>OpenSSL PHP Extension</li>
+                                <li>PDO PHP Extension</li>
+                                <li>Mbstring PHP Extension</li>
+                                <li>Tokenizer PHP Extension</li>
+                                <li>XML PHP Extension</li>
+                                <li>Ctype PHP Extension</li>
+                                <li>JSON PHP Extension</li>
+                                <li>BCMath PHP Extension</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row clearfix">
+                <div class="col-sm-12 ">
+                    <div class="card" id="installation">
+                        <div class="header">
+                            <h2>Installation</h2>
+                        </div>
+                        <div class="body">
+                            <p>Please make sure your server meets the following requirements.</p>
+                            <div class="mb-4">
+                                <h6>1. Download</h6>
+                                <p>Download the theme files from your account and place on your server.</p>
+                            </div>
+                            <div class="mb-4">
+                                <h6>2. Composer</h6>
+                                <p>Laravel project dependencies are managed through the PHP Composer tool. The first step is to install the depencencies by navigating into your project in terminal and type following command:
+                                <code>composer install</code></p>
+                            </div>
+                            <div class="mb-4">
+                                <h6>3. NPM/Yarn</h6>
+                                <p>For NPM, you have to run following command from the root of the project in terminal:
+                                <code>npm install</code></p>
+                            </div>
+                            <div class="mb-4">
+                                <h6>4. Change Environment Configuration Files</h6>
+                                <p>This package ships with a .env. file in the root of the project. Change/Update your desired variables in this file.</p>
+                            </div>
+                            <p>Reference: <a href="Reference: https://laravel.com/docs/5.7/installation">https://laravel.com/docs/5.7/installation</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row clearfix">
+                <div class="col-sm-12">
+                    <div class="card" id="features">
+                        <div class="header">
+                            <h2>Main Features</h2>
+                        </div>
+                        <div class="body">
+                            <div class="row">
+                                <div class="col-lg-4 col-md-12">
+                                    <ul class="main_features">
+                                        <li><strong><a href="https://getbootstrap.com/" target="_blank">Bootstrap</a> 4x</strong></li>
+                                        <li>Latest <strong><a href="https://jquery.com/" target="_blank">jQuery v3.3.1</a></strong></li>
+                                        <li>Clean and Creative Landing Page Included (Free $14)</li>
+                                        <li>Fully Responsive pages</li>
+                                        <li>Light & Dark Versions</li>
+                                        <li>RTL Full Versions</li>
+
+                                        <li class="divider">Lucid </li>
+                                        <li><strong>10+</strong> Different Dashboards</li>
+                                        <li><strong>6 Unique</strong> Color Scheme</li>                                        
+                                        <li>300+ Use Full Pages (No extra pages)</li>	
+                                        <li>Built in <strong><a href="http://sass-lang.com/" target="_blank">SASS</a></strong></li>	                                        
+                                        <li>JS Bundling Ready (<strong>Bundle</strong>) <span class="badge badge-default m-b-0">New</span></li>
+                                        <li>Fully <strong>Responsive</strong> & Interactive</li>
+                                        <li>Elegant & Clean User Interface</li>                                        
+                                        <li>100+ Ready to used <strong>widget</strong></li>
+                                        <li>3000+ Icons</li>
+                                        <li>Detailed Documentation</li>
+                                        <li>Google fonts (<a href="https://fonts.google.com/specimen/Ubuntu" target="_blank">Ubuntu</a>)</li>                                        
+                                        
+                                        <li class="divider">Ready to Use Application</li>
+                                        <li><strong>Inbox</strong> Full App <span class="badge badge-default m-b-0">New</span></li>
+                                        <li><strong>Chat App</strong> <span class="badge badge-default m-b-0">New</span></li>
+                                        <li><strong>Calendar</strong> integration</li>                                        
+                                        <li>Contact list</li>
+                                        <li>Contact Card<span class="badge badge-default m-b-0">New</span></li>
+                                        <li>Scrum/Kanban type <strong>Taskboard</strong></li>
+                                    </ul>
+                                </div>
+                                <div class="col-lg-4 col-md-6 col-sm-12">
+                                    <ul class="main_features">                  
+                                        <li class="divider">User</li>
+                                        <li>File Manager <span class="badge badge-default m-b-0">New</span></li>                                        
+                                        <li><strong>Blog</strong> full section with <strong>Dashboard</strong> <span class="badge badge-default m-b-0">New</span></li>
+                                        <li>Invoice</li>
+                                        <li>Invoice V2<span class="badge badge-default m-b-0">New</span></li>                                        
+                                        <li>User <strong>Profile</strong> Page </li>
+                                        <li>User <strong>Profile V2</strong> Page <span class="badge badge-default m-b-0">New</span></li>
+                                        <li>Image Gallery (Bootstrap 4 Gallery)</li>
+                                        <li>Image Gallery V2</li>
+                                        <li>Messenger Notifications</li>
+                                        <li>Timeline <span class="badge badge-default m-b-0">New</span></li>
+                                        <li>Timeline Horizontal</li>
+                                        
+                                        <li class="divider">Editor</li>
+                                        <li>Summernote</li>
+                                        <li>CKEditor</li>
+                                        <li>Markdown</li>
+                                        
+                                        <li class="divider">Many Charts Options</li>
+                                        <li><strong>Charts:-</strong> Morris, Flot, ChartJS, Knob</li>
+                                        <li>C3 Chart</li>
+                                        <li>Gauges Chart</li>
+                                        <li>Expanded and Collapsed Menu (Multi Menu Levels)</li>
+                                    </ul>
+                                </div>
+                                <div class="col-lg-4 col-md-6 col-sm-12">
+                                    <ul class="main_features">                                       
+                                        <li class="divider">Lots of Table Examples</li>
+                                        <li>Jquery <strong>Datatable</strong></li>
+                                        <li><strong>Editable</strong> Tables</li>                                        
+                                        <li>Table <strong>Dragger</strong></li>
+                                        <li>Table <strong>Filter</strong></li>
+                                        <li>Responsive Tables</li>
+                                        
+                                        <li class="divider">Forms</li>
+                                        <li>Form Examples</li>
+                                        <li>Form <strong>Validation</strong></li>                                        
+                                        <li><strong>Advanced</strong> Form Elements</li>
+                                        <li>Form <strong>Wizard</strong></li>
+                                        
+                                        <li class="divider">Form Elements</li>
+                                        <li><strong>Color</strong> Pickers</li>
+                                        <li>Masked Text Inputs</li>
+                                        <li>Multi Select</li>
+                                        <li><strong>Tags</strong> Input</li>
+                                        <li>Input Slider</li>
+                                        <li>Date Picker</li>                                        
+                                        
+                                        <li class="divider">Elements</li>
+                                        <li>Drag & Drop Upload</li>
+                                        <li>Image Cropping</li>
+                                        <li>Sortable & Nestable</li>
+                                        <li>Treeview</li>
+                                        <li>Progress Bars</li>
+                                        <li>Range Sliders</li>
+                                        <li><strong>Sweet Alert</strong> Dialog</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="alert alert-success" role="alert">
+                                <p class="mb-0"><strong>Authentication:-</strong> login, lock screen, Sign Up, Forgot Password, Lockscreen, 404, 500 Error Pages</p>
+                                <p class="mb-0"><strong>Widgets:-</strong>Liks Statistics, Data, Chart, Weather, Social, Blog, eCommerce</p>
+                                <p class="mb-0"><strong>Note:-</strong> Works well in all latest browsers like Chrome, Firefox, Safari, Microsoft Edge, IE11+</p>						
+                            </div>                            
+                            <div class="alert alert-danger" role="alert">
+                                <strong>Note:-</strong> jQuery plugin dependencies may relay on used platform and their versions.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row clearfix">
+                <div class="col-sm-12 ">
+                    <div class="card" id="template">
+                        <div class="header">
+                            <h2>Main Template</h2>
+                        </div>
+                        <div class="body">										
+                            <p> <img alt="" src="doc/images/1.png" class="img-fluid"></p>						
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="header">
+                            <h2><strong>Main</strong> Structre</h2>
+                        </div>
+                        <div class="body">
+                            <p><img alt="" src="doc/images/html.png" class="img-fluid"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row clearfix">
+                <div class="col-sm-12 ">
+                    <div class="card" id="grunt_file">
+                        <div class="header">
+                            <h2>Grunt File & Installation <small>The JavaScript Task Runner.</small></h2>
+                        </div>
+                        <div class="body m-b-10">
+                            <p><strong>Installing Grunt:</strong> Run <code>npm install grunt --save-dev</code> command from your teminal to install grunt within your project.</p>
+                            <p><strong>Grunt Sass:</strong> Run <code>grunt sass</code> command from your project directory. It will compile SASS to CSS for the project. This will read the file `assets/scss/filename.scss` and output a plain-css file to `/assets/css/filename.css`. </p>
+                            <p><strong>Grunt JSHint:</strong> Run <code>grunt jshint</code> command from your project directory. It will checks all *.js files under `assetsjs/filename` for common syntax or coding errors using the JSHint utility.</p>
+                            <p><strong>Grunt Sprite:</strong> Run <code>grunt sprite</code> command from your project directory. </p>                        
+                            <p><strong>Further help:</strong> To get more help on the grunt checkout <a href="https://gruntjs.com/getting-started">Grunt</a></p>
+                            <p><strong>Note:</strong> However, any SASS code you write must be able compile via Grunt as well.It will generate pre-compiled javascript templates. Reads all the *.html files from `assets/js/filename` and outputs `assets/js/filename.templates.js`. Template.js will contains code of UI design and will be change each time you build solution through above command.</p>
+                        </div>
+                        <div class="body">
+                            <p><a href="https://gruntjs.com/" target="_blank"><strong>Grunt</strong></a> is a JavaScript task runner, a tool used to automatically perform frequent tasks such as minification, compilation, unit testing, and linting. It uses a command-line interface to run custom tasks defined in a file.</p>
+                            
+                            <img alt="" src="doc/images/4.png" class="img-fluid">
+                        </div>                    
+                    </div>
+                </div>
+            </div>
+
+            <div class="row clearfix">
+                <div class="col-sm-12 ">
+                    <div class="card" id="main_content">
+                        <div class="header">
+                            <h2>Main Content</h2>
+                        </div>
+                        <div class="body">
+<pre class="prettyprint lang-html linenums">
+@extends('layout.master')
+@section('title', 'Analytical')
+@section('parentPageTitle', 'Dashboard')
+
+
+@section('content')
+
+&lt;div class="row clearfix"&gt;
+    Add Your Content Here
+&lt;/div&gt;
+
+@stop
+</pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row clearfix">
+                <div class="col-sm-12 ">
+                    <div class="card" id="folder_structure">
+                        <div class="header">
+                            <h2>Folder Structure</h2>
+                        </div>
+                        <div class="body">
+                            <p>We follow standard Laravel fodler structure and other created files are as following</p>
+                            <h6 class="m-0">Template assets files can be located at</h6>
+                            <pre>/public/assets/*</pre>
+
+                            <h6 class="m-0">Routes can be located at</h6>
+                            <pre>/routes/web.php</pre>
+
+                            <h6 class="m-0">Controller files can be located at</h6>
+                            <pre>/app/Http/Controllers/*</pre>
+
+                            <h6 class="m-0">View files can be located at</h6>
+                            <pre>/resources/views/*</pre>
+
+                            <h6 class="m-0">Layout files can be located at</h6>
+                            <pre>/resources/views/layout/master.blade.php<br>/resources/views/layout/authentication.blade.php</pre>
+
+                            <h6 class="m-0">Navigation Bar and Sidebar can be located at</h6>
+                            <pre>/resources/views/layout/navbar.blade.php<br>/resources/views/layout/sidebar.blade.php</pre>
+
+                            <h6 class="m-0">Default Error page can be locate at</h6>
+                            <pre>/resources/views/errors/404.blade.php</pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row clearfix">
+                <div class="col-sm-12 ">
+                    <div class="card" id="SCSS">
+                        <div class="header">
+                            <h2>SCSS Structure</h2>
+                        </div>
+                        <div class="body">
+                            <blockquote>
+                                <p class="blockquote blockquote-primary">                                
+                                    Please note that all Detail main Web Site, you need to set it up on your project <a href="http://sass-lang.com/documentation/file.SASS_REFERENCE.html" class="col-blue" target="_blank">Click Here..</a>
+                                    <br>
+                                    <br>
+                                    <small>
+                                        - <strong>SCSS</strong>
+                                    </small>
+                                </p>
+                            </blockquote>
+                            <p>main.css is the main CSS file located in assets/css/ folder of the package. Whole CSS file is well indexed with topic and its related code.</p>						
+                            <img alt="" src="doc/images/9.png" class="img-fluid">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row clearfix">
+                <div class="col-sm-12 ">
+                    <div class="card" id="javascript">
+                        <div class="header">
+                            <h2>Javascript</h2>
+                        </div>
+                        <div class="body">
+                            <p>Lucid admin.js is the mail javascript file having all the js code. File is located in assets/js/ folder. This file code is also well formatted and section in different respective function names.</p>
+                            <p class="m-b-30">Along with this chart library based js code and dashboard based js code are added in separate files for ease of use of user.</p>
+                            <p> <img alt="" src="doc/images/8.png" class="img-fluid"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row clearfix">
+                <div class="col-sm-12 ">
+                    <div class="card" id="fonts">
+                        <div class="header">
+                            <h2>Font Used</h2>
+                        </div>
+                        <div class="body">
+                            <p>Google fonts are used in the template. They are as follows: <a href="https://fonts.google.com/specimen/Ubuntu">Ubuntu</a></p>
+                            <p>Font Awesome: <a href="https://fontawesome.com/v4.7.0/">Click to See</a></p>
+                            <p>All Images are used: <a href="https://www.pexels.com/">Pexels.com</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row clearfix">
+                <div class="col-sm-12 ">
+                    <div class="card" id="thank_you">
+                        <div class="header">
+                            <h2>THANK YOU!</h2>
+                        </div>
+                        <div class="body">
+                            <p> Once again, thank you so much for purchasing this template. As I said at the beginning, I&#39;d be glad to help you if you have any questions relating to this template.</p>
+                            <p>If you really like our work, design, performance and support then <a href="https://themeforest.net/downloads"> please don't forgot to rate us</a> on Themeforest, it really motivate us to provide something better.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    
+</div>
+
+<!-- Javascript -->
+<script src="../public/assets/bundles/libscripts.bundle.js"></script>    
+<script src="../public/assets/bundles/vendorscripts.bundle.js"></script>
+<script src="../public/assets/bundles/mainscripts.bundle.js"></script>
+<script>
+	$('.metismenu li').click(function(){
+		var $this = $(this);
+		if(!$this.is('active'))
+		{
+			$('.metismenu li').removeClass('active').removeData("top");
+			$this.addClass('active').data("top", $this.offset().top);
+		}
+	});
+	document.createElement('section');
+	var duration = '500',
+    easing = 'swing';
+    
+    // Select all links with hashes
+    $('a[href*="#"]')
+    // Remove links that don't actually link to anything
+    .not('[href="#"]')
+    .not('[href="#0"]')
+    .click(function(event) {
+        // On-page links
+        if (
+        location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') 
+        && 
+        location.hostname == this.hostname
+        ) {
+        // Figure out element to scroll to
+        var target = $(this.hash);
+        target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+        // Does a scroll target exist?
+        if (target.length) {
+            // Only prevent default if animation is actually gonna happen
+            event.preventDefault();
+            $('html, body').animate({
+            scrollTop: target.offset().top - 80
+            }, 1000, function() {
+            // Callback after animation
+            // Must change focus!
+            var $target = $(target);
+            $target.focus();
+            if ($target.is(":focus")) { // Checking if the target was focused
+                return false;
+            } else {
+                $target.attr('tabindex','-1'); // Adding tabindex for elements not focusable
+                $target.focus(); // Set focus again
+            };
+            });
+        }
+        }
+    });
+</script>
+</body>
+</html>
