@@ -10,53 +10,51 @@ use Illuminate\Support\Facades\Input;
 use Kamaln7\Toastr\Facades\Toastr;
 use DB;
 
-class RoomsController extends Controller
-{
+class RoomsController extends Controller {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
+    * Display a listing of the resource.
+    *
+    * @return \Illuminate\Http\Response
+    */
+
+    public function index() {
         $data['property'] = Property::getProperty();
         $data['rooms'] = Rooms::getRooms();
-       // dd($data['rooms']);
-        return view('rooms.index')->with($data);
+        // dd( $data['rooms'] );
+        return view( 'rooms.index' )->with( $data );
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('rooms.create');
+    * Show the form for creating a new resource.
+    *
+    * @return \Illuminate\Http\Response
+    */
+
+    public function create() {
+        return view( 'rooms.create' );
     }
 
-     public function variationValuesSelector()
-    {
+    public function variationValuesSelector() {
         //Function to get the variation values based on the selected property
-        $property_id = Input::get('property_id');
+        $property_id = Input::get( 'property_id' );
 
-        $variation_values = Variation::getVariationValues($property_id);
+        $variation_values = Variation::getVariationValues( $property_id );
 
-        return response()->json($variation_values);
+        return response()->json( $variation_values );
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        $property_id = $request->input('property_id');
-        $variation_val_id = $request->input('variation_val_id');
-        $room_no = $request->input('room_no');
-        $max_occupants = $request->input('max_occupants');
+    * Store a newly created resource in storage.
+    *
+    * @param  \Illuminate\Http\Request  $request
+    * @return \Illuminate\Http\Response
+    */
+
+    public function store( Request $request ) {
+        $property_id = $request->input( 'property_id' );
+        $variation_val_id = $request->input( 'variation_val_id' );
+        $room_no = $request->input( 'room_no' );
+        $max_occupants = $request->input( 'max_occupants' );
 
         $room = new Rooms();
 
@@ -67,57 +65,53 @@ class RoomsController extends Controller
 
         $room->save();
 
-        Toastr::success('Room added successfully');
-        return back(); 
-    }
+        Toastr::success( 'Room added successfully' );
+        return back();
 
-    public function roomAssignments(Request $request){
-        // $data['property'] = Property::getProperty();
-        return view('rooms.room-assignments');
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Rooms  $rooms
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Rooms $rooms)
-    {
+    * Display the specified resource.
+    *
+    * @param  \App\Models\Rooms  $rooms
+    * @return \Illuminate\Http\Response
+    */
+
+    public function show( Rooms $rooms ) {
         //
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Rooms  $rooms
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Rooms $rooms)
-    {
+    * Show the form for editing the specified resource.
+    *
+    * @param  \App\Models\Rooms  $rooms
+    * @return \Illuminate\Http\Response
+    */
+
+    public function edit( Rooms $rooms ) {
         //
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Rooms  $rooms
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Rooms $rooms)
-    {
+    * Update the specified resource in storage.
+    *
+    * @param  \Illuminate\Http\Request  $request
+    * @param  \App\Models\Rooms  $rooms
+    * @return \Illuminate\Http\Response
+    */
+
+    public function update( Request $request, Rooms $rooms ) {
         //
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Rooms  $rooms
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Rooms $rooms)
-    {
+    * Remove the specified resource from storage.
+    *
+    * @param  \App\Models\Rooms  $rooms
+    * @return \Illuminate\Http\Response
+    */
+
+    public function destroy( Rooms $rooms ) {
         //
     }
 }

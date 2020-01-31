@@ -31,7 +31,6 @@ Route::get('property/property-list', 'PropertyController@index')->name('property
 Route::get('property/propety-create', 'PropertyController@create')->name('property.property-create');
 Route::post('property/save', 'PropertyController@store')->name('property.save');
 Route::any('property/manage/&id={id}', 'PropertyController@manageProperty')->name('property.property-manage');
-Route::post('property/assign-room', 'PropertyController@assignRoom')->name('property.assign-room');
 Route::get('property/get-variation-rooms', 'PropertyController@varRoomsSelector')->name('property.get-variation-rooms');
 
 
@@ -42,7 +41,14 @@ Route::get('rooms/rooms-list', 'RoomsController@index')->name('rooms.rooms-list'
 Route::get('rooms/rooms-create', 'RoomsController@create')->name('rooms.rooms-create');
 Route::get('rooms/get-variation-values', 'RoomsController@variationValuesSelector')->name('rooms.get-variation-values');
 Route::post('rooms/save', 'RoomsController@store')->name('rooms.save');
-Route::get('rooms/room-assignments', 'RoomsController@roomAssignments')->name('rooms.room-assignments');
+
+/** Room assignments */
+Route::get('rooms/room-assignments', 'RoomAssignmentController@index')->name('rooms.room-assignments');
+Route::post('room/assign-room', 'RoomAssignmentController@store')->name('room.assign-room');
+
+/** Room adjustments */
+Route::get('rooms/room-adjustments', 'RoomAdjustmentController@index')->name('rooms.room-adjustments');
+Route::post('rooms/room-adjustments/save', 'RoomAdjustmentController@store')->name('rooms.rooms-adjustments.save');
 
 /** Tenants */
 Route::get('tenants/tenants-list', 'TenantsController@index')->name('tenants.tenants-list');

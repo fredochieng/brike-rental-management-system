@@ -4,7 +4,7 @@
             <div class="modal-header">
                 <h6 class="title">Assign Room</h6>
             </div>
-            {!! Form::open(['url' => action('PropertyController@assignRoom'), 'method' => 'post'])
+            {!! Form::open(['url' => action('RoomAssignmentController@store'), 'method' => 'post'])
             !!}
 
             <div class="modal-body">
@@ -23,37 +23,38 @@
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-12">
                         <div class="form-group">
-                            <label for="phone" class="control-label">Property Variation <span
+                            <label for="phone" class="control-label">Room Number <span
                                     class="text-danger">*</span></label>
                             <select class="custom-select" name="variation_room_id" id="variation_rooms" required>
                                 <option value="">Select room number</option>
-                                <option value="0" disabled="true" selected="true">Select variation first</option>
+                                <option value="" disabled="true">Select variation first</option>
                             </select>
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-12">
                         <div class="form-group">
-                            <label for="phone" class="control-label">Maximum Occupants <span
-                                    class="text-danger">*</span></label>
-                            <select class="custom-select" name="max_occupants" required>
-                                <option value="">Select maximum number of occupants</option>
-                                <option value='1'>1 person</option>
-                                <option value='2'>2 people</option>
-                                <option value='3'>3 people</option>
-                                <option value='4'>4 people</option>
-                                <option value='5'>5 people</option>
-                                <option value='6'>6 people</option>
-                                <option value='7'>7 people</option>
-                                <option value='8'>8 people</option>
-                                <option value='9'>9 people</option>
-                                <option value='No max'>No maximum number</option>
+                            <label for="phone" class="control-label">Tenant <span class="text-danger">*</span></label>
+                            <select class="custom-select" name="r_tenant_id" required>
+                                <option value="">Select room tenant</option>
+                                @foreach($tenants as $tenant)
+                                <option value='{{ $tenant->tenant_id }}'>{{ $tenant->t_name }}</option>
+                                @endforeach
                             </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-12">
+                        <label>Room Assignment Date</label>
+                        <div class="input-group mb-3">
+                            <input data-provide="datepicker" name="r_start_date"
+                                placeholder="Choose room assignment date" required data-date-autoclose="true" readonly
+                                class="form-control" data-date-format="yyyy/mm/dd">
                         </div>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-primary"><i class="icon-check"></i> Add Room</button>
+                <button type="submit" id="assignRoomBtn" class="btn btn-primary"><i class="icon-check"></i> Assign
+                    Room</button>
                 <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Close</button>
             </div>
             {!! Form::close() !!}

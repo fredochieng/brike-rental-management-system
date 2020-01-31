@@ -5,8 +5,11 @@
         </div>
 
         <div class="navbar-brand">
-            <a href="{{route('dashboard.analytical')}}"><img src="{{ asset('assets/img/logo.svg') }}"
-                    alt="Rental Management" class="img-responsive logo"></a>
+            <a href="{{route('dashboard.analytical')}}" class="img-responsive logo">
+                {{-- <img src="{{ asset('assets/img/logo.svg') }}"
+                alt="Rental Management" class="img-responsive logo"> --}}
+                Rental Management
+            </a>
         </div>
 
         <div class="navbar-right">

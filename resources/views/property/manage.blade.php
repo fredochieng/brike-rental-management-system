@@ -13,6 +13,99 @@
 </div> --}}
 <div class="row clearfix">
     <div class="col-lg-3 col-md-6">
+        <div class="card overflowhidden">
+            <div class="body">
+                <h5>KES 109,547,546.00 <i class="fa fa-money float-right"></i></h5>
+                <span>Revenue Collections</span>
+            </div>
+            <div class="progress progress-xs progress-transparent custom-color-blue m-b-0">
+                <div class="progress-bar" data-transitiongoal="64"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+        <div class="card overflowhidden">
+            <div class="body">
+                <h5>KES 546,067.00 <i class="fa fa-dollar float-right"></i></h5>
+                <span>Due Collections</span>
+            </div>
+            <div class="progress progress-xs progress-transparent custom-color-purple m-b-0">
+                <div class="progress-bar" data-transitiongoal="67"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+        <div class="card overflowhidden">
+            <div class="body">
+                <h5>{{ $sum_total_rooms }} Rooms <i class="fa fa-dollar float-right"></i></h5>
+                <span>Total Rooms</span>
+            </div>
+            <div class="progress progress-xs progress-transparent custom-color-green m-b-0">
+                <div class="progress-bar" data-transitiongoal="89"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+        <div class="card overflowhidden">
+            <div class="body">
+                <h5>{{ $sum_total_rented_rooms }} Rooms <i class="fa fa-dollar float-right"></i></h5>
+                <span>Rented Rooms</span>
+            </div>
+            <div class="progress progress-xs progress-transparent custom-color-yellow m-b-0">
+                <div class="progress-bar" data-transitiongoal="89"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row clearfix">
+    <div class="col-lg-3 col-md-6">
+        <div class="card overflowhidden">
+            <div class="body">
+                <h5>{{ $sum_total_vacant_rooms}} Rooms <i class=" icon-heart float-right"></i></h5>
+                <span>Vacant Rooms</span>
+            </div>
+            <div class="progress progress-xs progress-transparent custom-color-blue m-b-0">
+                <div class="progress-bar" data-transitiongoal="68"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+        <div class="card overflowhidden">
+            <div class="body">
+                <h5>{{ $tot_variations }} Variations <i class="icon-basket-loaded float-right"></i></h5>
+                <span>Property Variations</span>
+            </div>
+            <div class="progress progress-xs progress-transparent custom-color-purple m-b-0">
+                <div class="progress-bar" data-transitiongoal="64"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+        <div class="card overflowhidden">
+            <div class="body">
+                <h5>{{ $tot_tenants }} Tenants <i class="icon-user-follow float-right"></i></h5>
+                <span>Total Tenants</span>
+            </div>
+            <div class="progress progress-xs progress-transparent custom-color-green m-b-0">
+                <div class="progress-bar" data-transitiongoal="67"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+        <div class="card overflowhidden">
+            <div class="body">
+                <h5>KES 158,856.00 <i class=" icon-heart float-right"></i></h5>
+                <span>Total Expenses</span>
+            </div>
+            <div class="progress progress-xs progress-transparent custom-color-yellow m-b-0">
+                <div class="progress-bar" data-transitiongoal="68"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{-- <div class="row clearfix">
+    <div class="col-lg-3 col-md-6">
         <div class="card top_counter">
             <div class="body">
                 <div class="icon text-info"><i class="fa fa-money"></i> </div>
@@ -36,51 +129,51 @@
                 <div class="content">
                     <div class="text">Total Rooms</div>
                     <h6 class="number">{{ $sum_total_rooms }} Rooms</h6>
-                </div>
-                <hr>
-                <div class="icon text-warning"><i class="fa fa-graduation-cap"></i> </div>
-                <div class="content">
-                    <div class="text">Rented Rooms</div>
-                    <h6 class="number">{{ $sum_total_rented_rooms }} Rooms</h6>
-                </div>
+</div>
+<hr>
+<div class="icon text-warning"><i class="fa fa-graduation-cap"></i> </div>
+<div class="content">
+    <div class="text">Rented Rooms</div>
+    <h6 class="number">{{ $sum_total_rented_rooms }} Rooms</h6>
+</div>
+</div>
+</div>
+</div>
+<div class="col-lg-3 col-md-6">
+    <div class="card top_counter">
+        <div class="body">
+            <div class="icon text-danger"><i class="fa fa-credit-card"></i> </div>
+            <div class="content">
+                <div class="text">Vacant Rooms</div>
+                <h6 class="number">{{ $sum_total_vacant_rooms}} Rooms</h6>
             </div>
-        </div>
-    </div>
-    <div class="col-lg-3 col-md-6">
-        <div class="card top_counter">
-            <div class="body">
-                <div class="icon text-danger"><i class="fa fa-credit-card"></i> </div>
-                <div class="content">
-                    <div class="text">Vacant Rooms</div>
-                    <h6 class="number">{{ $sum_total_vacant_rooms}} Rooms</h6>
-                </div>
-                <hr>
-                <div class="icon text-danger"><i class="fa fa-university"></i> </div>
-                <div class="content">
-                    <div class="text">Property Variations</div>
-                    <h6 class="number">{{ $tot_variations }} Variations</h6>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-3 col-md-6">
-        <div class="card top_counter">
-            <div class="body">
-                <div class="icon text-success"><i class="icon-users"></i> </div>
-                <div class="content">
-                    <div class="text">Total Tenants</div>
-                    <h6 class="number">{{ $tot_tenants }} Tenants</h6>
-                </div>
-                <hr>
-                <div class="icon text-success"><i class="fa fa-smile-o"></i> </div>
-                <div class="content">
-                    <div class="text">Total Expenses</div>
-                    <h6 class="number">KES 120,000.00</h6>
-                </div>
+            <hr>
+            <div class="icon text-danger"><i class="fa fa-university"></i> </div>
+            <div class="content">
+                <div class="text">Property Variations</div>
+                <h6 class="number">{{ $tot_variations }} Variations</h6>
             </div>
         </div>
     </div>
 </div>
+<div class="col-lg-3 col-md-6">
+    <div class="card top_counter">
+        <div class="body">
+            <div class="icon text-success"><i class="icon-users"></i> </div>
+            <div class="content">
+                <div class="text">Total Tenants</div>
+                <h6 class="number">{{ $tot_tenants }} Tenants</h6>
+            </div>
+            <hr>
+            <div class="icon text-success"><i class="fa fa-smile-o"></i> </div>
+            <div class="content">
+                <div class="text">Total Expenses</div>
+                <h6 class="number">KES 120,000.00</h6>
+            </div>
+        </div>
+    </div>
+</div>
+</div> --}}
 <div class="row clearfix">
     <div class="col-lg-12 col-md-12">
         <div class="card">

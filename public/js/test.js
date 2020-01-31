@@ -1,5 +1,5 @@
     $(document).ready(function () {
-
+        console.log('fredrickl')
         // $("#addTenant").on("submit", function (e) {
         //     e.preventDefault(); // prevent the form submission
         //     var route = $('#addTenant').data('route');

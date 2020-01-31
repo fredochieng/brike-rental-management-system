@@ -15,20 +15,6 @@
                     </ul>
             </div>
             <hr>
-            <ul class="row list-unstyled">
-                <li class="col-4">
-                    <small>Sales</small>
-                    <h6>456</h6>
-                </li>
-                <li class="col-4">
-                    <small>Order</small>
-                    <h6>1350</h6>
-                </li>
-                <li class="col-4">
-                    <small>Revenue</small>
-                    <h6>$2.13B</h6>
-                </li>
-            </ul>
         </div>
         <!-- Nav tabs -->
         <ul class="nav nav-tabs">
@@ -124,6 +110,11 @@
                                 <li class="{{ Request::segment(2) === 'room-assignments' ? 'active' : null }}"><a
                                         href="{{route('rooms.room-assignments')}}">
                                         Room Assignment</a></li>
+                            </ul>
+                            <ul>
+                                <li class="{{ Request::segment(2) === 'room-adjustments' ? 'active' : null }}"><a
+                                        href="{{route('rooms.room-adjustments')}}">
+                                        Room Adjustments</a></li>
                             </ul>
                             {{-- <ul>
                                 <li class="{{ Request::segment(2) === 'rooms-create' ? 'active' : null }}"><a
@@ -600,10 +591,10 @@
                     </div>
                 </form>
                 <ul class="list-unstyled question">
-                    <li class="menu-heading">HOW-TO</li>
-                    <li><a href="javascript:void(0);">How to Create Campaign</a></li>
-                    <li><a href="javascript:void(0);">Boost Your Sales</a></li>
-                    <li><a href="javascript:void(0);">Website Analytics</a></li>
+                    <li class="menu-heading">HOW-TO PAY</li>
+                    <li><a href="javascript:void(0);">MPESA Paybill</a></li>
+                    <li><a href="javascript:void(0);">Paybill No-----> 43635433</a></li>
+                    <li><a href="javascript:void(0);">Account No-----> Phone Number </a></li>
                     <li class="menu-heading">ACCOUNT</li>
                     <li><a href="javascript:void(0);">Cearet New Account</a></li>
                     <li><a href="javascript:void(0);">Change Password?</a></li>

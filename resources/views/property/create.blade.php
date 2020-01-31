@@ -54,7 +54,7 @@
                     </div> --}}
                     <div class="col-md-4"> <b>Variation Type</b>
                         <div class="input-group mb-3">
-                            <select class="custom-select" name="v_type">
+                            <select class="custom-select" name="variation_tempate_id" id="variation_tempate">
                                 <option value="">Choose property variation</option>
                                 @foreach($property_variations as $item)
                                 <option value='{{ $item->id }}'>{{ $item->temp_name }}</option>
