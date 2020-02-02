@@ -13,23 +13,26 @@
                 </a>
             </div>
             <div class="body">
-                <div class="table-responsive">
+                <div class="table-responsive" style="font-size:13px">
                     <table class="table table-bordered table-striped table-hover dataTable js-exportable">
                         <thead>
                             <tr>
                                 <th>#</th>
                                 <th>Property</th>
+                                <th>Room Type</th>
                                 <th>Room Number</th>
                                 <th>Max. Occupants</th>
                                 <th>Vacant</th>
                                 <th>Room Status</th>
                                 <th>Created At</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         @foreach ($rooms as $count => $room)
                         <tr>
                             <td>{{ $count + 1 }}</td>
                             <td>{{ $room->prop_name }}</td>
+                            <td>{{ $room->var_name }}</td>
                             <td>{{ $room->room_no }}</td>
                             @if ($room->max_occupants == 1)
                             <td>{{ $room->max_occupants }} Person</td>
@@ -50,7 +53,16 @@
                             <td><span class="badge badge-danger">Inactive</span></td>
                             @endif
                             <td>{{ $room->r_created_at }}</td>
+                            <td>
+                                <a class="btn btn-primary btn-sm" title="Edit " href="#" data-toggle="modal"
+                                    data-target="#editRoomModal_{{$room->room_id}}" data-backdrop="static"
+                                    data-keyboard="false"><i class="icon-pencil"></i></a>
+                                <a class="btn btn-danger btn-sm" title="Delete " href="#" data-toggle="modal"
+                                    data-target="#deleteRoomModal_{{$room->room_id}}" data-backdrop="static"
+                                    data-keyboard="false"><i class="icon-trash"></i></a>
+                            </td>
                         </tr>
+                        @include('rooms.modals.modal-edit-room')
                         @endforeach
                     </table>
                 </div>

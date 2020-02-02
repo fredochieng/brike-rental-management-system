@@ -19,7 +19,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-primary"><i class="icon-check"></i> Add Room</button>
+                <button type="submit" class="btn btn-primary"><i class="icon-check"></i> Add Category</button>
                 <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Close</button>
             </div>
             {!! Form::close() !!}

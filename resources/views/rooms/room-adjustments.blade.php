@@ -13,19 +13,20 @@
                 </a>
             </div>
             <div class="body">
-                <div class="table-responsive" style="font-size:12px">
+                <div class="table-responsive" style="font-size:10px">
                     <table class="table table-bordered table-striped table-hover dataTable js-exportable">
                         <thead>
                             <tr>
                                 <th>Property</th>
                                 <th>Variation</th>
-                                <th>Adjustment Quantity</th>
+                                <th>Quantity</th>
                                 <th>Initial Tot. Rooms</th>
                                 <th>New Tot. Rooms</th>
                                 <th>Initial Vacant Rooms</th>
                                 <th>New Vacant Rooms</th>
                                 <th>Initial Rented Rooms</th>
                                 <th>New Rented Rooms</th>
+                                <th>Date</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -40,6 +41,7 @@
                                 <td>{{ $r_adjustments->new_vac_rooms }}</td>
                                 <td>{{ $r_adjustments->init_ren_rooms }}</td>
                                 <td>{{ $r_adjustments->new_ren_rooms }}</td>
+                                <td>{{ $r_adjustments->r_adjustments_date }}</td>
                             </tr>
                             @endforeach
                         </tbody>

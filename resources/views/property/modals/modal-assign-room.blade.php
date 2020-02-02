@@ -36,7 +36,7 @@
                             <label for="phone" class="control-label">Tenant <span class="text-danger">*</span></label>
                             <select class="custom-select" name="r_tenant_id" required>
                                 <option value="">Select room tenant</option>
-                                @foreach($tenants as $tenant)
+                                @foreach($unassigned_tenants as $tenant)
                                 <option value='{{ $tenant->tenant_id }}'>{{ $tenant->t_name }}</option>
                                 @endforeach
                             </select>

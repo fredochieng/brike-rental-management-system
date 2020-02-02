@@ -178,6 +178,10 @@
     <div class="col-lg-12 col-md-12">
         <div class="card">
             <div class="body">
+                <a href="#addVariationValueModal" data-toggle="modal"
+                    data-target="#addVariationValueModal_{{ $property->property_id }}" class="btn btn-warning"
+                    style="margin-left:740px"><i class="icon-plus"></i> ADD VARIATION VALUE
+                </a>
                 <a href="#assignRoomModal" data-toggle="modal" data-target="#assignRoomModal"
                     class="btn btn-info pull-right"><i class="icon-plus"></i> ASSIGN ROOM
                 </a>
@@ -305,12 +309,5 @@
     </div>
 </div>
 @include('property.modals.modal-assign-room')
-@stop
-@section('js')
-
-<script>
-    $(function () {
-        console.log('welcome fredrick....');
-        });
-</script>
+@include('property.modals.modal-add-variation-value')
 @stop

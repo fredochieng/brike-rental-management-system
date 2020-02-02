@@ -109,8 +109,24 @@ class PropertyVariationsController extends Controller {
     * @return \Illuminate\Http\Response
     */
 
-    public function update( Request $request, PropertyVariations $propertyVariations ) {
-        //
+    public function update( Request $request, $variation_id ) {
+
+        $now = Carbon::now( 'Africa/Nairobi' )->toDateTimeString();
+
+        /** Get property category data from edit property category form **/
+        $variation_name = $request->input( 'variation_name' );
+
+        $property_variation = array(
+            'temp_name' => $variation_name,
+        );
+        $update_property_variation = PropertyVariations::where( 'id', $variation_id )->update( $property_variation );
+
+        /** Log the action in the logs file */
+        Log::info( 'Property category of ID ' . $variation_id .  ' updated'.
+        ' at ' . $now );
+        Toastr::success( 'Variation updated successfully' );
+
+        return back();
     }
 
     /**

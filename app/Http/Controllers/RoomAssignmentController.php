@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\RoomAssignment;
 use App\Models\Property;
 use App\Models\Variation;
+use App\Models\Tenants;
 use App\Models\Rooms;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
@@ -110,6 +111,12 @@ class RoomAssignmentController extends Controller {
 
         $update_is_vacant = Rooms::where( 'id', $room_id )->update( [
             'is_vacant' => 0
+        ] );
+
+        /** Update room_assigned column for the selected client from 0 to 1 */
+
+        $update_room_assigned = Tenants::where( 'id', $tenant_id )->update( [
+            'room_assigned' => 1
         ] );
 
         /** Log the action in the logs file */

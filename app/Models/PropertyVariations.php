@@ -7,6 +7,9 @@ use DB;
 
 class PropertyVariations extends Model
 {
+    /** This model is interchanged with the variation template model....
+     * it should reference property_variations table 
+     * otherwise just use it the way it is */
 
     protected $table = 'variation_template';
 

@@ -89,8 +89,24 @@ class PropertyCategoriesController extends Controller {
     * @return \Illuminate\Http\Response
     */
 
-    public function update( Request $request, PropertyCategories $propertyCategories ) {
-        //
+    public function update( Request $request, $category_id ) {
+
+        $now = Carbon::now( 'Africa/Nairobi' )->toDateTimeString();
+
+        /** Get property category data from edit property category form **/
+        $category_name = $request->input( 'category_name' );
+
+        $property_category = array(
+            'category_name' => $category_name,
+        );
+        $update_property_category = PropertyCategories::where( 'id', $category_id )->update( $property_category );
+
+        /** Log the action in the logs file */
+        Log::info( 'Property category of ID ' . $category_id .  ' updated'.
+        ' at ' . $now );
+        Toastr::success( 'Category updated successfully' );
+
+        return back();
     }
 
     /**

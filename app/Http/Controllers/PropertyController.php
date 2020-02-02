@@ -10,6 +10,7 @@ use App\Models\PropertyVariations;
 use App\Models\RoomAssignment;
 use App\Models\RoomAdjustment;
 use App\Models\Variation;
+use App\Models\VariationValues;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Auth;
@@ -35,6 +36,15 @@ class PropertyController extends Controller {
     *
     * @return \Illuminate\Http\Response
     */
+
+    public function variationValuesSelector() {
+        //Function to get the variation values based on the selected variation type
+        $variation_template = Input::get( 'variation_template' );
+
+        $variation_values = VariationValues::getVariationValues( $variation_template );
+
+        return response()->json( $variation_values );
+    }
 
     public function create() {
         $data['categories'] = PropertyCategories::getPropertyCategories();
@@ -70,10 +80,7 @@ class PropertyController extends Controller {
         $p_location = ucwords( $request->input( 'p_location' ) );
         $c_name = ucwords( $request->input( 'c_name' ) );
         $c_phone = $request->input( 'c_phone' );
-        // $p_type = $request->input( 'p_type' );
-        // single or variable
         $variation_template_id = $request->input( 'variation_template_id' );
-        // variation
 
         $new_c_phone = str_replace( '(', '', $c_phone );
         $new_c_phone = str_replace( ')', '', $new_c_phone );
@@ -84,7 +91,6 @@ class PropertyController extends Controller {
         $property = new Property();
         $property->prop_name = $p_name;
         $property->category_id = $p_category;
-        //$property->type_id = $p_type;
         $property->location = $p_location;
         $property->c_name = $c_name;
         $property->c_phone = $new_c_phone;
@@ -95,6 +101,7 @@ class PropertyController extends Controller {
 
         /** Save property variation data */
 
+        $var_value_id = $request->input( 'var_value_id' );
         $v_name = $request->input( 'v_name' );
         $rooms = $request->input( 'rooms' );
         $rent = $request->input( 'rent' );
@@ -113,31 +120,31 @@ class PropertyController extends Controller {
         else $count = count( $rooms );
 
         for ( $i = 0; $i < $count; $i++ ) {
+
             $data = array(
                 'property_id' => $just_saved_property_id,
-                // this is the id from the recently property variation, from property_variations table
                 'property_variation_id' => $save_prop_variations,
-
-                // this should be id from the variation_value_template table, to be captured from the form
-                // Change it once the create property variations config are done
-                'variation_value_id' => $variation_template_id,
+                'variation_value_id' => $var_value_id[$i],
                 'var_name' => $v_name[$i],
                 'tot_rooms' => $rooms[$i],
                 'vacant_rooms' => $rooms[$i],
                 'booked_rooms' => 0,
                 'monthly_rent' => $rent[$i]
             );
+
+            /** Skip when total rooms is 0 */
+            if ( $data['tot_rooms'] == 0 || $data['monthly_rent'] == 0 ) {
+                continue;
+            }
             $insertData[] = $data;
+
         }
 
         Variation::insert( $insertData );
 
         for ( $i = 0; $i < $count; $i++ ) {
             $room_adjustments = array(
-                //the below vaue should be for specfic variation value ids selected
-                //this is the id of the variation template table eg. this are from the form
-                // id from variation_value_template table
-                'var_val_id' => 11,
+                'var_val_id' => $var_value_id[$i],
                 'adjustment_qty' => 0,
                 'init_tot_rooms' => $rooms[$i],
                 'new_tot_rooms' => $rooms[$i],
@@ -147,6 +154,10 @@ class PropertyController extends Controller {
                 'new_ren_rooms' => 0,
                 'created_by' => Auth::id()
             );
+            /** Skip when total rooms is 0 */
+            if ( $room_adjustments['init_tot_rooms'] == 0 ) {
+                continue;
+            }
             $insertRoomAdjustments[] = $room_adjustments;
         }
 
@@ -162,10 +173,14 @@ class PropertyController extends Controller {
     }
 
     public function manageProperty( Request $request, $property_id ) {
+
         $t_status = 1;
+        $room_assigned = 0;
         $data['property'] = Property::getProperty()->where( 'property_id', $property_id )->first();
         $data['variation_values'] = Variation::getVariationValues( $property_id );
         $data['tenants'] = Tenants::getTenants()->where( 'property_id', $property_id )->where( 't_status', $t_status );
+        $data['unassigned_tenants'] = Tenants::getTenants()->where( 'property_id', $property_id )
+        ->where( 't_status', $t_status )->where( 'room_assigned', $room_assigned );
 
         $total_rooms = array();
         $rented_rooms = array();
@@ -184,6 +199,22 @@ class PropertyController extends Controller {
         $data['tot_tenants'] = count( $data['tenants'] );
 
         $data['currency_symbol'] = 'KES';
+
+        /** This can be replaced once the model for this table is created */
+        $property_variation = DB::table( 'property_variations' )->select(
+            DB::raw( 'property_variations.*' )
+        )
+        ->where( 'property_id', $property_id )
+        ->first();
+
+        $data['property_variation_id'] = $property_variation->id;
+
+        //dd( $data['property_variation_id'] );
+        $variation_template = $property_variation->variation_temp_id;
+
+        $data['all_variation_values'] = VariationValues::getVariationValues( $variation_template );
+
+        //dd( $data['all_variation_values'] );
 
         return view( 'property.manage' )->with( $data );
     }
@@ -215,8 +246,12 @@ class PropertyController extends Controller {
     * @return \Illuminate\Http\Response
     */
 
-    public function edit( Property $property ) {
-
+    public function edit( Request $request, $property_id ) {
+        $data['categories'] = PropertyCategories::getPropertyCategories();
+        $data['property_variations'] = PropertyVariations::getPropertyVariations();
+        $data['property'] = Property::getProperty()->where( 'property_id', $property_id )->first();
+        // dd( $data['property'] );
+        return view( 'property.edit' )->with( $data );
     }
 
     /**
@@ -227,8 +262,74 @@ class PropertyController extends Controller {
     * @return \Illuminate\Http\Response
     */
 
-    public function update( Request $request, Property $property ) {
-        //
+    public function update( Request $request, $property_id ) {
+
+        $now = Carbon::now( 'Africa/Nairobi' )->toDateTimeString();
+
+        /** Get property data from edit property form **/
+        $p_name = ucwords( $request->input( 'p_name' ) );
+        $p_category = $request->input( 'p_category_id' );
+        $p_location = ucwords( $request->input( 'p_location' ) );
+        $c_name = ucwords( $request->input( 'c_name' ) );
+        $c_phone = $request->input( 'c_phone' );
+
+        $property_details = array(
+            'prop_name' => $p_name,
+            'category_id' => $p_category,
+            'location' => $p_location,
+            'c_name' => $c_name,
+            'c_phone' => $c_phone,
+        );
+        $update_property = Property::where( 'id', $property_id )->update( $property_details );
+
+        /** Log the action in the logs file */
+        Log::info( 'Property of ID ' . $property_id .  ' updated'.
+        ' at ' . $now );
+        Toastr::success( 'Property updated successfully' );
+
+        return back();
+    }
+
+    public function addMoreVariationValues( Request $request, $property_id ) {
+
+        $property_variation_id = $request->input( 'property_variation_id' );
+        $variation_template = $request->input( 'variation_val_id' );
+        $rooms = $request->input( 'rooms' );
+        $rent = $request->input( 'rent' );
+
+        $variation_values = VariationValues::getVarValues( $variation_template )->first();
+
+        $var_name = $variation_values->var_value_name;
+
+        $variation = new Variation();
+
+        $variation->property_id = $property_id;
+        $variation->property_variation_id = $property_variation_id;
+        $variation->variation_value_id = $variation_template;
+        $variation->var_name = $var_name;
+        $variation->tot_rooms = $rooms;
+        $variation->vacant_rooms = $rooms;
+        $variation->booked_rooms = 0;
+        $variation->monthly_rent = $rent;
+
+        $variation->save();
+
+        $room_adjustment = new RoomAdjustment();
+        $room_adjustment->var_val_id = $variation_template;
+        $room_adjustment->adjustment_qty = 0;
+        $room_adjustment->init_tot_rooms = $rooms;
+        $room_adjustment->new_tot_rooms = $rooms;
+        $room_adjustment->init_vac_rooms = $rooms;
+        $room_adjustment->new_vac_rooms = $rooms;
+        $room_adjustment->init_ren_rooms = 0;
+        $room_adjustment->new_ren_rooms = 0;
+        $room_adjustment->created_by = 1;
+
+        $room_adjustment->save();
+
+        Toastr::success( 'Property updated successfully' );
+
+        return back();
     }
 
     /**

@@ -46,11 +46,8 @@
                                                 href="/property/manage/&id={{$item->property_id}}"><i
                                                     class="icon-eye"></i> View
                                                 property</a>
-                                            <a class="dropdown-item" href="#" data-toggle="modal"
-                                                data-target="#viewPropertyModal_{{ $item->property_id}}"><i
-                                                    class="icon-eye"></i> View
-                                                property</a>
-                                            <a class="dropdown-item" href=""><i class="icon-pencil"></i> Edit
+                                            <a class="dropdown-item" href="/property/edit/&id={{$item->property_id}}"><i
+                                                    class="icon-pencil"></i> Edit
                                                 property</a>
                                             <a class="dropdown-item" href=""><i class="icon-trash"></i> Delete
                                                 property</a>

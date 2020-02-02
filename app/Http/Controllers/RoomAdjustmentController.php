@@ -76,15 +76,16 @@ class RoomAdjustmentController extends Controller {
         $room_adjustment->new_tot_rooms = $new_total_rooms;
         $room_adjustment->init_vac_rooms = $vacant_rooms;
         $room_adjustment->new_vac_rooms = $new_vacant_rooms;
-        $room_adjustment->created_by = Auth::id();
+        $room_adjustment->created_by = 1;
 
         $room_adjustment->save();
 
+        /** Check the problem with Auth */
         /** Log the action in the logs file */
         Log::info( 'Room adjustment for property ' . $property_id . ' and variation value id of ' . $variation_val_id.
         ' done: old total rooms: ' . $total_rooms. 'quantity added: '. $quanity . ' new total rooms: ' . $new_total_rooms.
         ' old vacant rooms: ' . $vacant_rooms . ' quantity added: ' . $quanity. ' new vacant rooms: ' . $new_vacant_rooms.
-        ' created by user of ID: ' . Auth::id() .
+        ' created by user of ID: ' . 1 .
         ' at ' . $now );
 
         Toastr::success( 'Adjustment done successfully' );

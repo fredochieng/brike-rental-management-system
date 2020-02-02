@@ -21,26 +21,32 @@ Route::get('/', function () { return redirect('authentication'); });
 /* Property categories */
 Route::get('property/categories', 'PropertyCategoriesController@index')->name('property.categories');
 Route::post('category/save', 'PropertyCategoriesController@store')->name('category.save');
+Route::post('property/categories/&id={id}', 'PropertyCategoriesController@update')->name('property.category-update');
+
 
 /* Property variations */
 Route::get('property/variations', 'PropertyVariationsController@index')->name('property.variations');
 Route::post('variation/save', 'PropertyVariationsController@store')->name('variation.save');
+Route::post('property/variations/&id={id}', 'PropertyVariationsController@update')->name('property.variation-update');
+
 
 /* Property */
 Route::get('property/property-list', 'PropertyController@index')->name('property.property-list');
 Route::get('property/propety-create', 'PropertyController@create')->name('property.property-create');
 Route::post('property/save', 'PropertyController@store')->name('property.save');
+Route::any('property/edit/&id={id}', 'PropertyController@edit')->name('property.property-edit');
+Route::post('property/update/&id={id}', 'PropertyController@update')->name('property.property-update');
+Route::post('property/add-variation-value/&id={id}', 'PropertyController@addMoreVariationValues')->name('property.add-variation-value');
 Route::any('property/manage/&id={id}', 'PropertyController@manageProperty')->name('property.property-manage');
-Route::get('property/get-variation-rooms', 'PropertyController@varRoomsSelector')->name('property.get-variation-rooms');
-
-
-Route::post('property/test', 'PropertyController@test')->name('property.test');
+Route::get('property/get-variation-rooms', 'PropertyController@varRoomsSelector')->name('rooms.get-variation-rooms');
+Route::get('property/get-variation-values', 'PropertyController@variationValuesSelector')->name('rooms.get-variation-values');
 
 /* Rooms */
 Route::get('rooms/rooms-list', 'RoomsController@index')->name('rooms.rooms-list');
 Route::get('rooms/rooms-create', 'RoomsController@create')->name('rooms.rooms-create');
 Route::get('rooms/get-variation-values', 'RoomsController@variationValuesSelector')->name('rooms.get-variation-values');
 Route::post('rooms/save', 'RoomsController@store')->name('rooms.save');
+Route::post('rooms/update/&id={id}', 'RoomsController@update')->name('rooms.room-update');
 
 /** Room assignments */
 Route::get('rooms/room-assignments', 'RoomAssignmentController@index')->name('rooms.room-assignments');
@@ -55,6 +61,28 @@ Route::get('tenants/tenants-list', 'TenantsController@index')->name('tenants.ten
 Route::get('tenants/tenants-create', 'TenantsController@create')->name('tenants.tenants-create');
 Route::post('tenants/save', 'TenantsController@store')->name('tenants.save');
 Route::get('tenants/search-tenants', 'TenantsController@searchTenants')->name('tenants.search-tenants');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

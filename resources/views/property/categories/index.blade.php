@@ -32,13 +32,14 @@
                                 <td>{{ $item->created_at }}</td>
                                 <td>
                                     <a class="btn btn-primary btn-sm" title="Edit " href="#" data-toggle="modal"
-                                        disabled data-target="#editCategory Modal_{{$item->category_id}}"
-                                        data-backdrop="static" data-keyboard="false"><i class="icon-eye"></i></a>
+                                        disabled data-target="#editCategoryModal_{{$item->category_id}}"
+                                        data-backdrop="static" data-keyboard="false"><i class="icon-pencil"></i></a>
                                     <a class="btn btn-danger btn-sm" title="Delete " href="#" data-toggle="modal"
                                         disabled data-target="#deleteCategory_{{$item->category_id}}"
                                         data-backdrop="static" data-keyboard="false"><i class="icon-trash"></i></a>
                                 </td>
                             </tr>
+                            @include('property.categories.modals.modal-edit-category')
                             @endforeach
                         </tbody>
                     </table>

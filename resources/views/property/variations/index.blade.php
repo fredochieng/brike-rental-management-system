@@ -35,13 +35,14 @@
                                 <td>{{ $item->created_at }}</td>
                                 <td>
                                     <a class="btn btn-primary btn-sm" title="Edit " href="#" data-toggle="modal"
-                                        disabled data-target="#editVariation Modal_{{$item->variation_id}}"
+                                        disabled data-target="#editVariationModal_{{$item->variation_id}}"
                                         data-backdrop="static" data-keyboard="false"><i class="icon-eye"></i></a>
                                     <a class="btn btn-danger btn-sm" title="Delete " href="#" data-toggle="modal"
                                         disabled data-target="#deleteVariation_{{$item->variation_id}}"
                                         data-backdrop="static" data-keyboard="false"><i class="icon-trash"></i></a>
                                 </td>
                             </tr>
+                            @include('property.variations.modals.modal-edit-variation')
                             @endforeach
                         </tbody>
                     </table>
