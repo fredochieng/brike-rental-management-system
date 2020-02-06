@@ -39,6 +39,7 @@ Route::post('property/update/&id={id}', 'PropertyController@update')->name('prop
 Route::post('property/add-variation-value/&id={id}', 'PropertyController@addMoreVariationValues')->name('property.add-variation-value');
 Route::any('property/manage/&id={id}', 'PropertyController@manageProperty')->name('property.property-manage');
 Route::get('property/get-variation-rooms', 'PropertyController@varRoomsSelector')->name('rooms.get-variation-rooms');
+Route::get('property/get-variation-rented-rooms', 'PropertyController@varRentedRoomsSelector')->name('rooms.get-variation-rooms');
 Route::get('property/get-variation-values', 'PropertyController@variationValuesSelector')->name('rooms.get-variation-values');
 
 /* Rooms */
@@ -51,6 +52,7 @@ Route::post('rooms/update/&id={id}', 'RoomsController@update')->name('rooms.room
 /** Room assignments */
 Route::get('rooms/room-assignments', 'RoomAssignmentController@index')->name('rooms.room-assignments');
 Route::post('room/assign-room', 'RoomAssignmentController@store')->name('room.assign-room');
+Route::post('room/add-tenant', 'RoomAssignmentController@addAnotherTenant')->name('room.add-tenant');
 
 /** Room adjustments */
 Route::get('rooms/room-adjustments', 'RoomAdjustmentController@index')->name('rooms.room-adjustments');
@@ -61,6 +63,9 @@ Route::get('tenants/tenants-list', 'TenantsController@index')->name('tenants.ten
 Route::get('tenants/tenants-create', 'TenantsController@create')->name('tenants.tenants-create');
 Route::post('tenants/save', 'TenantsController@store')->name('tenants.save');
 Route::get('tenants/search-tenants', 'TenantsController@searchTenants')->name('tenants.search-tenants');
+Route::any('tenant/manage/&id={id}', 'TenantsController@manageTenant')->name('tenants.tenants-manage');
+Route::post('tenant/update/&id={id}', 'TenantsController@update')->name('tenants.tenant-update');
+Route::post('tenant/unassign-room/&id={id}', 'TenantsController@unassignRoom')->name('tenants.unassign-room');
 
 
 

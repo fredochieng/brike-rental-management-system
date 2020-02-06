@@ -54,6 +54,7 @@
                                 <th>Email Address</th>
                                 <th>Property</th>
                                 <th>Created At</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -71,7 +72,28 @@
                                 @endif
                                 <td>{{ $item->prop_name }}</td>
                                 <td>{{ $item->t_created_at }}</td>
+                                <td>
+                                    <div class="btn-group btn-group-sm role=" group">
+                                        <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Action
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                            <a class="dropdown-item" href="/tenant/manage/&id={{$item->tenant_id}}"><i
+                                                    class="icon-eye"></i> View
+                                                tenant</a>
+                                            <a class="dropdown-item" href="#" data-toggle="modal" disabled
+                                                data-target="#editTenantModal_{{$item->tenant_id}}"
+                                                data-backdrop="static" data-keyboard="false"><i class="icon-pencil"></i>
+                                                Edit
+                                                tenant</a>
+                                            <a class="dropdown-item" href=""><i class="icon-trash"></i> Delete
+                                                tenant</a>
+                                        </div>
+                                    </div>
+                                </td>
                             </tr>
+                            @include('tenants.modals.modal-edit-tenant')
                             @endforeach
                         </tbody>
                     </table>
@@ -97,6 +119,7 @@
                                 <th>Email Address</th>
                                 <th>Property</th>
                                 <th>Created At</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -114,7 +137,28 @@
                                 @endif
                                 <td>{{ $item->prop_name }}</td>
                                 <td>{{ $item->t_created_at }}</td>
+                                <td>
+                                    <div class="btn-group btn-group-sm role=" group">
+                                        <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Action
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                            <a class="dropdown-item" href="/tenant/manage/&id={{$item->tenant_id}}"><i
+                                                    class="icon-eye"></i> View
+                                                tenant</a>
+                                            <a class="dropdown-item" href="#" data-toggle="modal" disabled
+                                                data-target="#editTenantModal_{{$item->tenant_id}}"
+                                                data-backdrop="static" data-keyboard="false"><i class="icon-pencil"></i>
+                                                Edit
+                                                tenant</a>
+                                            <a class="dropdown-item" href=""><i class="icon-trash"></i> Delete
+                                                tenant</a>
+                                        </div>
+                                    </div>
+                                </td>
                             </tr>
+                            @include('tenants.modals.modal-edit-tenant')
                             @endforeach
                         </tbody>
                     </table>

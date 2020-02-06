@@ -16,7 +16,7 @@
         <div class="card overflowhidden">
             <div class="body">
                 <h5>KES 109,547,546.00 <i class="fa fa-money float-right"></i></h5>
-                <span>Revenue Collections</span>
+                <span>Rent Income</span>
             </div>
             <div class="progress progress-xs progress-transparent custom-color-blue m-b-0">
                 <div class="progress-bar" data-transitiongoal="64"></div>
@@ -27,7 +27,7 @@
         <div class="card overflowhidden">
             <div class="body">
                 <h5>KES 546,067.00 <i class="fa fa-dollar float-right"></i></h5>
-                <span>Due Collections</span>
+                <span>Rent Arrears</span>
             </div>
             <div class="progress progress-xs progress-transparent custom-color-purple m-b-0">
                 <div class="progress-bar" data-transitiongoal="67"></div>
@@ -179,8 +179,14 @@
         <div class="card">
             <div class="body">
                 <a href="#addVariationValueModal" data-toggle="modal"
-                    data-target="#addVariationValueModal_{{ $property->property_id }}" class="btn btn-warning"
-                    style="margin-left:740px"><i class="icon-plus"></i> ADD VARIATION VALUE
+                    data-target="#addVariationValueModal_{{ $property->property_id }}"
+                    class="btn btn-warning pull-left"><i class="icon-plus"></i> ADD VARIATION VALUE
+                </a>
+                <a href="#addAnotherTenantModal" data-toggle="modal" data-target="#addAnotherTenantModal"
+                    class="btn btn-primary" style="margin-left:40px"><i class="icon-plus"></i> UNASSIGN TENANT
+                </a>
+                <a href="#addAnotherTenantModal" data-toggle="modal" data-target="#addAnotherTenantModal"
+                    class="btn btn-success" style="margin-left:310px"><i class="icon-plus"></i> ADD ANOTHER TENANT
                 </a>
                 <a href="#assignRoomModal" data-toggle="modal" data-target="#assignRoomModal"
                     class="btn btn-info pull-right"><i class="icon-plus"></i> ASSIGN ROOM
@@ -309,5 +315,6 @@
     </div>
 </div>
 @include('property.modals.modal-assign-room')
+@include('property.modals.modal-add-another-tenant')
 @include('property.modals.modal-add-variation-value')
 @stop

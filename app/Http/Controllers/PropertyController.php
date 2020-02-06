@@ -28,6 +28,7 @@ class PropertyController extends Controller {
 
     public function index() {
         $data['property'] = Property::getProperty();
+
         return view( 'property.index' )->with( $data );
     }
 
@@ -219,11 +220,26 @@ class PropertyController extends Controller {
         return view( 'property.manage' )->with( $data );
     }
 
+    /** Get vacant rooms of selected variation on room assignment */
+
     public function varRoomsSelector( Request $request ) {
         //Function to get the variation rooms based on the selected variation
         $variation_val_id = Input::get( 'variation_val_id' );
+        $property_id = Input::get( 'property_id' );
         $is_vacant = 1;
-        $rooms = Rooms::getRooms()->where( 'variation_val_id', $variation_val_id )->where( 'is_vacant', $is_vacant );
+        $rooms = Rooms::getRooms()->where( 'property_id', $property_id )->where( 'variation_val_id', $variation_val_id )->where( 'is_vacant', $is_vacant );
+
+        return response()->json( $rooms );
+    }
+
+    /** Get already rented rooms of selected variation in the case of adding another tenant to a room */
+
+    public function varRentedRoomsSelector( Request $request ) {
+        //Function to get the variation rooms based on the selected variation
+        $variation_val_id = Input::get( 'variation_val_id' );
+        $property_id = Input::get( 'property_id' );
+        $is_vacant = 0;
+        $rooms = Rooms::getRooms()->where( 'property_id', $property_id )->where( 'variation_val_id', $variation_val_id )->where( 'is_vacant', $is_vacant );
 
         return response()->json( $rooms );
     }

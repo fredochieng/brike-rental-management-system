@@ -23,7 +23,7 @@ class RoomAssignmentController extends Controller {
     */
 
     public function index() {
-        $data['room_assignments'] = RoomAssignment::getRoomAssignments();
+        $data['room_assignments'] = RoomAssignment::getRoomAssignments()->where( 'r_end_date', '' );
         $data['property'] = Property::getProperty();
 
         $data['searched_tenants'] = array();
@@ -34,7 +34,7 @@ class RoomAssignmentController extends Controller {
             $t_status = 1;
             $find_by = 'property_id';
             $data['searched'] = 'yes';
-            $data['searched_r_assignments'] = RoomAssignment::getRoomAssignments()->where( 'property_id', $property_id );
+            $data['searched_r_assignments'] = RoomAssignment::getRoomAssignments()->where( 'property_id', $property_id )->where( 'r_end_date', '' );
 
             $total_r_assignments = count( $data['searched_r_assignments'] );
 
@@ -78,6 +78,66 @@ class RoomAssignmentController extends Controller {
     public function store( Request $request ) {
 
         $now = Carbon::now( 'Africa/Nairobi' )->toDateTimeString();
+        $property_id = $request->input( 'property_id' );
+        $variation_val_id = $request->input( 'variation_val_id' );
+        $room_id = $request->input( 'variation_room_id' );
+        $tenant_id = $request->input( 'r_tenant_id' );
+        $start_date = $request->input( 'r_start_date' );
+
+        $room_assignment = new RoomAssignment();
+
+        $room_assignment->room_id = $room_id;
+        $room_assignment->tenant_id = $tenant_id;
+        $room_assignment->r_start_date = $start_date;
+
+        //$room_assignment->save();
+
+        /** Get details of the selected variation */
+
+        $variation = Variation::where( 'variation_value_id', $variation_val_id )->where( 'property_id', $property_id )->first();
+
+        $vacant_rooms = $variation->vacant_rooms;
+        $vacant_rooms = $vacant_rooms - 1;
+
+        $rented_rooms = $variation->booked_rooms;
+        $rented_rooms = $rented_rooms + 1;
+
+        // dd( $vacant_rooms );
+
+        /** Reduce the count of vacant rooms by 1 and increase count of rented rooms( booked_rooms ) of the selected variation */
+
+        $update_variation_counts = Variation::where( 'variation_value_id', $variation_val_id )->where( 'property_id', $property_id )->update( [
+            'vacant_rooms' => $vacant_rooms,
+            'booked_rooms' => $rented_rooms
+        ] );
+
+        /** Update is_vacant status of the selected room */
+
+        $update_is_vacant = Rooms::where( 'id', $room_id )->update( [
+            'is_vacant' => 0
+        ] );
+
+        /** Update room_assigned column for the selected tennat from 0 to 1 */
+
+        $update_room_assigned = Tenants::where( 'id', $tenant_id )->update( [
+            'room_assigned' => 1
+        ] );
+
+        /** Log the action in the logs file */
+        Log::info( 'Room assignmet of ID ' . $room_assignment->id .  ' created by user of ID: ' . Auth::id() .
+        ' at ' . $now );
+
+        Toastr::success( 'Assignment created successfully' );
+
+        return back();
+    }
+    /** Add another tenant to alraedy rented room
+    * This is the case for hostel where one room can have more than 1 tenant
+    */
+
+    public function addAnotherTenant( Request $request ) {
+
+        $now = Carbon::now( 'Africa/Nairobi' )->toDateTimeString();
         $variation_val_id = $request->input( 'variation_val_id' );
         $room_id = $request->input( 'variation_room_id' );
         $tenant_id = $request->input( 'r_tenant_id' );
@@ -91,39 +151,17 @@ class RoomAssignmentController extends Controller {
 
         $room_assignment->save();
 
-        /** Get details of the selected variation */
-
-        $variation = Variation::where( 'variation_value_id', $variation_val_id )->first();
-        $vacant_rooms = $variation->vacant_rooms;
-        $vacant_rooms = $vacant_rooms - 1;
-
-        $rented_rooms = $variation->booked_rooms;
-        $rented_rooms = $rented_rooms + 1;
-
-        /** Reduce the count of vacant rooms by 1 and increase count of rented rooms( booked_rooms ) of the selected variation */
-
-        $update_variation_counts = Variation::where( 'variation_value_id', $variation_val_id )->update( [
-            'vacant_rooms' => $vacant_rooms,
-            'booked_rooms' => $rented_rooms
-        ] );
-
-        /** Update is_vacant status of the selected room */
-
-        $update_is_vacant = Rooms::where( 'id', $room_id )->update( [
-            'is_vacant' => 0
-        ] );
-
-        /** Update room_assigned column for the selected client from 0 to 1 */
+        /** Update room_assigned column for the selected tenant from 0 to 1 */
 
         $update_room_assigned = Tenants::where( 'id', $tenant_id )->update( [
             'room_assigned' => 1
         ] );
 
         /** Log the action in the logs file */
-        Log::info( 'Room assignmet of ID ' . $room_assignment->id .  ' created by user of ID: ' . Auth::id() .
+        Log::info( 'Room assignment assignmet of ID ' . $room_assignment->id .  ' created by user of ID: ' . Auth::id() .
         ' at ' . $now );
 
-        Toastr::success( 'Assignment created successfully' );
+        Toastr::success( 'Tenant added successfully' );
 
         return back();
     }

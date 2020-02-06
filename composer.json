@@ -16,6 +16,7 @@
         "laravelcollective/html": "^5.4.0",
         "nesbot/carbon": "^1.26.3",
         "oriceon/toastr-5-laravel": "^1.0",
+        "safaricom/mpesa": "^1.0",
         "yajra/laravel-datatables-oracle": "~8.0"
     },
     "require-dev": {

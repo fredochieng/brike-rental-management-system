@@ -55,7 +55,6 @@
                                     </div>
                                 </td>
                             </tr>
-                            @include('property.modals.modal-view-property')
                             @endforeach
                         </tbody>
                     </table>
