@@ -24,21 +24,23 @@ class TenantsController extends Controller {
 
     public function index() {
         $t_status = 1;
+        $room_assigned = 1;
         $data['property'] = Property::getProperty();
-        $data['tenants'] = Tenants::getTenants()->where( 't_status', $t_status );
+        $data['tenants'] = Tenants::getTenants()->where( 't_status', $t_status )->where( 'room_assigned', $room_assigned );
         $data['searched_tenants'] = array();
         $property_id = Input::get( 'property_id' );
+
+        // dd( $data['tenants'] );
 
         /** Get the search value and perform the neccessary queries */
         if ( isset( $_GET['property_id'] ) ) {
             $t_status = 1;
-            $find_by = 'property_id';
+            $room_assigned = 1;
             $data['searched'] = 'yes';
-            $data['searched_tenants'] = Tenants::getTenants()->where( 'property_id', $property_id )->where( 't_status', $t_status );
+            $data['searched_tenants'] = Tenants::getTenants()->where( 'property_id', $property_id )->where( 't_status', $t_status )
+            ->where( 'room_assigned', $room_assigned );
 
             $total_tenants = count( $data['searched_tenants'] );
-
-            $find_by_value = Input::get( 'property_id' );
 
             if ( count( $data['searched_tenants'] ) == 0 ) {
 
@@ -115,6 +117,7 @@ class TenantsController extends Controller {
     public function manageTenant( Request $request, $tenant_id ) {
         $data['tenant'] = Tenants::getTenants()->where( 'tenant_id', $tenant_id )->first();
         $data['room_assignment'] = RoomAssignment::getRoomAssignments()->where( 'tenant_id', $tenant_id )->first();
+        //  dd( $data['room_assignment'] );
         return view( 'tenants.manage' )->with( $data );
     }
 
@@ -151,7 +154,6 @@ class TenantsController extends Controller {
          * Go to variations table, increase vacant_rooms by 1 & decrease rented_rooms by 1
         */
 
-        //dd($room_assignment_count);
         if($room_assignment_count == 1){
 
             $room_details = array(

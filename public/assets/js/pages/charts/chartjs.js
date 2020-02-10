@@ -1,8 +1,9 @@
 $(function () {
     new Chart(document.getElementById("radar_chart").getContext("2d"), getChartJs('radar'));
 });
+
 function getChartJs(type) {
-    var config = null;   
+    var config = null;
     if (type === 'radar') {
         config = {
             type: 'radar',
@@ -17,32 +18,42 @@ function getChartJs(type) {
                     pointBackgroundColor: 'rgba(241,95,121, 0.8)',
                     pointBorderWidth: 1
                 }, {
-                        label: "My Second dataset",
-                        data: [72, 48, 40, 19, 96, 27, 100],
-                        borderColor: 'rgba(140,147,154, 0.8)',
-                        backgroundColor: 'rgba(140,147,154, 0.5)',
-                        pointBorderColor: 'rgba(140,147,154, 0)',
-                        pointBackgroundColor: 'rgba(140,147,154, 0.8)',
-                        pointBorderWidth: 1
-                    }]
+                    label: "My Second dataset",
+                    data: [72, 48, 40, 19, 96, 27, 100],
+                    borderColor: 'rgba(140,147,154, 0.8)',
+                    backgroundColor: 'rgba(140,147,154, 0.5)',
+                    pointBorderColor: 'rgba(140,147,154, 0)',
+                    pointBackgroundColor: 'rgba(140,147,154, 0.8)',
+                    pointBorderWidth: 1
+                }]
             },
             options: {
                 responsive: true,
                 legend: false
             }
         }
-    }    
+    }
     return config;
 }
 
 //=========================
-$(function() {
+$(function () {
     var options;
 
     var data = {
         labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-        series: [
-            [200, 380, 350, 320, 410, 450, 570, 400, 555, 620, 750, 900],
+        series: [{
+            name: 'series-real',
+            data: [46700, 18600, 56400, 32500, 24300, 43500, 16700, 40000, 56335, 63040, 47500, 90000],
+        }, {
+            name: 'series-projection',
+            data: [21000, 30800, 16000, 32000, 34500, 78300, 36300, 43200, 63733, 23460, 74360, 18400],
+        }],
+
+        plugins: [
+            Chartist.plugins.legend({
+                legendNames: ['Rent Income', 'Expenses']
+            })
         ]
     };
 
@@ -82,12 +93,15 @@ $(function() {
     options = {
         height: "270px",
         showArea: true,
-        showLine: false,
+        showLine: true,
         showPoint: true,
         axisX: {
             showGrid: false
         },
-        lineSmooth: false,
+        axisY: {
+            showGrid: false
+        },
+        lineSmooth: true,
     };
     new Chartist.Line('#area-chart', data, options);
 
@@ -97,31 +111,31 @@ $(function() {
         labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
         series: [{
             name: 'series-real',
-            data: [200, 380, 350, 320, 410, 450, 570, 400, 555, 620, 750, 900],
+            data: [26700, 38600, 56400, 32500, 24300, 43500, 16700, 40000, 56335, 63040, 47500, 14400],
         }, {
             name: 'series-projection',
-            data: [240, 350, 360, 380, 400, 450, 480, 523, 555, 600, 700, 800],            
+            data: [21000, 37800, 16000, 32000, 34500, 78300, 36300, 43200, 63733, 23460, 74360, 18400],
         }]
     };
     options = {
-        lineSmooth: false,
+        lineSmooth: true,
         height: "230px",
         low: 0,
         high: 'auto',
         series: {
             'series-projection': {
-                showPoint: true,                
+                showPoint: true,
             },
         },
-        
+
         options: {
             responsive: true,
-            legend: false
+            legend: true
         },
 
         plugins: [
             Chartist.plugins.legend({
-                legendNames: ['Actual', 'Projection']
+                legendNames: ['Rent Income', 'Expenses']
             })
         ]
     };
@@ -133,12 +147,12 @@ $(function() {
         series: [5, 3, 4]
     };
     var labels = ['Direct', 'Organic', 'Referral'];
-    var sum = function(a, b) {
+    var sum = function (a, b) {
         return a + b;
     };
     new Chartist.Pie('#pie-chart', dataPie, {
         height: "270px",
-        labelInterpolationFnc: function(value, idx) {
+        labelInterpolationFnc: function (value, idx) {
             var percentage = Math.round(value / dataPie.series.reduce(sum) * 100) + '%';
             return labels[idx] + ' (' + percentage + ')';
         }
@@ -175,7 +189,7 @@ $(function() {
             showGrid: false
         },
         axisY: {
-            labelInterpolationFnc: function(value) {
+            labelInterpolationFnc: function (value) {
                 return (value / 1000) + 'k';
             }
         },
@@ -184,7 +198,7 @@ $(function() {
                 appendToBody: true
             }),
         ]
-    }).on('draw', function(data) {
+    }).on('draw', function (data) {
         if (data.type === 'bar') {
             data.element.attr({
                 style: 'stroke-width: 30px'
@@ -212,9 +226,9 @@ $(function() {
     });
 
 
-    var randomScalingFactor = function() {
+    var randomScalingFactor = function () {
         return Math.round(Math.random() * 100);
-    };    
+    };
     var chartColors = window.chartColors;
     var color = Chart.helpers.color;
     var config = {
@@ -264,11 +278,10 @@ $(function() {
                 animateScale: true
             }
         }
-    };    
-    window.onload = function() {
+    };
+    window.onload = function () {
         var ctx = document.getElementById("chart-area");
         window.myPolarArea = Chart.PolarArea(ctx, config);
     };
 
 });
-    

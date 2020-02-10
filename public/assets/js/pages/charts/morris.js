@@ -1,4 +1,4 @@
-$(function() {
+$(function () {
     "use strict";
     MorrisArea();
     MorrisLineChart();
@@ -65,37 +65,36 @@ function MorrisArea() {
     Morris.Area({
         element: 'm_area_chart2',
         data: [{
-                period: '2012',
-                SiteA: 0,
-                SiteB: 10,
+            period: '2012',
+            SiteA: 0,
+            SiteB: 10,
 
-            }, {
-                period: '2013',
-                SiteA: 106,
-                SiteB: 71,
+        }, {
+            period: '2013',
+            SiteA: 106,
+            SiteB: 71,
 
-            }, {
-                period: '2014',
-                SiteA: 68,
-                SiteB: 41,
+        }, {
+            period: '2014',
+            SiteA: 68,
+            SiteB: 41,
 
-            }, {
-                period: '2015',
-                SiteA: 89,
-                SiteB: 285,
+        }, {
+            period: '2015',
+            SiteA: 89,
+            SiteB: 285,
 
-            }, {
-                period: '2016',
-                SiteA: 185,
-                SiteB: 104,
+        }, {
+            period: '2016',
+            SiteA: 185,
+            SiteB: 104,
 
-            }, {
-                period: '2017',
-                SiteA: 146,
-                SiteB: 102  ,
+        }, {
+            period: '2017',
+            SiteA: 146,
+            SiteB: 102,
 
-            }
-        ],
+        }],
         xkey: 'period',
         ykeys: ['SiteA', 'SiteB'],
         labels: ['Site A', 'Site B'],
@@ -113,7 +112,7 @@ function MorrisArea() {
     });
     Morris.Area({
         element: 'e_area_chart',
-            data: [{
+        data: [{
                 period: '2011',
                 iphone: 10,
                 ipad: 5,
@@ -226,15 +225,14 @@ function MorrisLineChart() {
 function MorrisDonutChart() {
     Morris.Donut({
         element: 'm_donut_chart',
-        data: [
-        {
+        data: [{
             label: "Online Sales",
             value: 45,
 
         }, {
             label: "Store Sales",
             value: 35
-        },{
+        }, {
             label: "Email Sales",
             value: 8
         }, {

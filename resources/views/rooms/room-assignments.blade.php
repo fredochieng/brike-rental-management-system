@@ -57,7 +57,7 @@
                                 <th>Room Number</th>
                                 <th>Tenant Name</th>
                                 <th>Phone</th>
-                                <th>Start At</th>
+                                <th>Tenancy Start Date</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -99,7 +99,7 @@
                                 <th>Room Number</th>
                                 <th>Tenant Name</th>
                                 <th>Phone</th>
-                                <th>Start At</th>
+                                <th>Tenancy Start Date</th>
                             </tr>
                         </thead>
                         <tbody>

@@ -3,7 +3,40 @@
 @section('parentPageTitle', 'Rooms')
 
 @section('content')
+<div class="row clearfix">
+    <div class="col-md-12">
+        <div class="card">
+            {!! Form::open(['url' => action('RoomAdjustmentController@index'), 'method' => 'get'])
+            !!}
+            <div class="body">
+                <div class="row clearfix">
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <label>Search rooms by property</label>
+                    </div>
+                    <div class="col-lg-5 col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <select class="custom-select" name="property_id" required>
+                                <option value="">Select property</option>
+                                @foreach($property as $item)
+                                <option value='{{ $item->property_id }}'>{{ $item->prop_name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-block btn-primary"><i class="fa fa-search"></i>
+                                <span>Search rooms adjustments</span></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {!! Form::close() !!}
+        </div>
+    </div>
+</div>
 
+@if($searched == 'yes')
 <div class="row clearfix">
     <div class="col-lg-12">
         <div class="card">
@@ -30,7 +63,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($room_adjustments as $r_adjustments)
+                            @foreach ($searched_adjustments as $r_adjustments)
                             <tr>
                                 <td>{{ $r_adjustments->prop_name }}</td>
                                 <td>{{ $r_adjustments->var_name }}</td>
@@ -51,5 +84,6 @@
         </div>
     </div>
 </div>
+@endif
 @include('rooms.modals.modal-room-adjustment')
 @stop

@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Kamaln7\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Input;
 use DB;
 use Carbon\Carbon;
 
@@ -22,7 +23,31 @@ class RoomAdjustmentController extends Controller {
     public function index() {
         $data['property'] = Property::getProperty();
         $data['room_adjustments'] = RoomAdjustment::getRoomAdjustmenst();
-        //dd( $data['room_adjustments'] );
+        $property_id = Input::get( 'property_id' );
+
+        /** Get the search value and perform the neccessary queries */
+        if ( isset( $_GET['property_id'] ) ) {
+            $t_status = 1;
+            $data['searched'] = 'yes';
+            $data['searched_adjustments'] = RoomAdjustment::getRoomAdjustmenst()
+            ->where( 'property_id', $property_id );
+
+            $total_adjustments = count( $data['searched_adjustments'] );
+
+            if ( count( $data['searched_adjustments'] ) == 0 ) {
+
+                Toastr::info( 'No adjustments found for your query' );
+
+                return view( 'rooms.room-adjustments' )->with( $data );
+
+            } elseif ( count( $data['searched_adjustments'] ) > 0 ) {
+
+                Toastr::success( $total_adjustments . ' adjustments found for your query' );
+
+                return view( 'rooms.room-adjustments' )->with( $data );
+            }
+        }
+        $data['searched'] = 'no';
         return view( 'rooms.room-adjustments' )->with( $data );
     }
 

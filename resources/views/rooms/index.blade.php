@@ -3,7 +3,49 @@
 @section('parentPageTitle', 'Rooms')
 
 @section('content')
+<div class="row clearfix">
+    <div class="col-md-12">
+        <div class="card">
+            {!! Form::open(['url' => action('RoomsController@index'), 'method' => 'get'])
+            !!}
+            <div class="body">
+                <div class="row clearfix">
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <label>Search rooms by property</label>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <select class="custom-select" name="property_id" required>
+                                <option value="">Select property</option>
+                                @foreach($property as $item)
+                                <option value='{{ $item->property_id }}'>{{ $item->prop_name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <select class="custom-select" name="is_vacant" id="is_vacant" required>
+                                <option value="">Select room status</option>
+                                <option value='1'>Vacant</option>
+                                <option value='0'>Rented</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-block btn-primary"><i class="fa fa-search"></i>
+                                <span>Search rooms</span></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {!! Form::close() !!}
+        </div>
+    </div>
+</div>
 
+@if ($searched == 'yes')
 <div class="row clearfix">
     <div class="col-lg-12">
         <div class="card">
@@ -28,7 +70,7 @@
                                 <th>Action</th>
                             </tr>
                         </thead>
-                        @foreach ($rooms as $count => $room)
+                        @foreach ($searched_rooms as $count => $room)
                         <tr>
                             <td>{{ $count + 1 }}</td>
                             <td>{{ $room->prop_name }}</td>
@@ -70,5 +112,42 @@
         </div>
     </div>
 </div>
+@else
+<div class="row clearfix">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="header">
+                <a href="#addRoomModal" data-toggle="modal" data-target="#addRoomModal"
+                    class="btn btn-info pull-right"><i class="icon-plus"></i> ADD ROOM
+                </a>
+            </div>
+            <div class="body">
+                <div class="table-responsive" style="font-size:13px">
+                    <table class="table table-bordered table-striped table-hover dataTable js-exportable">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Property</th>
+                                <th>Room Type</th>
+                                <th>Room Number</th>
+                                <th>Max. Occupants</th>
+                                <th>Vacant</th>
+                                <th>Room Status</th>
+                                <th>Created At</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endif
 @include('rooms.modals.modal-add-room')
 @stop

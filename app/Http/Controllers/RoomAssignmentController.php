@@ -24,6 +24,7 @@ class RoomAssignmentController extends Controller {
 
     public function index() {
         $data['room_assignments'] = RoomAssignment::getRoomAssignments()->where( 'r_end_date', '' );
+
         $data['property'] = Property::getProperty();
 
         $data['searched_tenants'] = array();
@@ -90,7 +91,7 @@ class RoomAssignmentController extends Controller {
         $room_assignment->tenant_id = $tenant_id;
         $room_assignment->r_start_date = $start_date;
 
-        //$room_assignment->save();
+        $room_assignment->save();
 
         /** Get details of the selected variation */
 
@@ -101,8 +102,6 @@ class RoomAssignmentController extends Controller {
 
         $rented_rooms = $variation->booked_rooms;
         $rented_rooms = $rented_rooms + 1;
-
-        // dd( $vacant_rooms );
 
         /** Reduce the count of vacant rooms by 1 and increase count of rented rooms( booked_rooms ) of the selected variation */
 

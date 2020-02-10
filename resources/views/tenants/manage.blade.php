@@ -133,9 +133,9 @@
                     <div class="body">
                         <ul class="list-unstyled feeds_widget">
                             <li>
+                                @if ($room_assignment->r_end_date != '')
                                 <div class="feeds-left"><i class="icon-logout"></i></div>
                                 <div class="feeds-body">
-                                    @if ($room_assignment->r_end_date == '')
                                     <a href="#" data-toggle="modal" disabled
                                         data-target="#unassignRoomModal_{{$tenant->tenant_id}}" data-backdrop="static"
                                         data-keyboard="false" class="title"><strong>Unassign

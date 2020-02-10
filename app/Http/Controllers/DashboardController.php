@@ -6,6 +6,10 @@ use Illuminate\Routing\Controller as BaseController;
 
 class DashboardController extends BaseController
 {
+
+    function index(){
+        return view('dashboard');
+    }
     function analytical(){
     	return view('dashboard.analytical');
     }

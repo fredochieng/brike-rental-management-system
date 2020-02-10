@@ -227,7 +227,7 @@ class PropertyController extends Controller {
         $variation_val_id = Input::get( 'variation_val_id' );
         $property_id = Input::get( 'property_id' );
         $is_vacant = 1;
-        $rooms = Rooms::getRooms()->where( 'property_id', $property_id )->where( 'variation_val_id', $variation_val_id )->where( 'is_vacant', $is_vacant );
+        $rooms = Rooms::getRooms()->where( 'property_id', 13 )->where( 'variation_val_id', 2 )->where( 'is_vacant', $is_vacant );
 
         return response()->json( $rooms );
     }

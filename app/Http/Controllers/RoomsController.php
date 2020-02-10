@@ -22,6 +22,33 @@ class RoomsController extends Controller {
     public function index() {
         $data['property'] = Property::getProperty();
         $data['rooms'] = Rooms::getRooms();
+
+        $data['searched_rooms'] = array();
+        $property_id = Input::get( 'property_id' );
+        $is_vacant = Input::get( 'is_vacant' );
+
+        if ( isset( $_GET['property_id'] ) && isset( $_GET['is_vacant'] ) ) {
+            $data['searched'] = 'yes';
+            $data['searched_rooms'] = Rooms::getRooms()->where( 'property_id', $property_id )->where( 'is_vacant', $is_vacant );
+
+            $total_rooms = count( $data['searched_rooms'] );
+
+            if ( count( $data['searched_rooms'] ) == 0 ) {
+
+                Toastr::info( 'No rooms found for your query' );
+
+                return view( 'rooms.index' )->with( $data );
+
+            } elseif ( count( $data['searched_rooms'] ) > 0 ) {
+
+                Toastr::success( $total_rooms . ' rooms found for your query' );
+
+                return view( 'rooms.index' )->with( $data );
+            }
+
+        }
+
+        $data['searched'] = 'no';
         return view( 'rooms.index' )->with( $data );
     }
 

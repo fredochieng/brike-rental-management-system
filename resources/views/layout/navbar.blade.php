@@ -5,7 +5,7 @@
         </div>
 
         <div class="navbar-brand">
-            <a href="{{route('dashboard.analytical')}}" class="img-responsive logo">
+            <a href="{{route('dashboard')}}" class="img-responsive logo">
                 {{-- <img src="{{ asset('assets/img/logo.svg') }}"
                 alt="Rental Management" class="img-responsive logo"> --}}
                 Rental Management
@@ -20,20 +20,6 @@
 
             <div id="navbar-menu">
                 <ul class="nav navbar-nav">
-                    <li class="d-none d-sm-inline-block d-md-none d-lg-inline-block">
-                        <a href="{{route('file-manager.dashboard')}}" class="icon-menu"><i
-                                class="fa fa-folder-open-o"></i></a>
-                    </li>
-                    <li class="d-none d-sm-inline-block d-md-none d-lg-inline-block">
-                        <a href="{{route('app.calendar')}}" class="icon-menu"><i class="icon-calendar"></i></a>
-                    </li>
-                    <li class="d-none d-sm-inline-block">
-                        <a href="{{route('app.chat')}}" class="icon-menu"><i class="icon-bubbles"></i></a>
-                    </li>
-                    <li class="d-none d-sm-inline-block">
-                        <a href="{{route('app.inbox')}}" class="icon-menu"><i class="icon-envelope"></i><span
-                                class="notification-dot"></span></a>
-                    </li>
                     <li class="dropdown">
                         <a href="javascript:void(0);" class="dropdown-toggle icon-menu" data-toggle="dropdown">
                             <i class="icon-bell"></i>
@@ -120,7 +106,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="{{route('authentication.login')}}" class="icon-menu"><i class="icon-login"></i></a>
+                        <a href="{{route('authentication.login')}}" class="icon-menu"><i class="icon-logout"></i></a>
                     </li>
                 </ul>
             </div>
