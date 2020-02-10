@@ -17,6 +17,8 @@ class TransactionsController extends Controller {
         //
     }
 
+    /** Mpesa API C2B Simulation*/
+
     public function c2b_transaction() {
         $mpesa = new \Safaricom\Mpesa\Mpesa();
         $mpesa = new Transaction();
@@ -29,6 +31,8 @@ class TransactionsController extends Controller {
 
         $c2bTransaction = $mpesa->c2b( $ShortCode, $CommandID, $Amount, $Msisdn, $BillRefNumber );
     }
+
+    /** Mpesa API C2B Confirmation URL*/
 
     public function confirmation_url() {
         # if this is your first time, you might need to check the directory 'Tutorial 1'  File first.
@@ -62,6 +66,7 @@ class TransactionsController extends Controller {
         $FirstName           = $jsonMpesaResponse['FirstName'];
         $MiddleName         = $jsonMpesaResponse['MiddleName'];
         $LastName          = $jsonMpesaResponse['LastName'];
+        $payment_method = 'Mpesa';
 
         // write to file
         $log = fopen( $logFile, 'a' );
@@ -71,19 +76,20 @@ class TransactionsController extends Controller {
         echo $response;
 
         $payments = new Transaction();
-        $payments->TransactionType = $TransactionType;
-        $payments->TransID = $TransID;
-        $payments->TransTime = $TransTime;
-        $payments->TransAmount = $TransAmount;
-        $payments->BusinessShortCode = $BusinessShortCode;
-        $payments->BillRefNumber = $BillRefNumber;
-        $payments->InvoiceNumber = $InvoiceNumber;
-        $payments->OrgAccountBalance = $OrgAccountBalance;
-        $payments->ThirdPartyTransID = $ThirdPartyTransID;
-        $payments->MSISDN = $MSISDN;
-        $payments->FirstName = $FirstName;
-        $payments->MiddleName = $MiddleName;
-        $payments->LastName = $LastName;
+        $payments->trans_type = $TransactionType;
+        $payments->trans_id = $TransID;
+        $payments->trans_time = $TransTime;
+        $payments->trans_amount = $TransAmount;
+        $payments->bus_shortcode = $BusinessShortCode;
+        $payments->bill_ref_no = $BillRefNumber;
+        $payments->invoice_no = $InvoiceNumber;
+        $payments->org_account_bal = $OrgAccountBalance;
+        $payments->third_party_trans_id = $ThirdPartyTransID;
+        $payments->msisdn = $MSISDN;
+        $payments->first_name = $FirstName;
+        $payments->middle_name = $MiddleName;
+        $payments->last_name = $LastName;
+        $payments->payment_method = $payment_method;
 
         $payments->save();
 
@@ -101,7 +107,7 @@ class TransactionsController extends Controller {
         // Your Validation
         // $response = '{  "ResultCode": 1, "ResultDesc": "Transaction Rejected."  }';
         /* Ofcourse we will be checking for amount, account number( incase of paybill ), invoice number and inventory.
-        But we reserve this for future tutorials*/
+        */
 
         // log the response
         $logFile = 'ValidationResponse.json';
@@ -117,9 +123,9 @@ class TransactionsController extends Controller {
         echo $response;
     }
 
-    public function register_url() {
+    /** Mpesa API C2B Register URL*/
 
-        //  $access_token = Mpesa::accessToken();
+    public function register_url() {
 
         if ( $environment == 'live' ) {
             $url = 'https://api.safaricom.co.ke/mpesa/c2b/v1/simulate';
@@ -130,13 +136,12 @@ class TransactionsController extends Controller {
         } else {
             return json_encode( ['Message'=>'invalid application status'] );
         }
-        // dd( $access_token );
+
         $url = 'https://sandbox.safaricom.co.ke/mpesa/c2b/v1/registerurl';
 
         $curl = curl_init();
         curl_setopt( $curl, CURLOPT_URL, $url );
         curl_setopt( $curl, CURLOPT_HTTPHEADER, array( 'Content-Type:application/json', 'Authorization:Bearer '.$token ) );
-        //curl_setopt( $curl, CURLOPT_HTTPHEADER, array( 'Content-Type:application/json', 'Authorization:Bearer'.$access_token ) );
         //setting custom header
 
         $curl_post_data = array(

@@ -6,7 +6,7 @@ use App\Models\Mpesa;
 use Illuminate\Database\Eloquent\Model;
 
 class Transaction extends Model {
-    protected $table = 'mobile_payments';
+    protected $table = 'rent_payments';
 
     public  static  function  c2b( $ShortCode, $CommandID, $Amount, $Msisdn, $BillRefNumber ) {
 
