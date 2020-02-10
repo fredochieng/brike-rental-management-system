@@ -132,8 +132,8 @@
                 <div class="card">
                     <div class="body">
                         <ul class="list-unstyled feeds_widget">
+                            @if ($room_assignment->r_end_date != '')
                             <li>
-                                @if ($room_assignment->r_end_date != '')
                                 <div class="feeds-left"><i class="icon-logout"></i></div>
                                 <div class="feeds-body">
                                     <a href="#" data-toggle="modal" disabled
@@ -141,15 +141,9 @@
                                         data-keyboard="false" class="title"><strong>Unassign
                                             Room</strong></a>
                                     <small>End of tenancy</small>
-                                    {{-- @else
-                                    <a href="#" data-toggle="modal" disabled
-                                        data-target="#unassignRoomModal_{{$tenant->tenant_id}}" data-backdrop="static"
-                                    data-keyboard="false" class="title"><strong>Unassign
-                                        Room</strong></a>
-                                    <small>End of tenancy</small> --}}
-                                    @endif
                                 </div>
                             </li>
+                            @endif
                             <li>
                                 <div class="feeds-left"><i class="icon-refresh"></i></div>
                                 <div class="feeds-body">

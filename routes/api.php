@@ -16,3 +16,8 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::any('/payments/confirmation', 'TransactionsController@confirmation_url');
+Route::any('/payments/validation', 'TransactionsController@validation_url');
+Route::any('/payments/register', 'TransactionsController@register_url');
+Route::any('/payments', 'TransactionsController@c2b_transaction');
