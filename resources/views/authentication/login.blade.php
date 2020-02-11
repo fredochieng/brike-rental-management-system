@@ -12,7 +12,7 @@
             </div>
             <div class="card">
                 <div class="header">
-                    <p class="lead">Login to your accountssss</p>
+                    <p class="lead">Login to your account</p>
                 </div>
                 <div class="body">
 

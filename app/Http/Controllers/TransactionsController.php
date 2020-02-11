@@ -14,7 +14,12 @@ class TransactionsController extends Controller {
     */
 
     public function index() {
-        //
+        $data['payments'] = Transaction::getPayments();
+        $data['currency_symbol'] = 'KES';
+        // echo '<pre>';
+        // print_r( $data['payments'] );
+        // exit;
+        return view( 'payments.index' )->with( $data );
     }
 
     /** Mpesa API C2B Simulation*/
@@ -58,7 +63,7 @@ class TransactionsController extends Controller {
         $TransTime            = $jsonMpesaResponse['TransTime'];
         $TransAmount         = $jsonMpesaResponse['TransAmount'];
         $BusinessShortCode    = $jsonMpesaResponse['BusinessShortCode'];
-        $BillRefNumber       = $jsonMpesaResponse['BillRefNumber'];
+        $BillRefNumber       = strtoupper( $jsonMpesaResponse['BillRefNumber'] );
         $InvoiceNumber       = $jsonMpesaResponse['InvoiceNumber'];
         $OrgAccountBalance    = $jsonMpesaResponse['OrgAccountBalance'];
         $ThirdPartyTransID   = $jsonMpesaResponse['ThirdPartyTransID'];

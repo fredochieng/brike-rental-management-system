@@ -3,14 +3,7 @@
 @section('parentPageTitle', 'Property')
 
 @section('content')
-{{-- <div class="col-lg-7 col-md-4 col-sm-12 text-right">
-    <div class="inlineblock text-center m-r-15 m-l-15-sm">
-        <span>Visitors</span>
-    </div>
-    <div class="inlineblock text-center m-r-15 m-l-15 hidden-sm">
-        <span>Visits</span>
-    </div>
-</div> --}}
+
 <div class="row clearfix">
     <div class="col-lg-3 col-md-6">
         <div class="card overflowhidden">
@@ -262,51 +255,36 @@
                 <h2>Recent Payments</h2>
             </div>
             <div class="body">
-                <div class="table-responsive">
-                    <table class="table table-hover m-b-0">
+                <div class="table-responsive" style="font-size:13px">
+                    <table class="table table-bordered table-striped table-hover dataTable js-exportable"
+                        style="font-size:13px">
                         <thead class="thead-primary">
                             <tr>
                                 <th>Transaction ID</th>
-                                <th>Name</th>
-                                <th>Account Number</th>
-                                <th>Room Number</th>
-                                <th>Amount Paid</th>
-                                <th>Month & Year</th>
+                                <th>Amount</th>
+                                <th>Phone</th>
+                                <th>Paid By</th>
+                                <th>Room</th>
+                                <th>Property</th>
+                                <th>Tenant Name</th>
+                                <th>Tenant Phone</th>
+                                <th>Paid At</th>
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach ($payments as $item)
                             <tr>
-                                <td><span class="list-name">OU 00456</span></td>
-                                <td>Joseph</td>
-                                <td>0708534343</td>
-                                <td>A1</td>
-                                <td>KES 2,000.00</td>
-                                <td>Jan, 2010</td>
+                                <td>{{ $item->trans_id}}</td>
+                                <td>{{ $currency_symbol }} {{number_format($item->trans_amount, 2, '.', ',')}}</td>
+                                <td>{{ $item->msisdn}}</td>
+                                <td>{{ $item->first_name}} {{ $item->last_name }}</td>
+                                <td>{{ $item->bill_ref_no}}</td>
+                                <td>{{ $item->prop_name}}</td>
+                                <td>{{ $item->t_name}}</td>
+                                <td>{{ $item->t_phone}}</td>
+                                <td>{{ $item->trans_created_at}}</td>
                             </tr>
-                            <tr>
-                                <td><span class="list-name">OU 00456</span></td>
-                                <td>Joseph</td>
-                                <td>0708534343</td>
-                                <td>A1</td>
-                                <td>KES 2,000.00</td>
-                                <td>Jan, 2010</td>
-                            </tr>
-                            <tr>
-                                <td><span class="list-name">OU 00456</span></td>
-                                <td>Joseph</td>
-                                <td>0708534343</td>
-                                <td>A1</td>
-                                <td>KES 2,000.00</td>
-                                <td>Jan, 2010</td>
-                            </tr>
-                            <tr>
-                                <td><span class="list-name">OU 00456</span></td>
-                                <td>Joseph</td>
-                                <td>0708534343</td>
-                                <td>A1</td>
-                                <td>KES 2,000.00</td>
-                                <td>Jan, 2010</td>
-                            </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

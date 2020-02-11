@@ -10,6 +10,7 @@ use App\Models\PropertyVariations;
 use App\Models\RoomAssignment;
 use App\Models\RoomAdjustment;
 use App\Models\Variation;
+use App\Models\ Transaction;
 use App\Models\VariationValues;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
@@ -214,6 +215,9 @@ class PropertyController extends Controller {
         $variation_template = $property_variation->variation_temp_id;
 
         $data['all_variation_values'] = VariationValues::getVariationValues( $variation_template );
+
+        /** Get rent payments for the propery */
+        $data['payments'] = Transaction::getPayments()->where( 'property_id', '=', $property_id );
 
         //dd( $data['all_variation_values'] );
 

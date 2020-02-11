@@ -71,6 +71,9 @@ Route::any('tenant/manage/&id={id}', 'TenantsController@manageTenant')->name('te
 Route::post('tenant/update/&id={id}', 'TenantsController@update')->name('tenants.tenant-update');
 Route::post('tenant/unassign-room/&id={id}', 'TenantsController@unassignRoom')->name('tenants.unassign-room');
 
+/** Rent payments */
+Route::get('rent/payments', 'TransactionsController@index')->name('rent.payments');
+
 /* Authentication */
 Route::get('authentication', function () { return redirect('authentication/login'); });
 Route::get('authentication/login', 'AuthenticationController@login')->name('authentication.login');

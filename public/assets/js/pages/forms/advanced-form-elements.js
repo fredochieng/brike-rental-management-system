@@ -56,7 +56,8 @@ $(function () {
     });
 
     // Masked Inputs
-    $('#phone').mask('(999) 999-9999');
+    $('#phone').inputmask('+254 (999) 999-999');
+    // $('#phone').mask('(999) 999-9999');
     $('#phone-ex').mask('(999) 999-9999? x99999');
     $('#tax-id').mask('99-9999999');
     $('#ssn').mask('999-99-9999');

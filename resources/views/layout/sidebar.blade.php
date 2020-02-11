@@ -93,12 +93,12 @@
                                     Assignments</span></a>
                         </li>
 
-                        <li class="{{ Request::segment(1) === 'tenants' ? 'active' : null }}">
+                        <li class="{{ Request::segment(1) === 'payments' ? 'active' : null }}">
                             <a href="#Rooms" class="has-arrow"><i class="fa fa-money"></i><span>Payments</span></a>
                             <ul>
-                                <li class="{{ Request::segment(2) === 'tenants-list' ? 'active' : null }}"><a
-                                        href="{{route('tenants.tenants-list')}}">
-                                        Tenant Listing</a></li>
+                                <li class="{{ Request::segment(2) === 'payments' ? 'active' : null }}"><a
+                                        href="{{route('rent.payments')}}">
+                                        Payments</a></li>
                             </ul>
                             <ul>
                                 <li class="{{ Request::segment(2) === 'tenants-create' ? 'active' : null }}"><a

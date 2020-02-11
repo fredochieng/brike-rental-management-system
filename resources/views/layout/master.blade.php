@@ -32,7 +32,8 @@
         @if (Request::segment(2) === 'property-list' || Request::segment(2) === 'tenants-list' || Request::segment(2)
         ===
         'categories' || Request::segment(2) === 'variations' || Request::segment(2) === 'rooms-list' ||
-        Request::segment(2) === 'room-assignments' || Request::segment(2) === 'room-adjustments')
+        Request::segment(2) === 'room-assignments' || Request::segment(2) === 'room-adjustments' || Request::segment(2)
+        === 'dashboard')
         <link rel="stylesheet" href="{{ asset('assets/vendor/jquery-datatable/dataTables.bootstrap4.min.css') }}" />
         <link rel="stylesheet"
             href="{{ asset('assets/vendor/jquery-datatable/fixedeader/dataTables.fixedcolumns.bootstrap4.min.css') }}" />
@@ -150,7 +151,25 @@
         <script src="{{ asset('assets/bundles/jvectormap.bundle.js') }}"></script> <!-- JVectorMap Plugin Js -->
         <script src="{{ asset('assets/bundles/knob.bundle.js') }}"></script>
 
+        <script src="{{ asset('assets/bundles/datatablescripts.bundle.js') }}"></script>
+        <script src="{{ asset('assets/vendor/jquery-datatable/buttons/dataTables.buttons.min.js') }}"></script>
+        <script src="{{ asset('assets/vendor/jquery-datatable/buttons/buttons.bootstrap4.min.js') }}"></script>
+        <script src="{{ asset('assets/vendor/jquery-datatable/buttons/buttons.colVis.min.js') }}"></script>
+        <script src="{{ asset('assets/vendor/jquery-datatable/buttons/buttons.html5.min.js') }}"></script>
+        <script src="{{ asset('assets/vendor/jquery-datatable/buttons/buttons.print.min.js') }}"></script>
+        <script src="{{ asset('assets/vendor/sweetalert/sweetalert.min.js') }}"></script>
+        <script src="{{ asset('assets/js/pages/tables/jquery-datatable.js') }}"></script>
 
+
+        <script src="{{ asset('assets/vendor/bootstrap-colorpicker/js/bootstrap-colorpicker.js') }}"></script>
+        <script src="{{ asset('assets/vendor/jquery-inputmask/jquery.inputmask.bundle.js') }}"></script>
+        <script src="{{ asset('assets/vendor/jquery.maskedinput/jquery.maskedinput.min.js') }}"></script>
+        <script src="{{ asset('assets/vendor/multi-select/js/jquery.multi-select.js') }}"></script>
+        <script src="{{ asset('assets/vendor/bootstrap-multiselect/bootstrap-multiselect.js') }}"></script>
+        <script src="{{ asset('assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}"></script>
+        <script src="{{ asset('assets/vendor/bootstrap-tagsinput/bootstrap-tagsinput.js') }}"></script>
+        <script src="{{ asset('assets/vendor/nouislider/nouislider.js') }}"></script>
+        <script src="{{ asset('assets/js/pages/forms/advanced-form-elements.js') }}"></script>
 
 
 
@@ -172,11 +191,20 @@
         <script src="{{ asset('assets/vendor/nestable/jquery.nestable.js') }}"></script> <!-- Jquery Nestable -->
         <script src="{{ asset('assets/js/pages/ui/sortable-nestable.js') }}"></script>
         <script src="{{ asset('assets/js/dashboard.js') }}"></script>
+        <script src="{{ asset('assets/bundles/datatablescripts.bundle.js') }}"></script>
+        <script src="{{ asset('assets/vendor/jquery-datatable/buttons/dataTables.buttons.min.js') }}"></script>
+        <script src="{{ asset('assets/vendor/jquery-datatable/buttons/buttons.bootstrap4.min.js') }}"></script>
+        <script src="{{ asset('assets/vendor/jquery-datatable/buttons/buttons.colVis.min.js') }}"></script>
+        <script src="{{ asset('assets/vendor/jquery-datatable/buttons/buttons.html5.min.js') }}"></script>
+        <script src="{{ asset('assets/vendor/jquery-datatable/buttons/buttons.print.min.js') }}"></script>
+        <script src="{{ asset('assets/vendor/sweetalert/sweetalert.min.js') }}"></script>
+        <script src="{{ asset('assets/js/pages/tables/jquery-datatable.js') }}"></script>
         @endif
 
         @if (Request::segment(2) === 'property-list' || Request::segment(2) === 'categories' || Request::segment(2) ===
         'variations' || Request::segment(2) === 'tenants-list' || Request::segment(2) === 'rooms-list' ||
-        Request::segment(2) === 'room-assignments' || Request::segment(2) === 'room-adjustments'
+        Request::segment(2) === 'room-assignments' || Request::segment(2) === 'room-adjustments' || Request::segment(2)
+        === 'payments'
 
         )
         <script src="{{ asset('assets/bundles/datatablescripts.bundle.js') }}"></script>

@@ -7,6 +7,7 @@ use App\Models\Property;
 use App\Models\Rooms;
 use App\Models\RoomAssignment;
 use App\Models\Variation;
+use App\Models\ Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Kamaln7\Toastr\Facades\Toastr;
@@ -88,6 +89,7 @@ class TenantsController extends Controller {
         $t_email = $request->input( 't_email' );
 
         $new_t_phone = str_replace( '(', '', $t_phone );
+        $new_t_phone = str_replace( '+', '', $new_t_phone );
         $new_t_phone = str_replace( ')', '', $new_t_phone );
         $new_t_phone = str_replace( '-', '', $new_t_phone );
         $new_t_phone = str_replace( ' ', '', $new_t_phone );
@@ -117,7 +119,17 @@ class TenantsController extends Controller {
     public function manageTenant( Request $request, $tenant_id ) {
         $data['tenant'] = Tenants::getTenants()->where( 'tenant_id', $tenant_id )->first();
         $data['room_assignment'] = RoomAssignment::getRoomAssignments()->where( 'tenant_id', $tenant_id )->first();
-        //  dd( $data['room_assignment'] );
+
+        /** To get actual payment for the tenant, the msisdn must be the same as t_phone
+        * This means that the tenant must pay with his/her phone number
+        * Another option would be to confirm payment that dont much any tenant, & update
+        * t_phone column in the rent payments table with the t_phone & use it to search the tenant
+        */
+        $data['payments'] = Transaction::getPayments()
+        // ->where( 'msisdn', $data['tenant'] )
+        ;
+        $data['currency_symbol'] = 'KES';
+        // dd( $data['payments'] );
         return view( 'tenants.manage' )->with( $data );
     }
 

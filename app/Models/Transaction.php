@@ -2,6 +2,7 @@
 
 namespace App\Models;
 use App\Models\Mpesa;
+use DB;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -26,8 +27,6 @@ class Transaction extends Model {
             return json_encode( ['Message'=>'invalid application status'] );
         }
 
-        // dd( $token );
-
         $curl = curl_init();
         curl_setopt( $curl, CURLOPT_URL, $url );
         curl_setopt( $curl, CURLOPT_HTTPHEADER, array( 'Content-Type:application/json', 'Authorization:Bearer '.$token ) );
@@ -50,6 +49,61 @@ class Transaction extends Model {
 
         print_r( $curl_response );
         return $curl_response;
+    }
+
+    public static function getPayments() {
+
+        /** To get actual payment for the tenant, the msisdn must be the same as t_phone
+        * This means that the tenant must pay with his/her phone number
+        * Another option would be to confirm payment that dont much any tenant, & update
+        * t_phone column in the rent payments table with the t_phone & use it to search the tenant
+        */
+        $payments = DB::table( 'rent_payments' )->select(
+            DB::raw( 'rent_payments.*' ),
+            DB::raw( 'rent_payments.id as transaction_id' ),
+            DB::raw( 'rent_payments.created_at as trans_created_at' ),
+            DB::raw( 'rooms.id as room_id' ),
+            DB::raw( 'rooms.property_id' ),
+            DB::raw( 'rooms.room_no' ),
+            DB::raw( 'properties.id as prop_id' ),
+            DB::raw( 'properties.prop_name' ),
+            DB::raw( 'tenants.t_name' ),
+            DB::raw( 'tenants.t_phone' ),
+            DB::raw( 'rent_payments.msisdn as payment_phone' )
+        )
+        ->leftJoin( 'rooms', 'rent_payments.bill_ref_no', '=', 'rooms.room_no' )
+        ->leftJoin( 'properties', 'rooms.property_id', '=', 'properties.id' )
+        ->join( 'tenants', 'tenants.t_phone', '=', 'rent_payments.msisdn', 'left outer' )
+        // ->join( 'tenants', 'tenants.t_phone', '=', 'rent_payments.tenant_phone', 'left outer' )
+        ->orderBy( 'rent_payments.id', 'desc' )
+        ->get();
+
+        return $payments;
+    }
+
+    public static function getLatestPayments() {
+        $latest_payments = DB::table( 'rent_payments' )->select(
+            DB::raw( 'rent_payments.*' ),
+            DB::raw( 'rent_payments.id as transaction_id' ),
+            DB::raw( 'rent_payments.created_at as trans_created_at' ),
+            DB::raw( 'rooms.id as room_id' ),
+            DB::raw( 'rooms.property_id' ),
+            DB::raw( 'rooms.room_no' ),
+            DB::raw( 'properties.id as prop_id' ),
+            DB::raw( 'properties.prop_name' ),
+            DB::raw( 'tenants.t_name' ),
+            DB::raw( 'tenants.t_phone' ),
+            DB::raw( 'rent_payments.msisdn as payment_phone' )
+        )
+        ->leftJoin( 'rooms', 'rent_payments.bill_ref_no', '=', 'rooms.room_no' )
+        ->leftJoin( 'properties', 'rooms.property_id', '=', 'properties.id' )
+        ->join( 'tenants', 'tenants.t_phone', '=', 'rent_payments.msisdn', 'left outer' )
+        // ->join( 'tenants', 'tenants.t_phone', '=', 'rent_payments.tenant_phone', 'left outer' )
+        ->orderBy( 'rent_payments.id', 'desc' )
+        ->limit( 7 )
+        ->get();
+
+        return $latest_payments;
     }
 
 }

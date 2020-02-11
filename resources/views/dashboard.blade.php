@@ -102,7 +102,7 @@
     <div class="col-lg-12 col-md-12">
         <div class="card">
             <div class="header">
-                <h2>Recent Transactions</h2>
+                <h2>Transactions Chart</h2>
                 <ul class="header-dropdown">
                     <li class="dropdown">
                         <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button"
@@ -141,109 +141,72 @@
 </div>
 
 <div class="row clearfix">
-    <div class="col-lg-6">
+    <div class="col-lg-7">
         <div class="card">
             <div class="header">
                 <h2>Recent Payments</h2>
             </div>
             <div class="body">
                 <div class="table-responsive" style="font-size:11px">
-                    <table class="table table-hover m-b-0">
+                    <table class="table table-hover m-b-0" style="font-size:11px">
                         <thead class="thead-primary">
                             <tr>
                                 <th>Trans ID</th>
-                                <th>Name</th>
-                                <th>Account</th>
-                                <th>Room</th>
                                 <th>Amount</th>
-                                <th>Date</th>
+                                <th>Phone</th>
+                                <th>Paid By</th>
+                                <th>Room</th>
+                                <th>Property</th>
+                                <th>Paid At</th>
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach ($payments as $item)
                             <tr>
-                                <td><span class="list-name">OU 00456</span></td>
-                                <td>Joseph</td>
-                                <td>0708534343</td>
-                                <td>A1</td>
-                                <td>KES 2,000.00</td>
-                                <td>2020-02-07 14:34:26</td>
+                                <td>{{ $item->trans_id}}</td>
+                                <td>{{ $currency_symbol }} {{number_format($item->trans_amount, 2, '.', ',')}}</td>
+                                <td>{{ $item->msisdn}}</td>
+                                <td>{{ $item->first_name}} {{ $item->last_name }}</td>
+                                <td>{{ $item->bill_ref_no}}</td>
+                                <td>{{ $item->prop_name}}</td>
+                                <td>{{ $item->trans_created_at}}</td>
                             </tr>
-                            <tr>
-                                <td><span class="list-name">OU 00456</span></td>
-                                <td>Joseph</td>
-                                <td>0708534343</td>
-                                <td>A1</td>
-                                <td>KES 2,000.00</td>
-                                <td>2020-02-07 14:34:26</td>
-                            </tr>
-                            <tr>
-                                <td><span class="list-name">OU 00456</span></td>
-                                <td>Joseph</td>
-                                <td>0708534343</td>
-                                <td>A1</td>
-                                <td>KES 2,000.00</td>
-                                <td>2020-02-07 14:34:26</td>
-                            </tr>
-                            <tr>
-                                <td><span class="list-name">OU 00456</span></td>
-                                <td>Joseph</td>
-                                <td>0708534343</td>
-                                <td>A1</td>
-                                <td>KES 2,000.00</td>
-                                <td>2020-02-07 14:34:26</td>
-                            </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
     </div>
-    <div class="col-lg-6">
+    <div class="col-lg-5">
         <div class="card">
             <div class="header">
                 <h2>Recent Room Assignments</h2>
             </div>
             <div class="body">
                 <div class="table-responsive" style="font-size:11px">
-                    <table class="table table-hover m-b-0">
+                    <table class="table table-hover m-b-0" style="font-size:11px">
                         <thead class="thead-primary">
                             <tr>
-                                <th>Trans ID</th>
-                                <th>Name</th>
-                                <th>Account</th>
+                                <th>Property</th>
+                                <th>Variation</th>
                                 <th>Room</th>
-                                <th>Amount</th>
+                                <th>Tenant Name</th>
+                                <th>Phone</th>
+                                <th>Start Date</th>
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach ($room_assignments as $count => $r_assignments)
                             <tr>
-                                <td><span class="list-name">OU 00456</span></td>
-                                <td>Joseph</td>
-                                <td>0708534343</td>
-                                <td>A1</td>
-                                <td>KES 2,000.00</td>
+                                <td>{{ $r_assignments->prop_name }}</td>
+                                <td>{{ $r_assignments->var_name_value }}</td>
+                                <td>{{ $r_assignments->room_no }}</td>
+                                <td>{{ $r_assignments->t_name }}</td>
+                                <td>{{ $r_assignments->t_phone }}</td>
+                                <td>{{ $r_assignments->r_start_date }}</td>
                             </tr>
-                            <tr>
-                                <td><span class="list-name">OU 00456</span></td>
-                                <td>Joseph</td>
-                                <td>0708534343</td>
-                                <td>A1</td>
-                                <td>KES 2,000.00</td>
-                            </tr>
-                            <tr>
-                                <td><span class="list-name">OU 00456</span></td>
-                                <td>Joseph</td>
-                                <td>0708534343</td>
-                                <td>A1</td>
-                                <td>KES 2,000.00</td>
-                            </tr>
-                            <tr>
-                                <td><span class="list-name">OU 00456</span></td>
-                                <td>Joseph</td>
-                                <td>0708534343</td>
-                                <td>A1</td>
-                                <td>KES 2,000.00</td>
-                            </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
