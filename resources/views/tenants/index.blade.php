@@ -115,7 +115,6 @@
                                 <th>Name</th>
                                 <th>ID/Reg Number</th>
                                 <th>Phone Number</th>
-                                {{-- <th>Alt. Phone Number</th> --}}
                                 <th>Email Address</th>
                                 <th>Property</th>
                                 <th>Created At</th>
@@ -123,44 +122,11 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($tenants as $count => $item)
                             <tr>
-                                <td>{{ $count + 1 }}</td>
-                                <td>{{ $item->t_name }}</td>
-                                <td>{{ $item->t_id_no }}</td>
-                                <td>{{ $item->t_phone }}</td>
-                                {{-- <td>{{ $item->t_alt_phone }}</td> --}}
-                                @if ($item->t_email == '')
-                                <td>Not Available</td>
-                                @else
-                                <td>{{ $item->t_email }}</td>
-                                @endif
-                                <td>{{ $item->prop_name }}</td>
-                                <td>{{ $item->t_created_at }}</td>
-                                <td>
-                                    <div class="btn-group btn-group-sm role=" group">
-                                        <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle"
-                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Action
-                                        </button>
-                                        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                                            <a class="dropdown-item" href="/tenant/manage/&id={{$item->tenant_id}}"><i
-                                                    class="icon-eye"></i> View
-                                                tenant</a>
-                                            <a class="dropdown-item" href="#" data-toggle="modal" disabled
-                                                data-target="#editTenantModal_{{$item->tenant_id}}"
-                                                data-backdrop="static" data-keyboard="false"><i class="icon-pencil"></i>
-                                                Edit
-                                                tenant</a>
-                                            <a class="dropdown-item" href=""><i class="icon-trash"></i> Delete
-                                                tenant</a>
-                                        </div>
-                                    </div>
-                                </td>
+                                <td>No records</td>
                             </tr>
-                            @include('tenants.modals.modal-edit-tenant')
-                            @endforeach
                         </tbody>
+
                     </table>
                 </div>
             </div>

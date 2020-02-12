@@ -176,6 +176,7 @@
         <script src="{{ asset('assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}"></script>
         <script src="{{ asset('assets/js/widgets/infobox/infobox-1.js') }}"></script>
         <script src="{{ asset('assets/js/index3.js') }}"></script>
+        <script src="{{ asset('assets/js/sparkline.js') }}"></script>
         <script src="{{ asset('/js/variationRoomsSelector.js') }}"></script>
         <script src="{{ asset('/js/getVariationsSelector.js') }}"></script>
 

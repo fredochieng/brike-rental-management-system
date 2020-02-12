@@ -1,7 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\ Property;
+use App\Models\ Variation;
 use App\Models\ Transaction;
+use App\Models\ Tenants;
 use App\Models\RoomAssignment;
 
 use Illuminate\Routing\Controller as BaseController;
@@ -10,6 +13,24 @@ class DashboardController extends BaseController {
 
     function index() {
         $data['payments'] = Transaction::getLatestPayments();
+        $data['sum_rent_payments'] = Transaction::sumTotalRentPayments();
+        $data['total_property'] = count( Property::getProperty() );
+        $data['variation_values'] = Variation::variationValuesSum();
+
+        foreach ( $data['variation_values'] as $key => $value ) {
+            $total_rooms[] = $value->tot_rooms;
+            $rented_rooms[] = $value->booked_rooms;
+            $vacant_rooms[] = $value->vacant_rooms;
+        }
+        $data['sum_total_rooms'] = array_sum( $total_rooms );
+        $data['sum_total_rented_rooms'] = array_sum( $rented_rooms );
+        $data['sum_total_vacant_rooms'] = array_sum( $vacant_rooms );
+
+        $t_status = 1;
+        $data['tot_tenants'] = count( Tenants::getTotalTenants()->where( 't_status', $t_status ) );
+
+        // dd( $data['sum_total_rooms'] );
+
         $data['room_assignments'] = RoomAssignment::getLatestRoomAssignments();
         $data['currency_symbol'] = 'KES';
         return view( 'dashboard' )->with( $data );

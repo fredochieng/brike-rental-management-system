@@ -8,7 +8,8 @@
     <div class="col-lg-3 col-md-6">
         <div class="card overflowhidden">
             <div class="body">
-                <h5>KES 109,547,546.00 <i class="fa fa-money float-right"></i></h5>
+                <h5>{{ $currency_symbol }} {{ number_format($sum_tot_prop_rent_payments, 2, '.',',' )}} <i
+                        class="fa fa-money float-right icon text-primary"></i></h5>
                 <span>Rent Income</span>
             </div>
             <div class="progress progress-xs progress-transparent custom-color-blue m-b-0">
@@ -19,7 +20,7 @@
     <div class="col-lg-3 col-md-6">
         <div class="card overflowhidden">
             <div class="body">
-                <h5>KES 546,067.00 <i class="fa fa-dollar float-right"></i></h5>
+                <h5>KES 546,067.00 <i class="fa fa-dollar float-right icon text-primary"></i></h5>
                 <span>Rent Arrears</span>
             </div>
             <div class="progress progress-xs progress-transparent custom-color-purple m-b-0">
@@ -30,7 +31,7 @@
     <div class="col-lg-3 col-md-6">
         <div class="card overflowhidden">
             <div class="body">
-                <h5>{{ $sum_total_rooms }} Rooms <i class="fa fa-dollar float-right"></i></h5>
+                <h5>{{ $sum_total_rooms }} Rooms <i class="fa fa-building-o float-right icon text-primary"></i></h5>
                 <span>Total Rooms</span>
             </div>
             <div class="progress progress-xs progress-transparent custom-color-green m-b-0">
@@ -41,7 +42,7 @@
     <div class="col-lg-3 col-md-6">
         <div class="card overflowhidden">
             <div class="body">
-                <h5>{{ $sum_total_rented_rooms }} Rooms <i class="fa fa-dollar float-right"></i></h5>
+                <h5>{{ $sum_total_rented_rooms }} Rooms <i class="fa fa-home float-right icon text-primary"></i></h5>
                 <span>Rented Rooms</span>
             </div>
             <div class="progress progress-xs progress-transparent custom-color-yellow m-b-0">
@@ -54,7 +55,8 @@
     <div class="col-lg-3 col-md-6">
         <div class="card overflowhidden">
             <div class="body">
-                <h5>{{ $sum_total_vacant_rooms}} Rooms <i class=" icon-heart float-right"></i></h5>
+                <h5>{{ $sum_total_vacant_rooms}} Rooms <i class=" fa fa-building float-right icon text-primary"></i>
+                </h5>
                 <span>Vacant Rooms</span>
             </div>
             <div class="progress progress-xs progress-transparent custom-color-blue m-b-0">
@@ -65,7 +67,7 @@
     <div class="col-lg-3 col-md-6">
         <div class="card overflowhidden">
             <div class="body">
-                <h5>{{ $tot_variations }} Variations <i class="icon-basket-loaded float-right"></i></h5>
+                <h5>{{ $tot_variations }} Variations <i class="icon-loop float-right icon text-primary"></i></h5>
                 <span>Property Variations</span>
             </div>
             <div class="progress progress-xs progress-transparent custom-color-purple m-b-0">
@@ -76,7 +78,7 @@
     <div class="col-lg-3 col-md-6">
         <div class="card overflowhidden">
             <div class="body">
-                <h5>{{ $tot_tenants }} Tenants <i class="icon-user-follow float-right"></i></h5>
+                <h5>{{ $tot_tenants }} Tenants <i class="icon-user-follow float-right icon text-primary"></i></h5>
                 <span>Total Tenants</span>
             </div>
             <div class="progress progress-xs progress-transparent custom-color-green m-b-0">
@@ -87,7 +89,7 @@
     <div class="col-lg-3 col-md-6">
         <div class="card overflowhidden">
             <div class="body">
-                <h5>KES 158,856.00 <i class=" icon-heart float-right"></i></h5>
+                <h5>KES 158,856.00 <i class=" fa fa-money float-right icon text-primary"></i></h5>
                 <span>Total Expenses</span>
             </div>
             <div class="progress progress-xs progress-transparent custom-color-yellow m-b-0">
@@ -215,7 +217,7 @@
                                         <td>{{ $item->booked_rooms }} Rooms</td>
                                         <td>{{ $item->vacant_rooms }} Rooms</td>
                                         <td>{{ $currency_symbol  }}
-                                            {{ number_format($item->monthly_rent), 2, '.', ','   }}</td>
+                                            {{ number_format($item->monthly_rent, 2, '.', ',')}}</td>
                                     </tr>
                                     @endforeach
                                 </tbody>
@@ -265,8 +267,7 @@
                                 <th>Phone</th>
                                 <th>Paid By</th>
                                 <th>Room</th>
-                                <th>Property</th>
-                                <th>Tenant Name</th>
+                                <th>Name</th>
                                 <th>Tenant Phone</th>
                                 <th>Paid At</th>
                             </tr>
@@ -279,7 +280,6 @@
                                 <td>{{ $item->msisdn}}</td>
                                 <td>{{ $item->first_name}} {{ $item->last_name }}</td>
                                 <td>{{ $item->bill_ref_no}}</td>
-                                <td>{{ $item->prop_name}}</td>
                                 <td>{{ $item->t_name}}</td>
                                 <td>{{ $item->t_phone}}</td>
                                 <td>{{ $item->trans_created_at}}</td>

@@ -218,8 +218,10 @@ class PropertyController extends Controller {
 
         /** Get rent payments for the propery */
         $data['payments'] = Transaction::getPayments()->where( 'property_id', '=', $property_id );
+        $data['sum_prop_rent_payments'] = Transaction::sumPropertyRentPayments( $property_id )->first();
+        $data['sum_tot_prop_rent_payments'] = $data['sum_prop_rent_payments']->sum_tot_prop_rent_payments;
 
-        //dd( $data['all_variation_values'] );
+        //dd( $data['sum_tot_prop_rent_payments'] );
 
         return view( 'property.manage' )->with( $data );
     }

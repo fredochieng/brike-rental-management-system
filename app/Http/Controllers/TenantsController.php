@@ -39,7 +39,9 @@ class TenantsController extends Controller {
             $room_assigned = 1;
             $data['searched'] = 'yes';
             $data['searched_tenants'] = Tenants::getTenants()->where( 'property_id', $property_id )->where( 't_status', $t_status )
-            ->where( 'room_assigned', $room_assigned );
+            ->where( 'room_assigned', $room_assigned )->where( 'r_end_date', '=', '' );
+
+            //dd( $data['searched_tenants'] );
 
             $total_tenants = count( $data['searched_tenants'] );
 
@@ -117,8 +119,10 @@ class TenantsController extends Controller {
     }
 
     public function manageTenant( Request $request, $tenant_id ) {
+        $data['currency_symbol'] = 'KES';
         $data['tenant'] = Tenants::getTenants()->where( 'tenant_id', $tenant_id )->first();
         $data['room_assignment'] = RoomAssignment::getRoomAssignments()->where( 'tenant_id', $tenant_id )->first();
+        //dd( $data['room_assignment'] );
 
         /** To get actual payment for the tenant, the msisdn must be the same as t_phone
         * This means that the tenant must pay with his/her phone number
@@ -126,10 +130,17 @@ class TenantsController extends Controller {
         * t_phone column in the rent payments table with the t_phone & use it to search the tenant
         */
         $data['payments'] = Transaction::getPayments()
-        // ->where( 'msisdn', $data['tenant'] )
-        ;
-        $data['currency_symbol'] = 'KES';
-        // dd( $data['payments'] );
+        ->where( 'msisdn', $data['tenant']->t_phone );
+
+        $t_phone = $data['tenant']->t_phone;
+        $data['sum_tot_payments'] = Transaction::getTenantTotalPayments( $t_phone )->first();
+        if ( empty( $data['sum_tot_payments'] ) ) {
+            $data['sum_tot_payments'] = '0.00';
+        } else {
+
+            $data['sum_tot_payments'] =  number_format( $data['sum_tot_payments']->sum_tenant_payments, 2, '.', ',' );
+        }
+        //dd( $data['sum_tot_payments'] );
         return view( 'tenants.manage' )->with( $data );
     }
 

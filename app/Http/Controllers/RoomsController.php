@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Rooms;
 use App\Models\Variation;
 use App\Models\Property;
+use App\Models\ Transaction;
+use App\Models\RoomAssignment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Kamaln7\Toastr\Facades\Toastr;
@@ -148,6 +150,24 @@ class RoomsController extends Controller {
     * @param  \App\Models\Rooms  $rooms
     * @return \Illuminate\Http\Response
     */
+
+    public function manageRoom( Request $request, $room_id ) {
+        $data['currency_symbol'] = 'KES';
+        $data['room'] = Rooms::getRooms()->where( 'room_id', $room_id )->first();
+        $property_id = $data['room']->property_id;
+        $data['payments'] = Transaction::getPayments()->where( 'room_id', $room_id )->where( 'property_id', $property_id );
+        $data['room_assignments'] = RoomAssignment::getRoomAssignments()
+        ->where( 'room_id', $room_id )
+        ->where( 'r_end_date', '' );
+
+        $data['tot_tenants'] = count( $data['room_assignments'] );
+        $data['tot_payments'] = Transaction::sumPropertyRentPayments( $property_id )->where( 'room_id', $room_id )->first();
+        $data['tot_payments'] = $data['tot_payments']->sum_tot_prop_rent_payments;
+        // echo '<pre>';
+        // print_r( $data['tot_payments'] );
+        // exit;
+        return view( 'rooms.manage' )->with( $data );
+    }
 
     public function update( Request $request, $room_id ) {
 

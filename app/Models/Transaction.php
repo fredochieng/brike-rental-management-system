@@ -106,4 +106,48 @@ class Transaction extends Model {
         return $latest_payments;
     }
 
+    public static function sumTotalRentPayments() {
+
+        $sum_rent_payments = number_format( DB::table( 'rent_payments' )->sum( 'trans_amount' ), 2, '.', ',' );
+        return  $sum_rent_payments;
+    }
+
+    public static function sumPropertyRentPayments( $property_id ) {
+        $sum_prop_rent_payments =  DB::table( 'rent_payments' )
+        ->select(
+            DB::raw( 'rent_payments.id as payment_id' ),
+            DB::raw( 'sum(trans_amount) as sum_tot_prop_rent_payments' ),
+            DB::raw( 'rooms.id as room_id' ),
+            DB::raw( 'rooms.property_id' ),
+            DB::raw( 'properties.id as prop_id' )
+        )
+        ->leftJoin( 'rooms', 'rent_payments.bill_ref_no', '=', 'rooms.room_no' )
+        ->leftJoin( 'properties', 'rooms.property_id', '=', 'properties.id' )
+        ->groupBy( 'rooms.id' )
+        ->where( 'properties.id', '=', $property_id )
+        ->get();
+
+        return $sum_prop_rent_payments;
+
+    }
+
+    public static function getTenantTotalPayments( $t_phone ) {
+        $sum_tenant_payments = DB::table( 'rent_payments' )->select(
+            DB::raw( 'rent_payments.bill_ref_no' ),
+            DB::raw( 'sum(trans_amount) as sum_tenant_payments' ),
+            DB::raw( 'rooms.id as room_id' ),
+            DB::raw( 'rooms.property_id' ),
+            DB::raw( 'rooms.room_no' ),
+            DB::raw( 'tenants.t_phone' ),
+            DB::raw( 'rent_payments.msisdn as payment_phone' )
+        )
+        ->leftJoin( 'rooms', 'rent_payments.bill_ref_no', '=', 'rooms.room_no' )
+        ->join( 'tenants', 'tenants.t_phone', '=', 'rent_payments.msisdn', 'left outer' )
+        ->groupBy( 'tenants.t_phone' )
+        ->where( 'tenants.t_phone', '=', $t_phone )
+        ->get();
+
+        return $sum_tenant_payments;
+    }
+
 }

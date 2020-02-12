@@ -12,7 +12,7 @@
                 <div class="card">
                     <div class="body">
                         <h3 class="number count-to" data-from="0" data-to="128" data-speed="2000"
-                            data-fresh-interval="700">KES 380,000.00</h3>
+                            data-fresh-interval="700">{{ $currency_symbol }} {{ $sum_tot_payments }}</h3>
                         <p class="text-muted">Rent Payments</p>
                         <div class="progress progress-xs">
                             <div class="progress-bar l-blue" role="progressbar" aria-valuenow="68" aria-valuemin="0"
@@ -181,10 +181,7 @@
                                 <th>Amount</th>
                                 <th>Phone</th>
                                 <th>Paid By</th>
-                                <th>Room</th>
-                                <th>Property</th>
-                                <th>Tenant Name</th>
-                                <th>Tenant Phone</th>
+                                <th>Account</th>
                                 <th>Paid At</th>
                             </tr>
                         </thead>
@@ -196,9 +193,6 @@
                                 <td>{{ $item->msisdn}}</td>
                                 <td>{{ $item->first_name}} {{ $item->last_name }}</td>
                                 <td>{{ $item->bill_ref_no}}</td>
-                                <td>{{ $item->prop_name}}</td>
-                                <td>{{ $item->t_name}}</td>
-                                <td>{{ $item->t_phone}}</td>
                                 <td>{{ $item->trans_created_at}}</td>
                             </tr>
                             @endforeach

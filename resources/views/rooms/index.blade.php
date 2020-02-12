@@ -95,13 +95,26 @@
                             <td><span class="badge badge-danger">Inactive</span></td>
                             @endif
                             <td>{{ $room->r_created_at }}</td>
+
                             <td>
-                                <a class="btn btn-primary btn-sm" title="Edit " href="#" data-toggle="modal"
-                                    data-target="#editRoomModal_{{$room->room_id}}" data-backdrop="static"
-                                    data-keyboard="false"><i class="icon-pencil"></i></a>
-                                <a class="btn btn-danger btn-sm" title="Delete " href="#" data-toggle="modal"
-                                    data-target="#deleteRoomModal_{{$room->room_id}}" data-backdrop="static"
-                                    data-keyboard="false"><i class="icon-trash"></i></a>
+                                <div class="btn-group btn-group-sm role=" group">
+                                    <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Action
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                        <a class="dropdown-item" href="/room/manage/&id={{$room->room_id}}"><i
+                                                class="icon-eye"></i> View
+                                            room</a>
+                                        <a class="dropdown-item" href="#" data-toggle="modal" disabled
+                                            data-target="#editRoomModal_{{$room->room_id}}" data-backdrop="static"
+                                            data-keyboard="false"><i class="icon-pencil"></i>
+                                            Edit
+                                            room</a>
+                                        <a class="dropdown-item" href=""><i class="icon-trash"></i> Delete
+                                            room</a>
+                                    </div>
+                                </div>
                             </td>
                         </tr>
                         @include('rooms.modals.modal-edit-room')

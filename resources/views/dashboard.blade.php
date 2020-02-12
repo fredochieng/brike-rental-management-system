@@ -11,7 +11,7 @@
                 <div class="icon text-info"><i class="fa fa-building"></i> </div>
                 <div class="content">
                     <div class="text">Property for rent</div>
-                    <h5 class="number">53,251</h5>
+                    <h5 class="number">{{ $total_property }}</h5>
                 </div>
             </div>
         </div>
@@ -22,7 +22,7 @@
                 <div class="icon text-warning"><i class="icon-home"></i> </div>
                 <div class="content">
                     <div class="text">Vacant rooms</div>
-                    <h5 class="number">356</h5>
+                    <h5 class="number">{{number_format($sum_total_vacant_rooms, 0, '.',',') }}</h5>
                 </div>
             </div>
         </div>
@@ -33,7 +33,7 @@
                 <div class="icon text-danger"><i class="icon-list"></i> </div>
                 <div class="content">
                     <div class="text">Rented rooms</div>
-                    <h5 class="number">320</h5>
+                    <h5 class="number">{{ $sum_total_rented_rooms }}</h5>
                 </div>
             </div>
         </div>
@@ -44,7 +44,7 @@
                 <div class="icon text-success"><i class="icon-users"></i> </div>
                 <div class="content">
                     <div class="text">Tenants</div>
-                    <h5 class="number">36</h5>
+                    <h5 class="number">{{ $tot_tenants }}</h5>
                 </div>
             </div>
         </div>
@@ -58,7 +58,7 @@
                 <div class="icon text-info"><i class="fa fa-money"></i> </div>
                 <div class="content">
                     <div class="text">Rent income</div>
-                    <h5 class="number">KES 530,251</h5>
+                    <h5 class="number">{{ $currency_symbol }} {{ $sum_rent_payments }}</h5>
                 </div>
             </div>
         </div>
@@ -119,7 +119,7 @@
                 <div class="row clearfix">
                     <div class="col-lg-3 col-md-4 col-sm-4">
                         <span class="text-muted">Annual Revenue </span>
-                        <h3 class="text-info">KES 634,481</h3>
+                        <h3 class="text-info">{{ $currency_symbol }} {{ $sum_rent_payments }}</h3>
                     </div>
                     <div class="col-lg-3 col-md-4 col-sm-4">
                         <span class="text-muted">Rent Due</span>
