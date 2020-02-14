@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class ModifyRoomVariationsTable extends Migration
+class ModifyTenantMonthlyPaymentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class ModifyRoomVariationsTable extends Migration
      */
     public function up()
     {
-        Schema::table('room_variations', function (Blueprint $table) {
-            //$table->unsignedBigInteger('variation_temp_id')->change();
+        Schema::table('tenant_monthly_payments', function (Blueprint $table) {
+            $table->dropColumn('room_id');
         });
+        
     }
 
     /**
@@ -25,8 +26,8 @@ class ModifyRoomVariationsTable extends Migration
      */
     public function down()
     {
-        Schema::table('room_variations', function (Blueprint $table) {
-            //
+        Schema::table('tenant_monthly_payments', function (Blueprint $table) {
+          
         });
     }
 }

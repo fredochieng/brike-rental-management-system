@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateVariationsTable extends Migration
+class AddRoomIdToTenantMonthlyPaymentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,8 @@ class CreateVariationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('variations', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger('propery_id');
-            $table->string('room_variation_id');
-            $table->timestamps();
+        Schema::table('tenant_monthly_payments', function (Blueprint $table) {
+            $table->unsignedBigInteger('room_id')->after('tenant_id');
         });
     }
 
@@ -28,6 +25,8 @@ class CreateVariationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('variations');
+        Schema::table('tenant_monthly_payments', function (Blueprint $table) {
+            $table->dropColumn('room_id');
+        });
     }
 }

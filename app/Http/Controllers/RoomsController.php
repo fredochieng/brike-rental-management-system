@@ -161,8 +161,16 @@ class RoomsController extends Controller {
         ->where( 'r_end_date', '' );
 
         $data['tot_tenants'] = count( $data['room_assignments'] );
-        $data['tot_payments'] = Transaction::sumPropertyRentPayments( $property_id )->where( 'room_id', $room_id )->first();
-        $data['tot_payments'] = $data['tot_payments']->sum_tot_prop_rent_payments;
+        $data['tot_payments'] = Transaction::sumPropertyRentPayments( $property_id )->where( 'room_id', $room_id );
+
+        $payment_amount = array();
+        foreach ( $data['tot_payments'] as $key => $value ) {
+            $payment_amount[] = $value->trans_amount;
+        }
+
+        $data['tot_payments'] = json_encode( array_sum( $payment_amount ) );
+        // dd( $payment_amount );
+        // $data['tot_payments'] = $data['tot_payments']->sum_tot_prop_rent_payments;
         // echo '<pre>';
         // print_r( $data['tot_payments'] );
         // exit;

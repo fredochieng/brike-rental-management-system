@@ -14,6 +14,14 @@ class DashboardController extends BaseController {
     function index() {
         $data['payments'] = Transaction::getLatestPayments();
         $data['sum_rent_payments'] = Transaction::sumTotalRentPayments();
+
+        $payment_amount = array();
+        foreach ( $data['sum_rent_payments'] as $key => $value ) {
+            $payment_amount[] = $value->trans_amount;
+        }
+
+        $data['sum_rent_payments'] = number_format( json_encode( array_sum( $payment_amount ) ), 2, '.', ',' );
+
         $data['total_property'] = count( Property::getProperty() );
         $data['variation_values'] = Variation::variationValuesSum();
 

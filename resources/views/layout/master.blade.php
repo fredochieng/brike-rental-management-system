@@ -148,7 +148,8 @@
         <script src="{{ asset('assets/bundles/vendorscripts.bundle.js') }}"></script>
 
         <script src="{{ asset('assets/bundles/morrisscripts.bundle.js') }}"></script><!-- Morris Plugin Js -->
-        <script src="{{ asset('assets/bundles/jvectormap.bundle.js') }}"></script> <!-- JVectorMap Plugin Js -->
+        {{-- <script src="{{ asset('assets/bundles/jvectormap.bundle.js') }}"></script> <!-- JVectorMap Plugin Js -->
+        --}}
         <script src="{{ asset('assets/bundles/knob.bundle.js') }}"></script>
 
         <script src="{{ asset('assets/bundles/datatablescripts.bundle.js') }}"></script>

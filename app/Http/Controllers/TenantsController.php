@@ -133,13 +133,22 @@ class TenantsController extends Controller {
         ->where( 'msisdn', $data['tenant']->t_phone );
 
         $t_phone = $data['tenant']->t_phone;
-        $data['sum_tot_payments'] = Transaction::getTenantTotalPayments( $t_phone )->first();
-        if ( empty( $data['sum_tot_payments'] ) ) {
-            $data['sum_tot_payments'] = '0.00';
-        } else {
+        $data['sum_tot_payments'] = Transaction::getTenantTotalPayments( $t_phone );
+        // dd( $data['sum_tot_payments'] );
 
-            $data['sum_tot_payments'] =  number_format( $data['sum_tot_payments']->sum_tenant_payments, 2, '.', ',' );
+        $payment_amount = array();
+        foreach ( $data['sum_tot_payments'] as $key => $value ) {
+            $payment_amount[] = $value->trans_amount;
         }
+
+        $data['sum_tot_payments'] =  number_format( json_encode( array_sum( $payment_amount ) ), 2, '.', ',' );
+
+        // if ( empty( $data['sum_tot_payments'] ) ) {
+        //     $data['sum_tot_payments'] = '0.00';
+        // } else {
+
+        //     $data['sum_tot_payments'] =  number_format( $data['sum_tot_payments']->sum_tenant_payments, 2, '.', ',' );
+        // }
         //dd( $data['sum_tot_payments'] );
         return view( 'tenants.manage' )->with( $data );
     }

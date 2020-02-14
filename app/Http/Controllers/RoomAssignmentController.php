@@ -7,6 +7,7 @@ use App\Models\Property;
 use App\Models\Variation;
 use App\Models\Tenants;
 use App\Models\Rooms;
+use App\Models\MonthlyPayment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Auth;
@@ -97,6 +98,8 @@ class RoomAssignmentController extends Controller {
 
         $variation = Variation::where( 'variation_value_id', $variation_val_id )->where( 'property_id', $property_id )->first();
 
+        $rent_amount = $variation->monthly_rent;
+
         $vacant_rooms = $variation->vacant_rooms;
         $vacant_rooms = $vacant_rooms - 1;
 
@@ -122,9 +125,31 @@ class RoomAssignmentController extends Controller {
             'room_assigned' => 1
         ] );
 
+        /** Save details in the tenant monthly payment table
+        * This table shows tenant's payment info
+        * Which month has he paid, is he due?
+         */
+
+        $date = Carbon::parse( $start_date );
+
+        $start_tenancy_month = $date->format( 'M Y' );
+
+        $monthly_payment = new MonthlyPayment();
+        $monthly_payment->tenant_id = $tenant_id;
+        $monthly_payment->room_id = $room_id;
+        $monthly_payment->payment_status = 3;
+        $monthly_payment->period = $start_tenancy_month;
+        $monthly_payment->rent_amount = $rent_amount;
+        $monthly_payment->amount_paid = 0.00;
+        $monthly_payment->balance_due = $rent_amount;
+
+        $monthly_payment->save();
+
         /** Log the action in the logs file */
         Log::info( 'Room assignmet of ID ' . $room_assignment->id .  ' created by user of ID: ' . Auth::id() .
         ' at ' . $now );
+
+       // dd('fred');
 
         Toastr::success( 'Assignment created successfully' );
 

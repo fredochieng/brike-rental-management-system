@@ -44,7 +44,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="submit" id="assignRoomBtn" class="btn btn-primary"><i class="icon-check"></i> Add
+                <button type="submit" id="addVariationValueBtn" class="btn btn-primary"><i class="icon-check"></i> Add
                     variation
                     value</button>
                 <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Close</button>

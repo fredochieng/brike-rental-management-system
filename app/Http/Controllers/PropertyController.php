@@ -218,10 +218,14 @@ class PropertyController extends Controller {
 
         /** Get rent payments for the propery */
         $data['payments'] = Transaction::getPayments()->where( 'property_id', '=', $property_id );
-        $data['sum_prop_rent_payments'] = Transaction::sumPropertyRentPayments( $property_id )->first();
-        $data['sum_tot_prop_rent_payments'] = $data['sum_prop_rent_payments']->sum_tot_prop_rent_payments;
+        $data['sum_prop_rent_payments'] = Transaction::sumPropertyRentPayments( $property_id );
 
-        //dd( $data['sum_tot_prop_rent_payments'] );
+        $payment_amount = array();
+        foreach ( $data['sum_prop_rent_payments'] as $key => $value ) {
+            $payment_amount[] = $value->trans_amount;
+        }
+
+        $data['sum_tot_prop_rent_payments'] =  number_format( json_encode( array_sum( $payment_amount ) ), 2, '.', ',' );
 
         return view( 'property.manage' )->with( $data );
     }
@@ -233,7 +237,7 @@ class PropertyController extends Controller {
         $variation_val_id = Input::get( 'variation_val_id' );
         $property_id = Input::get( 'property_id' );
         $is_vacant = 1;
-        $rooms = Rooms::getRooms()->where( 'property_id', 13 )->where( 'variation_val_id', 2 )->where( 'is_vacant', $is_vacant );
+        $rooms = Rooms::getRooms()->where( 'property_id', $property_id )->where( 'variation_val_id', $variation_val_id )->where( 'is_vacant', $is_vacant );
 
         return response()->json( $rooms );
     }
