@@ -15,7 +15,7 @@
                         style="font-size:13px">
                         <thead>
                             <tr>
-                                <th>Transaction ID</th>
+                                <th>Trans ID</th>
                                 <th>Amount</th>
                                 <th>Phone</th>
                                 <th>Paid By</th>
@@ -23,6 +23,7 @@
                                 <th>Property</th>
                                 <th>Tenant Name</th>
                                 <th>Tenant Phone</th>
+                                <th>Status</th>
                                 <th>Time</th>
                             </tr>
                         </thead>
@@ -37,6 +38,11 @@
                                 <td>{{ $item->prop_name}}</td>
                                 <td>{{ $item->t_name}}</td>
                                 <td>{{ $item->t_phone}}</td>
+                                @if ($item->cron_processed == 1)
+                                <td><span class="badge badge-success">Processed</span></td>
+                                @elseif($item->cron_processed == 0)
+                                <td><span class="badge badge-danger">Pending</span></td>
+                                @endif
                                 <td>{{ $item->trans_created_at}}</td>
                             </tr>
                             @endforeach

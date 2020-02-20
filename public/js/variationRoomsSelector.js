@@ -54,7 +54,7 @@
                     toastr.options.closeButton = true;
                     toastr.options.positionClass = 'toast-top-right';
                     toastr.options.showDuration = 2;
-                    toastr['warning']('No vacant rooms availabe...');
+                    toastr['warning']('No rented rooms availabe...');
 
                     $('#variation_rooms1').empty();
                     $('#variation_rooms1').append('<option value="" disable="true" required>Select room number</option>');
@@ -68,7 +68,7 @@
                     toastr.options.closeButton = true;
                     toastr.options.positionClass = 'toast-top-right';
                     toastr.options.showDuration = 2;
-                    toastr['success']('vacant rooms availabe...');
+                    toastr['success']('rented rooms availabe...');
 
                     $.each(data, function (index, variationRoomsObj) {
                         $('#variation_rooms1').append('<option value="' + variationRoomsObj.id + '">' +

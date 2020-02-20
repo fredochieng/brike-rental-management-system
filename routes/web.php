@@ -75,6 +75,13 @@ Route::post('tenant/unassign-room/&id={id}', 'TenantsController@unassignRoom')->
 /** Rent payments */
 Route::get('rent/payments', 'TransactionsController@index')->name('rent.payments');
 
+
+/** Rent payments tracker */
+Route::get('rent-payments/trackers', 'MonthlyPaymentController@index')->name('rent-payments.trackers');
+Route::get('rent-payments/full-payments', 'MonthlyPaymentController@fullRentPayments')->name('rent-payments.full-payments');
+Route::get('rent-payments/partial-payments', 'MonthlyPaymentController@partialRentPayments')->name('rent-payments.partial-payments');
+Route::get('rent-payments/rent-arrears', 'MonthlyPaymentController@rentArrears')->name('rent-payments.rent-arrears');
+
 /* Authentication */
 Route::get('authentication', function () { return redirect('authentication/login'); });
 Route::get('authentication/login', 'AuthenticationController@login')->name('authentication.login');

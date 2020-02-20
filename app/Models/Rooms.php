@@ -14,10 +14,13 @@ class Rooms extends Model {
             DB::raw( 'properties.id as prop_id' ),
             DB::raw( 'properties.prop_name' ),
             DB::raw( 'variation_value_template.id as var_val_id' ),
-            DB::raw( 'variation_value_template.name as var_name' )
+            DB::raw( 'variation_value_template.name as var_name' ),
+            DB::raw( 'variations.id as var_id' ),
+            DB::raw( 'variations.monthly_rent' )
         )
         ->leftJoin( 'properties', 'rooms.property_id', 'properties.id' )
         ->leftJoin( 'variation_value_template', 'rooms.variation_val_id', 'variation_value_template.id' )
+        ->leftJoin( 'variations', 'variation_value_template.id', 'variations.id' )
         ->orderBy( 'rooms.id', 'desc' )->get();
 
         return $rooms;

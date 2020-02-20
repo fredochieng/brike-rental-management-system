@@ -32,6 +32,7 @@ class RoomsController extends Controller {
         if ( isset( $_GET['property_id'] ) && isset( $_GET['is_vacant'] ) ) {
             $data['searched'] = 'yes';
             $data['searched_rooms'] = Rooms::getRooms()->where( 'property_id', $property_id )->where( 'is_vacant', $is_vacant );
+            //dd( $data['searched_rooms'] );
 
             $total_rooms = count( $data['searched_rooms'] );
 
@@ -169,11 +170,7 @@ class RoomsController extends Controller {
         }
 
         $data['tot_payments'] = json_encode( array_sum( $payment_amount ) );
-        // dd( $payment_amount );
-        // $data['tot_payments'] = $data['tot_payments']->sum_tot_prop_rent_payments;
-        // echo '<pre>';
-        // print_r( $data['tot_payments'] );
-        // exit;
+
         return view( 'rooms.manage' )->with( $data );
     }
 

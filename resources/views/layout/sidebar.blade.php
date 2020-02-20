@@ -100,10 +100,30 @@
                                         href="{{route('rent.payments')}}">
                                         Payments</a></li>
                             </ul>
+                        </li>
+                        <li class="{{ Request::segment(1) === 'rent-tracker' ? 'active' : null }}">
+                            <a href="#RentTracker" class="has-arrow"><i class="icon-screen-desktop"></i><span>Rent
+                                    Payment
+                                    Tracker</span></a>
+                            <ul>
+                                <li class="{{ Request::segment(2) === 'payments' ? 'active' : null }}"><a
+                                        href="{{route('rent-payments.trackers')}}">
+                                        All Rent Trackers</a></li>
+                            </ul>
+                            <ul>
+                                <li class="{{ Request::segment(2) === 'payments' ? 'active' : null }}"><a
+                                        href="{{route('rent-payments.full-payments')}}">
+                                        Full Payments</a></li>
+                            </ul>
                             <ul>
                                 <li class="{{ Request::segment(2) === 'tenants-create' ? 'active' : null }}"><a
-                                        href="{{route('tenants.tenants-create')}}">Add
-                                        Tenant</a></li>
+                                        href="{{route('rent-payments.partial-payments')}}">Partial
+                                        Payments</a></li>
+                            </ul>
+                            <ul>
+                                <li class="{{ Request::segment(2) === 'tenants-create' ? 'active' : null }}"><a
+                                        href="{{route('rent-payments.rent-arrears')}}">Rent
+                                        Arrears</a></li>
                             </ul>
                         </li>
                         <li class="{{ Request::segment(1) === 'tenants' ? 'active' : null }}">

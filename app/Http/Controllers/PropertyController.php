@@ -211,7 +211,6 @@ class PropertyController extends Controller {
 
         $data['property_variation_id'] = $property_variation->id;
 
-        //dd( $data['property_variation_id'] );
         $variation_template = $property_variation->variation_temp_id;
 
         $data['all_variation_values'] = VariationValues::getVariationValues( $variation_template );

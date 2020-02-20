@@ -8,7 +8,7 @@
     <div class="col-lg-3 col-md-6">
         <div class="card overflowhidden">
             <div class="body">
-                <h5>{{ $currency_symbol }} {{ number_format($sum_tot_prop_rent_payments, 2, '.',',' )}} <i
+                <h5>{{ $currency_symbol }} {{ $sum_tot_prop_rent_payments, 2, '.',','}} <i
                         class="fa fa-money float-right icon text-primary"></i></h5>
                 <span>Rent Income</span>
             </div>
