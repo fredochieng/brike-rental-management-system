@@ -41,7 +41,7 @@
                 <div class="card">
                     <div class="body">
                         <h3 class="number count-to" data-from="0" data-to="128" data-speed="2000"
-                            data-fresh-interval="700">11 Months</h3>
+                            data-fresh-interval="700">{{ $tenancy_period }} Months</h3>
                         <p class="text-muted">Tenancy Period</p>
                         <div class="progress progress-xs">
                             <div class="progress-bar l-purple" role="progressbar" aria-valuenow="68" aria-valuemin="0"

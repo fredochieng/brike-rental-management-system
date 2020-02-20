@@ -20,7 +20,8 @@
     <div class="col-lg-3 col-md-6">
         <div class="card overflowhidden">
             <div class="body">
-                <h5>KES 546,067.00 <i class="fa fa-dollar float-right icon text-primary"></i></h5>
+                <h5>{{ $currency_symbol}} {{ $rent_arrears_amount }}<i
+                        class="fa fa-dollar float-right icon text-primary"></i></h5>
                 <span>Rent Arrears</span>
             </div>
             <div class="progress progress-xs progress-transparent custom-color-purple m-b-0">

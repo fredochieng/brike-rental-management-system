@@ -12,6 +12,7 @@ use App\Models\RoomAdjustment;
 use App\Models\Variation;
 use App\Models\ Transaction;
 use App\Models\VariationValues;
+use App\Models\MonthlyPayment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Auth;
@@ -225,6 +226,15 @@ class PropertyController extends Controller {
         }
 
         $data['sum_tot_prop_rent_payments'] =  number_format( json_encode( array_sum( $payment_amount ) ), 2, '.', ',' );
+
+        $payment_tracks = MonthlyPayment::getPaymentTracker()->where( 'payment_status', 3 )->where( 'prop_id', $property_id );
+        // dd( $payment_tracks );
+        $rent_arrears = array();
+        foreach ( $payment_tracks as $key => $value ) {
+            $rent_arrears_amount[] = $value->balance_due;
+        }
+
+        $data['rent_arrears_amount'] = number_format( json_encode( array_sum( $rent_arrears_amount ) ), 2, '.', ',' );
 
         return view( 'property.manage' )->with( $data );
     }

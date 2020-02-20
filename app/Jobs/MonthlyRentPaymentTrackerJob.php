@@ -46,12 +46,19 @@ class MonthlyRentPaymentTrackerJob {
 
         $dates = array();
         for ( $i = $start_date; $i <= $end_date; $i->modify( '+1 month' ) ) {
-
             $dates[] = $i->format( 'M Y' );
-
         }
-
-        $rooms = Rooms::getRooms();
+        $rooms = DB::table( 'rooms' )->select(
+            DB::raw( 'rooms.variation_val_id' ),
+            DB::raw( 'rooms.id as room_id' ),
+            DB::raw( 'variation_value_template.id as var_val_id' ),
+            DB::raw( 'variation_value_template.name as var_name' ),
+            DB::raw( 'variations.id as var_id' ),
+            DB::raw( 'variations.monthly_rent' )
+        )
+        ->leftJoin( 'variation_value_template', 'rooms.variation_val_id', 'variation_value_template.id' )
+        ->leftJoin( 'variations', 'variation_value_template.id', 'variations.id' )
+        ->orderBy( 'rooms.id', 'asc' )->get();
 
         foreach ( $dates as $key => $period ) {
 
@@ -61,14 +68,12 @@ class MonthlyRentPaymentTrackerJob {
                     'tenant_id' => 1,
                     'room_id' =>$value->room_id,
                     'payment_status' => 3,
-                    'period' => 'Apr 2020',
+                    'period' => $period,
                     'rent_amount' => $value->monthly_rent,
                     'amount_paid' => '0.00',
                     'balance_due' => $value->monthly_rent
-
                 );
-
-                //$save_tracks = DB::table( 'tenant_monthly_payments' )->insert( $tracks );
+                $save_tracks = DB::table( 'tenant_monthly_payments' )->insert( $tracks );
             }
         }
     }

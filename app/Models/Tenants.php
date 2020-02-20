@@ -16,6 +16,7 @@ class Tenants extends Model {
             DB::raw( 'properties.id as property_id' ),
             DB::raw( 'properties.prop_name' ),
             DB::raw( 'room_assignments.tenant_id as t_id' ),
+            DB::raw( 'room_assignments.r_start_date' ),
             DB::raw( 'room_assignments.r_end_date' )
         )
         ->leftJoin( 'properties', 'tenants.t_property_id', 'properties.id' )

@@ -80,7 +80,7 @@
                 <div class="icon text-danger"><i class="fa fa-money"></i> </div>
                 <div class="content">
                     <div class="text">Rent arrears</div>
-                    <h5 class="number">KES 32,059</h5>
+                    <h5 class="number">{{ $currency_symbol}} {{ $rent_arrears_amount }}</h5>
                 </div>
             </div>
         </div>
@@ -123,7 +123,7 @@
                     </div>
                     <div class="col-lg-3 col-md-4 col-sm-4">
                         <span class="text-muted">Rent Due</span>
-                        <h3 class="text-warning">KES 34,000</h3>
+                        <h3 class="text-warning">{{ $currency_symbol}} {{ $rent_arrears_amount }}</h3>
                     </div>
                     <div class="col-lg-3 col-md-4 col-sm-4">
                         <span class="text-muted">Total Deposits</span>

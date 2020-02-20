@@ -33,7 +33,7 @@
             <div class="col-lg-3 col-md-6 col-sm-12 text-center">
                 <div class="card overflowhidden">
                     <div class="body">
-                        <h5 class="m-t-0 m-b-5">KES 6,051.00</h5>
+                        <h5 class="m-t-0 m-b-5">{{ $currency_symbol}} {{ $rent_arrears_amount }}</h5>
                         <p class="text-muted">Rent arrears</p>
                     </div>
                     <span id="linecustom3">1,5,3,6,6,3,6,8,4,2</span>

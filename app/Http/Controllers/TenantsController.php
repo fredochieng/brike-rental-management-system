@@ -31,8 +31,6 @@ class TenantsController extends Controller {
         $data['searched_tenants'] = array();
         $property_id = Input::get( 'property_id' );
 
-        // dd( $data['tenants'] );
-
         /** Get the search value and perform the neccessary queries */
         if ( isset( $_GET['property_id'] ) ) {
             $t_status = 1;
@@ -40,8 +38,6 @@ class TenantsController extends Controller {
             $data['searched'] = 'yes';
             $data['searched_tenants'] = Tenants::getTenants()->where( 'property_id', $property_id )->where( 't_status', $t_status )
             ->where( 'room_assigned', $room_assigned )->where( 'r_end_date', '=', '' );
-
-            //dd( $data['searched_tenants'] );
 
             $total_tenants = count( $data['searched_tenants'] );
 
@@ -115,14 +111,12 @@ class TenantsController extends Controller {
         // $property_id = Input::get( 'property_id' );
         // $data['searched_clients'] = Tenants::getTenants()->where( 'property_id', $property_id );
         // // $property_id = $request->input( 'property_id' );
-        // dd( $data['searched_clients'] );
     }
 
     public function manageTenant( Request $request, $tenant_id ) {
         $data['currency_symbol'] = 'KES';
         $data['tenant'] = Tenants::getTenants()->where( 'tenant_id', $tenant_id )->first();
         $data['room_assignment'] = RoomAssignment::getRoomAssignments()->where( 'tenant_id', $tenant_id )->first();
-        //dd( $data['room_assignment'] );
 
         /** To get actual payment for the tenant, the msisdn must be the same as t_phone
         * This means that the tenant must pay with his/her phone number
@@ -134,7 +128,6 @@ class TenantsController extends Controller {
 
         $t_phone = $data['tenant']->t_phone;
         $data['sum_tot_payments'] = Transaction::getTenantTotalPayments( $t_phone );
-        // dd( $data['sum_tot_payments'] );
 
         $payment_amount = array();
         foreach ( $data['sum_tot_payments'] as $key => $value ) {
@@ -143,13 +136,14 @@ class TenantsController extends Controller {
 
         $data['sum_tot_payments'] =  number_format( json_encode( array_sum( $payment_amount ) ), 2, '.', ',' );
 
-        // if ( empty( $data['sum_tot_payments'] ) ) {
-        //     $data['sum_tot_payments'] = '0.00';
-        // } else {
+        $tenancy_start_date =  Carbon::parse( $data['tenant']->r_start_date );
+        if ( $data['tenant']->t_status == 1 ) {
+            $current_date = Carbon::now();
+        } else {
+            $current_date = $data['tenant']->r_end_date;
+        }
+        $data['tenancy_period'] = $current_date->diffInMonths( $tenancy_start_date );
 
-        //     $data['sum_tot_payments'] =  number_format( $data['sum_tot_payments']->sum_tenant_payments, 2, '.', ',' );
-        // }
-        //dd( $data['sum_tot_payments'] );
         return view( 'tenants.manage' )->with( $data );
     }
 

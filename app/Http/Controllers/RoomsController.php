@@ -7,6 +7,7 @@ use App\Models\Variation;
 use App\Models\Property;
 use App\Models\ Transaction;
 use App\Models\RoomAssignment;
+use App\Models\MonthlyPayment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Kamaln7\Toastr\Facades\Toastr;
@@ -170,6 +171,14 @@ class RoomsController extends Controller {
         }
 
         $data['tot_payments'] = json_encode( array_sum( $payment_amount ) );
+
+        $payment_tracks = MonthlyPayment::getPaymentTracker()->where( 'payment_status', 3 )->where( 'prop_id', $property_id )->where( 'room_id', $room_id );
+        $rent_arrears = array();
+        foreach ( $payment_tracks as $key => $value ) {
+            $rent_arrears_amount[] = $value->balance_due;
+        }
+
+        $data['rent_arrears_amount'] = number_format( json_encode( array_sum( $rent_arrears_amount ) ), 2, '.', ',' );
 
         return view( 'rooms.manage' )->with( $data );
     }

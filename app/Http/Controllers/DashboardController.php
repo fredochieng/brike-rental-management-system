@@ -6,6 +6,7 @@ use App\Models\ Variation;
 use App\Models\ Transaction;
 use App\Models\ Tenants;
 use App\Models\RoomAssignment;
+use App\Models\MonthlyPayment;
 
 use Illuminate\Routing\Controller as BaseController;
 
@@ -37,7 +38,13 @@ class DashboardController extends BaseController {
         $t_status = 1;
         $data['tot_tenants'] = count( Tenants::getTotalTenants()->where( 't_status', $t_status ) );
 
-        // dd( $data['sum_total_rooms'] );
+        $payment_tracks = MonthlyPayment::getPaymentTracker()->where( 'payment_status', 3 );
+        $rent_arrears = array();
+        foreach ( $payment_tracks as $key => $value ) {
+            $rent_arrears_amount[] = $value->balance_due;
+        }
+
+        $data['rent_arrears_amount'] = number_format( json_encode( array_sum( $rent_arrears_amount ) ), 2, '.', ',' );
 
         $data['room_assignments'] = RoomAssignment::getLatestRoomAssignments();
         $data['currency_symbol'] = 'KES';
