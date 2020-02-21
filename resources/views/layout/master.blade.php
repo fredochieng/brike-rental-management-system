@@ -223,6 +223,18 @@
         <script src="{{ asset('/js/addVariation.js') }}"></script>
         @endif
 
+        @if (Request::segment(2) === 'payments')
+        <script src="{{ asset('/js/paymentsRoomSelector.js') }}"></script>
+        @endif
+
+        @if (Request::segment(2) === 'processed-transactions')
+        <script src="{{ asset('/js/paymentsRoomSelector.js') }}"></script>
+        @endif
+
+        @if (Request::segment(2) === 'pending-transactions')
+        <script src="{{ asset('/js/paymentsRoomSelector.js') }}"></script>
+        @endif
+
         @if (Request::segment(2) === 'rooms-list' || Request::segment(2) === 'room-adjustments')
         <script src="{{ asset('/js/variationValSelector.js') }}"></script>
         @endif

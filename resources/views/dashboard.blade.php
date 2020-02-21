@@ -11,7 +11,7 @@
                 <div class="icon text-info"><i class="fa fa-building"></i> </div>
                 <div class="content">
                     <div class="text">Property for rent</div>
-                    <h5 class="number">{{ $total_property }}</h5>
+                    <h6 class="number">{{ $total_property }}</h6>
                 </div>
             </div>
         </div>
@@ -22,7 +22,7 @@
                 <div class="icon text-warning"><i class="icon-home"></i> </div>
                 <div class="content">
                     <div class="text">Vacant rooms</div>
-                    <h5 class="number">{{number_format($sum_total_vacant_rooms, 0, '.',',') }}</h5>
+                    <h6 class="number">{{number_format($sum_total_vacant_rooms, 0, '.',',') }}</h6>
                 </div>
             </div>
         </div>
@@ -30,10 +30,10 @@
     <div class="col-lg-3 col-md-6">
         <div class="card top_counter">
             <div class="body">
-                <div class="icon text-danger"><i class="icon-list"></i> </div>
+                <div class="icon text-success"><i class="icon-list"></i> </div>
                 <div class="content">
                     <div class="text">Rented rooms</div>
-                    <h5 class="number">{{ $sum_total_rented_rooms }}</h5>
+                    <h6 class="number">{{ $sum_total_rented_rooms }}</h6>
                 </div>
             </div>
         </div>
@@ -41,10 +41,10 @@
     <div class="col-lg-3 col-md-6">
         <div class="card top_counter">
             <div class="body">
-                <div class="icon text-success"><i class="icon-users"></i> </div>
+                <div class="icon text-danger"><i class="icon-users"></i> </div>
                 <div class="content">
                     <div class="text">Tenants</div>
-                    <h5 class="number">{{ $tot_tenants }}</h5>
+                    <h6 class="number">{{ $tot_tenants }}</h6>
                 </div>
             </div>
         </div>
@@ -57,8 +57,8 @@
             <div class="body">
                 <div class="icon text-info"><i class="fa fa-money"></i> </div>
                 <div class="content">
-                    <div class="text">Rent income</div>
-                    <h5 class="number">{{ $currency_symbol }} {{ $sum_rent_payments }}</h5>
+                    <div class="text">Rent Income</div>
+                    <h6 class="number">{{ $currency_symbol }} {{ $sum_rent_payments }}</h6>
                 </div>
             </div>
         </div>
@@ -66,10 +66,10 @@
     <div class="col-lg-3 col-md-6">
         <div class="card top_counter">
             <div class="body">
-                <div class="icon text-warning"><i class="fa fa-dollar"></i> </div>
+                <div class="icon text-warning"><i class="fa fa-money"></i> </div>
                 <div class="content">
-                    <div class="text">Expenses</div>
-                    <h5 class="number">KES 56,700</h5>
+                    <div class="text">Rent Arrears</div>
+                    <h6 class="number">{{ $currency_symbol}} {{ $rent_arrears_amount }}</h6>
                 </div>
             </div>
         </div>
@@ -77,10 +77,10 @@
     <div class="col-lg-3 col-md-6">
         <div class="card top_counter">
             <div class="body">
-                <div class="icon text-danger"><i class="fa fa-money"></i> </div>
+                <div class="icon text-success"><i class="fa fa-check"></i> </div>
                 <div class="content">
-                    <div class="text">Rent arrears</div>
-                    <h5 class="number">{{ $currency_symbol}} {{ $rent_arrears_amount }}</h5>
+                    <div class="text">Processed Transactions</div>
+                    <h6 class="number">{{ $processed_transactions }}</h6>
                 </div>
             </div>
         </div>
@@ -88,10 +88,10 @@
     <div class="col-lg-3 col-md-6">
         <div class="card top_counter">
             <div class="body">
-                <div class="icon text-success"><i class="fa fa-dollar"></i> </div>
+                <div class="icon text-danger"><i class="fa fa-exclamation"></i> </div>
                 <div class="content">
-                    <div class="text">Deposits</div>
-                    <h5 class="number">KES 234,647</h5>
+                    <div class="text">Pending Transactions</div>
+                    <h6 class="number">{{ $pending_transactions }}</h6>
                 </div>
             </div>
         </div>

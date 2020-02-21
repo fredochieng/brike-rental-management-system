@@ -49,6 +49,15 @@ class PropertyController extends Controller {
         return response()->json( $variation_values );
     }
 
+    public function getPaymentRooms() {
+        //Function to get the variation values based on the selected variation type
+        $property_id = Input::get( 'property_id' );
+
+        $pay_rooms = Rooms::getRooms()->where( 'property_id', $property_id );
+
+        return response()->json( $pay_rooms );
+    }
+
     public function create() {
         $data['categories'] = PropertyCategories::getPropertyCategories();
         $data['property_variations'] = PropertyVariations::getPropertyVariations();

@@ -4,7 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\ Transaction;
 use App\Models\Mpesa;
+use App\Models\ Property;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
+use Kamaln7\Toastr\Facades\Toastr;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class TransactionsController extends Controller {
     /**
@@ -14,12 +19,153 @@ class TransactionsController extends Controller {
     */
 
     public function index() {
+        $data['property'] = Property::getProperty();
         $data['payments'] = Transaction::getPayments();
         $data['currency_symbol'] = 'KES';
-        // echo '<pre>';
-        // print_r( $data['payments'] );
-        // exit;
+
+        $property_id = Input::get( 'property_id' );
+        $room_id = Input::get( 'room_no' );
+
+        /** Get the search value and perform the neccessary queries */
+        if ( isset( $_GET['property_id'] ) && empty( $room_id ) ) {
+            $data['searched'] = 'yes';
+            $data['payments'] = Transaction::getPayments()->where( 'property_id', $property_id );
+
+            $total_transactions = count( $data['payments'] );
+
+            if ( count( $data['payments'] ) == 0 ) {
+
+                Toastr::info( 'No transactions found...' );
+
+                return view( 'payments.index' )->with( $data );
+
+            } elseif ( count( $data['payments'] ) > 0 ) {
+
+                Toastr::success( $total_transactions . ' transactions found for your query' );
+
+                return view( 'payments.index' )->with( $data );
+            }
+        } elseif ( isset( $_GET['property_id'] ) && isset( $_GET['room_no'] ) ) {
+            $data['searched'] = 'yes';
+            $data['payments'] = Transaction::getPayments()->where( 'property_id', $property_id )->where( 'room_id', $room_id );
+
+            $total_transactions = count( $data['payments'] );
+
+            if ( count( $data['payments'] ) == 0 ) {
+
+                Toastr::info( 'No transactions found...' );
+
+                return view( 'payments.index' )->with( $data );
+
+            } elseif ( count( $data['payments'] ) > 0 ) {
+
+                Toastr::success( $total_transactions . ' transactions found for your query' );
+
+                return view( 'payments.index' )->with( $data );
+            }
+        }
+        $data['searched'] = 'no';
         return view( 'payments.index' )->with( $data );
+    }
+
+    public function processedPayments() {
+        $data['property'] = Property::getProperty();
+        $data['payments'] = Transaction::getPayments()->where( 'cron_processed', 1 );
+        $data['currency_symbol'] = 'KES';
+
+        $property_id = Input::get( 'property_id' );
+        $room_id = Input::get( 'room_no' );
+
+        /** Get the search value and perform the neccessary queries */
+        if ( isset( $_GET['property_id'] ) && empty( $room_id ) ) {
+            $data['searched'] = 'yes';
+            $data['payments'] = Transaction::getPayments()->where( 'property_id', $property_id )->where( 'cron_processed', 1 );
+
+            $total_transactions = count( $data['payments'] );
+
+            if ( count( $data['payments'] ) == 0 ) {
+
+                Toastr::info( 'No transactions found...' );
+
+                return view( 'payments.processed-transactions' )->with( $data );
+
+            } elseif ( count( $data['payments'] ) > 0 ) {
+
+                Toastr::success( $total_transactions . ' transactions found for your query' );
+
+                return view( 'payments.processed-transactions' )->with( $data );
+            }
+        } elseif ( isset( $_GET['property_id'] ) && isset( $_GET['room_no'] ) ) {
+            $data['searched'] = 'yes';
+            $data['payments'] = Transaction::getPayments()->where( 'property_id', $property_id )->where( 'room_id', $room_id )->where( 'cron_processed', 1 );
+
+            $total_transactions = count( $data['payments'] );
+
+            if ( count( $data['payments'] ) == 0 ) {
+
+                Toastr::info( 'No transactions found...' );
+
+                return view( 'payments.processed-transactions' )->with( $data );
+
+            } elseif ( count( $data['payments'] ) > 0 ) {
+
+                Toastr::success( $total_transactions . ' transactions found for your query' );
+
+                return view( 'payments.processed-transactions' )->with( $data );
+            }
+        }
+        $data['searched'] = 'no';
+        return view( 'payments.processed-transactions' )->with( $data );
+    }
+
+    public function pendingPayments() {
+        $data['property'] = Property::getProperty();
+        $data['payments'] = Transaction::getPayments()->where( 'cron_processed', 0 );
+        $data['currency_symbol'] = 'KES';
+
+        $property_id = Input::get( 'property_id' );
+        $room_id = Input::get( 'room_no' );
+
+        /** Get the search value and perform the neccessary queries */
+        if ( isset( $_GET['property_id'] ) && empty( $room_id ) ) {
+            $data['searched'] = 'yes';
+            $data['payments'] = Transaction::getPayments()->where( 'property_id', $property_id )->where( 'cron_processed', 0 );
+
+            $total_transactions = count( $data['payments'] );
+
+            if ( count( $data['payments'] ) == 0 ) {
+
+                Toastr::info( 'No transactions found...' );
+
+                return view( 'payments.processed-transactions' )->with( $data );
+
+            } elseif ( count( $data['payments'] ) > 0 ) {
+
+                Toastr::success( $total_transactions . ' transactions found for your query' );
+
+                return view( 'payments.pending-transactions' )->with( $data );
+            }
+        } elseif ( isset( $_GET['property_id'] ) && isset( $_GET['room_no'] ) ) {
+            $data['searched'] = 'yes';
+            $data['payments'] = Transaction::getPayments()->where( 'property_id', $property_id )->where( 'room_id', $room_id )->where( 'cron_processed', 0 );
+
+            $total_transactions = count( $data['payments'] );
+
+            if ( count( $data['payments'] ) == 0 ) {
+
+                Toastr::info( 'No transactions found...' );
+
+                return view( 'payments.pending-transactions' )->with( $data );
+
+            } elseif ( count( $data['payments'] ) > 0 ) {
+
+                Toastr::success( $total_transactions . ' transactions found for your query' );
+
+                return view( 'payments.pending-transactions' )->with( $data );
+            }
+        }
+        $data['searched'] = 'no';
+        return view( 'payments.pending-transactions' )->with( $data );
     }
 
     /** Mpesa API C2B Simulation*/

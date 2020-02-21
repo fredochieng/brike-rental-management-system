@@ -68,7 +68,8 @@
     <div class="col-lg-3 col-md-6">
         <div class="card overflowhidden">
             <div class="body">
-                <h5>{{ $tot_variations }} Variations <i class="icon-loop float-right icon text-primary"></i></h5>
+                <h5>{{ $tot_variations }} Variations <i class="icon-loop float-right icon text-primary"
+                        style="font-weight:bolder"></i></h5>
                 <span>Property Variations</span>
             </div>
             <div class="progress progress-xs progress-transparent custom-color-purple m-b-0">
@@ -79,7 +80,9 @@
     <div class="col-lg-3 col-md-6">
         <div class="card overflowhidden">
             <div class="body">
-                <h5>{{ $tot_tenants }} Tenants <i class="icon-user-follow float-right icon text-primary"></i></h5>
+                <h5>{{ $tot_tenants }} Tenants <i class="icon-user-follow float-right icon text-primary"
+                        style="font-weight:bolder"></i>
+                </h5>
                 <span>Total Tenants</span>
             </div>
             <div class="progress progress-xs progress-transparent custom-color-green m-b-0">

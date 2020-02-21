@@ -94,11 +94,21 @@
                         </li>
 
                         <li class="{{ Request::segment(1) === 'payments' ? 'active' : null }}">
-                            <a href="#Rooms" class="has-arrow"><i class="fa fa-money"></i><span>Payments</span></a>
+                            <a href="#Rooms" class="has-arrow"><i class="fa fa-money"></i><span>Rent Payments</span></a>
                             <ul>
                                 <li class="{{ Request::segment(2) === 'payments' ? 'active' : null }}"><a
                                         href="{{route('rent.payments')}}">
-                                        Payments</a></li>
+                                        Payments Listing</a></li>
+                            </ul>
+                            <ul>
+                                <li class="{{ Request::segment(2) === 'processed-transactions' ? 'active' : null }}"><a
+                                        href="{{route('rent.processed-transactions')}}">
+                                        Processed Payments</a></li>
+                            </ul>
+                            <ul>
+                                <li class="{{ Request::segment(2) === 'pending-transactions' ? 'active' : null }}"><a
+                                        href="{{route('rent.pending-transactions')}}">
+                                        Pending Payments</a></li>
                             </ul>
                         </li>
                         <li class="{{ Request::segment(1) === 'rent-tracker' ? 'active' : null }}">

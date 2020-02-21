@@ -1,14 +1,13 @@
 @extends('layout.master')
-@section('title', 'Payment Transactions')
+@section('title', 'Pending Payment Transactions')
 @section('parentPageTitle', 'Payments')
 
 
 @section('content')
-
 <div class="row clearfix">
     <div class="col-md-12">
         <div class="card">
-            {!! Form::open(['url' => action('TransactionsController@index'), 'method' => 'get'])
+            {!! Form::open(['url' => action('TransactionsController@pendingPayments'), 'method' => 'get'])
             !!}
             <div class="body">
                 <div class="row clearfix">
@@ -78,11 +77,7 @@
                                 <td>{{ $item->prop_name}}</td>
                                 <td>{{ $item->t_name}}</td>
                                 <td>{{ $item->t_phone}}</td>
-                                @if ($item->cron_processed == 1)
-                                <td><span class="badge badge-success">Processed</span></td>
-                                @elseif($item->cron_processed == 0)
-                                <td><span class="badge badge-danger">Pending</span></td>
-                                @endif
+                                <td><span class="badge badge-warning">Pending</span></td>
                                 <td>{{ $item->trans_created_at}}</td>
                             </tr>
                             @endforeach
@@ -126,11 +121,7 @@
                                 <td>{{ $item->prop_name}}</td>
                                 <td>{{ $item->t_name}}</td>
                                 <td>{{ $item->t_phone}}</td>
-                                @if ($item->cron_processed == 1)
-                                <td><span class="badge badge-success">Processed</span></td>
-                                @elseif($item->cron_processed == 0)
-                                <td><span class="badge badge-danger">Pending</span></td>
-                                @endif
+                                <td><span class="badge badge-warning">Pending</span></td>
                                 <td>{{ $item->trans_created_at}}</td>
                             </tr>
                             @endforeach

@@ -45,6 +45,10 @@ class DashboardController extends BaseController {
         }
 
         $data['rent_arrears_amount'] = number_format( json_encode( array_sum( $rent_arrears_amount ) ), 2, '.', ',' );
+        $data['processed_transactions'] = count( Transaction::all()->where( 'cron_processed', 1 ) );
+        $data['pending_transactions'] = count( Transaction::all()->where( 'cron_processed', 0 ) );
+        $data['all_transactions'] = count( Transaction::all() );
+        // dd( $data['pending_transactions'] );
 
         $data['room_assignments'] = RoomAssignment::getLatestRoomAssignments();
         $data['currency_symbol'] = 'KES';
