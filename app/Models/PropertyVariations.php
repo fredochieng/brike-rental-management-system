@@ -25,9 +25,8 @@ class PropertyVariations extends Model {
         ->join( 'variation_value_template', 'variation_value_template.variation_temp_id', 'variation_template.id', 'left-outer' )
         ->orderBy( 'variation_template.id', 'desc' )
         ->groupBy( 'variation_template.id' )
+        ->groupBy( 'variation_value_template.id' )
         ->get();
-
-        //  $property_variations = PropertyVariations::all();
 
         return $property_variations;
 
