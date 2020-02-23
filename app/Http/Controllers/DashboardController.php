@@ -31,7 +31,12 @@ class DashboardController extends BaseController {
             $rented_rooms[] = $value->booked_rooms;
             $vacant_rooms[] = $value->vacant_rooms;
         }
-        $data['sum_total_rooms'] = array_sum( $total_rooms );
+        if ( !empty( $total_rooms ) ) {
+
+            $data['sum_total_rooms'] = array_sum( $total_rooms );
+        } else {
+            $data['sum_total_rooms'] = 0;
+        }
         $data['sum_total_rented_rooms'] = array_sum( $rented_rooms );
         $data['sum_total_vacant_rooms'] = array_sum( $vacant_rooms );
 
