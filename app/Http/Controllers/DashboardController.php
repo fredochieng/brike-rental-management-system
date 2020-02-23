@@ -58,11 +58,32 @@ class DashboardController extends BaseController {
             $rent_arrears_amount[] = $value->balance_due;
         }
 
-        $data['rent_arrears_amount'] = number_format( json_encode( array_sum( $rent_arrears_amount ) ), 2, '.', ',' );
-        $data['processed_transactions'] = count( Transaction::all()->where( 'cron_processed', 1 ) );
-        $data['pending_transactions'] = count( Transaction::all()->where( 'cron_processed', 0 ) );
-        $data['all_transactions'] = count( Transaction::all() );
-        // dd( $data['pending_transactions'] );
+        if ( !empty( $rent_arrears_amount ) ) {
+            $data['rent_arrears_amount'] = number_format( json_encode( array_sum( $rent_arrears_amount ) ), 2, '.', ',' );
+        } else {
+            $data['rent_arrears_amount'] = 0.00;
+        }
+
+        if ( !empty( Transaction::all()->where( 'cron_processed', 1 ) ) ) {
+
+            $data['processed_transactions'] = count( Transaction::all()->where( 'cron_processed', 1 ) );
+        } else {
+            $data['processed_transactions'] = 0;
+        }
+
+        if ( !empty( Transaction::all()->where( 'cron_processed', 0 ) ) ) {
+
+            $data['pending_transactions'] = count( Transaction::all()->where( 'cron_processed', 0 ) );
+        } else {
+            $data['pending_transactions'] = 0;
+        }
+
+        if ( !empty( Transaction::all() ) ) {
+
+            $data['all_transactions'] = count( Transaction::all() );
+        } else {
+            $data['all_transactions'] = 0;
+        }
 
         $data['room_assignments'] = RoomAssignment::getLatestRoomAssignments();
         $data['currency_symbol'] = 'KES';
