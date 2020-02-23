@@ -32,13 +32,22 @@ class DashboardController extends BaseController {
             $vacant_rooms[] = $value->vacant_rooms;
         }
         if ( !empty( $total_rooms ) ) {
-
             $data['sum_total_rooms'] = array_sum( $total_rooms );
         } else {
             $data['sum_total_rooms'] = 0;
         }
-        $data['sum_total_rented_rooms'] = array_sum( $rented_rooms );
-        $data['sum_total_vacant_rooms'] = array_sum( $vacant_rooms );
+
+        if ( !empty( $rented_rooms ) ) {
+            $data['sum_total_rented_rooms'] = array_sum( $rented_rooms );
+        } else {
+            $data['sum_total_rented_rooms'] = 0;
+        }
+
+        if ( !empty( $vacant_rooms ) ) {
+            $data['sum_total_vacant_rooms'] = array_sum( $vacant_rooms );
+        } else {
+            $data['sum_total_vacant_rooms'] = 0;
+        }
 
         $t_status = 1;
         $data['tot_tenants'] = count( Tenants::getTotalTenants()->where( 't_status', $t_status ) );
