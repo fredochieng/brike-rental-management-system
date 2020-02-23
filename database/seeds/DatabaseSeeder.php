@@ -14,7 +14,8 @@ class DatabaseSeeder extends Seeder {
 
         $this->call( [
             TransactionsSeeder::class,
-            RentPaymentStatusSeeder::class
+            RentPaymentStatusSeeder::class,
+            MessageStatusTableSeeder::class,
         ] );
     }
 }

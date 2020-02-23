@@ -33,7 +33,6 @@ class RoomsController extends Controller {
         if ( isset( $_GET['property_id'] ) && isset( $_GET['is_vacant'] ) ) {
             $data['searched'] = 'yes';
             $data['searched_rooms'] = Rooms::getRooms()->where( 'property_id', $property_id )->where( 'is_vacant', $is_vacant );
-            //dd( $data['searched_rooms'] );
 
             $total_rooms = count( $data['searched_rooms'] );
 

@@ -86,11 +86,12 @@ Route::get('rent-payments/full-payments', 'MonthlyPaymentController@fullRentPaym
 Route::get('rent-payments/partial-payments', 'MonthlyPaymentController@partialRentPayments')->name('rent-payments.partial-payments');
 Route::get('rent-payments/rent-arrears', 'MonthlyPaymentController@rentArrears')->name('rent-payments.rent-arrears');
 
-/** Rent payments tracker */
-Route::get('sms/send-sms', 'AfricasTalkingController@sendSMS')->name('sms.send-sms');
-Route::get('messages/fetch', 'AfricasTalkingController@fetchMessages')->name('messages.fetch-messages');
-Route::get('messages/get-balance', 'AfricasTalkingController@getBalance')->name('messages.get-balance');
-Route::get('messages/send-rent-payment-reminder', 'AfricasTalkingController@sendRentPaymentReminderSMS')->name('messages.send-rent-payment-reminder');
+/** SMS */
+Route::get('messages/sms-list', 'MessageController@index')->name('messages.sms-list');
+Route::get('messages/sms-create', 'MessageController@create')->name('messages.sms-create');
+Route::get('messages/get-sms-rooms', 'PropertyController@getSMSRooms')->name('rooms.get-payment-rooms');
+Route::post('messages/save', 'MessageController@store')->name('messages.save');
+// Route::get('messages/validate_phone', 'MessageController@validate_phone_no')->name('messages.validate_phone');
 
 
 /* Authentication */

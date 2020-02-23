@@ -6,6 +6,8 @@ use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use App\Jobs\ProcessPaymentsJob;
 use App\Jobs\MonthlyRentPaymentTrackerJob;
+use App\Jobs\SaveRentPaymentNotificationJob;
+use App\Jobs\SendSMSJob;
 
 class Kernel extends ConsoleKernel
 {
@@ -29,7 +31,9 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')
         //          ->hourly();
        // $schedule->job(new MonthlyRentPaymentTrackerJob())->everyMinute();
-        $schedule->job(new ProcessPaymentsJob())->everyMinute();
+        //$schedule->job(new ProcessPaymentsJob())->everyMinute();
+       // $schedule->job(new SaveRentPaymentNotificationJob())->everyMinute();
+        $schedule->job(new SendSMSJob())->everyMinute();
     }
 
     /**

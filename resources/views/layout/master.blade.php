@@ -180,6 +180,7 @@
         <script src="{{ asset('assets/js/sparkline.js') }}"></script>
         <script src="{{ asset('/js/variationRoomsSelector.js') }}"></script>
         <script src="{{ asset('/js/getVariationsSelector.js') }}"></script>
+        <script src="{{ asset('/js/smsRoomSelector.js') }}"></script>
 
 
         @if (Request::segment(1) === 'dashboard' )

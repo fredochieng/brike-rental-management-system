@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRentPaymentTrackersTable extends Migration
+class CreateMessageStatusTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,11 @@ class CreateRentPaymentTrackersTable extends Migration
      */
     public function up()
     {
-        Schema::create('rent_payment_trackers', function (Blueprint $table) {
-            $table->increments('id');
-            $table->timestamps();
+        Schema::create('message_status', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('m_status_name');
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
         });
     }
 
@@ -26,6 +28,6 @@ class CreateRentPaymentTrackersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('rent_payment_trackers');
+        Schema::dropIfExists('message_status');
     }
 }

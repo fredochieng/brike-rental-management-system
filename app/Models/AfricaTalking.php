@@ -31,6 +31,12 @@ class AfricaTalking extends Model {
 
         return $apiKey;
     }
+
+    public static function getShortCode() {
+        $shortCode = env( 'AFRICASTALKING_SHORTCODE', '' );
+
+        return $shortCode;
+    }
 }
 
 // TZ_APIKEY = 7ed73794c30a2e51758bf05c35bc9c3b1a0ab9d81eed71b5d5529ae2b4bcacc7

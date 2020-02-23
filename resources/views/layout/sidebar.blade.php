@@ -136,6 +136,20 @@
                                         Arrears</a></li>
                             </ul>
                         </li>
+                        <li class="{{ Request::segment(1) === 'messages' ? 'active' : null }}">
+                            <a href="#Messages" class="has-arrow"><i class="icon-envelope"></i><span>Bulk
+                                    SMS</span></a>
+                            <ul>
+                                <li class="{{ Request::segment(2) === 'sms-list' ? 'active' : null }}"><a
+                                        href="{{route('messages.sms-list')}}">
+                                        SMS Listing</a></li>
+                            </ul>
+                            <ul>
+                                <li class="{{ Request::segment(2) === 'sms-create' ? 'active' : null }}"><a
+                                        href="{{route('messages.sms-create')}}">Create
+                                        SMS</a></li>
+                            </ul>
+                        </li>
                         <li class="{{ Request::segment(1) === 'tenants' ? 'active' : null }}">
                             <a href="#Rooms" class="has-arrow"><i class="icon-credit-card"></i><span>Expenses</span></a>
                             <ul>

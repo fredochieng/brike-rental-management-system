@@ -58,6 +58,15 @@ class PropertyController extends Controller {
         return response()->json( $pay_rooms );
     }
 
+    public function getSMSRooms() {
+        //Function to get the variation values based on the selected variation type
+        $property_id = Input::get( 'property_id' );
+
+        $sms_rooms = Rooms::getRooms()->where( 'property_id', $property_id );
+
+        return response()->json( $sms_rooms );
+    }
+
     public function create() {
         $data['categories'] = PropertyCategories::getPropertyCategories();
         $data['property_variations'] = PropertyVariations::getPropertyVariations();
