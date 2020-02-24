@@ -243,7 +243,12 @@ class PropertyController extends Controller {
             $payment_amount[] = $value->trans_amount;
         }
 
-        $data['sum_tot_prop_rent_payments'] =  number_format( json_encode( array_sum( $payment_amount ) ), 2, '.', ',' );
+        if ( !empty( $payment_amount ) ) {
+
+            $data['sum_tot_prop_rent_payments'] =  number_format( json_encode( array_sum( $payment_amount ) ), 2, '.', ',' );
+        } else {
+            $data['sum_tot_prop_rent_payments'] = 0.00;
+        }
 
         $payment_tracks = MonthlyPayment::getPaymentTracker()->where( 'payment_status', 3 )->where( 'prop_id', $property_id );
         // dd( $payment_tracks );
@@ -252,7 +257,12 @@ class PropertyController extends Controller {
             $rent_arrears_amount[] = $value->balance_due;
         }
 
-        $data['rent_arrears_amount'] = number_format( json_encode( array_sum( $rent_arrears_amount ) ), 2, '.', ',' );
+        if ( !empty( $rent_arrears_amount ) ) {
+
+            $data['rent_arrears_amount'] = number_format( json_encode( array_sum( $rent_arrears_amount ) ), 2, '.', ',' );
+        } else {
+            $data['rent_arrears_amount'] = 0.00;
+        }
 
         return view( 'property.manage' )->with( $data );
     }
