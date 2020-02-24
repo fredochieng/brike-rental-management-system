@@ -84,7 +84,7 @@ class RoomsController extends Controller {
     public function store( Request $request ) {
         $property_id = $request->input( 'property_id' );
         $variation_val_id = $request->input( 'variation_val_id' );
-        $room_no = $request->input( 'room_no' );
+        $room_no = strtoupper( $request->input( 'room_no' ) );
         $max_occupants = $request->input( 'max_occupants' );
 
         /** Get the total number of added rooms for the selected variation from thr room table */
@@ -187,7 +187,7 @@ class RoomsController extends Controller {
         $now = Carbon::now( 'Africa/Nairobi' )->toDateTimeString();
 
         /** Get room data from edit room form **/
-        $room_no = $request->input( 'room_no' );
+        $room_no = strtoupper( $request->input( 'room_no' ) );
         $max_occupants = $request->input( 'max_occupants' );
 
         $room_data = array(
