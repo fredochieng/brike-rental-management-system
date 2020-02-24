@@ -289,19 +289,8 @@
                 <ul class="list-unstyled question">
                     <li class="menu-heading">HOW-TO PAY</li>
                     <li><a href="javascript:void(0);">MPESA Paybill</a></li>
-                    <li><a href="javascript:void(0);">Paybill No-----> 43635433</a></li>
-                    <li><a href="javascript:void(0);">Account No-----> Phone Number </a></li>
-                    <li class="menu-heading">ACCOUNT</li>
-                    <li><a href="javascript:void(0);">Cearet New Account</a></li>
-                    <li><a href="javascript:void(0);">Change Password?</a></li>
-                    <li><a href="javascript:void(0);">Privacy &amp; Policy</a></li>
-                    <li class="menu-heading">BILLING</li>
-                    <li><a href="javascript:void(0);">Payment info</a></li>
-                    <li><a href="javascript:void(0);">Auto-Renewal</a></li>
-                    <li class="menu-button m-t-30">
-                        <a href="javascript:void(0);" class="btn btn-primary"><i class="icon-question"></i> Need
-                            Help?</a>
-                    </li>
+                    <li><a href="javascript:void(0);">Paybill No--------> 867643</a></li>
+                    <li><a href="javascript:void(0);">Account No-----> Room Number </a></li>
                 </ul>
             </div>
         </div>

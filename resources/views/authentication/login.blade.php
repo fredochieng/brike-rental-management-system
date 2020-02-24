@@ -8,7 +8,8 @@
     <div class="vertical-align-middle auth-main">
         <div class="auth-box">
             <div class="top">
-                <img src="{{url('/')}}/assets/img/logo-white.svg" alt="Lucid">
+                {{-- <img src="{{url('/')}}/assets/img/logo-whites.svg" alt="Lucid"> --}}
+                {{-- Brike Rental Managemnt System --}}
             </div>
             <div class="card">
                 <div class="header">
@@ -47,10 +48,10 @@
                         </div>
                         <button type="submit" class="btn btn-primary btn-lg btn-block">LOGIN</button>
                         <div class="bottom">
-                            <span class="helper-text m-b-10"><i class="fa fa-lock"></i> <a
-                                    href="{{route('authentication.forgot-password')}}">Forgot password?</a></span>
-                            <span>Don't have an account? <a
-                                    href="{{route('authentication.register')}}">Register</a></span>
+                            {{-- <span class="helper-text m-b-10"><i class="fa fa-lock"></i> <a
+                                    href="{{route('authentication.forgot-password')}}">Forgot password?</a></span> --}}
+                            {{-- <span>Don't have an account? <a
+                                    href="{{route('authentication.register')}}">Register</a></span> --}}
                         </div>
                     </form>
                 </div>

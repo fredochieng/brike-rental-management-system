@@ -43,7 +43,6 @@
 
         $('#message').keyup(function () {
             var tlength = $(this).val().length;
-            // alert('fredrick');
             $(this).val($(this).val().substring(0, maxchars));
             var tlength = $(this).val().length;
             remain = maxchars - parseInt(tlength);

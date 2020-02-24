@@ -4,6 +4,7 @@ namespace App\Jobs;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Foundation\Bus\Dispatchable;
+use App\Models\RoomAssignment;
 use App\Models\MonthlyPayment;
 use App\Models\Message;
 use DB;
@@ -32,7 +33,7 @@ class SaveRentPaymentNotificationJob {
     */
 
     public function handle() {
-        $data['payment_tracks'] = MonthlyPayment::getPaymentTracker()->where( 'payment_status', 3 );
+
         $current_date = Carbon::now();
         $current_date = new DateTime( $current_date );
         $current_date = $current_date->format( 'M Y' );
@@ -51,10 +52,25 @@ class SaveRentPaymentNotificationJob {
 
             foreach ( $rent_trackers as $key => $value ) {
 
+                $room_tennats_count = count( RoomAssignment::all()->where( 'room_id', $value->room_id )->where( 'r_end_date', '' ) );
+
+                if ( $value->category_id == 1 ) {
+                    $message_body = 'Hello '. $value->tenant_name. ', kindly pay your rent for '. $value->period.'.'.
+                    ' Rent amount Kshs '. $value->bal_due_hostel. '. Please pay Kshs '. $value->bal_due_hostel.'.'.
+                    ' to Paybill 867643 Account Number '. $value->room_no .'.'.
+                    ' Please ignore this message if you have already paid. Thank you';
+                } else {
+
+                    $message_body = 'Hello '. $value->tenant_name. ', kindly pay your rent for '. $value->period.'.'.
+                    ' Rent amount Kshs '. $value->balance_due. '. Please pay Kshs '. $value->balance_due.'.'.
+                    ' to Paybill 867643 Account Number '. $value->room_no .'.'.
+                    ' Please ignore this message if you have already paid. Thank you';
+                }
+
                 $message = new Message();
                 $message_title = 'Rent Payment Reminder';
                 $message->message_title = $message_title;
-                $message->message = $value->message;
+                $message->message = $message_body;
                 $message->phone_no = $value->t_phone;
 
                 $message->save();
@@ -65,16 +81,5 @@ class SaveRentPaymentNotificationJob {
                 $update_sms_reminder_sent = MonthlyPayment::where( 'id', $value->track_id )->update( $update_track );
             }
         }
-
-        // foreach ( $rent_trackers as $key => $value ) {
-        //     dd( $value );
-        // }
-
-        // foreach ( $rent_trackers as $key => $value ) {
-        //     $tenants_phones = json_decode( json_encode( $rent_trackers ), true );
-        //    $to = array_column( $tenants_phones, 't_phone' );
-        // $to =  implode( ',', $to );
-        // }
-
     }
 }

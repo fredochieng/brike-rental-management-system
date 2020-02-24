@@ -18,7 +18,7 @@
                     <p>Please enter your email address below to receive instructions for resetting password.</p>
                     <form class="form-auth-small" action="{{route('dashboard')}}">
                         <div class="form-group">
-                            <input type="password" class="form-control" id="signup-password" placeholder="Password">
+                            <input type="email" class="form-control" id="email" placeholder="Email address">
                         </div>
                         <button type="submit" class="btn btn-primary btn-lg btn-block">RESET PASSWORD</button>
                         <div class="bottom">

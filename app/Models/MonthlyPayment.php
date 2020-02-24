@@ -4,6 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use DB;
+use DateInterval;
+use DatePeriod;
+use DateTime;
+use Carbon\Carbon;
 
 class MonthlyPayment extends Model {
     protected $table = 'tenant_monthly_payments';
@@ -36,6 +40,19 @@ class MonthlyPayment extends Model {
         ->leftJoin( 'rooms', 'tenant_monthly_payments.room_id', 'rooms.id' )
         ->leftJoin( 'properties', 'rooms.property_id', 'properties.id' )
         ->orderBy( 'tenant_monthly_payments.id', 'desc' )->get();
+
+        $rent_trackers->map(function ($item) {
+        $current_date = Carbon::now();
+        $current_date = new DateTime( $current_date );
+        $current_date = $current_date->format( 'M Y' );
+
+        $month = $item->period;
+               $month = new DateTime( $month );
+               $item->month = $month->format( 'Y-m-d' );
+
+            return $item;
+        });
+        
         return $rent_trackers;
     }
 
@@ -61,7 +78,8 @@ class MonthlyPayment extends Model {
                     DB::raw('tenants.t_phone'),
                     DB::raw('tenants.t_name'),
                     DB::raw( 'properties.id as prop_id' ),
-                    DB::raw( 'properties.prop_name' )
+                    DB::raw( 'properties.prop_name' ),
+                    DB::raw( 'properties.category_id' )
           )
                 ->leftJoin( 'rent_payment_status', 'tenant_monthly_payments.payment_status', 'rent_payment_status.id' )
                 ->leftJoin( 'rooms', 'tenant_monthly_payments.room_id', 'rooms.id' )
@@ -74,11 +92,8 @@ class MonthlyPayment extends Model {
                      $tenant_name = explode(" ",$item->t_name);
                      unset($tenant_name[1]);
                      $item->tenant_name = implode(" ", $tenant_name);
+                     $item->bal_due_hostel = $item->balance_due/2;
 
-            $item->message = 'Hello '. $item->tenant_name. ', kindly pay your rent for '. $item->period.'.'.
-            ' Rent amount Kshs '. $item->balance_due. '. Please pay Kshs '. $item->balance_due.'.'.
-            ' to Paybill 867643 Account Number '. $item->room_no .'.'.
-            ' Please ignore this message if you have already paid. Thank you';
             return $item;
         });
 

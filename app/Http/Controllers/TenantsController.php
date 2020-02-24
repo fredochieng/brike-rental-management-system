@@ -8,6 +8,7 @@ use App\Models\Rooms;
 use App\Models\RoomAssignment;
 use App\Models\Variation;
 use App\Models\ Transaction;
+use App\Models\ MonthlyPayment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Kamaln7\Toastr\Facades\Toastr;
@@ -117,6 +118,7 @@ class TenantsController extends Controller {
         $data['currency_symbol'] = 'KES';
         $data['tenant'] = Tenants::getTenants()->where( 'tenant_id', $tenant_id )->first();
         $data['room_assignment'] = RoomAssignment::getRoomAssignments()->where( 'tenant_id', $tenant_id )->first();
+        $room_id = $data['room_assignment']->room_id;
 
         /** To get actual payment for the tenant, the msisdn must be the same as t_phone
         * This means that the tenant must pay with his/her phone number
@@ -134,13 +136,42 @@ class TenantsController extends Controller {
             $payment_amount[] = $value->trans_amount;
         }
 
-        $data['sum_tot_payments'] =  number_format( json_encode( array_sum( $payment_amount ) ), 2, '.', ',' );
+        if ( !empty( $payment_amount ) ) {
+
+            $data['sum_tot_payments'] =  number_format( json_encode( array_sum( $payment_amount ) ), 2, '.', ',' );
+        } else {
+            $data['sum_tot_payments'] = 0.00;
+        }
+
+        $data['sum_rent_payments'] = Transaction::sumTotalRentPayments();
+
+        $payment_amount = array();
+        foreach ( $data['sum_rent_payments'] as $key => $value ) {
+            $payment_amount[] = $value->trans_amount;
+        }
+
+        if ( !empty( $payment_amount ) ) {
+
+            $data['sum_rent_payments'] = number_format( json_encode( array_sum( $payment_amount ) ), 2, '.', ',' );
+        } else {
+            $data['sum_rent_payments'] = 0.00;
+        }
+
+        // dd( $data['sum_rent_payments'] );
+        //$data['payment_per'] =  ( $data['sum_tot_payments']/ $data['sum_rent_payments'] );
 
         $tenancy_start_date =  Carbon::parse( $data['tenant']->r_start_date );
         if ( $data['tenant']->t_status == 1 ) {
             $current_date = Carbon::now();
         } else {
             $current_date = $data['tenant']->r_end_date;
+        }
+
+        if ( !empty( $rent_arrears_amount ) ) {
+
+            $data['rent_arrears_amount'] = number_format( json_encode( array_sum( $rent_arrears_amount ) ), 2, '.', ',' );
+        } else {
+            $data['rent_arrears_amount'] = 0.00;
         }
         $data['tenancy_period'] = $current_date->diffInMonths( $tenancy_start_date );
 

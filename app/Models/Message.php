@@ -37,7 +37,7 @@ class Message extends Model {
         ->leftJoin( 'properties', 'tenants.t_property_id', '=', 'properties.id' )
         ->leftJoin( 'room_assignments', 'tenants.id', '=', 'room_assignments.tenant_id' )
         ->leftJoin( 'rooms', 'room_assignments.room_id', '=', 'rooms.id' )
-        ->orderBy( 'messages.id', 'asc' )
+        ->orderBy( 'messages.id', 'desc' )
         ->get();
 
         return $sms;

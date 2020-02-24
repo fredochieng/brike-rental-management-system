@@ -21,7 +21,12 @@ class DashboardController extends BaseController {
             $payment_amount[] = $value->trans_amount;
         }
 
-        $data['sum_rent_payments'] = number_format( json_encode( array_sum( $payment_amount ) ), 2, '.', ',' );
+        if ( !empty( $payment_amount ) ) {
+
+            $data['sum_rent_payments'] = number_format( json_encode( array_sum( $payment_amount ) ), 2, '.', ',' );
+        } else {
+            $data['sum_rent_payments'] = 0.00;
+        }
 
         $data['total_property'] = count( Property::getProperty() );
         $data['variation_values'] = Variation::variationValuesSum();
