@@ -77,6 +77,7 @@ Route::get('rent/payments', 'TransactionsController@index')->name('rent.payments
 Route::get('rent/processed-transactions', 'TransactionsController@processedPayments')->name('rent.processed-transactions');
 Route::get('rent/pending-transactions', 'TransactionsController@pendingPayments')->name('rent.pending-transactions');
 Route::get('rent/get-payment-rooms', 'PropertyController@getPaymentRooms')->name('rooms.get-payment-rooms');
+Route::get('property/get-transaction-rooms', 'PropertyController@getTransRooms')->name('rooms.get-trans-rooms');
 
 
 

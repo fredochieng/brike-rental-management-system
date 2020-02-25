@@ -103,76 +103,6 @@
     </div>
 </div>
 
-{{-- <div class="row clearfix">
-    <div class="col-lg-3 col-md-6">
-        <div class="card top_counter">
-            <div class="body">
-                <div class="icon text-info"><i class="fa fa-money"></i> </div>
-                <div class="content">
-                    <div class="text">Revenue Collections</div>
-                    <h6 class="number">KES 530,000.00</h6>
-                </div>
-                <hr>
-                <div class="icon text-info"><i class="fa fa-dollar"></i> </div>
-                <div class="content">
-                    <div class="text">Due Collections</div>
-                    <h6 class="number">KES 140,000.00</h6>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-3 col-md-6">
-        <div class="card top_counter">
-            <div class="body">
-                <div class="icon text-warning"><i class="fa fa-home"></i> </div>
-                <div class="content">
-                    <div class="text">Total Rooms</div>
-                    <h6 class="number">{{ $sum_total_rooms }} Rooms</h6>
-</div>
-<hr>
-<div class="icon text-warning"><i class="fa fa-graduation-cap"></i> </div>
-<div class="content">
-    <div class="text">Rented Rooms</div>
-    <h6 class="number">{{ $sum_total_rented_rooms }} Rooms</h6>
-</div>
-</div>
-</div>
-</div>
-<div class="col-lg-3 col-md-6">
-    <div class="card top_counter">
-        <div class="body">
-            <div class="icon text-danger"><i class="fa fa-credit-card"></i> </div>
-            <div class="content">
-                <div class="text">Vacant Rooms</div>
-                <h6 class="number">{{ $sum_total_vacant_rooms}} Rooms</h6>
-            </div>
-            <hr>
-            <div class="icon text-danger"><i class="fa fa-university"></i> </div>
-            <div class="content">
-                <div class="text">Property Variations</div>
-                <h6 class="number">{{ $tot_variations }} Variations</h6>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="col-lg-3 col-md-6">
-    <div class="card top_counter">
-        <div class="body">
-            <div class="icon text-success"><i class="icon-users"></i> </div>
-            <div class="content">
-                <div class="text">Total Tenants</div>
-                <h6 class="number">{{ $tot_tenants }} Tenants</h6>
-            </div>
-            <hr>
-            <div class="icon text-success"><i class="fa fa-smile-o"></i> </div>
-            <div class="content">
-                <div class="text">Total Expenses</div>
-                <h6 class="number">KES 120,000.00</h6>
-            </div>
-        </div>
-    </div>
-</div>
-</div> --}}
 <div class="row clearfix">
     <div class="col-lg-12 col-md-12">
         <div class="card">
@@ -273,6 +203,7 @@
                                 <th>Room</th>
                                 <th>Name</th>
                                 <th>Tenant Phone</th>
+                                <th>Status</th>
                                 <th>Paid At</th>
                             </tr>
                         </thead>
@@ -286,6 +217,11 @@
                                 <td>{{ $item->bill_ref_no}}</td>
                                 <td>{{ $item->t_name}}</td>
                                 <td>{{ $item->t_phone}}</td>
+                                @if ($item->cron_processed == 1)
+                                    <td><span class="badge badge-success">Processed</span></td>
+                                @elseif($item->cron_processed == 0)
+                                    <td><span class="badge badge-danger">Pending</span></td>
+                                @endif
                                 <td>{{ $item->trans_created_at}}</td>
                             </tr>
                             @endforeach

@@ -58,6 +58,16 @@ class PropertyController extends Controller {
         return response()->json( $pay_rooms );
     }
 
+    /** Get rooms for payment confirmation based on the property selected */
+	public function getTransRooms() {
+		//Function to get the variation values based on the selected variation type
+		$property_id = Input::get( 'property_id' );
+
+		$pay_rooms = Rooms::getRooms()->where( 'property_id', $property_id );
+
+		return response()->json( $pay_rooms );
+	}
+
     public function getSMSRooms() {
         //Function to get the variation values based on the selected variation type
         $property_id = Input::get( 'property_id' );

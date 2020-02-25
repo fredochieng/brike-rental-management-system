@@ -181,6 +181,7 @@
         <script src="{{ asset('/js/variationRoomsSelector.js') }}"></script>
         <script src="{{ asset('/js/getVariationsSelector.js') }}"></script>
         <script src="{{ asset('/js/smsRoomSelector.js') }}"></script>
+        <script src="{{ asset('/js/transRoomSelector.js') }}"></script>
 
 
         @if (Request::segment(1) === 'dashboard' )
@@ -226,6 +227,7 @@
 
         @if (Request::segment(2) === 'payments')
         <script src="{{ asset('/js/paymentsRoomSelector.js') }}"></script>
+
         @endif
 
         @if (Request::segment(2) === 'processed-transactions')

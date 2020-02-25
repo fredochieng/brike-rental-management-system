@@ -39,7 +39,7 @@ class ProcessPaymentsJob implements ShouldQueue {
     public function handle() {
         $today = $this->date->toDateString();
 
-        $transactions = Transaction::getPayments()->where( 'cron_processed', '=', 0 )->first();
+        $transactions = Transaction::getPayments()->where( 'cron_processed', '=', 0 )->where('trans_confirmed', '=', 1)->first();
 
         $now = Carbon::now( 'Africa/Nairobi' )->toDateTimeString();
         Log::info( '*************************************** TRANSACTION BATCH PROCESSING STARTED AT: ' .$now. ' ********************************************' );
@@ -57,7 +57,7 @@ class ProcessPaymentsJob implements ShouldQueue {
 
                 if ( !empty( $monthly_track ) ) {
                     /** Checks to make sure tenant monthly payment track exists
-                    * This can be achieved by running a cron job to autopopulate the records
+                    * This can be achieved by running a cron job to auto-populate the records
                     */
 
                     $rent_amount = $monthly_track->rent_amount;

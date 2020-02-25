@@ -58,47 +58,74 @@ class Transaction extends Model {
         * Another option would be to confirm payment that dont much any tenant, & update
         * t_phone column in the rent payments table with the t_phone & use it to search the tenant
         */
-        $payments = DB::table( 'rent_payments' )->select(
-            DB::raw( 'rent_payments.*' ),
-            DB::raw( 'rent_payments.id as transaction_id' ),
-            DB::raw( 'rent_payments.created_at as trans_created_at' ),
-            DB::raw( 'rooms.id as room_id' ),
-            DB::raw( 'rooms.property_id' ),
-            DB::raw( 'rooms.room_no' ),
-            DB::raw( 'properties.id as prop_id' ),
-            DB::raw( 'properties.prop_name' ),
-            DB::raw( 'tenants.t_name' ),
-            DB::raw( 'tenants.t_phone' ),
-            DB::raw( 'rent_payments.msisdn as payment_phone' )
-        )
-        ->leftJoin( 'rooms', 'rent_payments.bill_ref_no', '=', 'rooms.room_no' )
-        ->leftJoin( 'properties', 'rooms.property_id', '=', 'properties.id' )
-        ->join( 'tenants', 'tenants.t_phone', '=', 'rent_payments.msisdn', 'left outer' )
-        // ->join( 'tenants', 'tenants.t_phone', '=', 'rent_payments.tenant_phone', 'left outer' )
-        //** Uncomment the below line and create a similar function to use for the job class */
-        ->orderBy( 'rent_payments.id', 'asc' )
-        ->get();
+//        $payments = DB::table( 'rent_payments' )->select(
+//            DB::raw( 'rent_payments.*' ),
+//            DB::raw( 'rent_payments.id as transaction_id' ),
+//            DB::raw( 'rent_payments.created_at as trans_created_at' ),
+//            DB::raw( 'rooms.id as room_id' ),
+//            DB::raw( 'rooms.property_id' ),
+//            DB::raw( 'rooms.room_no' ),
+//            DB::raw( 'properties.id as prop_id' ),
+//            DB::raw( 'properties.prop_name' ),
+//            DB::raw( 'tenants.t_name' ),
+//            DB::raw( 'tenants.t_phone' ),
+//            DB::raw( 'rent_payments.msisdn as payment_phone' )
+//        )
+//        ->leftJoin( 'rooms', 'rent_payments.bill_ref_no', '=', 'rooms.room_no' )
+//        ->leftJoin( 'properties', 'rooms.property_id', '=', 'properties.id' )
+//        ->join( 'tenants', 'tenants.t_phone', '=', 'rent_payments.phone_no', 'left outer' )
+//        // ->join( 'tenants', 'tenants.t_phone', '=', 'rent_payments.tenant_phone', 'left outer' )
+//        //** Uncomment the below line and create a similar function to use for the job class */
+//        ->orderBy( 'rent_payments.id', 'asc' )
+//        ->get();
+
+	    $payments = DB::table( 'rent_payments' )->select(
+		    DB::raw( 'rent_payments.*' ),
+		    DB::raw( 'rent_payments.id as transaction_id' ),
+		    DB::raw( 'rent_payments.created_at as trans_created_at' ),
+		    DB::raw( 'tenants.t_name' ),
+		    DB::raw( 'tenants.t_phone' ),
+		    DB::raw('room_assignments.tenant_id'),
+		    DB::raw('room_assignments.room_id'),
+		    DB::raw( 'rooms.id as room_id' ),
+		    DB::raw( 'rooms.property_id' ),
+		    DB::raw( 'rooms.room_no' ),
+		    DB::raw( 'properties.id as prop_id' ),
+		    DB::raw( 'properties.prop_name' ),
+		    DB::raw( 'rent_payments.msisdn as payment_phone' )
+	    )
+		    ->join( 'tenants', 'tenants.t_phone', '=', 'rent_payments.phone_no', 'left outer' )
+		    ->join('room_assignments', 'tenants.id', '=', 'room_assignments.room_id', 'left outer')
+		    ->leftJoin( 'rooms', 'room_assignments.room_id', '=', 'rooms.id' )
+		    ->leftJoin( 'properties', 'rooms.property_id', '=', 'properties.id' )
+		    // ->join( 'tenants', 'tenants.t_phone', '=', 'rent_payments.tenant_phone', 'left outer' )
+		    //** Uncomment the below line and create a similar function to use for the job class */
+		    ->orderBy( 'rent_payments.id', 'asc' )
+		    ->get();
 
         return $payments;
     }
 
     public static function getLatestPayments() {
         $latest_payments = DB::table( 'rent_payments' )->select(
-            DB::raw( 'rent_payments.*' ),
-            DB::raw( 'rent_payments.id as transaction_id' ),
-            DB::raw( 'rent_payments.created_at as trans_created_at' ),
-            DB::raw( 'rooms.id as room_id' ),
-            DB::raw( 'rooms.property_id' ),
-            DB::raw( 'rooms.room_no' ),
-            DB::raw( 'properties.id as prop_id' ),
-            DB::raw( 'properties.prop_name' ),
-            DB::raw( 'tenants.t_name' ),
-            DB::raw( 'tenants.t_phone' ),
-            DB::raw( 'rent_payments.msisdn as payment_phone' )
+	        DB::raw( 'rent_payments.*' ),
+	        DB::raw( 'rent_payments.id as transaction_id' ),
+	        DB::raw( 'rent_payments.created_at as trans_created_at' ),
+	        DB::raw( 'tenants.t_name' ),
+	        DB::raw( 'tenants.t_phone' ),
+	        DB::raw('room_assignments.tenant_id'),
+	        DB::raw('room_assignments.room_id'),
+	        DB::raw( 'rooms.id as room_id' ),
+	        DB::raw( 'rooms.property_id' ),
+	        DB::raw( 'rooms.room_no' ),
+	        DB::raw( 'properties.id as prop_id' ),
+	        DB::raw( 'properties.prop_name' ),
+	        DB::raw( 'rent_payments.msisdn as payment_phone' )
         )
-        ->leftJoin( 'rooms', 'rent_payments.bill_ref_no', '=', 'rooms.room_no' )
-        ->leftJoin( 'properties', 'rooms.property_id', '=', 'properties.id' )
-        ->join( 'tenants', 'tenants.t_phone', '=', 'rent_payments.msisdn', 'left outer' )
+	        ->join( 'tenants', 'tenants.t_phone', '=', 'rent_payments.phone_no', 'left outer' )
+	        ->join('room_assignments', 'tenants.id', '=', 'room_assignments.room_id', 'left outer')
+	        ->leftJoin( 'rooms', 'room_assignments.room_id', '=', 'rooms.id' )
+	        ->leftJoin( 'properties', 'rooms.property_id', '=', 'properties.id' )
         // ->join( 'tenants', 'tenants.t_phone', '=', 'rent_payments.tenant_phone', 'left outer' )
         ->orderBy( 'rent_payments.id', 'desc' )
         ->limit( 7 )
@@ -109,7 +136,6 @@ class Transaction extends Model {
 
     public static function sumTotalRentPayments() {
 
-        // $sum_rent_payments = number_format( DB::table( 'rent_payments' )->sum( 'trans_amount' ), 2, '.', ',' );
         $sum_rent_payments = Transaction::all();
         return  $sum_rent_payments;
     }
@@ -150,7 +176,7 @@ class Transaction extends Model {
             DB::raw( 'rent_payments.msisdn as payment_phone' )
         )
         ->leftJoin( 'rooms', 'rent_payments.bill_ref_no', '=', 'rooms.room_no' )
-        ->join( 'tenants', 'tenants.t_phone', '=', 'rent_payments.msisdn', 'left outer' )
+        ->join( 'tenants', 'tenants.t_phone', '=', 'rent_payments.phone_no', 'left outer' )
         //->groupBy( 'tenants.t_phone' )
         ->where( 'tenants.t_phone', '=', $t_phone )
         ->get();

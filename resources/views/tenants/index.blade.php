@@ -50,7 +50,6 @@
                                 <th>Name</th>
                                 <th>ID/Reg Number</th>
                                 <th>Phone Number</th>
-                                {{-- <th>Alt. Phone Number</th> --}}
                                 <th>Email Address</th>
                                 <th>Property</th>
                                 <th>Created At</th>
@@ -64,7 +63,6 @@
                                 <td>{{ $item->t_name }}</td>
                                 <td>{{ $item->t_id_no }}</td>
                                 <td>{{ $item->t_phone }}</td>
-                                {{-- <td>{{ $item->t_alt_phone }}</td> --}}
                                 @if ($item->t_email == '')
                                 <td>Not Available</td>
                                 @else

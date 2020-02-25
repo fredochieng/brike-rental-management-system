@@ -181,7 +181,9 @@
                                 <th>Amount</th>
                                 <th>Phone</th>
                                 <th>Paid By</th>
-                                <th>Account</th>
+                                <th>Account Number</th>
+                                <th>Tenant Name</th>
+                                <th>Tenant Phone</th>
                                 <th>Paid At</th>
                             </tr>
                         </thead>
@@ -193,6 +195,8 @@
                                 <td>{{ $item->msisdn}}</td>
                                 <td>{{ $item->first_name}} {{ $item->last_name }}</td>
                                 <td>{{ $item->bill_ref_no}}</td>
+                                <td>{{ $item->t_name}}</td>
+                                <td>{{ $item->t_phone}}</td>
                                 <td>{{ $item->trans_created_at}}</td>
                             </tr>
                             @endforeach

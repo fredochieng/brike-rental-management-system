@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Input;
 use Kamaln7\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use DB;
 
 class TransactionsController extends Controller {
     /**
@@ -43,7 +44,7 @@ class TransactionsController extends Controller {
 
                 Toastr::success( $total_transactions . ' transactions found for your query' );
 
-                return view( 'payments.index' )->with( $data );
+                return view('payments.index' )->with( $data );
             }
         } elseif ( isset( $_GET['property_id'] ) && isset( $_GET['room_no'] ) ) {
             $data['searched'] = 'yes';
@@ -176,7 +177,7 @@ class TransactionsController extends Controller {
 
         $ShortCode = '601361';
         $CommandID = 'CustomerPayBillOnline';
-        $Amount = '4550';
+        $Amount = '7777';
         $Msisdn = '254708374149';
         $BillRefNumber = 'Room A002';
 
@@ -214,9 +215,9 @@ class TransactionsController extends Controller {
         $OrgAccountBalance    = $jsonMpesaResponse['OrgAccountBalance'];
         $ThirdPartyTransID   = $jsonMpesaResponse['ThirdPartyTransID'];
         $MSISDN            = $jsonMpesaResponse['MSISDN'];
-        $FirstName           = $jsonMpesaResponse['FirstName'];
-        $MiddleName         = $jsonMpesaResponse['MiddleName'];
-        $LastName          = $jsonMpesaResponse['LastName'];
+        $FirstName           = strtoupper($jsonMpesaResponse['FirstName']);
+        $MiddleName         = strtoupper($jsonMpesaResponse['MiddleName']);
+        $LastName          = strtoupper($jsonMpesaResponse['LastName']);
         $payment_method = 'Mpesa';
 
         // write to file
@@ -237,10 +238,22 @@ class TransactionsController extends Controller {
         $payments->org_account_bal = $OrgAccountBalance;
         $payments->third_party_trans_id = $ThirdPartyTransID;
         $payments->msisdn = $MSISDN;
+        $payments->phone_no = $MSISDN;
         $payments->first_name = $FirstName;
         $payments->middle_name = $MiddleName;
         $payments->last_name = $LastName;
         $payments->payment_method = $payment_method;
+
+//        Check whether the Msisdn exists in the database
+	    $phone_numbers = DB::table('tenants')->select('tenants.t_phone')->get();
+	    $phone_numbers = json_decode(json_encode($phone_numbers, true));
+	    $phone_numbers = array_column($phone_numbers, 't_phone');
+
+	    if(in_array($MSISDN, $phone_numbers)){
+	    	$payments->trans_confirmed = 1;
+	    }else{
+		    $payments->trans_confirmed = 0;
+	    }
 
         $payments->save();
 
