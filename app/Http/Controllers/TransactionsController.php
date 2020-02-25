@@ -277,7 +277,7 @@ class TransactionsController extends Controller {
     /** Mpesa API C2B Register URL*/
 
     public function register_url() {
-
+        $environment = env( 'MPESA_ENV' );
         if ( $environment == 'live' ) {
             $url = 'https://api.safaricom.co.ke/mpesa/c2b/v1/simulate';
             $token = Mpesa::generateLiveToken();
