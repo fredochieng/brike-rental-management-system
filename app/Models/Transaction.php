@@ -79,12 +79,6 @@ class Transaction extends Model {
         ->orderBy( 'rent_payments.id', 'asc' )
         ->get();
 
-        $payments->map(function ($item) {
-       $item->trans_time = date('Y/m/d H:i:s', $item->trans_created_at);
-
-            return $item;
-        });
-
         return $payments;
     }
 
@@ -109,12 +103,6 @@ class Transaction extends Model {
         ->orderBy( 'rent_payments.id', 'desc' )
         ->limit( 7 )
         ->get();
-
-         $payments->map(function ($item) {
-       $item->trans_time = date('Y/m/d H:i:s', $item->trans_created_at);
-
-            return $item;
-        });
 
         return $latest_payments;
     }

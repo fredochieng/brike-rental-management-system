@@ -83,7 +83,7 @@
                                 @elseif($item->cron_processed == 0)
                                 <td><span class="badge badge-danger">Pending</span></td>
                                 @endif
-                                <td>{{ $item->trans_time}}</td>
+                                <td>{{ $item->trans_created_at}}</td>
                             </tr>
                             @endforeach
                         </tbody>
@@ -131,7 +131,7 @@
                                 @elseif($item->cron_processed == 0)
                                 <td><span class="badge badge-danger">Pending</span></td>
                                 @endif
-                                <td>{{ $item->trans_time}}</td>
+                                <td>{{ $item->trans_created_at}}</td>
                             </tr>
                             @endforeach
                         </tbody>

@@ -24,7 +24,7 @@ class CreateRentPaymentsTable extends Migration
             $table->string('middle_name');
             $table->string('last_name');
             $table->string('payment_method');
-            $table->string('trans_time');
+            $table->string('trans_created_at');
             $table->string('bus_shortcode');
             $table->string('invoice_no')->nullable();
             $table->string('org_account_bal');

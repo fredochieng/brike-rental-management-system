@@ -15,7 +15,7 @@ class TransactionsSeeder extends Seeder {
             array(
                 'trans_type' => 'Pay Bill',
                 'trans_id' => 'OBE42TOQA1',
-                'trans_time' => '20200214123145',
+                'trans_created_at' => '20200214123145',
                 'trans_amount' => '5000.00',
                 'bus_shortcode' => '643672',
                 'bill_ref_no' => 'Room 1',
@@ -31,7 +31,7 @@ class TransactionsSeeder extends Seeder {
             array(
                 'trans_type' => 'Pay Bill',
                 'trans_id' => 'OBE42TOQA2',
-                'trans_time' => '20200214123145',
+                'trans_created_at' => '20200214123145',
                 'trans_amount' => '4000.00',
                 'bus_shortcode' => '643672',
                 'bill_ref_no' => 'Room 1',
@@ -47,7 +47,7 @@ class TransactionsSeeder extends Seeder {
             array(
                 'trans_type' => 'Pay Bill',
                 'trans_id' => 'OBE42TOQA3',
-                'trans_time' => '20200214123145',
+                'trans_created_at' => '20200214123145',
                 'trans_amount' => '2000.00',
                 'bus_shortcode' => '643672',
                 'bill_ref_no' => 'Room 2',
@@ -63,7 +63,7 @@ class TransactionsSeeder extends Seeder {
             array(
                 'trans_type' => 'Pay Bill',
                 'trans_id' => 'OBE42TOQA4',
-                'trans_time' => '20200214123145',
+                'trans_created_at' => '20200214123145',
                 'trans_amount' => '1000.00',
                 'bus_shortcode' => '643672',
                 'bill_ref_no' => 'Room 2',

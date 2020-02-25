@@ -229,7 +229,7 @@ class TransactionsController extends Controller {
         $payments = new Transaction();
         $payments->trans_type = $TransactionType;
         $payments->trans_id = $TransID;
-        $payments->trans_time = $TransTime;
+        $payments->trans_created_at = $TransTime;
         $payments->trans_amount = $TransAmount;
         $payments->bus_shortcode = $BusinessShortCode;
         $payments->bill_ref_no = $BillRefNumber;
