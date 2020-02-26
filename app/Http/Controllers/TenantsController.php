@@ -129,7 +129,7 @@ class TenantsController extends Controller {
         * t_phone column in the rent payments table with the t_phone & use it to search the tenant
         */
         $data['payments'] = Transaction::getPayments()
-        ->where( 'msisdn', $data['tenant']->t_phone );
+        ->where( 'phone_no', $data['tenant']->t_phone );
 
         $t_phone = $data['tenant']->t_phone;
         $data['sum_tot_payments'] = Transaction::getTenantTotalPayments( $t_phone );
@@ -159,9 +159,6 @@ class TenantsController extends Controller {
         } else {
             $data['sum_rent_payments'] = 0.00;
         }
-
-        // dd( $data['sum_rent_payments'] );
-        //$data['payment_per'] =  ( $data['sum_tot_payments']/ $data['sum_rent_payments'] );
 
         $tenancy_start_date =  Carbon::parse( $data['tenant']->r_start_date );
         if ( $data['tenant']->t_status == 1 ) {
@@ -246,8 +243,8 @@ class TenantsController extends Controller {
         );
          $update_room_assignment = RoomAssignment::where('tenant_id', $tenant_id)->update($room_assignment_details);
 
-          Toastr::success( 'Room unassigned successfully' );
-        return back();
+	    Toastr::success('Room unassigned successfully');
+	    return back();
     }
 
     /**

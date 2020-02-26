@@ -169,7 +169,7 @@
                                 <td>{{ $item->first_name}} {{ $item->last_name }}</td>
                                 <td>{{ $item->bill_ref_no}}</td>
                                 <td>{{ $item->prop_name}}</td>
-                                <td>{{ $item->trans_created_at}}</td>
+                                <td>{{ $item->trans_date}}</td>
                             </tr>
                             @endforeach
                         </tbody>

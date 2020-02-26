@@ -79,7 +79,7 @@
                                 <td>{{ $item->t_name}}</td>
                                 <td>{{ $item->t_phone}}</td>
                                 <td><span class="badge badge-success">Processed</span></td>
-                                <td>{{ $item->trans_created_at}}</td>
+                                <td>{{ $item->trans_date}}</td>
                             </tr>
                             @endforeach
                         </tbody>
@@ -123,7 +123,7 @@
                                 <td>{{ $item->t_name}}</td>
                                 <td>{{ $item->t_phone}}</td>
                                 <td><span class="badge badge-success">Processed</span></td>
-                                <td>{{ $item->trans_created_at}}</td>
+                                <td>{{ $item->trans_date}}</td>
                             </tr>
                             @endforeach
                         </tbody>

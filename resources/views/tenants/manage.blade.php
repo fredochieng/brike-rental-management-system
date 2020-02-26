@@ -176,7 +176,7 @@
                     <table class="table table-bordered table-striped table-hover dataTable js-exportable"
                         style="font-size:13px">
                         <thead class="thead-primary">
-                            <tr>
+                        <tr style="font-size:12px">
                                 <th>Transaction ID</th>
                                 <th>Amount</th>
                                 <th>Phone</th>
@@ -197,7 +197,7 @@
                                 <td>{{ $item->bill_ref_no}}</td>
                                 <td>{{ $item->t_name}}</td>
                                 <td>{{ $item->t_phone}}</td>
-                                <td>{{ $item->trans_created_at}}</td>
+                                <td>{{ $item->trans_date}}</td>
                             </tr>
                             @endforeach
                         </tbody>

@@ -79,15 +79,16 @@
                                 <td>{{ $item->t_name}}</td>
                                 <td>{{ $item->t_phone}}</td>
                                 <td><span class="badge badge-warning">Pending</span></td>
-                                <td>{{ $item->trans_created_at}}</td>
+                                <td>{{ $item->trans_date}}</td>
                                 <td>
                                     @if ($item->trans_confirmed == 0)
-                                        <a href="" data-toggle="modal" disabled
-                                           data-target="#confirmPaymentModal_{{$item->transaction_id}}"
-                                           data-backdrop="static" data-keyboard="false" class="btn btn-sm btn-primary"><i class="fa fa-check"></i>
-                                            <span>Confirm payment</span></a>
+                                    <a href="" data-toggle="modal" disabled
+                                        data-target="#confirmPaymentModal_{{$item->transaction_id}}"
+                                        data-backdrop="static" data-keyboard="false" class="btn btn-sm btn-primary"><i
+                                            class="fa fa-check"></i>
+                                        <span>Confirm payment</span></a>
                                     @else
-                                        Confirmed already
+                                    Confirmed already
                                     @endif
                                 </td>
                             </tr>
@@ -134,7 +135,7 @@
                                 <td>{{ $item->t_name}}</td>
                                 <td>{{ $item->t_phone}}</td>
                                 <td><span class="badge badge-warning">Pending</span></td>
-                                <td>{{ $item->trans_created_at}}</td>
+                                <td>{{ $item->trans_date}}</td>
                             </tr>
                             @endforeach
                         </tbody>

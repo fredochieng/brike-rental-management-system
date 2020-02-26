@@ -218,11 +218,11 @@
                                 <td>{{ $item->t_name}}</td>
                                 <td>{{ $item->t_phone}}</td>
                                 @if ($item->cron_processed == 1)
-                                    <td><span class="badge badge-success">Processed</span></td>
+                                <td><span class="badge badge-success">Processed</span></td>
                                 @elseif($item->cron_processed == 0)
-                                    <td><span class="badge badge-danger">Pending</span></td>
+                                <td><span class="badge badge-danger">Pending</span></td>
                                 @endif
-                                <td>{{ $item->trans_created_at}}</td>
+                                <td>{{ $item->trans_date}}</td>
                             </tr>
                             @endforeach
                         </tbody>
