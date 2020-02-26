@@ -169,15 +169,23 @@ class RoomsController extends Controller {
             $payment_amount[] = $value->trans_amount;
         }
 
-        $data['tot_payments'] = json_encode( array_sum( $payment_amount ) );
+        if(empty($payment_amount)){
+        	$data['tot_payments'] = 0.00;
+        }else{
+	        $data['tot_payments'] = json_encode( array_sum( $payment_amount ) );
+        }
 
         $payment_tracks = MonthlyPayment::getPaymentTracker()->where( 'payment_status', 3 )->where( 'prop_id', $property_id )->where( 'room_id', $room_id );
-        $rent_arrears = array();
+	    $rent_arrears_amount = array();
         foreach ( $payment_tracks as $key => $value ) {
             $rent_arrears_amount[] = $value->balance_due;
         }
 
-        $data['rent_arrears_amount'] = number_format( json_encode( array_sum( $rent_arrears_amount ) ), 2, '.', ',' );
+        if(empty($rent_arrears_amount)){
+        	$data['rent_arrears_amount'] = 0.00;
+        }else{
+	        $data['rent_arrears_amount'] = number_format( json_encode( array_sum( $rent_arrears_amount ) ), 2, '.', ',' );
+        }
 
         return view( 'rooms.manage' )->with( $data );
     }
