@@ -4,7 +4,7 @@
             <img src="{{ asset('assets/img/user.png') }}" class="rounded-circle user-photo" alt="User Profile Picture">
             <div class="dropdown">
                 <span>Welcome,</span>
-                <a href="javascript:void(0);" class="dropdown-toggle user-name" data-toggle="dropdown"><strong><?php $user = \Auth::user();                  			print_r($user->name);
+                <a href="javascript:void(0);" class="dropdown-toggle user-name" data-toggle="dropdown"><strong><?php $user = \Auth::user();                  			print_r($user->username);
                                                                                             		?></span></strong></a>
                 <ul class="dropdown-menu dropdown-menu-right account">
                     <li><a href="{{route('pages.profile1')}}"><i class="icon-user"></i>My Profile</a></li>

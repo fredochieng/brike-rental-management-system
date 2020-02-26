@@ -65,7 +65,7 @@
                                     <th>Tenant Phone</th>
                                     <th>Confirmed</th>
                                     <th>Status</th>
-                                    <th>Time</th>
+                                    <th>Paid At</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
@@ -93,16 +93,13 @@
                                         <td>{{ $item->trans_created_at}}</td>
                                         <td>
                                             @if ($item->trans_confirmed == 0)
-                                                <a href="" data-toggle="modal" disabled
-                                                   data-target="#confirmPaymentModal_{{$item->transaction_id}}"
-                                                   data-backdrop="static" data-keyboard="false" class="btn btn-sm btn-primary"><i class="fa fa-check"></i>
+                                                <a href="/payment/manage/&id={{$item->transaction_id}}" class="btn btn-sm btn-primary"><i class="fa fa-check"></i>
                                                     <span>Confirm payment</span></a>
                                             @else
-                                                Confirmed already
+                                                Already confirmed
                                             @endif
                                         </td>
                                     </tr>
-                                    @include('payments.modals.modal-confirm-payment')
                                 @endforeach
                                 </tbody>
                             </table>
@@ -159,16 +156,13 @@
                                         <td>{{ $item->trans_created_at}}</td>
                                         <td>
                                             @if ($item->trans_confirmed == 0)
-                                                <a href="" data-toggle="modal" disabled
-                                                   data-target="#confirmPaymentModal_{{$item->transaction_id}}"
-                                                   data-backdrop="static" data-keyboard="false" class="btn btn-sm btn-primary"><i class="fa fa-check"></i>
+                                                <a href="/payment/manage/&id={{$item->transaction_id}}" class="btn btn-sm btn-primary"><i class="fa fa-check"></i>
                                                     <span>Confirm payment</span></a>
                                             @else
-                                                Confirmed already
+                                                Already confirmed
                                             @endif
                                         </td>
                                     </tr>
-                                    @include('payments.modals.modal-confirm-payment')
                                 @endforeach
                                 </tbody>
                             </table>

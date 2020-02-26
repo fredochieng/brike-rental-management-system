@@ -64,6 +64,7 @@
                                 <th>Tenant Phone</th>
                                 <th>Status</th>
                                 <th>Time</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -79,7 +80,18 @@
                                 <td>{{ $item->t_phone}}</td>
                                 <td><span class="badge badge-warning">Pending</span></td>
                                 <td>{{ $item->trans_created_at}}</td>
+                                <td>
+                                    @if ($item->trans_confirmed == 0)
+                                        <a href="" data-toggle="modal" disabled
+                                           data-target="#confirmPaymentModal_{{$item->transaction_id}}"
+                                           data-backdrop="static" data-keyboard="false" class="btn btn-sm btn-primary"><i class="fa fa-check"></i>
+                                            <span>Confirm payment</span></a>
+                                    @else
+                                        Confirmed already
+                                    @endif
+                                </td>
                             </tr>
+                            @include('payments.modals.modal-confirm-payment')
                             @endforeach
                         </tbody>
                     </table>

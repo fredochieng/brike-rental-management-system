@@ -8,7 +8,7 @@
             // console.log(variation_val_id);
             $.get('/property/get-variation-rooms?variation_val_id=' + variation_val_id + "&property_id=" + property_id, function (data) {
                 console.log(data);
-                //  var string_url = "http://www.example.com/?" + a + "&blabla=" + b;
+
                 if (data.length == 0) {
 
                     $("#assignRoomBtn").attr('disabled', true)
