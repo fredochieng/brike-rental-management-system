@@ -101,10 +101,11 @@ class TenantsController extends Controller {
         $tenant->t_email = $t_email;
         $tenant->t_property_id = $t_property_id;
 
-	    $phone_numbers = DB::table('tenants')->select('tenants.t_phone')->get();
-	    $phone_numbers = json_decode(json_encode($phone_numbers, true));
-	    $phone_numbers = array_column($phone_numbers, 't_phone');
+//	    $phone_numbers = DB::table('tenants')->select('tenants.t_phone')->get();
+//	    $phone_numbers = json_decode(json_encode($phone_numbers, true));
+//	    $phone_numbers = array_column($phone_numbers, 't_phone');
 
+	    $tenant->save();
         Toastr::success( 'Tenant added successfully' );
         return back();
     }

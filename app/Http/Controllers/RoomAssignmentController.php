@@ -173,7 +173,7 @@ class RoomAssignmentController extends Controller {
         $room_assignment->tenant_id = $tenant_id;
         $room_assignment->r_start_date = $start_date;
 
-        //$room_assignment->save();
+        $room_assignment->save();
 
         /** Update room_assigned column for the selected tenant from 0 to 1 */
 

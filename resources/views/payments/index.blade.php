@@ -129,7 +129,7 @@
                                 <th>Tenant Phone</th>
                                 <th>Confirmed</th>
                                 <th>Status</th>
-                                <th>Time</th>
+                                <th>Paid At</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
