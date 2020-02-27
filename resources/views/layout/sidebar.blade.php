@@ -150,19 +150,19 @@
                                         SMS</a></li>
                             </ul>
                         </li>
-                        <li class="{{ Request::segment(1) === 'tenants' ? 'active' : null }}">
-                            <a href="#Rooms" class="has-arrow"><i class="icon-credit-card"></i><span>Expenses</span></a>
-                            <ul>
-                                <li class="{{ Request::segment(2) === 'tenants-list' ? 'active' : null }}"><a
-                                        href="{{route('tenants.tenants-list')}}">
-                                        Tenant Listing</a></li>
-                            </ul>
-                            <ul>
-                                <li class="{{ Request::segment(2) === 'tenants-create' ? 'active' : null }}"><a
-                                        href="{{route('tenants.tenants-create')}}">Add
-                                        Tenant</a></li>
-                            </ul>
-                        </li>
+{{--                        <li class="{{ Request::segment(1) === 'tenants' ? 'active' : null }}">--}}
+{{--                            <a href="#Rooms" class="has-arrow"><i class="icon-credit-card"></i><span>Expenses</span></a>--}}
+{{--                            <ul>--}}
+{{--                                <li class="{{ Request::segment(2) === 'tenants-list' ? 'active' : null }}"><a--}}
+{{--                                        href="{{route('tenants.tenants-list')}}">--}}
+{{--                                        Tenant Listing</a></li>--}}
+{{--                            </ul>--}}
+{{--                            <ul>--}}
+{{--                                <li class="{{ Request::segment(2) === 'tenants-create' ? 'active' : null }}"><a--}}
+{{--                                        href="{{route('tenants.tenants-create')}}">Add--}}
+{{--                                        Tenant</a></li>--}}
+{{--                            </ul>--}}
+{{--                        </li>--}}
                         <li class="{{ Request::segment(1) === 'tenants' ? 'active' : null }}">
                             <a href="#Rooms" class="has-arrow"><i class="icon-user-follow"></i><span>User
                                     Management</span></a>
@@ -178,33 +178,33 @@
                             </ul>
                         </li>
 
-                        <li class="{{ Request::segment(1) === 'tenants' ? 'active' : null }}">
-                            <a href="#Rooms" class="has-arrow"><i class="icon-bar-chart"></i><span>Reports</span></a>
-                            <ul>
-                                <li class="{{ Request::segment(2) === 'tenants-list' ? 'active' : null }}"><a
-                                        href="{{route('tenants.tenants-list')}}">
-                                        Tenant Listing</a></li>
-                            </ul>
-                            <ul>
-                                <li class="{{ Request::segment(2) === 'tenants-create' ? 'active' : null }}"><a
-                                        href="{{route('tenants.tenants-create')}}">Add
-                                        Tenant</a></li>
-                            </ul>
-                        </li>
+{{--                        <li class="{{ Request::segment(1) === 'tenants' ? 'active' : null }}">--}}
+{{--                            <a href="#Rooms" class="has-arrow"><i class="icon-bar-chart"></i><span>Reports</span></a>--}}
+{{--                            <ul>--}}
+{{--                                <li class="{{ Request::segment(2) === 'tenants-list' ? 'active' : null }}"><a--}}
+{{--                                        href="{{route('tenants.tenants-list')}}">--}}
+{{--                                        Tenant Listing</a></li>--}}
+{{--                            </ul>--}}
+{{--                            <ul>--}}
+{{--                                <li class="{{ Request::segment(2) === 'tenants-create' ? 'active' : null }}"><a--}}
+{{--                                        href="{{route('tenants.tenants-create')}}">Add--}}
+{{--                                        Tenant</a></li>--}}
+{{--                            </ul>--}}
+{{--                        </li>--}}
 
-                        <li class="{{ Request::segment(1) === 'tenants-create' ? 'active' : null }}">
-                            <a href="#Rooms" class="has-arrow"><i class="icon-settings"></i><span>Settings</span></a>
-                            <ul>
-                                <li class="{{ Request::segment(2) === 'tenants-list' ? 'active' : null }}"><a
-                                        href="{{route('tenants.tenants-list')}}">
-                                        Tenant Listing</a></li>
-                            </ul>
-                            <ul>
-                                <li class="{{ Request::segment(2) === 'tenants-create' ? 'active' : null }}"><a
-                                        href="{{route('tenants.tenants-create')}}">Add
-                                        Tenant</a></li>
-                            </ul>
-                        </li>
+{{--                        <li class="{{ Request::segment(1) === 'tenants-create' ? 'active' : null }}">--}}
+{{--                            <a href="#Rooms" class="has-arrow"><i class="icon-settings"></i><span>Settings</span></a>--}}
+{{--                            <ul>--}}
+{{--                                <li class="{{ Request::segment(2) === 'tenants-list' ? 'active' : null }}"><a--}}
+{{--                                        href="{{route('tenants.tenants-list')}}">--}}
+{{--                                        Tenant Listing</a></li>--}}
+{{--                            </ul>--}}
+{{--                            <ul>--}}
+{{--                                <li class="{{ Request::segment(2) === 'tenants-create' ? 'active' : null }}"><a--}}
+{{--                                        href="{{route('tenants.tenants-create')}}">Add--}}
+{{--                                        Tenant</a></li>--}}
+{{--                            </ul>--}}
+{{--                        </li>--}}
                     </ul>
                 </nav>
             </div>
