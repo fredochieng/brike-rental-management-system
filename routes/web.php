@@ -97,7 +97,12 @@
 	Route::get('messages/sms-create', 'MessageController@create')->name('messages.sms-create');
 	Route::get('messages/get-sms-rooms', 'PropertyController@getSMSRooms')->name('rooms.get-payment-rooms');
 	Route::post('messages/save', 'MessageController@store')->name('messages.save');
-// Route::get('messages/validate_phone', 'MessageController@validate_phone_no')->name('messages.validate_phone');
+	Route::get('messages/validate_phone', 'MessageController@validate_phone_no')->name('messages.validate_phone');
+
+	/** User management */
+	Route::get('user-management/users-list', 'UsersController@index')->name('user-management.users-list');
+	Route::post('user-management/save-user', 'UsersController@store')->name('user-management.save-user');
+	Route::post('user-management/update/&id={id}', 'UsersController@update')->name('user.update-user');
 
 
 	/* Authentication */

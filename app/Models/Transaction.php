@@ -83,6 +83,7 @@
 				->join('room_assignments', 'tenants.id', '=', 'room_assignments.tenant_id', 'left outer')
 				->leftJoin('rooms', 'room_assignments.room_id', '=', 'rooms.id')
 				->leftJoin('properties', 'rooms.property_id', '=', 'properties.id')
+				->where('rent_payments.trans_type', '=', 'Pay Bill')
 				// ->join( 'tenants', 'tenants.t_phone', '=', 'rent_payments.tenant_phone', 'left outer' )
 				//** Uncomment the below line and create a similar function to use for the job class */
 				->orderBy('rent_payments.id', 'asc')
@@ -117,6 +118,7 @@
 				->join('room_assignments', 'tenants.id', '=', 'room_assignments.tenant_id', 'left outer')
 				->leftJoin('rooms', 'room_assignments.room_id', '=', 'rooms.id')
 				->leftJoin('properties', 'rooms.property_id', '=', 'properties.id')
+				->where('rent_payments.trans_type', '=', 'Pay Bill')
 				// ->join( 'tenants', 'tenants.t_phone', '=', 'rent_payments.tenant_phone', 'left outer' )
 				->orderBy('rent_payments.id', 'desc')
 				->limit(7)
@@ -143,6 +145,7 @@
 			$sum_prop_rent_payments = DB::table('rent_payments')
 				->select(
 					DB::raw('rent_payments.id as payment_id'),
+						DB::raw('rent_payments.trans_type'),
 					DB::raw('rent_payments.trans_amount'),
 					DB::raw('tenants.id as t_tenant_id'),
 					DB::raw('tenants.t_name'),
@@ -159,6 +162,7 @@
 				->join('room_assignments', 'tenants.id', '=', 'room_assignments.tenant_id', 'left outer')
 				->leftJoin('rooms', 'room_assignments.room_id', '=', 'rooms.id')
 				->leftJoin('properties', 'rooms.property_id', '=', 'properties.id')
+				->where('rent_payments.trans_type', '=', 'Pay Bill')
 				//->groupBy( 'rooms.id' )
 				->where('properties.id', '=', $property_id)
 				->get();
@@ -170,6 +174,7 @@
 		public static function getTenantTotalPayments($t_phone)
 		{
 			$sum_tenant_payments = DB::table('rent_payments')->select(
+					DB::raw('rent_payments.trans_type'),
 				DB::raw('rent_payments.bill_ref_no'),
 				DB::raw('rent_payments.trans_amount'),
 				DB::raw('tenants.id as t_tenant_id'),
@@ -182,6 +187,7 @@
 				->join('tenants', 'tenants.t_phone', '=', 'rent_payments.phone_no', 'left outer')
 				->join('room_assignments', 'tenants.id', '=', 'room_assignments.tenant_id', 'left outer')
 				->leftJoin('rooms', 'room_assignments.room_id', '=', 'rooms.id')
+				->where('rent_payments.trans_type', '=', 'Pay Bill')
 				//->groupBy( 'tenants.t_phone' )
 				->where('tenants.t_phone', '=', $t_phone)
 				->get();

@@ -6,9 +6,6 @@
             </div>
             {!! Form::open(['url' => action('RoomsController@store'), 'method' => 'post'])
             !!}
-
-            {{-- <form method="post" id="addTenant" data-route="{{ route('rooms.save')}}" <div class="body">
-                {{csrf_field()}} --}}
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-12">

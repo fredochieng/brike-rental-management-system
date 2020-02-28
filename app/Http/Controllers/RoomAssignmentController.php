@@ -130,32 +130,30 @@ class RoomAssignmentController extends Controller {
         * Which month has he paid, is he due?
          */
 
-        $date = Carbon::parse( $start_date );
+//        $date = Carbon::parse( $start_date );
+//
+//        $start_tenancy_month = $date->format( 'M Y' );
+//
+//        $monthly_payment = new MonthlyPayment();
+//        $monthly_payment->tenant_id = $tenant_id;
+//        $monthly_payment->room_id = $room_id;
+//        $monthly_payment->payment_status = 3;
+//        $monthly_payment->period = $start_tenancy_month;
+//        $monthly_payment->rent_amount = $rent_amount;
+//        $monthly_payment->amount_paid = 0.00;
+//        $monthly_payment->balance_due = $rent_amount;
 
-        $start_tenancy_month = $date->format( 'M Y' );
-
-        $monthly_payment = new MonthlyPayment();
-        $monthly_payment->tenant_id = $tenant_id;
-        $monthly_payment->room_id = $room_id;
-        $monthly_payment->payment_status = 3;
-        $monthly_payment->period = $start_tenancy_month;
-        $monthly_payment->rent_amount = $rent_amount;
-        $monthly_payment->amount_paid = 0.00;
-        $monthly_payment->balance_due = $rent_amount;
-
-        $monthly_payment->save();
+       // $monthly_payment->save();
 
         /** Log the action in the logs file */
-        Log::info( 'Room assignmet of ID ' . $room_assignment->id .  ' created by user of ID: ' . Auth::id() .
+        Log::info( 'Room assignment of ID ' . $room_assignment->id .  ' created by user of ID: ' . Auth::id() .
         ' at ' . $now );
-
-       // dd('fred');
 
         Toastr::success( 'Assignment created successfully' );
 
         return back();
     }
-    /** Add another tenant to alraedy rented room
+    /** Add another tenant to already rented room
     * This is the case for hostel where one room can have more than 1 tenant
     */
 
