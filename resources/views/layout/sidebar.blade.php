@@ -1,7 +1,8 @@
 <div id="left-sidebar" class="sidebar">
     <div class="sidebar-scroll">
         <div class="user-account">
-            <img src="{{ asset('assets/img/user.png') }}" class="rounded-circle user-photo" alt="User Profile Picture">
+            <img src="{{ asset('assets/img/no-user.png') }}" class="rounded-circle user-photo"
+                alt="User Profile Picture">
             <div class="dropdown">
                 <span>Welcome,</span>
                 <a href="javascript:void(0);" class="dropdown-toggle user-name" data-toggle="dropdown"><strong><?php $user = \Auth::user();                  			print_r($user->username);
@@ -150,66 +151,79 @@
                                         SMS</a></li>
                             </ul>
                         </li>
-{{--                        <li class="{{ Request::segment(1) === 'tenants' ? 'active' : null }}">--}}
-{{--                            <a href="#Rooms" class="has-arrow"><i class="icon-credit-card"></i><span>Expenses</span></a>--}}
-{{--                            <ul>--}}
-{{--                                <li class="{{ Request::segment(2) === 'tenants-list' ? 'active' : null }}"><a--}}
-{{--                                        href="{{route('tenants.tenants-list')}}">--}}
-{{--                                        Tenant Listing</a></li>--}}
-{{--                            </ul>--}}
-{{--                            <ul>--}}
-{{--                                <li class="{{ Request::segment(2) === 'tenants-create' ? 'active' : null }}"><a--}}
-{{--                                        href="{{route('tenants.tenants-create')}}">Add--}}
-{{--                                        Tenant</a></li>--}}
-{{--                            </ul>--}}
-{{--                        </li>--}}
-{{--                        <li class="{{ Request::segment(1) === 'tenants' ? 'active' : null }}">--}}
-{{--                            <a href="#Rooms" class="has-arrow"><i class="icon-user-follow"></i><span>User--}}
-{{--                                    Management</span></a>--}}
-{{--                            <ul>--}}
-{{--                                <li class="{{ Request::segment(2) === 'tenants-list' ? 'active' : null }}"><a--}}
-{{--                                        href="{{route('tenants.tenants-list')}}">--}}
-{{--                                        Tenant Listing</a></li>--}}
-{{--                            </ul>--}}
-{{--                            <ul>--}}
-{{--                                <li class="{{ Request::segment(2) === 'tenants-create' ? 'active' : null }}"><a--}}
-{{--                                        href="{{route('tenants.tenants-create')}}">Add--}}
-{{--                                        Tenant</a></li>--}}
-{{--                            </ul>--}}
-{{--                        </li>--}}
+                        {{-- <li class="{{ Request::segment(1) === 'tenants' ? 'active' : null }}">--}}
+                        {{-- <a href="#Rooms" class="has-arrow"><i class="icon-credit-card"></i><span>Expenses</span></a>--}}
+                        {{-- <ul>--}}
+                        {{-- <li class="{{ Request::segment(2) === 'tenants-list' ? 'active' : null }}"><a--}}
+                            {{--                                        href="{{route('tenants.tenants-list')}}">--}}
+                            {{-- Tenant Listing</a></li>--}}
+                            {{-- </ul>--}}
+                            {{-- <ul>--}}
+                            {{-- <li class="{{ Request::segment(2) === 'tenants-create' ? 'active' : null }}"><a--}}
+                                {{--                                        href="{{route('tenants.tenants-create')}}">
+                                Add--}}
+                                {{-- Tenant</a></li>--}}
+                                {{-- </ul>--}}
+                                {{-- </li>--}}
+                                {{-- <li class="{{ Request::segment(1) === 'tenants' ? 'active' : null }}">--}}
+                                {{-- <a href="#Rooms" class="has-arrow"><i class="icon-user-follow"></i><span>User--}}
+                                {{-- Management</span></a>--}}
+                                {{-- <ul>--}}
+                                {{-- <li class="{{ Request::segment(2) === 'tenants-list' ? 'active' : null }}"><a--}}
+                                    {{--                                        href="{{route('tenants.tenants-list')}}">
+                                    --}}
+                                    {{-- Tenant Listing</a></li>--}}
+                                    {{-- </ul>--}}
+                                    {{-- <ul>--}}
+                                    {{-- <li class="{{ Request::segment(2) === 'tenants-create' ? 'active' : null }}">
+                                    <a--}}
+                                        {{--                                        href="{{route('tenants.tenants-create')}}">
+                                        Add--}}
+                                        {{-- Tenant</a></li>--}}
+                                        {{-- </ul>--}}
+                                        {{-- </li>--}}
 
-                        <li class="{{ Request::segment(2) === 'users-list' ? 'active' : null }}">
-                            <a href="{{route('user-management.users-list')}}"><i class="icon-user-follow"></i><span>User
-                                    Management</span></a>
-                        </li>
+                                        <li class="{{ Request::segment(2) === 'users-list' ? 'active' : null }}">
+                                            <a href="{{route('user-management.users-list')}}"><i
+                                                    class="icon-user-follow"></i><span>User
+                                                    Management</span></a>
+                                        </li>
 
-{{--                        <li class="{{ Request::segment(1) === 'tenants' ? 'active' : null }}">--}}
-{{--                            <a href="#Rooms" class="has-arrow"><i class="icon-bar-chart"></i><span>Reports</span></a>--}}
-{{--                            <ul>--}}
-{{--                                <li class="{{ Request::segment(2) === 'tenants-list' ? 'active' : null }}"><a--}}
-{{--                                        href="{{route('tenants.tenants-list')}}">--}}
-{{--                                        Tenant Listing</a></li>--}}
-{{--                            </ul>--}}
-{{--                            <ul>--}}
-{{--                                <li class="{{ Request::segment(2) === 'tenants-create' ? 'active' : null }}"><a--}}
-{{--                                        href="{{route('tenants.tenants-create')}}">Add--}}
-{{--                                        Tenant</a></li>--}}
-{{--                            </ul>--}}
-{{--                        </li>--}}
+                                        {{-- <li class="{{ Request::segment(1) === 'tenants' ? 'active' : null }}">--}}
+                                        {{-- <a href="#Rooms" class="has-arrow"><i class="icon-bar-chart"></i><span>Reports</span></a>--}}
+                                        {{-- <ul>--}}
+                                        {{-- <li class="{{ Request::segment(2) === 'tenants-list' ? 'active' : null }}">
+                                        <a--}}
+                                            {{--                                        href="{{route('tenants.tenants-list')}}">
+                                            --}}
+                                            {{-- Tenant Listing</a></li>--}}
+                                            {{-- </ul>--}}
+                                            {{-- <ul>--}}
+                                            {{-- <li class="{{ Request::segment(2) === 'tenants-create' ? 'active' : null }}">
+                                            <a--}}
+                                                {{--                                        href="{{route('tenants.tenants-create')}}">
+                                                Add--}}
+                                                {{-- Tenant</a></li>--}}
+                                                {{-- </ul>--}}
+                                                {{-- </li>--}}
 
-{{--                        <li class="{{ Request::segment(1) === 'tenants-create' ? 'active' : null }}">--}}
-{{--                            <a href="#Rooms" class="has-arrow"><i class="icon-settings"></i><span>Settings</span></a>--}}
-{{--                            <ul>--}}
-{{--                                <li class="{{ Request::segment(2) === 'tenants-list' ? 'active' : null }}"><a--}}
-{{--                                        href="{{route('tenants.tenants-list')}}">--}}
-{{--                                        Tenant Listing</a></li>--}}
-{{--                            </ul>--}}
-{{--                            <ul>--}}
-{{--                                <li class="{{ Request::segment(2) === 'tenants-create' ? 'active' : null }}"><a--}}
-{{--                                        href="{{route('tenants.tenants-create')}}">Add--}}
-{{--                                        Tenant</a></li>--}}
-{{--                            </ul>--}}
-{{--                        </li>--}}
+                                                {{-- <li class="{{ Request::segment(1) === 'tenants-create' ? 'active' : null }}">--}}
+                                                {{-- <a href="#Rooms" class="has-arrow"><i class="icon-settings"></i><span>Settings</span></a>--}}
+                                                {{-- <ul>--}}
+                                                {{-- <li class="{{ Request::segment(2) === 'tenants-list' ? 'active' : null }}">
+                                                <a--}}
+                                                    {{--                                        href="{{route('tenants.tenants-list')}}">
+                                                    --}}
+                                                    {{-- Tenant Listing</a></li>--}}
+                                                    {{-- </ul>--}}
+                                                    {{-- <ul>--}}
+                                                    {{-- <li class="{{ Request::segment(2) === 'tenants-create' ? 'active' : null }}">
+                                                    <a--}}
+                                                        {{--                                        href="{{route('tenants.tenants-create')}}">
+                                                        Add--}}
+                                                        {{-- Tenant</a></li>--}}
+                                                        {{-- </ul>--}}
+                                                        {{-- </li>--}}
                     </ul>
                 </nav>
             </div>
