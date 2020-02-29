@@ -9,6 +9,7 @@
 
             <div class="modal-body">
                 <input type="hidden" name="property_id" id="prop_id" value="{{ $property->property_id }}">
+                <input type="hidden" name="category_name" id="prop_id" value="{{ $property->category_name }}">
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-12">
                         <div class="form-group">

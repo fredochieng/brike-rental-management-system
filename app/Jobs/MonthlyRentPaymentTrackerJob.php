@@ -11,6 +11,7 @@ use DatePeriod;
 use DateTime;
 use App\Models\Rooms;
 use App\Models\MonthlyPayment;
+use App\Models\RentPaymentTracker;
 use Illuminate\Support\Facades\Log;
 
 class MonthlyRentPaymentTrackerJob {
@@ -71,8 +72,16 @@ class MonthlyRentPaymentTrackerJob {
         ->where( 'rooms.is_vacant', '=', $is_vacant )
         ->orderBy( 'rooms.id', 'asc' )->get();
 
-        dd( $rooms );
+        // dd( $rooms );
 
+        // $existing_tracks = RentPaymentTracker::getPaymentTracker();
+        // $periods = json_decode( json_encode( $existing_tracks, true ) );
+        // $periods = array_column( $periods, 'period' );
+
+        // $room_ids = json_decode( json_encode( $existing_tracks, true ) );
+        // $room_ids = array_column( $room_ids, 'room_id' );
+
+        //  dd( $periods );
         if ( !empty( $rooms ) ) {
             foreach ( $dates as $key => $period ) {
 
@@ -87,7 +96,16 @@ class MonthlyRentPaymentTrackerJob {
                         'amount_paid' => '0.00',
                         'balance_due' => $value->monthly_rent
                     );
-                    $save_tracks = DB::table( 'tenant_monthly_payments' )->insert( $tracks );
+
+                    DB::table( 'tenant_monthly_payments' )->upsert(
+                        [
+                            'tenant_id' => 1, 'room_id' => $value->room_id,  'payment_status' => 3, 'period' => $period,
+                            'rent_amount' => $value->monthly_rent, 'amount_paid' => '0.00', 'balance_due' => $value->monthly_rent
+                        ],
+                        ['period', 'room_id'],
+                        ['updated_at']
+                    );
+
                 }
             }
         }

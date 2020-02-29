@@ -85,6 +85,7 @@ class RoomAssignmentController extends Controller {
         $room_id = $request->input( 'variation_room_id' );
         $tenant_id = $request->input( 'r_tenant_id' );
         $start_date = $request->input( 'r_start_date' );
+        $category_name = $request->input( 'category_name' );
 
         $room_assignment = new RoomAssignment();
 
@@ -130,20 +131,25 @@ class RoomAssignmentController extends Controller {
         * Which month has he paid, is he due?
          */
 
-//        $date = Carbon::parse( $start_date );
-//
-//        $start_tenancy_month = $date->format( 'M Y' );
-//
-//        $monthly_payment = new MonthlyPayment();
-//        $monthly_payment->tenant_id = $tenant_id;
-//        $monthly_payment->room_id = $room_id;
-//        $monthly_payment->payment_status = 3;
-//        $monthly_payment->period = $start_tenancy_month;
-//        $monthly_payment->rent_amount = $rent_amount;
-//        $monthly_payment->amount_paid = 0.00;
-//        $monthly_payment->balance_due = $rent_amount;
+       $date = Carbon::parse( $start_date );
 
-       // $monthly_payment->save();
+       $start_tenancy_month = $date->format( 'M Y' );
+
+       $monthly_payment = new MonthlyPayment();
+       $monthly_payment->tenant_id = $tenant_id;
+       $monthly_payment->room_id = $room_id;
+       $monthly_payment->payment_status = 3;
+       $monthly_payment->period = $start_tenancy_month;
+       if($category_name == 'Apartments'){
+         $monthly_payment->rent_amount = $rent_amount * 2;
+          $monthly_payment->balance_due = $rent_amount * 2;
+       }else{
+        $monthly_payment->rent_amount = $rent_amount;
+         $monthly_payment->balance_due = $rent_amount;
+       }
+       $monthly_payment->amount_paid = 0.00;
+
+       $monthly_payment->save();
 
         /** Log the action in the logs file */
         Log::info( 'Room assignment of ID ' . $room_assignment->id .  ' created by user of ID: ' . Auth::id() .
