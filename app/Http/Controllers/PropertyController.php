@@ -59,14 +59,15 @@ class PropertyController extends Controller {
     }
 
     /** Get rooms for payment confirmation based on the property selected */
-	public function getTransRooms() {
-		//Function to get the variation values based on the selected variation type
-		$property_id = Input::get( 'property_id' );
 
-		$pay_rooms = Rooms::getRooms()->where( 'property_id', $property_id );
+    public function getTransRooms() {
+        //Function to get the variation values based on the selected variation type
+        $property_id = Input::get( 'property_id' );
 
-		return response()->json( $pay_rooms );
-	}
+        $pay_rooms = Rooms::getRooms()->where( 'property_id', $property_id );
+
+        return response()->json( $pay_rooms );
+    }
 
     public function getSMSRooms() {
         //Function to get the variation values based on the selected variation type
@@ -128,6 +129,7 @@ class PropertyController extends Controller {
 
         $property->save();
 
+        /** Get id of the above saved property */
         $just_saved_property_id = $property->id;
 
         /** Save property variation data */

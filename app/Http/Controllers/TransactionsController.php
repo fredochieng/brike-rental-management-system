@@ -151,7 +151,8 @@ class TransactionsController extends Controller {
 
                 return view( 'payments.pending-transactions' )->with( $data );
             }
-        } elseif ( isset( $_GET['property_id'] ) && isset( $_GET['room_no'] ) ) {
+        } elseif ( isset( $_GET['property_id']
+         ) && isset( $_GET['room_no'] ) ) {
             $data['searched'] = 'yes';
             $data['payments'] = Transaction::getPayments()->where( 'property_id', $property_id )->where( 'room_id', $room_id )->where( 'cron_processed', 0 );
 
@@ -214,7 +215,6 @@ class TransactionsController extends Controller {
             $data['cron_processed'] = 'Pending';
         }
 
-        //dd( $data['payments'] );
         return view( 'payments.manage' )->with( $data );
     }
 
@@ -376,6 +376,34 @@ class TransactionsController extends Controller {
         echo $curl_response;
     }
 
+        /** Mpesa API C2B Confirmation URL*/
+
+    public function lipa_na_mpesa_online_url() {
+
+        header( 'Content-Type: application/json' );
+
+        $response = '{
+        "ResultCode": 0,
+        "ResultDesc": "Confirmation Received Successfully"
+    }';
+
+        // Response from M-PESA Stream
+        $mpesaResponse = file_get_contents( 'php://input' );
+
+        // log the response
+        $logFile = 'LNMOResponse.json';
+
+        $jsonMpesaResponse = json_decode( $mpesaResponse, true );
+
+        // write to file
+        $log = fopen( $logFile, 'a' );
+        fwrite( $log, $mpesaResponse );
+        fclose( $log );
+
+        echo $response;
+
+    }
+
     public function confPaymentRooomSelector( Request $request ) {
         //Function to get active tenants of the selected room during payment confirmation
         $room_id = Input::get( 'room_id' );
@@ -401,8 +429,8 @@ class TransactionsController extends Controller {
         );
         $confirm_payment = Transaction::where( 'id', $transaction_id )->update( $payment_data );
 
-	    Toastr::success( 'Payment confirmed successfully' );
-	    return back();
+        Toastr::success( 'Payment confirmed successfully' );
+        return back();
     }
 
     /**

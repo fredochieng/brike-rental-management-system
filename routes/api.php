@@ -21,3 +21,4 @@ Route::any('/payments/confirmation', 'TransactionsController@confirmation_url');
 Route::any('/payments/validation', 'TransactionsController@validation_url');
 Route::any('/payments/register', 'TransactionsController@register_url');
 Route::any('/payments', 'TransactionsController@c2b_transaction');
+Route::any('/payments/lipa_na_mpesa', 'TransactionsController@lipa_na_mpesa_online_url');
