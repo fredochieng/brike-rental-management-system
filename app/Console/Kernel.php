@@ -8,6 +8,7 @@
 	use App\Jobs\MonthlyRentPaymentTrackerJob;
 	use App\Jobs\SaveRentPaymentNotificationJob;
 	use App\Jobs\SendSMSJob;
+	use App\Jobs\MonthlyRoomStatusJob;
 
 	class Kernel extends ConsoleKernel
 	{
@@ -30,10 +31,11 @@
 		{
 			// $schedule->command('inspire')
 			//          ->hourly();
-			$schedule->job(new MonthlyRentPaymentTrackerJob())->everyMinute();
-			// $schedule->job(new ProcessPaymentsJob())->everyMinute();
+		$schedule->job(new MonthlyRentPaymentTrackerJob())->everyMinute();
+			//$schedule->job(new ProcessPaymentsJob())->everyMinute();
 			//$schedule->job(new SaveRentPaymentNotificationJob())->everyMinute();
 			//$schedule->job(new SendSMSJob())->everyMinute();
+				//$schedule->job(new MonthlyRoomStatusJob())->everyMinute();
 		}
 
 		/**

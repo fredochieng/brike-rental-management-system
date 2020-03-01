@@ -39,7 +39,7 @@ class ProcessPaymentsJob implements ShouldQueue {
     public function handle() {
         $today = $this->date->toDateString();
 
-        $transactions = Transaction::getPayments()->where( 'cron_processed', '=', 0 )->where('trans_confirmed', '=', 1)->first();
+        $transactions = Transaction::getPayments()->where( 'cron_processed', '=', 0 )->where( 'trans_confirmed', '=', 1 )->first();
 
         $now = Carbon::now( 'Africa/Nairobi' )->toDateTimeString();
         Log::info( '*************************************** TRANSACTION BATCH PROCESSING STARTED AT: ' .$now. ' ********************************************' );
@@ -53,7 +53,8 @@ class ProcessPaymentsJob implements ShouldQueue {
 
             if ( !empty( $room_id ) ) {
 
-                $monthly_track = MonthlyPayment::getMonthlyPaymentsTrack()->where( 'room_id', $room_id )->whereIn( 'payment_status', [2, 3] )->first();
+                $monthly_track = MonthlyPayment::getMonthlyPaymentsTrack()->where( 'room_id', $room_id )->whereIn( 'payment_status', [2, 3] )
+                ->where( 'rented', 'Yes' )->first();
 
                 if ( !empty( $monthly_track ) ) {
                     /** Checks to make sure tenant monthly payment track exists
@@ -87,10 +88,11 @@ class ProcessPaymentsJob implements ShouldQueue {
 
                         /** Get room's next monthly payment to be updated with the overpayment */
     
-                    $next_monthly_track = MonthlyPayment::getMonthlyPaymentsTrack()->where( 'room_id', $room_id )->where( 'payment_status', 3 );
+                    $next_monthly_track = MonthlyPayment::getMonthlyPaymentsTrack()->where( 'room_id', $room_id )->where( 'payment_status', 3 )
+                    ->where( 'rented', 'Yes' );
     
                     if ( count( $next_monthly_track ) == 0 ) {
-                        $insert_monthly_track = MonthlyPayment::getMonthlyPaymentsTrack()->where( 'room_id', $room_id )->last();
+                        $insert_monthly_track = MonthlyPayment::getMonthlyPaymentsTrack()->where( 'room_id', $room_id )->where( 'rented', 'Yes' )->last();
                         dd($insert_monthly_track);
                     } else {
                            $cf_months_count = ( int ) floor( $amount_cf / $rent_amount );
@@ -120,7 +122,8 @@ class ProcessPaymentsJob implements ShouldQueue {
                             $cf_months = ( int ) floor( $amount_cf / $rent_amount );
     
                             /** Get the track to be updated with partial payment */
-                            $less_monthly_track = MonthlyPayment::getMonthlyPaymentsTrack()->where( 'room_id', $room_id )->where( 'payment_status', 3 )->first();
+                            $less_monthly_track = MonthlyPayment::getMonthlyPaymentsTrack()->where( 'room_id', $room_id )->where( 'payment_status', 3 )
+                              ->where( 'rented', 'Yes' )->first();
     
                             $less_track_id = $less_monthly_track->track_id;
     
@@ -133,7 +136,8 @@ class ProcessPaymentsJob implements ShouldQueue {
                         } 
                     }
                 } elseif ( $new_amount_paid == $rent_amount ) {
-                    $monthly_track = MonthlyPayment::getMonthlyPaymentsTrack()->where( 'room_id', $room_id )->whereIn( 'pay_status', [2, 3] )->first();
+                    $monthly_track = MonthlyPayment::getMonthlyPaymentsTrack()->where( 'room_id', $room_id )->whereIn( 'pay_status', [2, 3] )
+                      ->where( 'rented', 'Yes' )->first();
                     $track_id = $monthly_track->track_id;
     
                     $update_track = MonthlyPayment::where( 'id', $track_id )->update( [
@@ -144,7 +148,8 @@ class ProcessPaymentsJob implements ShouldQueue {
     
                     echo( 'rent paid fully for the month' );
                 } elseif ( $new_amount_paid < $rent_amount ) {
-                    $monthly_track = MonthlyPayment::getMonthlyPaymentsTrack()->where( 'room_id', $room_id )->whereIn( 'payment_status', [2, 3] )->first();
+                    $monthly_track = MonthlyPayment::getMonthlyPaymentsTrack()->where( 'room_id', $room_id )->whereIn( 'payment_status', [2, 3] )
+                      ->where( 'rented', 'Yes' )->first();
                     
                     $track_id = $monthly_track->track_id;
                     $update_track = MonthlyPayment::where( 'id', $track_id )->update( [

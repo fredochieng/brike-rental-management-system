@@ -135,21 +135,26 @@ class RoomAssignmentController extends Controller {
 
        $start_tenancy_month = $date->format( 'M Y' );
 
-       $monthly_payment = new MonthlyPayment();
-       $monthly_payment->tenant_id = $tenant_id;
-       $monthly_payment->room_id = $room_id;
-       $monthly_payment->payment_status = 3;
-       $monthly_payment->period = $start_tenancy_month;
-       if($category_name == 'Apartments'){
-         $monthly_payment->rent_amount = $rent_amount * 2;
-          $monthly_payment->balance_due = $rent_amount * 2;
-       }else{
-        $monthly_payment->rent_amount = $rent_amount;
-         $monthly_payment->balance_due = $rent_amount;
-       }
-       $monthly_payment->amount_paid = 0.00;
+       $rented = 'Yes';
 
-       $monthly_payment->save();
+    
+       if($category_name == 'Hostels'){
+         $rent_plus_deposit_amount = $rent_amount * 2;
+         $balance_due = $rent_amount * 2;
+       }else{
+        $rent_plus_deposit_amount = $rent_amount;
+         $balance_due = $rent_amount;
+       }
+
+              /** Check whether monthly payment tracker for the above date exists */
+             DB::table( 'tenant_monthly_payments' )->upsert(
+                        [
+                            'tenant_id' => 1, 'room_id' => $room_id,  'payment_status' => 3, 'period' => $start_tenancy_month,'rented' => $rented,
+                            'rent_amount' => $rent_plus_deposit_amount, 'amount_paid' => '0.00', 'balance_due' => $balance_due
+                        ],
+                        ['period', 'room_id'],
+                        ['tenant_id', 'payment_status', 'rented', 'rent_amount', 'balance_due','updated_at']
+                    );
 
         /** Log the action in the logs file */
         Log::info( 'Room assignment of ID ' . $room_assignment->id .  ' created by user of ID: ' . Auth::id() .

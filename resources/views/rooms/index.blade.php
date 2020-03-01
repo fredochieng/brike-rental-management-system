@@ -111,8 +111,13 @@
                                             data-keyboard="false"><i class="icon-pencil"></i>
                                             Edit
                                             room</a>
+                                        @if ($room->ra_room_id == '')
                                         <a class="dropdown-item" href=""><i class="icon-trash"></i> Delete
                                             room</a>
+                                        @else
+
+                                        @endif
+
                                     </div>
                                 </div>
                             </td>

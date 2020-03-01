@@ -49,8 +49,13 @@
                                             <a class="dropdown-item" href="/property/edit/&id={{$item->property_id}}"><i
                                                     class="icon-pencil"></i> Edit
                                                 property</a>
+
+                                            @if ($item->room_property_id == '')
                                             <a class="dropdown-item" href=""><i class="icon-trash"></i> Delete
                                                 property</a>
+                                            @else
+
+                                            @endif
                                         </div>
                                     </div>
                                 </td>

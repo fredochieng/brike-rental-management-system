@@ -61,45 +61,32 @@ class MonthlyRentPaymentTrackerJob {
             DB::raw( 'variations.monthly_rent' ),
             DB::raw( 'properties.id as prop_id' ),
             DB::raw( 'properties.category_id' )
-            //				DB::raw( 'room_assignments.room_id' ),
-            //				DB::raw( 'room_assignments.r_start_date' )
+
         )
         ->leftJoin( 'variation_value_template', 'rooms.variation_val_id', 'variation_value_template.id' )
         ->leftJoin( 'variations', 'variation_value_template.id', 'variations.id' )
         ->leftJoin( 'properties', 'rooms.property_id', 'properties.id' )
-        //	->leftJoin( 'room_assignments', 'rooms.id', '=', 'room_assignments.room_id' )
-        //->where( 'room_assignments.r_end_date', '=', null )
         ->where( 'rooms.is_vacant', '=', $is_vacant )
         ->orderBy( 'rooms.id', 'asc' )->get();
 
-        // dd( $rooms );
+         $rooms->map(function ($item) {
+                   if($item->is_vacant == 0){
+                       $item->rented = 'Yes';
+                   }else{
+                       $item->rented = 'No';
+                   }
+                    
+            return $item;
+        });
 
-        // $existing_tracks = RentPaymentTracker::getPaymentTracker();
-        // $periods = json_decode( json_encode( $existing_tracks, true ) );
-        // $periods = array_column( $periods, 'period' );
-
-        // $room_ids = json_decode( json_encode( $existing_tracks, true ) );
-        // $room_ids = array_column( $room_ids, 'room_id' );
-
-        //  dd( $periods );
         if ( !empty( $rooms ) ) {
             foreach ( $dates as $key => $period ) {
 
                 foreach ( $rooms as $key => $value ) {
 
-                    $tracks = array(
-                        'tenant_id' => 1,
-                        'room_id' => $value->room_id,
-                        'payment_status' => 3,
-                        'period' => $period,
-                        'rent_amount' => $value->monthly_rent,
-                        'amount_paid' => '0.00',
-                        'balance_due' => $value->monthly_rent
-                    );
-
                     DB::table( 'tenant_monthly_payments' )->upsert(
                         [
-                            'tenant_id' => 1, 'room_id' => $value->room_id,  'payment_status' => 3, 'period' => $period,
+                            'tenant_id' => 1, 'room_id' => $value->room_id,  'payment_status' => 3, 'period' => $period,'rented' => $value->rented,
                             'rent_amount' => $value->monthly_rent, 'amount_paid' => '0.00', 'balance_due' => $value->monthly_rent
                         ],
                         ['period', 'room_id'],

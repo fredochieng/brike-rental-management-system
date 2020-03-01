@@ -52,7 +52,6 @@
                                 <th>Amount Paid</th>
                                 <th>Balance Due</th>
                                 <th>Payment Status</th>
-                                <th>Action</th>
                             </tr>
                         </thead>
                         @foreach ($payment_tracks as $count => $rent_track)
@@ -70,23 +69,6 @@
                             @elseif($rent_track->payment_status == 3)
                             <td><span class="badge badge-danger">{{ $rent_track->rent_status }}</span></td>
                             @endif
-                            <td>
-                                <div class="btn-group btn-group-sm role=" group">
-                                    <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle"
-                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Action
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                                        <a class="dropdown-item" href="#" data-toggle="modal" disabled
-                                            data-target="#editRoomModal_{{$rent_track->track_id}}"
-                                            data-backdrop="static" data-keyboard="false"><i class="icon-pencil"></i>
-                                            Edit
-                                            tracker</a>
-                                        <a class="dropdown-item" href=""><i class="icon-trash"></i> Delete
-                                            tracker</a>
-                                    </div>
-                                </div>
-                            </td>
                         </tr>
                         @endforeach
                     </table>
@@ -111,7 +93,6 @@
                                 <th>Amount Paid</th>
                                 <th>Balance Due</th>
                                 <th>Payment Status</th>
-                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>

@@ -16,6 +16,9 @@ class DashboardController extends BaseController {
         $data['payments'] = Transaction::getLatestPayments();
         $data['sum_rent_payments'] = Transaction::sumTotalRentPayments();
 
+        $trackers = MonthlyPayment::getTracksForDeposits()->whereIn( 'payment_status', [1, 2] );
+        //   dd( $trackers );
+
         $payment_amount = array();
         foreach ( $data['sum_rent_payments'] as $key => $value ) {
             $payment_amount[] = $value->trans_amount;

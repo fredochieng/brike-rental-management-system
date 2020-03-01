@@ -85,8 +85,6 @@
                                                 data-backdrop="static" data-keyboard="false"><i class="icon-pencil"></i>
                                                 Edit
                                                 tenant</a>
-                                            <a class="dropdown-item" href=""><i class="icon-trash"></i> Delete
-                                                tenant</a>
                                         </div>
                                     </div>
                                 </td>
