@@ -38,8 +38,7 @@ class TenantsController extends Controller {
 
         /** Get the search value and perform the neccessary queries */
         if ( isset( $_GET['property_id'] ) ) {
-            //$t_status = 1;
-            //$room_assigned = 1;
+ 
             $data['searched'] = 'yes';
 
             if ( $t_status == 1 ) {

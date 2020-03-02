@@ -4,9 +4,13 @@
             <img src="{{ asset('assets/img/no-user.png') }}" class="rounded-circle user-photo"
                 alt="User Profile Picture">
             <div class="dropdown">
-                <span>Welcome,</span>
-                <a href="javascript:void(0);" class="dropdown-toggle user-name" data-toggle="dropdown"><strong><?php $user = \Auth::user();                  			print_r($user->username);
-                                                                                            		?></span></strong></a>
+                <span>Welcome</span>
+                <a href="javascript:void(0);" class="dropdown-toggle user-name" data-toggle="dropdown">
+                    <strong>
+                        <?php $user = \Auth::user();
+                            print_r($user->username);
+                            ?>
+                        </span></strong></a>
                 <ul class="dropdown-menu dropdown-menu-right account">
                     <li><a href="{{route('pages.profile1')}}"><i class="icon-user"></i>My Profile</a></li>
                     <li><a href="javascript:void(0);"><i class="icon-settings"></i>Settings</a></li>
@@ -183,7 +187,11 @@
                                         {{-- Tenant</a></li>--}}
                                         {{-- </ul>--}}
                                         {{-- </li>--}}
-
+                                        <li class="{{ Request::segment(2) === 'expenses' ? 'active' : null }}">
+                                            <a href="{{route('expenses')}}"><i
+                                                    class="fa fa-money"></i><span>Expenses
+                                                    </span></a>
+                                        </li>
                                         <li class="{{ Request::segment(2) === 'users-list' ? 'active' : null }}">
                                             <a href="{{route('user-management.users-list')}}"><i
                                                     class="icon-user-follow"></i><span>User

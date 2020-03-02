@@ -108,6 +108,10 @@ use Kamaln7\Toastr\Facades\Toastr;
 	Route::get('messages/get-sms-rooms', 'PropertyController@getSMSRooms')->name('rooms.get-payment-rooms');
 	Route::post('messages/save', 'MessageController@store')->name('messages.save');
 	Route::get('messages/validate_phone', 'MessageController@validate_phone_no')->name('messages.validate_phone');
+	
+		/* Expenses */
+	Route::get('expenses', 'ExpensesController@index')->name('expenses');
+	Route::post('expense/save', 'ExpensesController@store')->name('expense.save');
 
 	/** User management */
 	Route::get('user-management/users-list', 'UsersController@index')->name('user-management.users-list');
