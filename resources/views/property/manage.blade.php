@@ -196,7 +196,7 @@
                         style="font-size:13px">
                         <thead class="thead-primary">
                             <tr>
-                                <th>Transaction ID</th>
+                                <th>Trans ID</th>
                                 <th>Amount</th>
                                 <th>Phone</th>
                                 <th>Paid By</th>

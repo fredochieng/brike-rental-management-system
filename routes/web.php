@@ -1,4 +1,5 @@
 <?php
+use Kamaln7\Toastr\Facades\Toastr;
 
 	/*
 	|--------------------------------------------------------------------------
@@ -14,17 +15,25 @@
 //     return view('welcome');
 // });
 
-	Auth::routes();
 
 	Route::get('/', function () {
 		return redirect('authentication');
 	});
 
+	Auth::routes();
 	/* Dashboard */
 	Route::get('dashboard', function () {
 		return redirect('dashboard');
 	});
+	Auth::routes();
+	
+	
+	Auth::routes();
+
 	Route::get('dashboard', 'DashboardController@index')->name('dashboard');
+
+	Auth::routes();
+	
 
 	/* Property categories */
 	Route::get('property/categories', 'PropertyCategoriesController@index')->name('property.categories');
@@ -121,3 +130,11 @@
 
 	Route::get('pages/profile1', 'PagesController@profile1')->name('pages.profile1');
 	Route::get('pages/profile2', 'PagesController@profile2')->name('pages.profile2');
+	
+	  Route::get('/logout', function(){
+    Session::flush();
+    Auth::logout();
+    return Redirect::to("/authentication");
+      Toastr::success( 'Successful login' );
+                     return redirect('dashboard');
+    });

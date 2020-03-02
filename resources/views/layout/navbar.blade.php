@@ -106,7 +106,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="{{route('authentication.login')}}" class="icon-menu"><i class="icon-logout"></i></a>
+                        <a href="{{ URL::route('logout') }}" class="icon-menu"><i class="icon-logout"></i></a>
                     </li>
                 </ul>
             </div>

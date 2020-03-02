@@ -145,7 +145,7 @@
                             </li>
                             @else
                             <li>
-                                <div class="feeds-left"><i class="icon-logout"></i></div>
+                                <div class="feeds-left"><i class="icon-refresh"></i></div>
                                 <div class="feeds-body">
                                     <a href="#" data-toggle="modal" disabled
                                         data-target="#reactivateTenantModal_{{$tenant->tenant_id}}"
@@ -156,7 +156,7 @@
                             </li>
                             @endif
                             <li>
-                                <div class="feeds-left"><i class="icon-refresh"></i></div>
+                                <div class="feeds-left"><i class="icon-reload"></i></div>
                                 <div class="feeds-body">
                                     <a href="https://www.google.com/" class="title"><strong>Reassign Room</strong></a>
                                     <small>Assign another room</small>
