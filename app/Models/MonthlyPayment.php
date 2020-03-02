@@ -128,7 +128,7 @@ class MonthlyPayment extends Model {
                     DB::raw( 'properties.category_id' ),
                     DB::raw( 'variation_value_template.id as var_val_id' ),
                     DB::raw( 'variations.id as var_id' ),
-                    DB::raw( 'variations.monthly_rent' ),
+                    DB::raw( 'variations.monthly_rent' )
           )
                 ->leftJoin( 'rent_payment_status', 'tenant_monthly_payments.payment_status', 'rent_payment_status.id' )
                 ->leftJoin( 'rooms', 'tenant_monthly_payments.room_id', 'rooms.id' )
