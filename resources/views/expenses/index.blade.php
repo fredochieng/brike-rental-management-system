@@ -59,12 +59,12 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($searched_expenses as $count => $item)
+                            @foreach ($searched_expenses as $count => $expense)
                             <tr>
-                                <td>{{ $item->prop_name }}</td>
-                                <td>{{ $item->expense_title }}</td>
-                                <td>{{ $currency_symbol}} {{number_format($item->expense_amount,2,'.',',') }}</td>
-                                <td>{{ $item->expense_created_at }}</td>
+                                <td>{{ $expense->prop_name }}</td>
+                                <td>{{ $expense->expense_title }}</td>
+                                <td>{{ $currency_symbol}} {{number_format($expense->expense_amount,2,'.',',') }}</td>
+                                <td>{{ $expense->expense_created_at }}</td>
                                 <td>
                                     <div class="btn-group btn-group-sm role=" group">
                                         <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle"
@@ -73,7 +73,7 @@
                                         </button>
                                         <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
                                             <a class="dropdown-item" href="#" data-toggle="modal" disabled
-                                                data-target="#editExpenseModal_{{$item->expense_id}}"
+                                                data-target="#editExpenseModal_{{$expense->expense_id}}"
                                                 data-backdrop="static" data-keyboard="false"><i class="icon-pencil"></i>
                                                 Edit
                                                 expense</a>
@@ -112,12 +112,12 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($expenses as $count => $item)
+                            @foreach ($expenses as $count => $expense)
                             <tr>
-                                <td>{{ $item->prop_name }}</td>
-                                <td>{{ $item->expense_title }}</td>
-                                <td>{{ $currency_symbol}} {{number_format($item->expense_amount,2,'.',',') }}</td>
-                                <td>{{ $item->expense_created_at }}</td>
+                                <td>{{ $expense->prop_name }}</td>
+                                <td>{{ $expense->expense_title }}</td>
+                                <td>{{ $currency_symbol}} {{number_format($expense->expense_amount,2,'.',',') }}</td>
+                                <td>{{ $expense->expense_created_at }}</td>
                                 <td>
                                     <div class="btn-group btn-group-sm role=" group">
                                         <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle"
@@ -126,7 +126,7 @@
                                         </button>
                                         <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
                                             <a class="dropdown-item" href="#" data-toggle="modal" disabled
-                                                data-target="#editExpenseModal_{{$item->expense_id}}"
+                                                data-target="#editExpenseModal_{{$expense->expense_id}}"
                                                 data-backdrop="static" data-keyboard="false"><i class="icon-pencil"></i>
                                                 Edit
                                                 expense</a>

@@ -22,7 +22,8 @@ class PropertyVariationsController extends Controller {
     /** Property categories listing */
 
     public function index() {
-        $data['property_variations'] = PropertyVariations::getPropertyVariations();
+        $data['property_variations'] = PropertyVariations::getVariationDetails();
+        // $data['property_variations'] = PropertyVariations::getPropertyVariations();
 
         // echo '<pre>';
         // print_r( $data['property_variations'] );

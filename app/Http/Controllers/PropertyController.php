@@ -82,6 +82,7 @@ class PropertyController extends Controller {
     public function create() {
         $data['categories'] = PropertyCategories::getPropertyCategories();
         $data['property_variations'] = PropertyVariations::getPropertyVariations();
+        // dd( $data['property_variations'] );
         return view( 'property.create' )->with( $data );
     }
 
