@@ -120,7 +120,7 @@
                     </div>
                     <div class="col-lg-3 col-md-4 col-sm-4">
                         <span class="text-muted">Total Expense</span>
-                        <h3 class="text-danger">KES 79,915</h3>
+                        <h3 class="text-danger">{{ $currency_symbol}} {{ $sum_expense_amount }}</h3>
                     </div>
                 </div>
                 {{-- <div id="area_chart" class="graph"></div> --}}

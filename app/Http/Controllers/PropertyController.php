@@ -13,6 +13,7 @@ use App\Models\Variation;
 use App\Models\ Transaction;
 use App\Models\VariationValues;
 use App\Models\MonthlyPayment;
+use App\Models\Expenses;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Auth;
@@ -262,8 +263,23 @@ class PropertyController extends Controller {
             $data['sum_tot_prop_rent_payments'] = 0.00;
         }
 
+        /** Get total expenses for the property */
+
+        $expenses = Expenses::getExpenses()->where( 'exp_property_id', $property_id );
+
+        $expense_amount = array();
+        foreach ( $expenses as $key => $value ) {
+            $expense_amount[] = $value->expense_amount;
+        }
+
+        if ( !empty( $expense_amount ) ) {
+            $data['sum_expense_amount'] = number_format( json_encode( array_sum( $expense_amount ) ), 2, '.', ',' );
+        } else {
+            $data['sum_expense_amount'] = 0.00;
+        }
+
         $payment_tracks = MonthlyPayment::getPaymentTracker()->where( 'payment_status', 3 )->where( 'prop_id', $property_id );
-        // dd( $payment_tracks );
+
         $rent_arrears = array();
         foreach ( $payment_tracks as $key => $value ) {
             $rent_arrears_amount[] = $value->balance_due;

@@ -21,6 +21,7 @@ class ExpensesController extends Controller {
 
     public function index() {
         $data['property'] = Property::getProperty();
+        $data['currency_symbol'] = 'KES';
         $property_id = Input::get( 'property_id' );
         /** Get the search value and perform the neccessary queries */
         if ( isset( $_GET['property_id'] ) ) {
@@ -29,20 +30,7 @@ class ExpensesController extends Controller {
 
             $data['searched_expenses'] = Expenses::getExpenses()->where( 'exp_property_id', $property_id );
 
-            $total_expenses = count( $data['searched_expenses'] );
-
-            if ( count( $data['searched_expenses'] ) == 0 ) {
-
-                Toastr::info( 'No expenses found for your query' );
-
-                return view( 'expenses.index' )->with( $data );
-
-            } elseif ( count( $data['searched_expenses'] ) > 0 ) {
-
-                Toastr::success( $total_expenses . ' record found for your query' );
-
-                return view( 'expenses.index' )->with( $data );
-            }
+            return view( 'expenses.index' )->with( $data );
         }
         $data['searched'] = 'no';
         $data['expenses'] = Expenses::getExpenses();
@@ -113,8 +101,28 @@ class ExpensesController extends Controller {
     * @return \Illuminate\Http\Response
     */
 
-    public function update( Request $request, Expenses $expenses ) {
-        //
+    public function update( Request $request, $expense_id ) {
+        $now = Carbon::now( 'Africa/Nairobi' )->toDateTimeString();
+
+        /** Get expense data from edit expense form **/
+        $property_id = $request->input( 'property_id' );
+        $expense_title = ucwords( $request->input( 'expense_title' ) );
+        $expense_amount = $request->input( 'expense_amount' );
+
+        $expense_data = array(
+            'exp_property_id' => $property_id,
+            'expense_title' => $expense_title,
+            'expense_amount' => $expense_amount
+        );
+        $update_expense = Expenses::where( 'id', $expense_id )->update( $expense_data );
+
+        /** Log the action in the logs file */
+        Log::info( 'Expense of ID ' . $expense_id .  ' updated'.
+        ' at ' . $now );
+
+        Toastr::success( 'Expense updated successfully' );
+
+        return back();
     }
 
     /**

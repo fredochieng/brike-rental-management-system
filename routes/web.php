@@ -112,6 +112,7 @@ use Kamaln7\Toastr\Facades\Toastr;
 		/* Expenses */
 	Route::get('expenses', 'ExpensesController@index')->name('expenses');
 	Route::post('expense/save', 'ExpensesController@store')->name('expense.save');
+	Route::post('expense/update/&id={id}', 'ExpensesController@update')->name('expense.expense-update');
 
 	/** User management */
 	Route::get('user-management/users-list', 'UsersController@index')->name('user-management.users-list');

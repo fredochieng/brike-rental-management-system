@@ -7,6 +7,7 @@ use App\Models\ Transaction;
 use App\Models\ Tenants;
 use App\Models\RoomAssignment;
 use App\Models\MonthlyPayment;
+use App\Models\Expenses;
 
 use Illuminate\Routing\Controller as BaseController;
 
@@ -17,7 +18,6 @@ class DashboardController extends BaseController {
         $data['sum_rent_payments'] = Transaction::sumTotalRentPayments();
 
         $trackers = MonthlyPayment::getTracksForDeposits()->whereIn( 'payment_status', [1, 2] );
-        //   dd( $trackers );
 
         $payment_amount = array();
         foreach ( $data['sum_rent_payments'] as $key => $value ) {
@@ -25,7 +25,6 @@ class DashboardController extends BaseController {
         }
 
         if ( !empty( $payment_amount ) ) {
-
             $data['sum_rent_payments'] = number_format( json_encode( array_sum( $payment_amount ) ), 2, '.', ',' );
         } else {
             $data['sum_rent_payments'] = 0.00;
@@ -91,6 +90,20 @@ class DashboardController extends BaseController {
             $data['all_transactions'] = count( Transaction::all() );
         } else {
             $data['all_transactions'] = 0;
+        }
+
+        /** Get total expenses */
+        $expenses = Expenses::getExpenses();
+
+        $expense_amount = array();
+        foreach ( $expenses as $key => $value ) {
+            $expense_amount[] = $value->expense_amount;
+        }
+
+        if ( !empty( $expense_amount ) ) {
+            $data['sum_expense_amount'] = number_format( json_encode( array_sum( $expense_amount ) ), 2, '.', ',' );
+        } else {
+            $data['sum_expense_amount'] = 0.00;
         }
 
         $data['room_assignments'] = RoomAssignment::getLatestRoomAssignments();

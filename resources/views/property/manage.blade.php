@@ -93,7 +93,8 @@
     <div class="col-lg-3 col-md-6">
         <div class="card overflowhidden">
             <div class="body">
-                <h5>KES 158,856.00 <i class=" fa fa-money float-right icon text-primary"></i></h5>
+                <h5>{{ $currency_symbol}} {{ $sum_expense_amount }} <i
+                        class=" fa fa-money float-right icon text-primary"></i></h5>
                 <span>Total Expenses</span>
             </div>
             <div class="progress progress-xs progress-transparent custom-color-yellow m-b-0">
@@ -109,24 +110,22 @@
             <div class="body">
                 <a href="#addVariationValueModal" data-toggle="modal"
                     data-target="#addVariationValueModal_{{ $property->property_id }}"
-                    class="btn btn-warning pull-left"><i class="icon-plus"></i> ADD VARIATION VALUE
+                    class="btn btn-warning pull-right"><i class="icon-plus"></i> ADD VARIATION VALUE
                 </a>
-                {{-- <a href="#addAnotherTenantModal" data-toggle="modal" data-target="#addAnotherTenantModal"
-                    class="btn btn-primary" style="margin-left:40px"><i class="icon-plus"></i> UNASSIGN TENANT
-                </a> --}}
-                <a href="#addAnotherTenantModal" data-toggle="modal" data-target="#addAnotherTenantModal"
-                    class="btn btn-success" style="margin-left:310px"><i class="icon-plus"></i> ADD ANOTHER TENANT
-                </a>
+
                 <a href="#assignRoomModal" data-toggle="modal" data-target="#assignRoomModal"
-                    class="btn btn-info pull-right"><i class="icon-plus"></i> ASSIGN ROOM
+                    class="btn btn-info pull-left"><i class="icon-plus"></i> ASSIGN ROOM
+                </a>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="#addAnotherTenantModal" data-toggle="modal" data-target="#addAnotherTenantModal"
+                    class="btn btn-success">
+                    <i class="icon-plus"></i> ADD ANOTHER TENANT
                 </a>
                 <ul class="nav nav-tabs-new2">
                     <li class="nav-item"><a class="nav-link active show" data-toggle="tab"
                             href="#Home-new2">Variations</a>
                     </li>
 
-                    {{-- <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#Profile-new2">Rooms</a></li>
-                    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#Contact-new2">Contact</a></li> --}}
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane show active" id="Home-new2">

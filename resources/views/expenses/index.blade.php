@@ -63,7 +63,7 @@
                             <tr>
                                 <td>{{ $item->prop_name }}</td>
                                 <td>{{ $item->expense_title }}</td>
-                                <td>{{ $item->expense_amount }}</td>
+                                <td>{{ $currency_symbol}} {{number_format($item->expense_amount,2,'.',',') }}</td>
                                 <td>{{ $item->expense_created_at }}</td>
                                 <td>
                                     <div class="btn-group btn-group-sm role=" group">
@@ -73,15 +73,15 @@
                                         </button>
                                         <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
                                             <a class="dropdown-item" href="#" data-toggle="modal" disabled
-                                                data-target="#editTenantModal_{{$item->expense_id}}"
+                                                data-target="#editExpenseModal_{{$item->expense_id}}"
                                                 data-backdrop="static" data-keyboard="false"><i class="icon-pencil"></i>
                                                 Edit
-                                                tenant</a>
+                                                expense</a>
                                         </div>
                                     </div>
                                 </td>
                             </tr>
-                            {{-- @include('tenants.modals.modal-edit-tenant') --}}
+                            @include('expenses.modals.modal-edit-expense')
                             @endforeach
                         </tbody>
                     </table>
@@ -116,7 +116,7 @@
                             <tr>
                                 <td>{{ $item->prop_name }}</td>
                                 <td>{{ $item->expense_title }}</td>
-                                <td>{{ $item->expense_amount }}</td>
+                                <td>{{ $currency_symbol}} {{number_format($item->expense_amount,2,'.',',') }}</td>
                                 <td>{{ $item->expense_created_at }}</td>
                                 <td>
                                     <div class="btn-group btn-group-sm role=" group">
@@ -126,15 +126,15 @@
                                         </button>
                                         <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
                                             <a class="dropdown-item" href="#" data-toggle="modal" disabled
-                                                data-target="#editTenantModal_{{$item->expense_id}}"
+                                                data-target="#editExpenseModal_{{$item->expense_id}}"
                                                 data-backdrop="static" data-keyboard="false"><i class="icon-pencil"></i>
                                                 Edit
-                                                tenant</a>
+                                                expense</a>
                                         </div>
                                     </div>
                                 </td>
                             </tr>
-                            {{-- @include('tenants.modals.modal-edit-tenant') --}}
+                            @include('expenses.modals.modal-edit-expense')
                             @endforeach
                         </tbody>
                     </table>
