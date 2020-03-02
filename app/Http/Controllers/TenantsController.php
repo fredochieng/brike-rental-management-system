@@ -16,6 +16,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use DB;
 use Carbon\Carbon;
+use DateInterval;
+use DatePeriod;
+use DateTime;
 
 class TenantsController extends Controller {
     /**
@@ -31,14 +34,23 @@ class TenantsController extends Controller {
         $data['tenants'] = Tenants::getTenants()->where( 't_status', $t_status )->where( 'room_assigned', $room_assigned );
         $data['searched_tenants'] = array();
         $property_id = Input::get( 'property_id' );
+        $t_status = Input::get( 't_status' );
 
         /** Get the search value and perform the neccessary queries */
         if ( isset( $_GET['property_id'] ) ) {
-            $t_status = 1;
-            $room_assigned = 1;
+            //$t_status = 1;
+            //$room_assigned = 1;
             $data['searched'] = 'yes';
+
+            if ( $t_status == 1 ) {
+                $room_assigned = 1;
+                $r_end_date = '';
+            } else {
+                $room_assigned = 0;
+                $r_end_date = !'';
+            }
             $data['searched_tenants'] = Tenants::getTenants()->where( 'property_id', $property_id )->where( 't_status', $t_status )
-            ->where( 'room_assigned', $room_assigned )->where( 'r_end_date', '=', '' );
+            ->where( 'room_assigned', $room_assigned )->where( 'r_end_date', '=', $r_end_date );
 
             $total_tenants = count( $data['searched_tenants'] );
 
@@ -101,11 +113,11 @@ class TenantsController extends Controller {
         $tenant->t_email = $t_email;
         $tenant->t_property_id = $t_property_id;
 
-//	    $phone_numbers = DB::table('tenants')->select('tenants.t_phone')->get();
-//	    $phone_numbers = json_decode(json_encode($phone_numbers, true));
-//	    $phone_numbers = array_column($phone_numbers, 't_phone');
+        //	    $phone_numbers = DB::table( 'tenants' )->select( 'tenants.t_phone' )->get();
+        //	    $phone_numbers = json_decode( json_encode( $phone_numbers, true ) );
+        //	    $phone_numbers = array_column( $phone_numbers, 't_phone' );
 
-	    $tenant->save();
+        $tenant->save();
         Toastr::success( 'Tenant added successfully' );
         return back();
     }
@@ -113,16 +125,18 @@ class TenantsController extends Controller {
     /** Not sure where this function is being used */
 
     public function searchTenants( Request $request ) {
-        // $property_id = Input::get( 'property_id' );
-        // $data['searched_clients'] = Tenants::getTenants()->where( 'property_id', $property_id );
-        // // $property_id = $request->input( 'property_id' );
+        $property_id = Input::get( 'property_id' );
+        $data['searched_clients'] = Tenants::getTenants()->where( 'property_id', $property_id );
     }
 
     public function manageTenant( Request $request, $tenant_id ) {
         $data['currency_symbol'] = 'KES';
         $data['tenant'] = Tenants::getTenants()->where( 'tenant_id', $tenant_id )->first();
         $data['room_assignment'] = RoomAssignment::getRoomAssignments()->where( 'tenant_id', $tenant_id )->first();
-        $room_id = $data['room_assignment']->room_id;
+        if(!empty($data['room_assignment'])){
+            
+            $room_id = $data['room_assignment']->room_id;
+        }
 
         /** To get actual payment for the tenant, the msisdn must be the same as t_phone
         * This means that the tenant must pay with his/her phone number
@@ -165,7 +179,7 @@ class TenantsController extends Controller {
         if ( $data['tenant']->t_status == 1 ) {
             $current_date = Carbon::now();
         } else {
-            $current_date = $data['tenant']->r_end_date;
+            $current_date = Carbon::parse( $data['tenant']->r_end_date );
         }
 
         if ( !empty( $rent_arrears_amount ) ) {
@@ -185,6 +199,9 @@ class TenantsController extends Controller {
         $property_id = $request->input( 'property_id' );
         $variation_val_id = $request->input( 'variation_val_id' );
         $room_id = $request->input( 'room_id' );
+        $unassign_date = Carbon::now( 'Africa/Nairobi' )->toDateString();
+        $unassign_date = new DateTime( $unassign_date );
+        $unassign_date = $unassign_date->format( 'M Y' );
 
         /** Update tenants room_assigned and t_status to 0
         * room_assigned => 0 shows that the tenant is not assigned any room
@@ -218,7 +235,7 @@ class TenantsController extends Controller {
             'is_vacant' => 1
         );
         
-         $update_room = Rooms::where('id', $room_id)->update($room_details);
+           $update_room = Rooms::where('id', $room_id)->update($room_details);
 
            $variation = Variation::where('property_id', $property_id)->where('variation_value_id', $variation_val_id)->first();
 
@@ -230,14 +247,28 @@ class TenantsController extends Controller {
             'booked_rooms' => $rented_rooms
         );
 
-         $update_variation = Variation::where('variation_value_id', $variation_val_id)->where('property_id', $property_id)->update($variation_details);
+         $update_variation = Variation::where('variation_value_id', $variation_val_id)->where('property_id', $property_id)
+         ->update($variation_details);
+
+         /** Update monthly payment tracker rented status to No & payment status to 3 */
+
+           $monthly_track = MonthlyPayment::getMonthlyPaymentsTrack()->where( 'room_id', $room_id )->where( 'period', $unassign_date )->first();
+           $track_id = $monthly_track->track_id;
+
+            $update_track = array(
+               'payment_status' => 3,
+               'rented' => 'No'
+           );
+
+           $update_monthly_track = MonthlyPayment::where( 'room_id', $room_id )->where('id', ' >= ', $track_id)
+           ->update($update_track);
         }
 
         /** Update r_end_date in room_assignments table with the exact end date
          * At the moment just update with current date
          * You may want to have a datepicker in the form to capture the date
          */
-         $r_end_date = Carbon::now( 'Africa/Nairobi' )->toDateTimeString();
+         $r_end_date = Carbon::now( 'Africa/Nairobi' )->toDateString();
 
           $room_assignment_details = array(
             'r_end_date' => $r_end_date
@@ -246,6 +277,19 @@ class TenantsController extends Controller {
 
 	    Toastr::success('Room unassigned successfully');
 	    return back();
+    }
+    
+    /** Reactivate tenant */
+    public function reactivateTenant(Request $request, $tenant_id){
+        $t_status = 1;
+        $t_data = array(
+            't_status' => $t_status
+        );
+        $reactivate_tenant = Tenants::where('id', $tenant_id)->update($t_data); 
+        
+          Toastr::success( 'Tenant reactivated successfully' );
+
+        return back();
     }
 
     /**

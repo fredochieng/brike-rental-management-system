@@ -102,23 +102,12 @@
     <div class="col-lg-12 col-md-12">
         <div class="card">
             <div class="header">
-                <h2>Transactions Chart</h2>
-                <ul class="header-dropdown">
-                    <li class="dropdown">
-                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                            aria-haspopup="true" aria-expanded="false"></a>
-                        <ul class="dropdown-menu dropdown-menu-right">
-                            <li><a href="javascript:void(0);">Select property</a></li>
-                            <li><a href="javascript:void(0);">Skylax Apertments</a></li>
-                            <li><a href="javascript:void(0);">Oarklands Apartments</a></li>
-                        </ul>
-                    </li>
-                </ul>
+                <h2>Transactions Recarp</h2>
             </div>
             <div class="body">
                 <div class="row clearfix">
                     <div class="col-lg-3 col-md-4 col-sm-4">
-                        <span class="text-muted">Annual Revenue </span>
+                        <span class="text-muted">Rent Revenue </span>
                         <h3 class="text-info">{{ $currency_symbol }} {{ $sum_rent_payments }}</h3>
                     </div>
                     <div class="col-lg-3 col-md-4 col-sm-4">
@@ -134,14 +123,14 @@
                         <h3 class="text-danger">KES 79,915</h3>
                     </div>
                 </div>
-                <div id="area_chart" class="graph"></div>
+                {{-- <div id="area_chart" class="graph"></div> --}}
             </div>
         </div>
     </div>
 </div>
 
 <div class="row clearfix">
-    <div class="col-lg-7">
+    <div class="col-lg-12">
         <div class="card">
             <div class="header">
                 <h2>Recent Payments</h2>
@@ -178,7 +167,7 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-5">
+    <div class="col-lg-12">
         <div class="card">
             <div class="header">
                 <h2>Recent Room Assignments</h2>

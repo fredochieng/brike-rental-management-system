@@ -143,6 +143,17 @@
                                     <small>End of tenancy</small>
                                 </div>
                             </li>
+                            @else
+                            <li>
+                                <div class="feeds-left"><i class="icon-logout"></i></div>
+                                <div class="feeds-body">
+                                    <a href="#" data-toggle="modal" disabled
+                                        data-target="#reactivateTenantModal_{{$tenant->tenant_id}}"
+                                        data-backdrop="static" data-keyboard="false" class="title"><strong>Reactivate
+                                            tenant</strong></a>
+                                    <small>Activate tenant again</small>
+                                </div>
+                            </li>
                             @endif
                             <li>
                                 <div class="feeds-left"><i class="icon-refresh"></i></div>
@@ -176,7 +187,7 @@
                     <table class="table table-bordered table-striped table-hover dataTable js-exportable"
                         style="font-size:13px">
                         <thead class="thead-primary">
-                        <tr style="font-size:12px">
+                            <tr style="font-size:12px">
                                 <th>Transaction ID</th>
                                 <th>Amount</th>
                                 <th>Phone</th>
@@ -208,6 +219,7 @@
     </div>
 </div>
 @include('tenants.modals.modal-unassign-room')
+@include('tenants.modals.modal-reactivate-tenant')
 @stop
 @section('page-script')
 

@@ -14,13 +14,22 @@
                     <div class="col-lg-4 col-md-6 col-sm-12">
                         <label>Search tenants by property</label>
                     </div>
-                    <div class="col-lg-6 col-md-6 col-sm-12">
+                    <div class="col-lg-3 col-md-6 col-sm-12">
                         <div class="form-group">
                             <select class="custom-select" name="property_id" required>
                                 <option value="">Select property</option>
                                 @foreach($property as $item)
                                 <option value='{{ $item->property_id }}'>{{ $item->prop_name }}</option>
                                 @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <select class="custom-select" name="t_status" required>
+                                <option value="">Select tenant status</option>
+                                <option value="1">Active</option>
+                                <option value="0">Inactive</option>
                             </select>
                         </div>
                     </div>

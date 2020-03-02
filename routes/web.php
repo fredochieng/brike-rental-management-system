@@ -75,6 +75,7 @@
 	Route::any('tenant/manage/&id={id}', 'TenantsController@manageTenant')->name('tenants.tenants-manage');
 	Route::post('tenant/update/&id={id}', 'TenantsController@update')->name('tenants.tenant-update');
 	Route::post('tenant/unassign-room/&id={id}', 'TenantsController@unassignRoom')->name('tenants.unassign-room');
+	Route::post('tenant/reactivate/&id={id}', 'TenantsController@reactivateTenant')->name('tenants.reactivate');
 
 	/** Rent payments */
 	Route::get('rent/payments', 'TransactionsController@index')->name('rent.payments');

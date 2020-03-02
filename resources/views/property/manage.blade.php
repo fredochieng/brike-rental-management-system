@@ -111,9 +111,9 @@
                     data-target="#addVariationValueModal_{{ $property->property_id }}"
                     class="btn btn-warning pull-left"><i class="icon-plus"></i> ADD VARIATION VALUE
                 </a>
-                <a href="#addAnotherTenantModal" data-toggle="modal" data-target="#addAnotherTenantModal"
+                {{-- <a href="#addAnotherTenantModal" data-toggle="modal" data-target="#addAnotherTenantModal"
                     class="btn btn-primary" style="margin-left:40px"><i class="icon-plus"></i> UNASSIGN TENANT
-                </a>
+                </a> --}}
                 <a href="#addAnotherTenantModal" data-toggle="modal" data-target="#addAnotherTenantModal"
                     class="btn btn-success" style="margin-left:310px"><i class="icon-plus"></i> ADD ANOTHER TENANT
                 </a>

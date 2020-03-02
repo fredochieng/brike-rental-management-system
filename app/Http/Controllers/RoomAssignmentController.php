@@ -84,7 +84,7 @@ class RoomAssignmentController extends Controller {
         $variation_val_id = $request->input( 'variation_val_id' );
         $room_id = $request->input( 'variation_room_id' );
         $tenant_id = $request->input( 'r_tenant_id' );
-        $start_date = $request->input( 'r_start_date' );
+        $start_date = Carbon::parse( $request->input( 'r_start_date' ) )->toDateString();
         $category_name = $request->input( 'category_name' );
 
         $room_assignment = new RoomAssignment();
@@ -155,6 +155,19 @@ class RoomAssignmentController extends Controller {
                         ['period', 'room_id'],
                         ['tenant_id', 'payment_status', 'rented', 'rent_amount', 'balance_due','updated_at']
                     );
+                    
+            /** Update monthly payment tracker rented status to No & payment status to 3 */
+
+           $monthly_track = MonthlyPayment::getMonthlyPaymentsTrack()->where( 'room_id', $room_id )->where( 'period', $start_tenancy_month )->first();
+           $track_id = $monthly_track->track_id;
+
+            $update_track = array(
+               'payment_status' => 3,
+               'rented' => 'Yes'
+           );
+
+           $update_monthly_track = MonthlyPayment::where( 'room_id', $room_id )->where('id', '>=', $track_id)
+           ->update($update_track);
 
         /** Log the action in the logs file */
         Log::info( 'Room assignment of ID ' . $room_assignment->id .  ' created by user of ID: ' . Auth::id() .
