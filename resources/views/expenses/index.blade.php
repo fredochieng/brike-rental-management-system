@@ -94,6 +94,11 @@
 <div class="row clearfix">
     <div class="col-lg-12">
         <div class="card">
+            <div class="header">
+                <a href="#addExpenseModal" data-toggle="modal" data-target="#addExpenseModal"
+                    class="btn btn-info pull-right"><i class="icon-plus"></i> ADD EXPENSE
+                </a>
+            </div>
             <div class="body">
                 <div class="table-responsive">
                     <table class="table table-bordered table-hover dataTable js-exportable">
