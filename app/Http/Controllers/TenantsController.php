@@ -38,33 +38,22 @@ class TenantsController extends Controller {
 
         /** Get the search value and perform the neccessary queries */
         if ( isset( $_GET['property_id'] ) ) {
- 
+
             $data['searched'] = 'yes';
 
             if ( $t_status == 1 ) {
                 $room_assigned = 1;
                 $r_end_date = '';
+                $data['searched_tenants'] = Tenants::getTenants()->where( 'property_id', $property_id )->where( 't_status', $t_status )
+                ->where( 'room_assigned', $room_assigned )->where( 'r_end_date', '=', $r_end_date );
             } else {
                 $room_assigned = 0;
                 $r_end_date = !'';
+                $data['searched_tenants'] = Tenants::getTenants()->where( 'property_id', $property_id )->where( 't_status', $t_status )
+                ->where( 'room_assigned', $room_assigned );
             }
-            $data['searched_tenants'] = Tenants::getTenants()->where( 'property_id', $property_id )->where( 't_status', $t_status )
-            ->where( 'room_assigned', $room_assigned )->where( 'r_end_date', '=', $r_end_date );
 
-            $total_tenants = count( $data['searched_tenants'] );
-
-            if ( count( $data['searched_tenants'] ) == 0 ) {
-
-                Toastr::info( 'No tenants found for your query' );
-
-                return view( 'tenants.index' )->with( $data );
-
-            } elseif ( count( $data['searched_tenants'] ) > 0 ) {
-
-                Toastr::success( $total_tenants . ' tenants found for your query' );
-
-                return view( 'tenants.index' )->with( $data );
-            }
+            return view( 'tenants.index' )->with( $data );
         }
         $data['searched'] = 'no';
 
@@ -132,8 +121,8 @@ class TenantsController extends Controller {
         $data['currency_symbol'] = 'KES';
         $data['tenant'] = Tenants::getTenants()->where( 'tenant_id', $tenant_id )->first();
         $data['room_assignment'] = RoomAssignment::getRoomAssignments()->where( 'tenant_id', $tenant_id )->first();
-        if(!empty($data['room_assignment'])){
-            
+        if ( !empty( $data['room_assignment'] ) ) {
+
             $room_id = $data['room_assignment']->room_id;
         }
 

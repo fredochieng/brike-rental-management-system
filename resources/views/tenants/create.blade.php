@@ -51,7 +51,8 @@
                             <div class="form-group">
                                 <label for="phone" class="control-label">Phone Number <span
                                         class="text-danger">*</span></label>
-                                <input type="text" name="t_phone" id="phone" class="form-control" required>
+                                <input type="text" name="t_phone" id="phone" class="form-control" required
+                                    placeholder="Enter phone number">
 
                             </div>
                         </div>

@@ -34,9 +34,14 @@
                                     <a class="btn btn-primary btn-sm" title="Edit " href="#" data-toggle="modal"
                                         disabled data-target="#editCategoryModal_{{$item->category_id}}"
                                         data-backdrop="static" data-keyboard="false"><i class="icon-pencil"></i></a>
+
+                                    @if ($item->prop_cat_id == '')
                                     <a class="btn btn-danger btn-sm" title="Delete " href="#" data-toggle="modal"
                                         disabled data-target="#deleteCategory_{{$item->category_id}}"
                                         data-backdrop="static" data-keyboard="false"><i class="icon-trash"></i></a>
+                                    @else
+
+                                    @endif
                                 </td>
                             </tr>
                             @include('property.categories.modals.modal-edit-category')

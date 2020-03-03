@@ -77,6 +77,11 @@
                                                 data-backdrop="static" data-keyboard="false"><i class="icon-pencil"></i>
                                                 Edit
                                                 expense</a>
+                                            <a class="dropdown-item" href="#" data-toggle="modal" disabled
+                                                data-target="#deleteModal_{{$expense->expense_id}}"
+                                                data-backdrop="static" data-keyboard="false"><i class="icon-trash"></i>
+                                                Delete
+                                                expense</a>
                                         </div>
                                     </div>
                                 </td>
@@ -129,6 +134,12 @@
                                                 data-target="#editExpenseModal_{{$expense->expense_id}}"
                                                 data-backdrop="static" data-keyboard="false"><i class="icon-pencil"></i>
                                                 Edit
+                                                expense</a>
+
+                                            <a class="dropdown-item" href="#" data-toggle="modal" disabled
+                                                data-target="#deleteModal_{{$expense->expense_id}}"
+                                                data-backdrop="static" data-keyboard="false"><i class="icon-trash"></i>
+                                                Delete
                                                 expense</a>
                                         </div>
                                     </div>

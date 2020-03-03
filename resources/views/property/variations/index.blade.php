@@ -37,9 +37,14 @@
                                     <a class="btn btn-primary btn-sm" title="Edit " href="#" data-toggle="modal"
                                         disabled data-target="#editVariationModal_{{$item->variation_id}}"
                                         data-backdrop="static" data-keyboard="false"><i class="icon-eye"></i></a>
+
+                                    @if ($item->prop_var_id == '')
                                     <a class="btn btn-danger btn-sm" title="Delete " href="#" data-toggle="modal"
                                         disabled data-target="#deleteVariation_{{$item->variation_id}}"
                                         data-backdrop="static" data-keyboard="false"><i class="icon-trash"></i></a>
+                                    @else
+
+                                    @endif
                                 </td>
                             </tr>
                             @include('property.variations.modals.modal-edit-variation')
