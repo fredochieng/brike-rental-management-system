@@ -61,14 +61,20 @@ class SendSMSJob {
                 'message' => $message,
                 'from' => $from
             ] );
-
-             $update_message = array(
-                    'message_status' => 2,
-                    'sent_at' => $current_time
-                );
-                $update_message_status = Message::where( 'id', $value->id )->update( $update_message );
             
-           print_r( $result );
+           foreach ($result as $key => $status) {
+
+                if($result['data']->SMSMessageData->Recipients[0]->status == 'Success'){
+
+                    $update_message = array(
+                           'message_status' => 2,
+                           'sent_at' => $current_time
+                       );
+                    $update_message_status = Message::where( 'id', $value->id )->update( $update_message );
+                }
+            }
+            
+          // print_r( $result );
         } catch ( Exception $e ) {
             echo 'Error: '.$e->getMessage();
                 }

@@ -13,6 +13,7 @@ class Message extends Model {
             DB::raw( 'messages.*' )
         )
         ->orderBy( 'messages.id', 'asc' )
+        ->limit( 30 )
         ->get();
 
         return $messages;

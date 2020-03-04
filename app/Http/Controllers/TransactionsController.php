@@ -9,6 +9,7 @@ use App\Models\ Property;
 use App\Models\ Rooms;
 use App\Models\RoomAssignment;
 use App\Models\Tenants;
+use App\Models\Message;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Kamaln7\Toastr\Facades\Toastr;
@@ -300,6 +301,14 @@ class TransactionsController extends Controller {
 
         if ( in_array( $MSISDN, $phone_numbers ) ) {
             $payments->trans_confirmed = 1;
+            $message_title = 'Payment Received';
+            $text = 'Hello ' . $FirstName.','.' we have received your Mpesa payment of KES '. $TransAmount. ' to '. $BillRefNumber.'.'.
+            'Confirmation code: '. $TransID;
+            $message = new Message();
+					$message->message_title = $message_title;
+					$message->message = $text;
+					$message->phone_no = $MSISDN;
+					$message->save();
         } else {
             $payments->trans_confirmed = 0;
         }
