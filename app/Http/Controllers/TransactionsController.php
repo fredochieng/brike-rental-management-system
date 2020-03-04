@@ -302,13 +302,13 @@ class TransactionsController extends Controller {
         if ( in_array( $MSISDN, $phone_numbers ) ) {
             $payments->trans_confirmed = 1;
             $message_title = 'Payment Received';
-            $text = 'Hello ' . $FirstName.','.' we have received your Mpesa payment of KES '. $TransAmount. ' to '. $BillRefNumber.'.'.
+            $text = 'Hello ' . ucwords($FirstName).','.' we have received your Mpesa payment of KES '. $TransAmount. ' to '. $BillRefNumber.'.'.
             'Confirmation code: '. $TransID;
             $message = new Message();
 					$message->message_title = $message_title;
 					$message->message = $text;
 					$message->phone_no = $MSISDN;
-					$message->save();
+					//$message->save();
         } else {
             $payments->trans_confirmed = 0;
         }
