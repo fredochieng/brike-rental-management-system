@@ -1,7 +1,6 @@
 @extends('layout.authentication')
 @section('title', 'Forget Password')
 
-
 @section('content')
 
 <div class="vertical-align-wrap">
@@ -20,7 +19,7 @@
                         <div class="form-group">
                             <input type="email" class="form-control" id="email" placeholder="Email address">
                         </div>
-                        <button type="submit" class="btn btn-primary btn-lg btn-block">RESET PASSWORD</button>
+                        <button type="submit" class="btn btn-primar§    y btn-lg btn-block">RESET PASSWORD</button>
                         <div class="bottom">
                             <span class="helper-text">Know your password? <a
                                     href="{{route('authentication.login')}}">Login</a></span>
