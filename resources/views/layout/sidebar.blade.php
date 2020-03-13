@@ -12,7 +12,7 @@
                             ?>
                         </span></strong></a>
                 <ul class="dropdown-menu dropdown-menu-right account">
-                    <li><a href="{{route('pages.profile1')}}"><i class="icon-user"></i>My Profile</a></li>
+                    <li><a href="{{route('user.profile')}}"><i class="icon-user"></i>My Profile</a></li>
                     <li><a href="javascript:void(0);"><i class="icon-settings"></i>Settings</a></li>
                     <li class="divider"></li>
                     <li><a href="{{ URL::route('logout') }}" class="icon-menu"><i class="icon-power"></i>Logout</a></li>
@@ -188,9 +188,8 @@
                                         {{-- </ul>--}}
                                         {{-- </li>--}}
                                         <li class="{{ Request::segment(2) === 'expenses' ? 'active' : null }}">
-                                            <a href="{{route('expenses')}}"><i
-                                                    class="fa fa-money"></i><span>Expenses
-                                                    </span></a>
+                                            <a href="{{route('expenses')}}"><i class="fa fa-money"></i><span>Expenses
+                                                </span></a>
                                         </li>
                                         <li class="{{ Request::segment(2) === 'users-list' ? 'active' : null }}">
                                             <a href="{{route('user-management.users-list')}}"><i

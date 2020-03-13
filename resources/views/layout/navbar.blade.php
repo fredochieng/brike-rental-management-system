@@ -36,7 +36,7 @@
                             <li><a href="{{route('messages.sms-list')}}"><i class="icon-envelope"></i> <span>Bulk
                                         SMS</span></a>
                             </li>
-                            <li><a href="{{route('messages.sms-list')}}"><i class="icon-user"></i> <span>Profile
+                            <li><a href="{{route('user.profile')}}"><i class="icon-user"></i> <span>Profile
                                     </span></a>
                             </li>
                         </ul>

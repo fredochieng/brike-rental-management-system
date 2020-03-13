@@ -8,7 +8,7 @@
     <div class="vertical-align-middle auth-main">
         <div class="auth-box">
             <div class="top">
-                <img src="{{ asset('assets/img/logo-white.svg') }}" alt="Lucid">
+                <h3>Brike Rentals Management System</h3>
             </div>
             <div class="card">
                 <div class="header">

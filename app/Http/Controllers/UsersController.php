@@ -6,6 +6,7 @@ use App\Models\Rooms;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Kamaln7\Toastr\Facades\Toastr;
@@ -19,8 +20,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-    	$data['users'] = User::all();
-    	//dd($data['users']);
+        $data['users'] = User::all();
         return  view('user-management.index')->with($data);
     }
 
@@ -51,12 +51,70 @@ class UsersController extends Controller
         $user->name = $name;
         $user->email = $email;
         $user->username = $username;
-	    $user->password = Hash::make($password);
+        $user->password = Hash::make($password);
 
-	    $user->save();
+        $user->save();
 
-	    Toastr::success( 'User added successfully' );
-	    return back();
+        Toastr::success('User added successfully');
+        return back();
+    }
+
+    public function profile()
+    {
+        $user_id = Auth::user()->id;
+        $data['user'] = User::find($user_id);
+        return view('user-management.profile')->with($data);
+    }
+
+    public function update_profile(Request $request, $user_id)
+    {
+        $name = $request->input('name');
+        $email = $request->input('email');
+        $username = $request->input('username');
+
+        $user = array(
+            'name' => $name,
+            'email' => $email,
+            'username' => $username
+        );
+
+        $update_profile = User::where('id', $user_id)->update($user);
+        Toastr::success('Profile updated successfully');
+        return back();
+    }
+
+    public function change_password(Request $request, $user_id)
+    {
+        $current_pass = $request->input('current_password');
+        $new_pass = $request->input('new_password');
+        $confirm_pass = $request->input('confirm_password');
+        $user = User::find($user_id);
+
+        try {
+            if (Hash::check($current_pass, $user->password)) {
+
+                if ($new_pass == $confirm_pass) {
+                    $user_pass = array(
+                        'password' => Hash::make($new_pass)
+                    );
+
+                    $update_password = User::where('id', $user_id)->update($user_pass);
+
+                    Toastr::success('Password changed successfully');
+                    return back();
+                } else {
+                    Toastr::error('Confirm password does not match');
+                    return back();
+                }
+
+                Toastr::success('Profile updated successfully');
+                return back();
+            }
+        } catch (\Exception $e) {
+            \Log::emergency("File:" . $e->getFile() . "Line:" . $e->getLine() . "Message:" . $e->getMessage());
+        }
+        Toastr::error('Current password is wrong');
+        return back();
     }
 
     /**
@@ -90,26 +148,26 @@ class UsersController extends Controller
      */
     public function update(Request $request, $user_id)
     {
-	    $now = Carbon::now( 'Africa/Nairobi' )->toDateTimeString();
+        $now = Carbon::now('Africa/Nairobi')->toDateTimeString();
 
-	    /** Get user data from edit user form **/
-	    $name = ucwords( $request->input( 'name' ) );
-	    $email = $request->input( 'email' );
-	    $username = $request->input( 'username' ) ;
+        /** Get user data from edit user form **/
+        $name = ucwords($request->input('name'));
+        $email = $request->input('email');
+        $username = $request->input('username');
 
-	    $user_date = array(
-		    'name' => $name,
-		    'email' => $email,
-		    'username' => $username
-	    );
-	    $update_user = User::where( 'id', $user_id )->update( $user_date );
+        $user_date = array(
+            'name' => $name,
+            'email' => $email,
+            'username' => $username
+        );
+        $update_user = User::where('id', $user_id)->update($user_date);
 
-	    /** Log the action in the logs file */
-	    Log::info( 'User of ID ' . $user_id .  ' updated'.
-		    ' at ' . $now );
-	    Toastr::success( 'User updated successfully' );
+        /** Log the action in the logs file */
+        Log::info('User of ID ' . $user_id .  ' updated' .
+            ' at ' . $now);
+        Toastr::success('User updated successfully');
 
-	    return back();
+        return back();
     }
 
     /**
