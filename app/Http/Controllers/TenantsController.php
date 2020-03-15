@@ -176,12 +176,12 @@ class TenantsController extends Controller
             $current_date = Carbon::parse($data['tenant']->r_end_date);
         }
 
-        if (!empty($rent_arrears_amount)) {
+        // if (!empty($rent_arrears_amount)) {
 
-            $data['rent_arrears_amount'] = number_format(json_encode(array_sum($rent_arrears_amount)), 2, '.', ',');
-        } else {
-            $data['rent_arrears_amount'] = 0.00;
-        }
+        //     $data['rent_arrears_amount'] = number_format(json_encode(array_sum($rent_arrears_amount)), 2, '.', ',');
+        // } else {
+        //     $data['rent_arrears_amount'] = 0.00;
+        // }
         $data['tenancy_period'] = $current_date->diffInMonths($tenancy_start_date);
 
         return view('tenants.manage')->with($data);

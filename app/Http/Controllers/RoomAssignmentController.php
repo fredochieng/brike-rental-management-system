@@ -16,76 +16,79 @@ use Illuminate\Support\Facades\Log;
 use DB;
 use Carbon\Carbon;
 
-class RoomAssignmentController extends Controller {
+class RoomAssignmentController extends Controller
+{
     /**
-    * Display a listing of the resource.
-    *
-    * @return \Illuminate\Http\Response
-    */
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
 
-    public function index() {
-        $data['room_assignments'] = RoomAssignment::getRoomAssignments()->where( 'r_end_date', '' );
+    public function index()
+    {
+        $data['room_assignments'] = RoomAssignment::getRoomAssignments()->where('r_end_date', '');
 
         $data['property'] = Property::getProperty();
 
         $data['searched_tenants'] = array();
-        $property_id = Input::get( 'property_id' );
+        $property_id = Input::get('property_id');
 
         /** Get the search value and perform the neccessary queries */
-        if ( isset( $_GET['property_id'] ) ) {
+        if (isset($_GET['property_id'])) {
             $t_status = 1;
             $find_by = 'property_id';
             $data['searched'] = 'yes';
-            $data['searched_r_assignments'] = RoomAssignment::getRoomAssignments()->where( 'property_id', $property_id )->where( 'r_end_date', '' );
+            $data['searched_r_assignments'] = RoomAssignment::getRoomAssignments()->where('property_id', $property_id)->where('r_end_date', '');
 
-            $total_r_assignments = count( $data['searched_r_assignments'] );
+            $total_r_assignments = count($data['searched_r_assignments']);
 
-            $find_by_value = Input::get( 'property_id' );
+            $find_by_value = Input::get('property_id');
 
-            if ( count( $data['searched_r_assignments'] ) == 0 ) {
+            if (count($data['searched_r_assignments']) == 0) {
 
-                Toastr::warning( 'No record found for your query' );
+                Toastr::warning('No record found for your query');
 
-                return view( 'rooms.room-assignments' )->with( $data );
+                return view('rooms.room-assignments')->with($data);
+            } elseif (count($data['searched_r_assignments']) > 0) {
 
-            } elseif ( count( $data['searched_r_assignments'] ) > 0 ) {
+                Toastr::success($total_r_assignments . ' records found for your query');
 
-                Toastr::success( $total_r_assignments . ' records found for your query' );
-
-                return view( 'rooms.room-assignments' )->with( $data );
+                return view('rooms.room-assignments')->with($data);
             }
         }
         $data['searched'] = 'no';
 
-        return view( 'rooms.room-assignments' )->with( $data );
+        return view('rooms.room-assignments')->with($data);
     }
 
     /**
-    * Show the form for creating a new resource.
-    *
-    * @return \Illuminate\Http\Response
-    */
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
 
-    public function create() {
+    public function create()
+    {
         //
     }
 
     /**
-    * Store a newly created resource in storage.
-    *
-    * @param  \Illuminate\Http\Request  $request
-    * @return \Illuminate\Http\Response
-    */
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
 
-    public function store( Request $request ) {
+    public function store(Request $request)
+    {
 
-        $now = Carbon::now( 'Africa/Nairobi' )->toDateTimeString();
-        $property_id = $request->input( 'property_id' );
-        $variation_val_id = $request->input( 'variation_val_id' );
-        $room_id = $request->input( 'variation_room_id' );
-        $tenant_id = $request->input( 'r_tenant_id' );
-        $start_date = Carbon::parse( $request->input( 'r_start_date' ) )->toDateString();
-        $category_name = $request->input( 'category_name' );
+        $now = Carbon::now('Africa/Nairobi')->toDateTimeString();
+        $property_id = $request->input('property_id');
+        $variation_val_id = $request->input('variation_val_id');
+        $room_id = $request->input('variation_room_id');
+        $tenant_id = $request->input('r_tenant_id');
+        $start_date = Carbon::parse($request->input('r_start_date'))->toDateString();
+        $category_name = $request->input('category_name');
 
         $room_assignment = new RoomAssignment();
 
@@ -97,7 +100,7 @@ class RoomAssignmentController extends Controller {
 
         /** Get details of the selected variation */
 
-        $variation = Variation::where( 'variation_value_id', $variation_val_id )->where( 'property_id', $property_id )->first();
+        $variation = Variation::where('variation_value_id', $variation_val_id)->where('property_id', $property_id)->first();
 
         $rent_amount = $variation->monthly_rent;
 
@@ -109,85 +112,99 @@ class RoomAssignmentController extends Controller {
 
         /** Reduce the count of vacant rooms by 1 and increase count of rented rooms( booked_rooms ) of the selected variation */
 
-        $update_variation_counts = Variation::where( 'variation_value_id', $variation_val_id )->where( 'property_id', $property_id )->update( [
+        $update_variation_counts = Variation::where('variation_value_id', $variation_val_id)->where('property_id', $property_id)->update([
             'vacant_rooms' => $vacant_rooms,
             'booked_rooms' => $rented_rooms
-        ] );
+        ]);
 
         /** Update is_vacant status of the selected room */
 
-        $update_is_vacant = Rooms::where( 'id', $room_id )->update( [
+        $update_is_vacant = Rooms::where('id', $room_id)->update([
             'is_vacant' => 0
-        ] );
+        ]);
 
         /** Update room_assigned column for the selected tennat from 0 to 1 */
 
-        $update_room_assigned = Tenants::where( 'id', $tenant_id )->update( [
+        $update_room_assigned = Tenants::where('id', $tenant_id)->update([
             'room_assigned' => 1
-        ] );
+        ]);
 
         /** Save details in the tenant monthly payment table
-        * This table shows tenant's payment info
-        * Which month has he paid, is he due?
+         * This table shows tenant's payment info
+         * Which month has he paid, is he due?
          */
 
-       $date = Carbon::parse( $start_date );
+        $date = Carbon::parse($start_date);
 
-       $start_tenancy_month = $date->format( 'M Y' );
+        $start_tenancy_month = $date->format('M Y');
 
-       $rented = 'Yes';
+        $rented = 'Yes';
 
-    
-       if($category_name == 'Hostels'){
-         $rent_plus_deposit_amount = $rent_amount * 2;
-         $balance_due = $rent_amount * 2;
-       }else{
-        $rent_plus_deposit_amount = $rent_amount;
-         $balance_due = $rent_amount;
-       }
 
-              /** Check whether monthly payment tracker for the above date exists */
-             DB::table( 'tenant_monthly_payments' )->upsert(
-                        [
-                            'tenant_id' => 1, 'room_id' => $room_id,  'payment_status' => 3, 'period' => $start_tenancy_month,'rented' => $rented,
-                            'rent_amount' => $rent_plus_deposit_amount, 'amount_paid' => '0.00', 'balance_due' => $balance_due
-                        ],
-                        ['period', 'room_id'],
-                        ['tenant_id', 'payment_status', 'rented', 'rent_amount', 'balance_due','updated_at']
-                    );
-                    
-            /** Update monthly payment tracker rented status to No & payment status to 3 */
+        if ($category_name == 'Hostels') {
+            $rent_plus_deposit_amount = $rent_amount * 2;
+            $balance_due = $rent_amount * 2;
+        } else {
+            $rent_plus_deposit_amount = $rent_amount;
+            $balance_due = $rent_amount;
+        }
 
-           $monthly_track = MonthlyPayment::getMonthlyPaymentsTrack()->where( 'room_id', $room_id )->where( 'period', $start_tenancy_month )->first();
-           $track_id = $monthly_track->track_id;
+        /** Check whether monthly payment tracker for the above date exists */
+        // DB::table('tenant_monthly_payments')->upsert(
+        //     [
+        //         'tenant_id' => 1, 'room_id' => $room_id,  'payment_status' => 3, 'period' => $start_tenancy_month, 'rented' => $rented,
+        //         'rent_amount' => $rent_plus_deposit_amount, 'amount_paid' => '0.00', 'balance_due' => $balance_due
+        //     ],
+        //     ['period', 'room_id'],
+        //     ['tenant_id', 'payment_status', 'rented', 'rent_amount', 'balance_due', 'updated_at']
+        // );
 
-            $update_track = array(
-               'payment_status' => 3,
-               'rented' => 'Yes'
-           );
+        $existing_track = MonthlyPayment::where('period', $start_tenancy_month)->where('room_id', $room_id)->first();
+        if (!empty($existing_track)) {
+            continue;
+        }
 
-           $update_monthly_track = MonthlyPayment::where( 'room_id', $room_id )->where('id', '>=', $track_id)
-           ->update($update_track);
+        $save_track_array = array(
+            'tenant_id' => 1, 'room_id' => $room_id,  'payment_status' => 3, 'period' => $start_tenancy_month,
+            'rented' => $rented, 'rent_amount' => $rent_plus_deposit_amount, 'amount_paid' => '0.00',
+            'balance_due' => $balance_due
+        );
+
+        $insert_track = MonthlyPayment::insert($save_track_array);
+
+        /** Update monthly payment tracker rented status to No & payment status to 3 */
+
+        $monthly_track = MonthlyPayment::getMonthlyPaymentsTrack()->where('room_id', $room_id)->where('period', $start_tenancy_month)->first();
+        $track_id = $monthly_track->track_id;
+
+        $update_track = array(
+            'payment_status' => 3,
+            'rented' => 'Yes'
+        );
+
+        $update_monthly_track = MonthlyPayment::where('room_id', $room_id)->where('id', '>=', $track_id)
+            ->update($update_track);
 
         /** Log the action in the logs file */
-        Log::info( 'Room assignment of ID ' . $room_assignment->id .  ' created by user of ID: ' . Auth::id() .
-        ' at ' . $now );
+        Log::info('Room assignment of ID ' . $room_assignment->id .  ' created by user of ID: ' . Auth::id() .
+            ' at ' . $now);
 
-        Toastr::success( 'Assignment created successfully' );
+        Toastr::success('Assignment created successfully');
 
         return back();
     }
     /** Add another tenant to already rented room
-    * This is the case for hostel where one room can have more than 1 tenant
-    */
+     * This is the case for hostel where one room can have more than 1 tenant
+     */
 
-    public function addAnotherTenant( Request $request ) {
+    public function addAnotherTenant(Request $request)
+    {
 
-        $now = Carbon::now( 'Africa/Nairobi' )->toDateTimeString();
-        $variation_val_id = $request->input( 'variation_val_id' );
-        $room_id = $request->input( 'variation_room_id' );
-        $tenant_id = $request->input( 'r_tenant_id' );
-        $start_date = $request->input( 'r_start_date' );
+        $now = Carbon::now('Africa/Nairobi')->toDateTimeString();
+        $variation_val_id = $request->input('variation_val_id');
+        $room_id = $request->input('variation_room_id');
+        $tenant_id = $request->input('r_tenant_id');
+        $start_date = $request->input('r_start_date');
 
         $room_assignment = new RoomAssignment();
 
@@ -199,27 +216,27 @@ class RoomAssignmentController extends Controller {
 
         /** Update room_assigned column for the selected tenant from 0 to 1 */
 
-        $update_room_assigned = Tenants::where( 'id', $tenant_id )->update( [
+        $update_room_assigned = Tenants::where('id', $tenant_id)->update([
             'room_assigned' => 1
-        ] );
+        ]);
 
         /** Update rent_amount in the tenant_month_payments table in the case of hostel
-        * In an hostel, there's an aspect of multi tenancy and charges per month are for each tenant
-        * Rent is charged per head, so if you live 3 tenants in one room and the rent per head is kes 2000
-        * Then if you add another tenant, the amount needs to be updated
-        */
+         * In an hostel, there's an aspect of multi tenancy and charges per month are for each tenant
+         * Rent is charged per head, so if you live 3 tenants in one room and the rent per head is kes 2000
+         * Then if you add another tenant, the amount needs to be updated
+         */
 
         /** Get room data for the selected room to capture details like monthly rent */
-        $room_data = Rooms::getRooms()->where( 'room_id', $room_id )->first();
+        $room_data = Rooms::getRooms()->where('room_id', $room_id)->first();
         $monthly_rent = $room_data->monthly_rent;
         $property_id = $room_data->prop_id;
 
-        $date = Carbon::parse( $start_date );
-        $start_tenancy_month = $date->format( 'M Y' );
+        $date = Carbon::parse($start_date);
+        $start_tenancy_month = $date->format('M Y');
 
         /** Get payment track for the month */
-        $payment_track = MonthlyPayment::getPaymentTracker()->where( 'prop_id', $property_id )->where( 'room_id', $room_id )
-        ->where( 'period', $start_tenancy_month )->first();
+        $payment_track = MonthlyPayment::getPaymentTracker()->where('prop_id', $property_id)->where('room_id', $room_id)
+            ->where('period', $start_tenancy_month)->first();
         $track_id = $payment_track->track_id;
         $payment_status = $payment_track->payment_status;
         $rent_amount = $payment_track->rent_amount;
@@ -228,83 +245,87 @@ class RoomAssignmentController extends Controller {
 
         $new_rent_amount = $rent_amount + $monthly_rent;
 
-        if ( $payment_status == 1 ) {
+        if ($payment_status == 1) {
             /** Update the monthly track with the new rent amount */
-            $update_track = MonthlyPayment::where( 'id', $track_id )->update( [
+            $update_track = MonthlyPayment::where('id', $track_id)->update([
                 'rent_amount' => $new_rent_amount,
                 'amount_paid' => $amount_paid,
                 'balance_due' => $monthly_rent,
                 'payment_status' => 2
-            ] );
-        } elseif ( $payment_status == 2 ) {
+            ]);
+        } elseif ($payment_status == 2) {
             /** Update the monthly track with the new rent amount */
-            $update_track = MonthlyPayment::where( 'id', $track_id )->update( [
+            $update_track = MonthlyPayment::where('id', $track_id)->update([
                 'rent_amount' => $new_rent_amount,
                 'amount_paid' => $amount_paid,
                 'balance_due' => $balance_due + $monthly_rent,
                 'payment_status' => 2
-            ] );
-        } elseif ( $payment_status == 3 ) {
+            ]);
+        } elseif ($payment_status == 3) {
             /** Update the monthly track with the new rent amount */
-            $update_track = MonthlyPayment::where( 'id', $track_id )->update( [
+            $update_track = MonthlyPayment::where('id', $track_id)->update([
                 'rent_amount' => $new_rent_amount,
                 'amount_paid' => $amount_paid,
                 'balance_due' => $balance_due + $monthly_rent,
                 'payment_status' => 2
-            ] );
+            ]);
         }
 
         /** Log the action in the logs file */
-        Log::info( 'Room assignment assignmet of ID ' . $room_assignment->id .  ' created by user of ID: ' . Auth::id() .
-        ' at ' . $now );
+        Log::info('Room assignment assignmet of ID ' . $room_assignment->id .  ' created by user of ID: ' . Auth::id() .
+            ' at ' . $now);
 
-        Toastr::success( 'Tenant added successfully' );
+        Toastr::success('Tenant added successfully');
 
         return back();
     }
 
     /**
-    * Display the specified resource.
-    *
-    * @param  \App\Models\RoomAssignment  $roomAssignment
-    * @return \Illuminate\Http\Response
-    */
+     * Display the specified resource.
+     *
+     * @param  \App\Models\RoomAssignment  $roomAssignment
+     * @return \Illuminate\Http\Response
+     */
 
-    public function show( RoomAssignment $roomAssignment ) {
+    public function show(RoomAssignment $roomAssignment)
+    {
         //
     }
 
     /**
-    * Show the form for editing the specified resource.
-    *
-    * @param  \App\Models\RoomAssignment  $roomAssignment
-    * @return \Illuminate\Http\Response
-    */
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\RoomAssignment  $roomAssignment
+     * @return \Illuminate\Http\Response
+     */
 
-    public function edit( RoomAssignment $roomAssignment ) {
+    public function edit(RoomAssignment $roomAssignment)
+    {
         //
     }
 
     /**
-    * Update the specified resource in storage.
-    *
-    * @param  \Illuminate\Http\Request  $request
-    * @param  \App\Models\RoomAssignment  $roomAssignment
-    * @return \Illuminate\Http\Response
-    */
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\RoomAssignment  $roomAssignment
+     * @return \Illuminate\Http\Response
+     */
 
-    public function update( Request $request, RoomAssignment $roomAssignment ) {
+    public function update(Request $request, RoomAssignment $roomAssignment)
+    {
         //
     }
 
     /**
-    * Remove the specified resource from storage.
-    *
-    * @param  \App\Models\RoomAssignment  $roomAssignment
-    * @return \Illuminate\Http\Response
-    */
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\RoomAssignment  $roomAssignment
+     * @return \Illuminate\Http\Response
+     */
 
-    public function destroy( RoomAssignment $roomAssignment ) {
+    public function destroy(RoomAssignment $roomAssignment)
+    {
         //
     }
 }
