@@ -100,7 +100,7 @@ class MonthlyPayment extends Model
 
             $total_tenants = DB::table('room_assignments')->select(
                 DB::raw('room_assignments.*'),
-                DB::raw('tenants.id as t_id'),
+                DB::raw('tenants.id as t_id')
             )
                 ->leftJoin('tenants', 'room_assignments.tenant_id', 'tenants.id')
                 ->where('room_id', $item->room_id)
