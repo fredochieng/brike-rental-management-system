@@ -124,6 +124,15 @@ Route::post('user/update-profile/{user_id}', 'UsersController@update_profile')->
 Route::post('user/change-password/{user_id}', 'UsersController@change_password')->name('user.change-password');
 
 
+// Password Reset Routes...
+$this->get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm');
+$this->post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail');
+$this->get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm');
+$this->post('password/reset', 'Auth\ResetPasswordController@reset');
+
+Route::post('reset_password_with_token', 'PasswordResetController@reset_password')->name('password.reset');
+
+
 /* Authentication */
 Route::get('authentication', function () {
 	return redirect('authentication/login');
