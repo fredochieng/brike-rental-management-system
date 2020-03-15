@@ -9,7 +9,7 @@
     <div class="col-lg-12 col-md-12 col-sm-12">
         <div class="row clearfix">
 
-            <div class="col-lg-3 col-md-6 col-sm-12 text-center">
+            <div class="col-lg-4 col-md-6 col-sm-12 text-center">
                 <div class="card overflowhidden">
                     <div class="body">
                         <h5 class="m-t-0 m-b-5">{{ $tot_tenants }}</h5>
@@ -19,7 +19,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-3 col-md-6 col-sm-12 text-center">
+            <div class="col-lg-4 col-md-6 col-sm-12 text-center">
                 <div class="card overflowhidden">
                     <div class="body">
                         <h5 class="m-t-0 m-b-5">{{ $currency_symbol }} {{ number_format($tot_payments, 2, '.', ',') }}
@@ -30,7 +30,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-3 col-md-6 col-sm-12 text-center">
+            <div class="col-lg-4 col-md-6 col-sm-12 text-center">
                 <div class="card overflowhidden">
                     <div class="body">
                         <h5 class="m-t-0 m-b-5">{{ $currency_symbol}} {{ $rent_arrears_amount }}</h5>
@@ -40,7 +40,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-3 col-md-6 col-sm-12 text-center">
+            {{-- <div class="col-lg-3 col-md-6 col-sm-12 text-center">
                 <div class="card overflowhidden">
                     <div class="body">
                         <h5 class="m-t-0 m-b-5">KES 60,501.00</h5>
@@ -48,7 +48,7 @@
                     </div>
                     <span id="linecustom4">1,5,3,6,6,3,6,8,4,2</span>
                 </div>
-            </div>
+            </div> --}}
 
         </div>
     </div>
@@ -64,7 +64,7 @@
                     <table class="table table-bordered table-striped table-hover dataTable js-exportable"
                         style="font-size:11px">
                         <thead class="thead-primary">
-                        <tr style="font-size:11px">
+                            <tr style="font-size:11px">
                                 <th>Trans ID</th>
                                 <th>Amount</th>
                                 <th>Phone</th>

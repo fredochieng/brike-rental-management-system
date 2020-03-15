@@ -125,7 +125,6 @@
                             href="#Home-new2">Variations</a>
                     </li>
 
-                    
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane show active" id="Home-new2">

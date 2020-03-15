@@ -5,55 +5,7 @@
 <?php $__env->startSection('content'); ?>
 
 <div class="row clearfix">
-    <div class="col-lg-3 col-md-12 col-sm-12">
-        <div class="row clearfix">
-            <div class="col-lg-12 col-md-6">
-                <div class="card">
-                    <div class="body">
-                        <h3 class="number count-to" data-from="0" data-to="128" data-speed="2000"
-                            data-fresh-interval="700"><?php echo e($currency_symbol); ?> <?php echo e($sum_tot_payments); ?></h3>
-                        <p class="text-muted">Rent Payments</p>
-                        <div class="progress progress-xs">
-                            <div class="progress-bar l-blue" role="progressbar" aria-valuenow="68" aria-valuemin="0"
-                                aria-valuemax="100" style="width: 46%;"></div>
-                        </div>
-                        <small>46% of total rent payment</small>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-12 col-md-6">
-                <div class="card">
-                    <div class="body">
-                        <h3 class="number count-to" data-from="0" data-to="128" data-speed="2000"
-                            data-fresh-interval="700">KES
-                            20,000.00</h3>
-                        <p class="text-muted">Rent Arrears</p>
-                        <div class="progress progress-xs">
-                            <div class="progress-bar l-green" role="progressbar" aria-valuenow="68" aria-valuemin="0"
-                                aria-valuemax="100" style="width: 14%;"></div>
-                        </div>
-                        <small>14% of total arrears</small>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-12 col-md-6">
-                <div class="card">
-                    <div class="body">
-                        <h3 class="number count-to" data-from="0" data-to="128" data-speed="2000"
-                            data-fresh-interval="700"><?php echo e($tenancy_period); ?> Months</h3>
-                        <p class="text-muted">Tenancy Period</p>
-                        <div class="progress progress-xs">
-                            <div class="progress-bar l-purple" role="progressbar" aria-valuenow="68" aria-valuemin="0"
-                                aria-valuemax="100" style="width: 68%;"></div>
-                        </div>
-                        <small>Change 27%</small>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-lg-6 col-md-12 col-sm-12">
+    <div class="col-lg-8 col-md-12 col-sm-12">
         <div class="card">
             <div class="header">
                 <h2>Tenant Details</h2>
@@ -116,16 +68,36 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-3 col-md-12 col-sm-12">
+    <div class="col-lg-4 col-md-12 col-sm-12">
         <div class="row clearfix">
-            <div class="col-lg-12 col-md-6 col-sm-12">
+            
+            <div class="col-lg-12 col-md-6">
                 <div class="card">
-                    <div class="body text-center">
-                        <h5>Rent Deposit</h5>
-                        <h6>KES 16,000.00</h6>
-                        <hr>
-                        <input type="text" class="knob2" value="66" data-linecap="round" data-width="115"
-                            data-height="131" data-thickness="0.2" data-fgColor="#4CAF50" readonly>
+                    <div class="body">
+                        <h3 class="number count-to" data-from="0" data-to="128" data-speed="2000"
+                            data-fresh-interval="700">
+                            <?php echo e($currency_symbol); ?> <?php echo e($sum_tot_payments); ?></h3>
+                        <p class="text-muted">Rent Payments</p>
+                        <div class="progress progress-xs">
+                            <div class="progress-bar l-blue" role="progressbar" aria-valuenow="68" aria-valuemin="0"
+                                aria-valuemax="100" style="width: 46%;"></div>
+                        </div>
+                        <small>46% of total rent payment</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12 col-md-6">
+                <div class="card">
+                    <div class="body">
+                        <h3 class="number count-to" data-from="0" data-to="128" data-speed="2000"
+                            data-fresh-interval="700">
+                            <?php echo e($tenancy_period); ?> Months</h3>
+                        <p class="text-muted">Tenancy Period</p>
+                        <div class="progress progress-xs">
+                            <div class="progress-bar l-purple" role="progressbar" aria-valuenow="68" aria-valuemin="0"
+                                aria-valuemax="100" style="width: 68%;"></div>
+                        </div>
+                        <small>Change 27%</small>
                     </div>
                 </div>
             </div>
@@ -156,20 +128,7 @@
                                 </div>
                             </li>
                             <?php endif; ?>
-                            <li>
-                                <div class="feeds-left"><i class="icon-reload"></i></div>
-                                <div class="feeds-body">
-                                    <a href="https://www.google.com/" class="title"><strong>Reassign Room</strong></a>
-                                    <small>Assign another room</small>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="feeds-left"><i class="icon-energy"></i></div>
-                                <div class="feeds-body">
-                                    <a href="https://www.google.com/" class="title"><strong>Unassign Room</strong></a>
-                                    <small>End tenancy of the tenant</small>
-                                </div>
-                            </li>
+                            
                         </ul>
                     </div>
                 </div>

@@ -106,19 +106,19 @@
             </div>
             <div class="body">
                 <div class="row clearfix">
-                    <div class="col-lg-3 col-md-4 col-sm-4">
+                    <div class="col-lg-4 col-md-4 col-sm-4">
                         <span class="text-muted">Rent Revenue </span>
                         <h3 class="text-info">{{ $currency_symbol }} {{ $sum_rent_payments }}</h3>
                     </div>
-                    <div class="col-lg-3 col-md-4 col-sm-4">
+                    <div class="col-lg-4 col-md-4 col-sm-4">
                         <span class="text-muted">Rent Due</span>
                         <h3 class="text-warning">{{ $currency_symbol}} {{ $rent_arrears_amount }}</h3>
                     </div>
-                    <div class="col-lg-3 col-md-4 col-sm-4">
+                    {{-- <div class="col-lg-3 col-md-4 col-sm-4">
                         <span class="text-muted">Total Deposits</span>
-                        <h3 class="text-success">KES 357,915</h3>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-4">
+                        <h3 class="text-success">KES 357,915</h3> 
+                </div>--}}
+                    <div class="col-lg-4 col-md-4 col-sm-4">
                         <span class="text-muted">Total Expense</span>
                         <h3 class="text-danger">{{ $currency_symbol}} {{ $sum_expense_amount }}</h3>
                     </div>

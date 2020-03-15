@@ -10,7 +10,7 @@ use App\Models\PropertyVariations;
 use App\Models\RoomAssignment;
 use App\Models\RoomAdjustment;
 use App\Models\Variation;
-use App\Models\ Transaction;
+use App\Models\Transaction;
 use App\Models\VariationValues;
 use App\Models\MonthlyPayment;
 use App\Models\Expenses;
@@ -21,105 +21,115 @@ use Kamaln7\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\Log;
 use DB;
 use Carbon\Carbon;
+use DateTime;
 
-class PropertyController extends Controller {
+class PropertyController extends Controller
+{
     /**
-    * Display a listing of the resource.
-    *
-    * @return \Illuminate\Http\Response
-    */
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
 
-    public function index() {
+    public function index()
+    {
         $data['property'] = Property::getProperty();
 
-        return view( 'property.index' )->with( $data );
+        return view('property.index')->with($data);
     }
 
     /**
-    * Show the form for creating a new resource.
-    *
-    * @return \Illuminate\Http\Response
-    */
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
 
-    public function variationValuesSelector() {
+    public function variationValuesSelector()
+    {
         //Function to get the variation values based on the selected variation type
-        $variation_template = Input::get( 'variation_template' );
+        $variation_template = Input::get('variation_template');
 
-        $variation_values = VariationValues::getVariationValues( $variation_template );
+        $variation_values = VariationValues::getVariationValues($variation_template);
 
-        return response()->json( $variation_values );
+        return response()->json($variation_values);
     }
 
-    public function getPaymentRooms() {
+    public function getPaymentRooms()
+    {
         //Function to get the variation values based on the selected variation type
-        $property_id = Input::get( 'property_id' );
+        $property_id = Input::get('property_id');
 
-        $pay_rooms = Rooms::getRooms()->where( 'property_id', $property_id );
+        $pay_rooms = Rooms::getRooms()->where('property_id', $property_id);
 
-        return response()->json( $pay_rooms );
+        return response()->json($pay_rooms);
     }
 
     /** Get rooms for payment confirmation based on the property selected */
 
-    public function getTransRooms() {
+    public function getTransRooms()
+    {
         //Function to get the variation values based on the selected variation type
-        $property_id = Input::get( 'property_id' );
+        $property_id = Input::get('property_id');
 
-        $pay_rooms = Rooms::getRooms()->where( 'property_id', $property_id );
+        $pay_rooms = Rooms::getRooms()->where('property_id', $property_id);
 
-        return response()->json( $pay_rooms );
+        return response()->json($pay_rooms);
     }
 
-    public function getSMSRooms() {
+    public function getSMSRooms()
+    {
         //Function to get the variation values based on the selected variation type
-        $property_id = Input::get( 'property_id' );
+        $property_id = Input::get('property_id');
 
-        $sms_rooms = Rooms::getRooms()->where( 'property_id', $property_id );
+        $sms_rooms = Rooms::getRooms()->where('property_id', $property_id);
 
-        return response()->json( $sms_rooms );
+        return response()->json($sms_rooms);
     }
 
-    public function create() {
+    public function create()
+    {
         $data['categories'] = PropertyCategories::getPropertyCategories();
         $data['property_variations'] = PropertyVariations::getPropertyVariations();
         // dd( $data['property_variations'] );
-        return view( 'property.create' )->with( $data );
+        return view('property.create')->with($data);
     }
 
-    public function test( Request $request ) {
-        if ( $request->ajax() ) {
-            dd( 'Fredrik' );
+    public function test(Request $request)
+    {
+        if ($request->ajax()) {
+            dd('Fredrik');
             $property = new Property();
-            $p_name = strtoupper( $request->input( 'p_name' ) );
+            $p_name = strtoupper($request->input('p_name'));
 
-            return response( $property );
+            return response($property);
         } else {
-            dd( 'ggggj' );
+            dd('ggggj');
         }
     }
 
     /**
-    * Store a newly created resource in storage.
-    *
-    * @param  \Illuminate\Http\Request  $request
-    * @return \Illuminate\Http\Response
-    */
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
 
-    public function store( Request $request ) {
-        $now = Carbon::now( 'Africa/Nairobi' )->toDateTimeString();
+    public function store(Request $request)
+    {
+        $now = Carbon::now('Africa/Nairobi')->toDateTimeString();
 
         /** Get property data from create property form **/
-        $p_name = ucwords( $request->input( 'p_name' ) );
-        $p_category = $request->input( 'p_category_id' );
-        $p_location = ucwords( $request->input( 'p_location' ) );
-        $c_name = ucwords( $request->input( 'c_name' ) );
-        $c_phone = $request->input( 'c_phone' );
-        $variation_template_id = $request->input( 'variation_template_id' );
+        $p_name = ucwords($request->input('p_name'));
+        $p_category = $request->input('p_category_id');
+        $p_location = ucwords($request->input('p_location'));
+        $c_name = ucwords($request->input('c_name'));
+        $c_phone = $request->input('c_phone');
+        $variation_template_id = $request->input('variation_template_id');
 
-        $new_c_phone = str_replace( '(', '', $c_phone );
-        $new_c_phone = str_replace( ')', '', $new_c_phone );
-        $new_c_phone = str_replace( '-', '', $new_c_phone );
-        $new_c_phone = str_replace( ' ', '', $new_c_phone );
+        $new_c_phone = str_replace('(', '', $c_phone);
+        $new_c_phone = str_replace(')', '', $new_c_phone);
+        $new_c_phone = str_replace('-', '', $new_c_phone);
+        $new_c_phone = str_replace(' ', '', $new_c_phone);
 
         /** Save property data in the properties table */
         $property = new Property();
@@ -136,25 +146,25 @@ class PropertyController extends Controller {
 
         /** Save property variation data */
 
-        $var_value_id = $request->input( 'var_value_id' );
-        $v_name = $request->input( 'v_name' );
-        $rooms = $request->input( 'rooms' );
-        $rent = $request->input( 'rent' );
+        $var_value_id = $request->input('var_value_id');
+        $v_name = $request->input('v_name');
+        $rooms = $request->input('rooms');
+        $rent = $request->input('rent');
 
         /** Save room variations in room_variations table */
         $prop_variations = array(
             'variation_temp_id' => $variation_template_id,
             'property_id' => $just_saved_property_id
         );
-        $save_prop_variations = DB::table( 'property_variations' )->insertGetId( $prop_variations );
+        $save_prop_variations = DB::table('property_variations')->insertGetId($prop_variations);
 
         /** Save property variations in the variations table */
 
-        if ( count( $rooms ) > count( $rent ) )
-        $count = count( $rent );
-        else $count = count( $rooms );
+        if (count($rooms) > count($rent))
+            $count = count($rent);
+        else $count = count($rooms);
 
-        for ( $i = 0; $i < $count; $i++ ) {
+        for ($i = 0; $i < $count; $i++) {
 
             $data = array(
                 'property_id' => $just_saved_property_id,
@@ -168,16 +178,15 @@ class PropertyController extends Controller {
             );
 
             /** Skip when total rooms is 0 */
-            if ( $data['tot_rooms'] == 0 || $data['monthly_rent'] == 0 ) {
+            if ($data['tot_rooms'] == 0 || $data['monthly_rent'] == 0) {
                 continue;
             }
             $insertData[] = $data;
-
         }
 
-        Variation::insert( $insertData );
+        Variation::insert($insertData);
 
-        for ( $i = 0; $i < $count; $i++ ) {
+        for ($i = 0; $i < $count; $i++) {
             $room_adjustments = array(
                 'var_val_id' => $var_value_id[$i],
                 'adjustment_qty' => 0,
@@ -190,180 +199,190 @@ class PropertyController extends Controller {
                 'created_by' => Auth::id()
             );
             /** Skip when total rooms is 0 */
-            if ( $room_adjustments['init_tot_rooms'] == 0 ) {
+            if ($room_adjustments['init_tot_rooms'] == 0) {
                 continue;
             }
             $insertRoomAdjustments[] = $room_adjustments;
         }
 
-        RoomAdjustment::insert( $insertRoomAdjustments );
+        RoomAdjustment::insert($insertRoomAdjustments);
 
         /** Log the action in the logs file */
-        Log::info( 'Property of ID ' . $just_saved_property_id .  ' created by user of ID: ' . Auth::id() .
-        ' at ' . $now );
-        Toastr::success( 'Property created successfully' );
+        Log::info('Property of ID ' . $just_saved_property_id .  ' created by user of ID: ' . Auth::id() .
+            ' at ' . $now);
+        Toastr::success('Property created successfully');
 
         return back();
-
     }
 
-    public function manageProperty( Request $request, $property_id ) {
+    public function manageProperty(Request $request, $property_id)
+    {
 
         $t_status = 1;
         $room_assigned = 0;
-        $data['property'] = Property::getProperty()->where( 'property_id', $property_id )->first();
-        $data['variation_values'] = Variation::getVariationValues( $property_id );
-        $data['tenants'] = Tenants::getTenants()->where( 'property_id', $property_id )->where( 't_status', $t_status );
-        $data['unassigned_tenants'] = Tenants::getTenants()->where( 'property_id', $property_id )
-        ->where( 't_status', $t_status )->where( 'room_assigned', $room_assigned );
+        $data['property'] = Property::getProperty()->where('property_id', $property_id)->first();
+        $data['variation_values'] = Variation::getVariationValues($property_id);
+        $data['tenants'] = Tenants::getTenants()->where('property_id', $property_id)->where('t_status', $t_status);
+        $data['unassigned_tenants'] = Tenants::getTenants()->where('property_id', $property_id)
+            ->where('t_status', $t_status)->where('room_assigned', $room_assigned);
 
         $total_rooms = array();
         $rented_rooms = array();
         $vacant_rooms = array();
 
-        foreach ( $data['variation_values'] as $key => $value ) {
+        foreach ($data['variation_values'] as $key => $value) {
             $total_rooms[] = $value->tot_rooms;
             $rented_rooms[] = $value->booked_rooms;
             $vacant_rooms[] = $value->vacant_rooms;
         }
-        $data['sum_total_rooms'] = array_sum( $total_rooms );
-        $data['sum_total_rented_rooms'] = array_sum( $rented_rooms );
-        $data['sum_total_vacant_rooms'] = array_sum( $vacant_rooms );
+        $data['sum_total_rooms'] = array_sum($total_rooms);
+        $data['sum_total_rented_rooms'] = array_sum($rented_rooms);
+        $data['sum_total_vacant_rooms'] = array_sum($vacant_rooms);
 
-        $data['tot_variations'] = count( $data['variation_values'] );
-        $data['tot_tenants'] = count( $data['tenants'] );
+        $data['tot_variations'] = count($data['variation_values']);
+        $data['tot_tenants'] = count($data['tenants']);
 
         $data['currency_symbol'] = 'KES';
 
         /** This can be replaced once the model for this table is created */
-        $property_variation = DB::table( 'property_variations' )->select(
-            DB::raw( 'property_variations.*' )
+        $property_variation = DB::table('property_variations')->select(
+            DB::raw('property_variations.*')
         )
-        ->where( 'property_id', $property_id )
-        ->first();
+            ->where('property_id', $property_id)
+            ->first();
 
         $data['property_variation_id'] = $property_variation->id;
 
         $variation_template = $property_variation->variation_temp_id;
 
-        $data['all_variation_values'] = VariationValues::getVariationValues( $variation_template );
+        $data['all_variation_values'] = VariationValues::getVariationValues($variation_template);
 
         /** Get rent payments for the propery */
-        $data['payments'] = Transaction::getPayments()->where( 'property_id', '=', $property_id );
-        $data['sum_prop_rent_payments'] = Transaction::sumPropertyRentPayments( $property_id );
+        $data['payments'] = Transaction::getPayments()->where('property_id', '=', $property_id);
+        $data['sum_prop_rent_payments'] = Transaction::sumPropertyRentPayments($property_id);
 
         $payment_amount = array();
-        foreach ( $data['sum_prop_rent_payments'] as $key => $value ) {
+        foreach ($data['sum_prop_rent_payments'] as $key => $value) {
             $payment_amount[] = $value->trans_amount;
         }
 
-        if ( !empty( $payment_amount ) ) {
+        if (!empty($payment_amount)) {
 
-            $data['sum_tot_prop_rent_payments'] =  number_format( json_encode( array_sum( $payment_amount ) ), 2, '.', ',' );
+            $data['sum_tot_prop_rent_payments'] =  number_format(json_encode(array_sum($payment_amount)), 2, '.', ',');
         } else {
             $data['sum_tot_prop_rent_payments'] = 0.00;
         }
 
         /** Get total expenses for the property */
 
-        $expenses = Expenses::getExpenses()->where( 'exp_property_id', $property_id );
+        $expenses = Expenses::getExpenses()->where('exp_property_id', $property_id);
 
         $expense_amount = array();
-        foreach ( $expenses as $key => $value ) {
+        foreach ($expenses as $key => $value) {
             $expense_amount[] = $value->expense_amount;
         }
 
-        if ( !empty( $expense_amount ) ) {
-            $data['sum_expense_amount'] = number_format( json_encode( array_sum( $expense_amount ) ), 2, '.', ',' );
+        if (!empty($expense_amount)) {
+            $data['sum_expense_amount'] = number_format(json_encode(array_sum($expense_amount)), 2, '.', ',');
         } else {
             $data['sum_expense_amount'] = 0.00;
         }
 
-        $payment_tracks = MonthlyPayment::getPaymentTracker()->where( 'payment_status', 3 )->where( 'prop_id', $property_id );
+        $current_date = Carbon::now()->toDateString();
+        $current_date = new DateTime($current_date);
+        $current_date = $current_date->format('Y-m-d H:i:s');
+        $rented = 'Yes';
+
+        $payment_tracks = MonthlyPayment::getPaymentTracker()->whereIn('payment_status', [2, 3])
+            ->where('prop_id', $property_id)->where('formatted_period', '<=', $current_date)->where('rented', $rented);
 
         $rent_arrears = array();
-        foreach ( $payment_tracks as $key => $value ) {
+        foreach ($payment_tracks as $key => $value) {
             $rent_arrears_amount[] = $value->balance_due;
         }
 
-        if ( !empty( $rent_arrears_amount ) ) {
+        if (!empty($rent_arrears_amount)) {
 
-            $data['rent_arrears_amount'] = number_format( json_encode( array_sum( $rent_arrears_amount ) ), 2, '.', ',' );
+            $data['rent_arrears_amount'] = number_format(json_encode(array_sum($rent_arrears_amount)), 2, '.', ',');
         } else {
             $data['rent_arrears_amount'] = 0.00;
         }
 
-        return view( 'property.manage' )->with( $data );
+        return view('property.manage')->with($data);
     }
 
     /** Get vacant rooms of selected variation on room assignment */
 
-    public function varRoomsSelector( Request $request ) {
+    public function varRoomsSelector(Request $request)
+    {
         //Function to get the variation rooms based on the selected variation
-        $variation_val_id = Input::get( 'variation_val_id' );
-        $property_id = Input::get( 'property_id' );
+        $variation_val_id = Input::get('variation_val_id');
+        $property_id = Input::get('property_id');
         $is_vacant = 1;
-        $rooms = Rooms::getRooms()->where( 'property_id', $property_id )->where( 'variation_val_id', $variation_val_id )->where( 'is_vacant', $is_vacant );
+        $rooms = Rooms::getRooms()->where('property_id', $property_id)->where('variation_val_id', $variation_val_id)->where('is_vacant', $is_vacant);
 
-        return response()->json( $rooms );
+        return response()->json($rooms);
     }
 
     /** Get already rented rooms of selected variation in the case of adding another tenant to a room */
 
-    public function varRentedRoomsSelector( Request $request ) {
+    public function varRentedRoomsSelector(Request $request)
+    {
         //Function to get the variation rooms based on the selected variation
-        $variation_val_id = Input::get( 'variation_val_id' );
-        $property_id = Input::get( 'property_id' );
+        $variation_val_id = Input::get('variation_val_id');
+        $property_id = Input::get('property_id');
         $is_vacant = 0;
-        $rooms = Rooms::getRooms()->where( 'property_id', $property_id )->where( 'variation_val_id', $variation_val_id )->where( 'is_vacant', $is_vacant );
+        $rooms = Rooms::getRooms()->where('property_id', $property_id)->where('variation_val_id', $variation_val_id)->where('is_vacant', $is_vacant);
 
-        return response()->json( $rooms );
+        return response()->json($rooms);
     }
 
     /**
-    * Display the specified resource.
-    *
-    * @param  \App\Models\Property  $property
-    * @return \Illuminate\Http\Response
-    */
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Property  $property
+     * @return \Illuminate\Http\Response
+     */
 
-    public function show( Property $property_id ) {
-
+    public function show(Property $property_id)
+    {
     }
 
     /**
-    * Show the form for editing the specified resource.
-    *
-    * @param  \App\Models\Property  $property
-    * @return \Illuminate\Http\Response
-    */
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\Property  $property
+     * @return \Illuminate\Http\Response
+     */
 
-    public function edit( Request $request, $property_id ) {
+    public function edit(Request $request, $property_id)
+    {
         $data['categories'] = PropertyCategories::getPropertyCategories();
         $data['property_variations'] = PropertyVariations::getPropertyVariations();
-        $data['property'] = Property::getProperty()->where( 'property_id', $property_id )->first();
+        $data['property'] = Property::getProperty()->where('property_id', $property_id)->first();
         // dd( $data['property'] );
-        return view( 'property.edit' )->with( $data );
+        return view('property.edit')->with($data);
     }
 
     /**
-    * Update the specified resource in storage.
-    *
-    * @param  \Illuminate\Http\Request  $request
-    * @param  \App\Models\Property  $property
-    * @return \Illuminate\Http\Response
-    */
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Property  $property
+     * @return \Illuminate\Http\Response
+     */
 
-    public function update( Request $request, $property_id ) {
+    public function update(Request $request, $property_id)
+    {
 
-        $now = Carbon::now( 'Africa/Nairobi' )->toDateTimeString();
+        $now = Carbon::now('Africa/Nairobi')->toDateTimeString();
 
         /** Get property data from edit property form **/
-        $p_name = ucwords( $request->input( 'p_name' ) );
-        $p_category = $request->input( 'p_category_id' );
-        $p_location = ucwords( $request->input( 'p_location' ) );
-        $c_name = ucwords( $request->input( 'c_name' ) );
-        $c_phone = $request->input( 'c_phone' );
+        $p_name = ucwords($request->input('p_name'));
+        $p_category = $request->input('p_category_id');
+        $p_location = ucwords($request->input('p_location'));
+        $c_name = ucwords($request->input('c_name'));
+        $c_phone = $request->input('c_phone');
 
         $property_details = array(
             'prop_name' => $p_name,
@@ -372,24 +391,25 @@ class PropertyController extends Controller {
             'c_name' => $c_name,
             'c_phone' => $c_phone,
         );
-        $update_property = Property::where( 'id', $property_id )->update( $property_details );
+        $update_property = Property::where('id', $property_id)->update($property_details);
 
         /** Log the action in the logs file */
-        Log::info( 'Property of ID ' . $property_id .  ' updated'.
-        ' at ' . $now );
-        Toastr::success( 'Property updated successfully' );
+        Log::info('Property of ID ' . $property_id .  ' updated' .
+            ' at ' . $now);
+        Toastr::success('Property updated successfully');
 
         return back();
     }
 
-    public function addMoreVariationValues( Request $request, $property_id ) {
+    public function addMoreVariationValues(Request $request, $property_id)
+    {
 
-        $property_variation_id = $request->input( 'property_variation_id' );
-        $variation_template = $request->input( 'variation_val_id' );
-        $rooms = $request->input( 'rooms' );
-        $rent = $request->input( 'rent' );
+        $property_variation_id = $request->input('property_variation_id');
+        $variation_template = $request->input('variation_val_id');
+        $rooms = $request->input('rooms');
+        $rent = $request->input('rent');
 
-        $variation_values = VariationValues::getVarValues( $variation_template )->first();
+        $variation_values = VariationValues::getVarValues($variation_template)->first();
 
         $var_name = $variation_values->var_value_name;
 
@@ -419,19 +439,20 @@ class PropertyController extends Controller {
 
         $room_adjustment->save();
 
-        Toastr::success( 'Property updated successfully' );
+        Toastr::success('Property updated successfully');
 
         return back();
     }
 
     /**
-    * Remove the specified resource from storage.
-    *
-    * @param  \App\Models\Property  $property
-    * @return \Illuminate\Http\Response
-    */
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\Property  $property
+     * @return \Illuminate\Http\Response
+     */
 
-    public function destroy( Property $property ) {
+    public function destroy(Property $property)
+    {
         //
     }
 }
