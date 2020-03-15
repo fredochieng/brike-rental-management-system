@@ -4,10 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use DB;
-use DateInterval;
-use DatePeriod;
 use DateTime;
 use Carbon\Carbon;
+use App\Models\RoomAssignment;
 
 class MonthlyPayment extends Model
 {
@@ -67,9 +66,7 @@ class MonthlyPayment extends Model
 
     public static function getTracksForSMS()
     {
-
         $rent_trackers = DB::table('tenant_monthly_payments')->select(
-            DB::raw('tenant_monthly_payments.id as room_id'),
             DB::raw('tenant_monthly_payments.id as track_id'),
             DB::raw('tenant_monthly_payments.payment_status'),
             DB::raw('tenant_monthly_payments.period'),
@@ -78,7 +75,7 @@ class MonthlyPayment extends Model
             DB::raw('tenant_monthly_payments.amount_paid'),
             DB::raw('tenant_monthly_payments.sms_reminder_sent'),
             DB::raw('rent_payment_status.id'),
-            DB::raw('rooms.id'),
+            DB::raw('rooms.id as room_id'),
             DB::raw('rooms.property_id'),
             DB::raw('rooms.room_no'),
             DB::raw('rooms.is_vacant'),
@@ -90,6 +87,7 @@ class MonthlyPayment extends Model
             DB::raw('properties.id as prop_id'),
             DB::raw('properties.prop_name'),
             DB::raw('properties.category_id')
+
         )
             ->leftJoin('rent_payment_status', 'tenant_monthly_payments.payment_status', 'rent_payment_status.id')
             ->leftJoin('rooms', 'tenant_monthly_payments.room_id', 'rooms.id')
@@ -99,10 +97,26 @@ class MonthlyPayment extends Model
             ->orderBy('tenant_monthly_payments.id', 'asc')->get();
 
         $rent_trackers->map(function ($item) {
+
+            $total_tenants = DB::table('room_assignments')->select(
+                DB::raw('room_assignments.*'),
+                DB::raw('tenants.id as t_id'),
+            )
+                ->leftJoin('tenants', 'room_assignments.tenant_id', 'tenants.id')
+                ->where('room_id', $item->room_id)
+                ->where('r_end_date', null)
+                ->get();
+
+            $item->sum_tenants = count($total_tenants);
+
             $tenant_name = explode(" ", $item->t_name);
             unset($tenant_name[1]);
             $item->tenant_name = implode(" ", $tenant_name);
-            $item->bal_due_hostel = $item->balance_due / 2;
+            if ($item->sum_tenants == 0) {
+                $item->bal_due_hostel = number_format(round($item->balance_due), 2, '.', ',');
+            } else {
+                $item->bal_due_hostel = number_format(round($item->balance_due / $item->sum_tenants), 2, '.', ',');
+            }
 
             return $item;
         });
