@@ -11,7 +11,8 @@ use Illuminate\Support\Facades\Redirect;
 use Kamaln7\Toastr\Facades\Toastr;
 //use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
-class LoginController extends Controller {
+class LoginController extends Controller
+{
     /*
     |--------------------------------------------------------------------------
     | Login Controller
@@ -25,7 +26,8 @@ class LoginController extends Controller {
 
     // use AuthenticatesUsers;
 
-    public function login( Request $request ) {
+    public function login(Request $request)
+    {
         //dd( 'Fred' );
 
         // validate the info, create rules for the inputs
@@ -48,32 +50,31 @@ class LoginController extends Controller {
         //dd( 'Correcr' );
         // create our user data for the authentication
         $userdata = array(
-            'username'     => Input::get( 'username' ),
-            'password'  => Input::get( 'password' )
+            'username'     => Input::get('username'),
+            'password'  => Input::get('password')
         );
 
         // attempt to do the login
-        if ( Auth::attempt( $userdata ) ) {
+        if (Auth::attempt($userdata)) {
 
             // validation successful!
             // redirect them to the secure section or whatever
             // return Redirect::to( 'secure' );
             // for now we'll just echo success (even though echoing in a controller is bad)
-                     Toastr::success( 'Successful login, welcome' );
-                     return redirect('dashboard');
+            Toastr::success('Successful login, welcome');
+            return redirect('dashboard');
+        } else {
+            //dd('wrong');      
 
-    } else {  
-        //dd('wrong');      
+            // validation not successful, send back to form 
+            return back()->with('error', 'Wrong username or password');
 
-        // validation not successful, send back to form 
-        Toastr::warning( 'Incorrect username or password' );
-        return back();
-           //return redirect('authentication/login');
-      // return Redirect::to('authentication/login');
+            //return redirect('authentication/login');
+            // return Redirect::to('authentication/login');
 
-  //  }
+            //  }
+        }
     }
-}
 
 
 
@@ -82,7 +83,7 @@ class LoginController extends Controller {
      *
      * @var string
      */
-   // protected $redirectTo = 'dashboard/analytical';
+    // protected $redirectTo = 'dashboard/analytical';
 
     /**
      * Create a new controller instance.
@@ -91,6 +92,6 @@ class LoginController extends Controller {
      */
     public function __construct()
     {
-        $this->middleware('guest')->except('logout' );
-        }
+        $this->middleware('guest')->except('logout');
     }
+}

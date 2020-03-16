@@ -265,9 +265,9 @@ class TransactionsController extends Controller
         $OrgAccountBalance = $jsonMpesaResponse['OrgAccountBalance'];
         $ThirdPartyTransID = $jsonMpesaResponse['ThirdPartyTransID'];
         $MSISDN = $jsonMpesaResponse['MSISDN'];
-        $FirstName = strtoupper($jsonMpesaResponse['FirstName']);
-        $MiddleName = strtoupper($jsonMpesaResponse['MiddleName']);
-        $LastName = strtoupper($jsonMpesaResponse['LastName']);
+        $FirstName = ucwords($jsonMpesaResponse['FirstName']);
+        $MiddleName = ucwords($jsonMpesaResponse['MiddleName']);
+        $LastName = ucwords($jsonMpesaResponse['LastName']);
         $payment_method = 'Mpesa';
 
         // write to file
@@ -294,7 +294,7 @@ class TransactionsController extends Controller
         $payments->last_name = $LastName;
         $payments->payment_method = $payment_method;
 
-        //        Check whether the Msisdn exists in the database
+        /** Check whether the Msisdn exists in the database */
         $phone_numbers = DB::table('tenants')->select('tenants.t_phone')->get();
         $phone_numbers = json_decode(json_encode($phone_numbers, true));
         $phone_numbers = array_column($phone_numbers, 't_phone');
@@ -302,8 +302,8 @@ class TransactionsController extends Controller
         if (in_array($MSISDN, $phone_numbers)) {
             $payments->trans_confirmed = 1;
             $message_title = 'Payment Received';
-            $text = 'Hello ' . ucwords($FirstName) . ',' . ' we have received your Mpesa payment of KES ' . $TransAmount . ' to ' . $BillRefNumber . '.' .
-                'Confirmation code: ' . $TransID;
+            $text = 'Hello ' . ucwords($FirstName) . ',' . ' we have received your Mpesa payment of KES ' . $TransAmount . ' to account' . $BillRefNumber . '.' .
+                'Mpesa confirmation code: ' . $TransID;
             $message = new Message();
             $message->message_title = $message_title;
             $message->message = $text;

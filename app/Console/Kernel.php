@@ -32,7 +32,7 @@ class Kernel extends ConsoleKernel
 		//$schedule->job(new MonthlyRentPaymentTrackerJob())->everyMinute();
 		//$schedule->job(new ProcessPaymentsJob())->everyMinute();
 		//$schedule->job(new SaveRentPaymentNotificationJob())->everyMinute();
-		//$schedule->job(new SendSMSJob())->everyMinute();
+		$schedule->job(new SendSMSJob())->everyMinute();
 	}
 
 	/**

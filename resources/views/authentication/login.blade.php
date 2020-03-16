@@ -3,7 +3,7 @@
 
 
 @section('content')
-
+@include('layout.partials.messages')
 <div class="vertical-align-wrap">
     <div class="vertical-align-middle auth-main">
         <div class="auth-box">

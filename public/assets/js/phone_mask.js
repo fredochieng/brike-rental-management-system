@@ -1,4 +1,5 @@
 $(function () {
+    alert('fredrick is a nice guy');
     $('.colorpicker').colorpicker();
 
 

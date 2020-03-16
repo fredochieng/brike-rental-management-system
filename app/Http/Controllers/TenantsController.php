@@ -85,7 +85,7 @@ class TenantsController extends Controller
     public function store(Request $request)
     {
         $t_property_id = $request->input('t_property_id');
-        $t_name = strtoupper(($request->input('t_name')));
+        $t_name = ucwords(($request->input('t_name')));
         $t_id_no = ucwords($request->input('t_id_no'));
         $t_phone = $request->input('t_phone');
         $t_alt_phone = $request->input('t_alt_phone');
@@ -176,12 +176,6 @@ class TenantsController extends Controller
             $current_date = Carbon::parse($data['tenant']->r_end_date);
         }
 
-        // if (!empty($rent_arrears_amount)) {
-
-        //     $data['rent_arrears_amount'] = number_format(json_encode(array_sum($rent_arrears_amount)), 2, '.', ',');
-        // } else {
-        //     $data['rent_arrears_amount'] = 0.00;
-        // }
         $data['tenancy_period'] = $current_date->diffInMonths($tenancy_start_date);
 
         return view('tenants.manage')->with($data);
@@ -325,7 +319,7 @@ class TenantsController extends Controller
         $now = Carbon::now('Africa/Nairobi')->toDateTimeString();
 
         /** Get new tenant's data from edit tenant form **/
-        $t_name = strtoupper(($request->input('t_name')));
+        $t_name = ucwords(($request->input('t_name')));
         $t_id_no = ucwords($request->input('t_id_no'));
         $t_phone = $request->input('t_phone');
         $t_alt_phone = $request->input('t_alt_phone');

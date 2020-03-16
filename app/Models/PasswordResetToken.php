@@ -11,4 +11,11 @@ class PasswordResetToken extends Model
         $token = str_random(60);
         return $token;
     }
+
+    public static function generate_otp()
+    {
+        $otp = strtoupper(str_random(6));
+
+        return $otp;
+    }
 }

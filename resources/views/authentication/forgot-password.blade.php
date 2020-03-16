@@ -1,8 +1,9 @@
 @extends('layout.authentication')
-@section('title', 'Forget Password')
+@section('title', 'Forgot Password')
 
 @section('content')
 
+@include('layout.partials.messages')
 <div class="vertical-align-wrap">
     <div class="vertical-align-middle auth-main">
         <div class="auth-box">
@@ -14,21 +15,19 @@
                     <p class="lead">Recover my password</p>
                 </div>
                 <div class="body">
-                    <p>Please enter your email address below to receive instructions for resetting password.</p>
-                    <form class="form-auth-small" action="{{route('password.reset')}}" method="post">
+                    <p>Please enter your phone number to receive OTP to reset your password.</p>
+                    <form class="form-auth-small" action="{{route('reset.password-otp')}}" method="post">
                         {!! csrf_field() !!}
-                        {{-- <form method="POST" action="{{ url('reset_password_with_token') }}"> --}}
                         <div class="form-group">
-                            <input type="email" class="form-control" name="email" id="email"
-                                placeholder="Email address">
+                            <input type="text" class="form-control" name="phone" id="phone" required
+                                placeholder="Phone Number">
                         </div>
-                        <button type="submit" class="btn btn-primary btn-lg btn-block">RESET PASSWORD</button>
+                        <button type="submit" class="btn btn-primary btn-lg btn-block">Send Password Reset OTP</button>
                         <div class="bottom">
                             <span class="helper-text">Know your password? <a
                                     href="{{route('authentication.login')}}">Login</a></span>
                         </div>
                     </form>
-                    {{-- {{ Form::close() }} --}}
                 </div>
             </div>
         </div>
