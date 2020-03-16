@@ -63,7 +63,7 @@ class PasswordResetController extends Controller
 
         try {
             // Thats it, hit send and we'll take care of the rest
-            $message = 'Hello' . $user->name . ', use this 6 digit OTP to reset your password ' . $generate_otp;
+            $message = 'Hello ' . $user->name . ', use this 6 digit OTP to reset your password ' . $generate_otp;
             $from = $shortCode;
             $result = $sms->send([
                 'to'      => $phone,
