@@ -8,7 +8,6 @@ use App\User;
 use Carbon\Carbon;
 use DB;
 use Illuminate\Support\Facades\Hash;
-use App\Models\Message;
 use AfricasTalking\SDK\AfricasTalking;
 use App\Models\AfricaTalking;
 
@@ -62,7 +61,7 @@ class PasswordResetController extends Controller
         $sms = $AT->sms();
 
         try {
-            // Thats it, hit send and we'll take care of the rest
+            /** Send OTPm to reset password */
             $message = 'Hello ' . $user->name . ', use this 6 digit OTP to reset your password ' . $generate_otp;
             $from = $shortCode;
             $result = $sms->send([
