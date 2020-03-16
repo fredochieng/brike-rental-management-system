@@ -15,7 +15,7 @@
                     <p class="lead">Recover my password</p>
                 </div>
                 <div class="body">
-                    <p>Please enter your phone number to receive OTP to reset your password.</p>
+                    <p>Please enter your phone number to receive OTP to reset your password</p>
                     <form class="form-auth-small" action="{{route('reset.password-otp')}}" method="post">
                         {!! csrf_field() !!}
                         <div class="form-group">
