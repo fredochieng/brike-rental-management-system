@@ -113,7 +113,7 @@ class MonthlyPayment extends Model
             $tenant_name = explode(" ", $item->t_name);
             unset($tenant_name[1]);
             $item->tenant_name = implode(" ", $tenant_name);
-            if ($item->sum_tenants == 0) {
+            if ($item->sum_tenants == 1) {
                 $item->bal_due_hostel = number_format(round($item->balance_due), 2, '.', ',');
             } else {
                 $item->bal_due_hostel = number_format(round($item->balance_due / $item->sum_tenants), 2, '.', ',');

@@ -56,7 +56,7 @@ class SaveRentPaymentNotificationJob
                 $room_tennats_count = count(RoomAssignment::all()->where('room_id', $value->room_id)->where('r_end_date', ''));
 
                 /** Make sure category 1 is hostels */
-                if ($value->category_id == 1) {
+                if ($value->category_id == 2) {
                     $message_body = 'Hello ' . $value->tenant_name . ', kindly pay your rent for ' . $value->period . '.' .
                         ' Rent amount Kshs ' . $value->bal_due_hostel . '. Please pay Kshs ' . $value->bal_due_hostel . '.' .
                         ' to Paybill 867643 Account Number ' . $value->room_no . '.' .
