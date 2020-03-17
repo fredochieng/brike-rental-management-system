@@ -6,7 +6,6 @@ use App\Models\MonthlyPayment;
 use App\Models\Property;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
-use Kamaln7\Toastr\Facades\Toastr;
 
 class MonthlyPaymentController extends Controller
 {
