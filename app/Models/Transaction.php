@@ -108,7 +108,7 @@ class Transaction extends Model
 			DB::raw('rooms.property_id'),
 			DB::raw('rooms.room_no'),
 			DB::raw('properties.id as prop_id'),
-			DB::raw('properties.prop_name'),
+			DB::raw('properties.prop_name')
 		)
 			->join('tenants', 'tenants.t_phone', '=', 'rent_payments.phone_no', 'left outer')
 			->leftJoin('rooms', 'tenants.t_room_id', '=', 'rooms.id')
