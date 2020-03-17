@@ -59,7 +59,6 @@
                     <table class="table table-bordered table-striped table-hover dataTable js-exportable">
                         <thead>
                             <tr>
-                                <th>#</th>
                                 <th>Property</th>
                                 <th>Room Type</th>
                                 <th>Room Number</th>
@@ -70,9 +69,8 @@
                                 <th>Action</th>
                             </tr>
                         </thead>
-                        @foreach ($searched_rooms as $count => $room)
+                        @foreach ($searched_rooms as $room)
                         <tr>
-                            <td>{{ $count + 1 }}</td>
                             <td>{{ $room->prop_name }}</td>
                             <td>{{ $room->var_name }}</td>
                             <td>{{ $room->room_no }}</td>
@@ -144,7 +142,6 @@
                     <table class="table table-bordered table-striped table-hover dataTable js-exportable">
                         <thead>
                             <tr>
-                                <th>#</th>
                                 <th>Property</th>
                                 <th>Room Type</th>
                                 <th>Room Number</th>

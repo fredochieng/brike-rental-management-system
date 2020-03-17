@@ -129,6 +129,12 @@ class RoomAssignmentController extends Controller
             'room_assigned' => 1
         ]);
 
+        /** Update t_room_id in the tenants table */
+
+        $update_room_id = Tenants::where('id', $tenant_id)->update([
+            't_room_id' => $room_id
+        ]);
+
         /** Save details in the tenant monthly payment table
          * This table shows tenant's payment info
          * Which month has he paid, is he due?
@@ -141,7 +147,7 @@ class RoomAssignmentController extends Controller
         $rented = 'Yes';
 
 
-        if ($category_name == 'Hostels') {
+        if ($category_name == 'Rentals') {
             $rent_plus_deposit_amount = $rent_amount * 2;
             $balance_due = $rent_amount * 2;
         } else {
@@ -161,29 +167,30 @@ class RoomAssignmentController extends Controller
 
         $existing_track = MonthlyPayment::where('period', $start_tenancy_month)->where('room_id', $room_id)->first();
         if (!empty($existing_track)) {
-            continue;
-        }
+            //continue;
+        } else {
 
-        $save_track_array = array(
-            'tenant_id' => 1, 'room_id' => $room_id,  'payment_status' => 3, 'period' => $start_tenancy_month,
-            'rented' => $rented, 'rent_amount' => $rent_plus_deposit_amount, 'amount_paid' => '0.00',
-            'balance_due' => $balance_due
-        );
+            $save_track_array = array(
+                'tenant_id' => 1, 'room_id' => $room_id,  'payment_status' => 3, 'period' => $start_tenancy_month,
+                'rented' => $rented, 'rent_amount' => $rent_plus_deposit_amount, 'amount_paid' => '0.00',
+                'balance_due' => $balance_due
+            );
+        }
 
         $insert_track = MonthlyPayment::insert($save_track_array);
 
         /** Update monthly payment tracker rented status to No & payment status to 3 */
 
-        $monthly_track = MonthlyPayment::getMonthlyPaymentsTrack()->where('room_id', $room_id)->where('period', $start_tenancy_month)->first();
-        $track_id = $monthly_track->track_id;
+        // $monthly_track = MonthlyPayment::getMonthlyPaymentsTrack()->where('room_id', $room_id)->where('period', $start_tenancy_month)->first();
+        // $track_id = $monthly_track->track_id;
 
-        $update_track = array(
-            'payment_status' => 3,
-            'rented' => 'Yes'
-        );
+        // $update_track = array(
+        //     'payment_status' => 3,
+        //     'rented' => 'Yes'
+        // );
 
-        $update_monthly_track = MonthlyPayment::where('room_id', $room_id)->where('id', '>=', $track_id)
-            ->update($update_track);
+        // $update_monthly_track = MonthlyPayment::where('room_id', $room_id)->where('id', '>=', $track_id)
+        //     ->update($update_track);
 
         /** Log the action in the logs file */
         Log::info('Room assignment of ID ' . $room_assignment->id .  ' created by user of ID: ' . Auth::id() .
@@ -205,6 +212,7 @@ class RoomAssignmentController extends Controller
         $room_id = $request->input('variation_room_id');
         $tenant_id = $request->input('r_tenant_id');
         $start_date = $request->input('r_start_date');
+        $category_name = $request->input('category_name');
 
         $room_assignment = new RoomAssignment();
 
@@ -235,8 +243,11 @@ class RoomAssignmentController extends Controller
         $start_tenancy_month = $date->format('M Y');
 
         /** Get payment track for the month */
-        $payment_track = MonthlyPayment::getPaymentTracker()->where('prop_id', $property_id)->where('room_id', $room_id)
-            ->where('period', $start_tenancy_month)->first();
+        $payment_track = MonthlyPayment::getPaymentTracker()
+            ->where('prop_id', $property_id)
+            ->where('room_id', $room_id)
+            ->where('period', $start_tenancy_month)
+            ->first();
         $track_id = $payment_track->track_id;
         $payment_status = $payment_track->payment_status;
         $rent_amount = $payment_track->rent_amount;
@@ -244,31 +255,32 @@ class RoomAssignmentController extends Controller
         $balance_due = $payment_track->balance_due;
 
         $new_rent_amount = $rent_amount + $monthly_rent;
-
-        if ($payment_status == 1) {
-            /** Update the monthly track with the new rent amount */
-            $update_track = MonthlyPayment::where('id', $track_id)->update([
-                'rent_amount' => $new_rent_amount,
-                'amount_paid' => $amount_paid,
-                'balance_due' => $monthly_rent,
-                'payment_status' => 2
-            ]);
-        } elseif ($payment_status == 2) {
-            /** Update the monthly track with the new rent amount */
-            $update_track = MonthlyPayment::where('id', $track_id)->update([
-                'rent_amount' => $new_rent_amount,
-                'amount_paid' => $amount_paid,
-                'balance_due' => $balance_due + $monthly_rent,
-                'payment_status' => 2
-            ]);
-        } elseif ($payment_status == 3) {
-            /** Update the monthly track with the new rent amount */
-            $update_track = MonthlyPayment::where('id', $track_id)->update([
-                'rent_amount' => $new_rent_amount,
-                'amount_paid' => $amount_paid,
-                'balance_due' => $balance_due + $monthly_rent,
-                'payment_status' => 2
-            ]);
+        if ($category_name == 'Hostels') {
+            if ($payment_status == 1) {
+                /** Update the monthly track with the new rent amount */
+                $update_track = MonthlyPayment::where('id', $track_id)->update([
+                    'rent_amount' => $new_rent_amount,
+                    'amount_paid' => $amount_paid,
+                    'balance_due' => $monthly_rent,
+                    'payment_status' => 2
+                ]);
+            } elseif ($payment_status == 2) {
+                /** Update the monthly track with the new rent amount */
+                $update_track = MonthlyPayment::where('id', $track_id)->update([
+                    'rent_amount' => $new_rent_amount,
+                    'amount_paid' => $amount_paid,
+                    'balance_due' => $balance_due + $monthly_rent,
+                    'payment_status' => 2
+                ]);
+            } elseif ($payment_status == 3) {
+                /** Update the monthly track with the new rent amount */
+                $update_track = MonthlyPayment::where('id', $track_id)->update([
+                    'rent_amount' => $new_rent_amount,
+                    'amount_paid' => $amount_paid,
+                    'balance_due' => $balance_due + $monthly_rent,
+                    'payment_status' => 3
+                ]);
+            }
         }
 
         /** Log the action in the logs file */

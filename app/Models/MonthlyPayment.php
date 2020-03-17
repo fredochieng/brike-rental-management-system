@@ -42,7 +42,8 @@ class MonthlyPayment extends Model
             ->leftJoin('rent_payment_status', 'tenant_monthly_payments.payment_status', 'rent_payment_status.id')
             ->leftJoin('rooms', 'tenant_monthly_payments.room_id', 'rooms.id')
             ->leftJoin('properties', 'rooms.property_id', 'properties.id')
-            ->orderBy('tenant_monthly_payments.id', 'desc')->get();
+            ->orderBy('tenant_monthly_payments.id', 'desc')
+            ->get();
 
         $rent_trackers->map(function ($item) {
             $current_date = Carbon::now();

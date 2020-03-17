@@ -69,7 +69,7 @@
                                 <th>Amount</th>
                                 <th>Phone</th>
                                 <th>Paid By</th>
-                                <th>Account No</th>
+                                <th>Account</th>
                                 <th>Tenant Name</th>
                                 <th>Tenant Phone</th>
                                 <th>Status</th>
