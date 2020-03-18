@@ -5,92 +5,100 @@ namespace App\Http\Controllers;
 use App\Models\RentPaymentTracker;
 use Illuminate\Http\Request;
 
-class RentPaymentTrackerController extends Controller {
+class RentPaymentTrackerController extends Controller
+{
     /**
-    * Display a listing of the resource.
-    *
-    * @return \Illuminate\Http\Response
-    */
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
 
-    public function index() {
+    public function index()
+    {
         //
     }
 
-    public function fullRentPayments() {
-
+    public function fullRentPayments()
+    {
     }
 
-    public function partialRentPayments() {
-
+    public function partialRentPayments()
+    {
     }
 
-    public function fullRentArrears() {
-
-    }
-
-    /**
-    * Show the form for creating a new resource.
-    *
-    * @return \Illuminate\Http\Response
-    */
-
-    public function create() {
-        //
+    public function fullRentArrears()
+    {
     }
 
     /**
-    * Store a newly created resource in storage.
-    *
-    * @param  \Illuminate\Http\Request  $request
-    * @return \Illuminate\Http\Response
-    */
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
 
-    public function store( Request $request ) {
+    public function create()
+    {
         //
     }
 
     /**
-    * Display the specified resource.
-    *
-    * @param  \App\Models\RentPaymentTracker  $rentPaymentTracker
-    * @return \Illuminate\Http\Response
-    */
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
 
-    public function show( RentPaymentTracker $rentPaymentTracker ) {
+    public function store(Request $request)
+    {
         //
     }
 
     /**
-    * Show the form for editing the specified resource.
-    *
-    * @param  \App\Models\RentPaymentTracker  $rentPaymentTracker
-    * @return \Illuminate\Http\Response
-    */
+     * Display the specified resource.
+     *
+     * @param  \App\Models\RentPaymentTracker  $rentPaymentTracker
+     * @return \Illuminate\Http\Response
+     */
 
-    public function edit( RentPaymentTracker $rentPaymentTracker ) {
+    public function show(RentPaymentTracker $rentPaymentTracker)
+    {
         //
     }
 
     /**
-    * Update the specified resource in storage.
-    *
-    * @param  \Illuminate\Http\Request  $request
-    * @param  \App\Models\RentPaymentTracker  $rentPaymentTracker
-    * @return \Illuminate\Http\Response
-    */
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\RentPaymentTracker  $rentPaymentTracker
+     * @return \Illuminate\Http\Response
+     */
 
-    public function update( Request $request, RentPaymentTracker $rentPaymentTracker ) {
+    public function edit(RentPaymentTracker $rentPaymentTracker)
+    {
         //
     }
 
     /**
-    * Remove the specified resource from storage.
-    *
-    * @param  \App\Models\RentPaymentTracker  $rentPaymentTracker
-    * @return \Illuminate\Http\Response
-    */
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\RentPaymentTracker  $rentPaymentTracker
+     * @return \Illuminate\Http\Response
+     */
 
-    public function destroy( RentPaymentTracker $rentPaymentTracker ) {
+    public function update(Request $request, RentPaymentTracker $rentPaymentTracker)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\RentPaymentTracker  $rentPaymentTracker
+     * @return \Illuminate\Http\Response
+     */
+
+    public function destroy(RentPaymentTracker $rentPaymentTracker)
+    {
         //
     }
 }

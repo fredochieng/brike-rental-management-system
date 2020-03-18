@@ -6,6 +6,8 @@ use App\Models\MonthlyPayment;
 use App\Models\Property;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
+use DateTime;
+use Carbon\Carbon;
 
 class MonthlyPaymentController extends Controller
 {
@@ -66,14 +68,28 @@ class MonthlyPaymentController extends Controller
     }
 
     public function rentArrears()
+
     {
+        $current_date = Carbon::now();
+        $current_date = new DateTime($current_date);
+
+        $current_date = $current_date->format('Y-m-d H:i:s');
+
         $data['property'] = Property::getProperty();
         $property_id = Input::get('property_id');
         $data['currency_symbol'] = 'KES';
 
+        $compare_field = 'tenant_monthly_payments.formatted_period';
+        $compare_operator = '<';
+        $compare_value = $current_date;
+
         if (isset($_GET['property_id'])) {
             $data['searched'] = 'yes';
             $data['payment_tracks'] = MonthlyPayment::getPaymentTracker()->where('prop_id', $property_id)->where('payment_status', 3);
+            //->where($compare_field, $compare_operator, $compare_value);
+            echo "<pre>";
+            print_r($data['payment_tracks']);
+            exit;
             return view('rent-tracker.rent-arrears')->with($data);
         }
         $data['searched'] = 'no';

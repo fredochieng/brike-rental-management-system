@@ -67,7 +67,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Africa/Nairobi',
 
     /*
     |--------------------------------------------------------------------------
@@ -164,7 +164,7 @@ return [
         Kamaln7\Toastr\ToastrServiceProvider::class,
         Yajra\DataTables\DataTablesServiceProvider::class,
         \Safaricom\Mpesa\MpesaServiceProvider::class,
-       
+
 
         /*
          * Package Service Providers...
@@ -229,7 +229,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Toastr' => Kamaln7\Toastr\Facades\Toastr::class,
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
-        'Mpesa'=> \Safaricom\Mpesa\MpesaServiceProvider::class,
+        'Mpesa' => \Safaricom\Mpesa\MpesaServiceProvider::class,
 
     ],
 

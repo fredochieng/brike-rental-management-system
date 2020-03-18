@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 use DB;
 use DateTime;
 use Carbon\Carbon;
-use App\Models\RoomAssignment;
 
 class MonthlyPayment extends Model
 {
@@ -46,9 +45,6 @@ class MonthlyPayment extends Model
             ->get();
 
         $rent_trackers->map(function ($item) {
-            $current_date = Carbon::now();
-            $current_date = new DateTime($current_date);
-            $current_date = $current_date->format('M Y');
 
             /** Not sure where it has been used */
             $month = $item->period;
