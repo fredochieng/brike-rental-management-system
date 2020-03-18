@@ -65,7 +65,7 @@ class RoomsTableSeeder extends Seeder
             ["property_id" => 1, "variation_val_id" => 1, "room_no" => "73S", "max_occupants" => 3]
         ];
 
-        Rooms::insert($single_rooms);
+        // Rooms::insert($single_rooms);
 
         /** Bedsitter rooms database seeder for Desert Rangers Rentals */
         $bedsitter = [
@@ -102,6 +102,55 @@ class RoomsTableSeeder extends Seeder
             ["property_id" => 1, "variation_val_id" => 2, "room_no" => "77B", "max_occupants" => 3]
         ];
 
-        Rooms::insert($bedsitter);
+        // Rooms::insert($bedsitter);
+
+        /** Hostel rooms database seeder for Desert Rangers Rentals */
+        $hostel_rooms = [
+            ["property_id" => 2, "room_no" => 3, "variation_val_id" => "3", "max_occupants" => 3],
+            ["property_id" => 2, "room_no" => 4, "variation_val_id" => "3", "max_occupants" => 3],
+            ["property_id" => 2, "room_no" => 5, "variation_val_id" => "3", "max_occupants" => 3],
+            ["property_id" => 2, "room_no" => 6, "variation_val_id" => "3", "max_occupants" => 3],
+            ["property_id" => 2, "room_no" => 7, "variation_val_id" => "3", "max_occupants" => 3],
+            ["property_id" => 2, "room_no" => 8, "variation_val_id" => "3", "max_occupants" => 3],
+            ["property_id" => 2, "room_no" => 9, "variation_val_id" => "3", "max_occupants" => 3],
+            ["property_id" => 2, "room_no" => 10, "variation_val_id" => "3", "max_occupants" => 3],
+            ["property_id" => 2, "room_no" => 11, "variation_val_id" => "3", "max_occupants" => 3],
+            ["property_id" => 2, "room_no" => 12, "variation_val_id" => "3", "max_occupants" => 3],
+            ["property_id" => 2, "room_no" => 13, "variation_val_id" => "3", "max_occupants" => 3],
+            ["property_id" => 2, "room_no" => 14, "variation_val_id" => "3", "max_occupants" => 3],
+            ["property_id" => 2, "room_no" => 15, "variation_val_id" => "3", "max_occupants" => 3],
+            ["property_id" => 2, "room_no" => 16, "variation_val_id" => "3", "max_occupants" => 3],
+            ["property_id" => 2, "room_no" => 17, "variation_val_id" => "3", "max_occupants" => 3],
+            ["property_id" => 2, "room_no" => 18, "variation_val_id" => "3", "max_occupants" => 3],
+            ["property_id" => 2, "room_no" => 19, "variation_val_id" => "3", "max_occupants" => 3],
+            ["property_id" => 2, "room_no" => 20, "variation_val_id" => "3", "max_occupants" => 3],
+            ["property_id" => 2, "room_no" => 21, "variation_val_id" => "3", "max_occupants" => 3],
+            ["property_id" => 2, "room_no" => 22, "variation_val_id" => "3", "max_occupants" => 3],
+            ["property_id" => 2, "room_no" => 23, "variation_val_id" => "3", "max_occupants" => 3],
+            ["property_id" => 2, "room_no" => 24, "variation_val_id" => "3", "max_occupants" => 3],
+            ["property_id" => 2, "room_no" => 25, "variation_val_id" => "3", "max_occupants" => 3],
+            ["property_id" => 2, "room_no" => 26, "variation_val_id" => "3", "max_occupants" => 3],
+            ["property_id" => 2, "room_no" => 27, "variation_val_id" => "3", "max_occupants" => 3],
+            ["property_id" => 2, "room_no" => 28, "variation_val_id" => "3", "max_occupants" => 3],
+            ["property_id" => 2, "room_no" => 29, "variation_val_id" => "3", "max_occupants" => 3],
+            ["property_id" => 2, "room_no" => 30, "variation_val_id" => "3", "max_occupants" => 3],
+            ["property_id" => 2, "room_no" => 31, "variation_val_id" => "3", "max_occupants" => 3],
+            ["property_id" => 2, "room_no" => 32, "variation_val_id" => "3", "max_occupants" => 3],
+            ["property_id" => 2, "room_no" => 33, "variation_val_id" => "3", "max_occupants" => 3],
+            ["property_id" => 2, "room_no" => 34, "variation_val_id" => "3", "max_occupants" => 3],
+            ["property_id" => 2, "room_no" => 35, "variation_val_id" => "3", "max_occupants" => 3],
+            ["property_id" => 2, "room_no" => 36, "variation_val_id" => "3", "max_occupants" => 3],
+            ["property_id" => 2, "room_no" => 37, "variation_val_id" => "3", "max_occupants" => 3],
+            ["property_id" => 2, "room_no" => 38, "variation_val_id" => "3", "max_occupants" => 3],
+            ["property_id" => 2, "room_no" => 39, "variation_val_id" => "3", "max_occupants" => 3],
+            ["property_id" => 2, "room_no" => 40, "variation_val_id" => "3", "max_occupants" => 3],
+            ["property_id" => 2, "room_no" => 41, "variation_val_id" => "3", "max_occupants" => 3],
+            ["property_id" => 2, "room_no" => 42, "variation_val_id" => "3", "max_occupants" => 3],
+            ["property_id" => 2, "room_no" => 43, "variation_val_id" => "3", "max_occupants" => 3],
+            ["property_id" => 2, "room_no" => 44, "variation_val_id" => "3", "max_occupants" => 3],
+
+        ];
+
+        Rooms::insert($hostel_rooms);
     }
 }

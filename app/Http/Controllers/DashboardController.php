@@ -36,7 +36,7 @@ class DashboardController extends BaseController
         }
 
         $data['total_property'] = count(Property::getProperty());
-        $data['variation_values'] = Variation::variationValuesSum();
+        $data['variation_values'] = Variation::variationValuesSum()->where('variation_value_id', '!=', 3);
 
         foreach ($data['variation_values'] as $key => $value) {
             $total_rooms[] = $value->tot_rooms;
