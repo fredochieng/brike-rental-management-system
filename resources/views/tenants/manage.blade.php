@@ -170,8 +170,8 @@
                                 <th>Phone</th>
                                 <th>Paid By</th>
                                 <th>Account</th>
-                                <th>Tenant Name</th>
-                                <th>Tenant Phone</th>
+                                <th>Tenant</th>
+                                <th>Phone</th>
                                 <th>Paid At</th>
                             </tr>
                         </thead>

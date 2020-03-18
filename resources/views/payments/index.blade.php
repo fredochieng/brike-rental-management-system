@@ -50,7 +50,7 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="body">
-                <div class="table-responsive">
+                <div class="table-responsive" style="font-size:11px">
                     <table class="table table-bordered table-striped table-hover dataTable js-exportable"
                         style="font-size:11px">
                         <thead>
@@ -61,8 +61,8 @@
                                 <th>Paid By</th>
                                 <th>Room</th>
                                 <th>Property</th>
-                                <th>Tenant Name</th>
-                                <th>Tenant Phone</th>
+                                <th>Tenant</th>
+                                <th>Phone</th>
                                 <th>Confirmed</th>
                                 <th>Status</th>
                                 <th>Paid At</th>
@@ -114,7 +114,7 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="body">
-                <div class="table-responsive">
+                <div class="table-responsive" style="font-size:11px">
                     <table class="table table-bordered table-striped table-hover dataTable js-exportable"
                         style="font-size:11px">
                         <thead>
@@ -125,8 +125,8 @@
                                 <th>Paid By</th>
                                 <th>Room</th>
                                 <th>Property</th>
-                                <th>Tenant Name</th>
-                                <th>Tenant Phone</th>
+                                <th>Tenant</th>
+                                <th>Phone</th>
                                 <th>Confirmed</th>
                                 <th>Status</th>
                                 <th>Paid At</th>

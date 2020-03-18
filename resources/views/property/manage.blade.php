@@ -190,9 +190,9 @@
                 <h2>Recent Payments</h2>
             </div>
             <div class="body">
-                <div class="table-responsive" style="font-size:13px">
+                <div class="table-responsive" style="font-size:12px">
                     <table class="table table-bordered table-striped table-hover dataTable js-exportable"
-                        style="font-size:13px">
+                        style="font-size:12px">
                         <thead class="thead-primary">
                             <tr>
                                 <th>Trans ID</th>
@@ -200,8 +200,8 @@
                                 <th>Phone</th>
                                 <th>Paid By</th>
                                 <th>Room</th>
-                                <th>Name</th>
-                                <th>Tenant Phone</th>
+                                <th>Tenant</th>
+                                <th>Phone</th>
                                 <th>Status</th>
                                 <th>Paid At</th>
                             </tr>
