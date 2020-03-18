@@ -55,7 +55,6 @@
                     <table class="table table-bordered table-hover dataTable js-exportable" style="font-size:13px">
                         <thead>
                             <tr style="font-size:12px">
-                                <th>#</th>
                                 <th>Name</th>
                                 <th>ID/Reg Number</th>
                                 <th>Phone Number</th>
@@ -68,7 +67,6 @@
                         <tbody>
                             @foreach ($searched_tenants as $count => $item)
                             <tr>
-                                <td>{{ $count + 1 }}</td>
                                 <td>{{ $item->t_name }}</td>
                                 <td>{{ $item->t_id_no }}</td>
                                 <td>{{ $item->t_phone }}</td>
@@ -121,7 +119,6 @@
                     <table class="table table-bordered table-hover dataTable js-exportable" style="font-size:13px">
                         <thead>
                             <tr style="font-size:12px">
-                                <th>#</th>
                                 <th>Name</th>
                                 <th>ID/Reg Number</th>
                                 <th>Phone Number</th>

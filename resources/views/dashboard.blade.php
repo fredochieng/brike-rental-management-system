@@ -79,7 +79,7 @@
             <div class="body">
                 <div class="icon text-success"><i class="fa fa-check"></i> </div>
                 <div class="content">
-                    <div class="text">Processed Transactions</div>
+                    <div class="text">Processed Trans</div>
                     <h6 class="number">{{ $processed_transactions }}</h6>
                 </div>
             </div>
@@ -90,7 +90,7 @@
             <div class="body">
                 <div class="icon text-danger"><i class="fa fa-exclamation"></i> </div>
                 <div class="content">
-                    <div class="text">Pending Transactions</div>
+                    <div class="text">Pending Trans</div>
                     <h6 class="number">{{ $pending_transactions }}</h6>
                 </div>
             </div>

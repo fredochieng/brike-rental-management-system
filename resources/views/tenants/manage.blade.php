@@ -47,7 +47,9 @@
                         </tr>
                         <tr>
                             <td><strong>Room Number</strong></td>
-                            <td class="align-right">{{ $room_assignment->room_no }}</td>
+                            <td class="align-right"><a target="_blank"
+                                    href="/room/manage/&id={{$room_assignment->rm_id}}">{{ $room_assignment->room_no }}</a>
+                            </td>
                         </tr>
                         <tr>
                             <td><strong>Tenancy Start Date</strong></td>
@@ -163,11 +165,11 @@
                         style="font-size:13px">
                         <thead class="thead-primary">
                             <tr style="font-size:12px">
-                                <th>Transaction ID</th>
+                                <th>Trans ID</th>
                                 <th>Amount</th>
                                 <th>Phone</th>
                                 <th>Paid By</th>
-                                <th>Account Number</th>
+                                <th>Account</th>
                                 <th>Tenant Name</th>
                                 <th>Tenant Phone</th>
                                 <th>Paid At</th>
