@@ -36,7 +36,7 @@
                     <div class="col-lg-2 col-md-6 col-sm-12">
                         <div class="form-group">
                             <button type="submit" class="btn btn-block btn-primary"><i class="fa fa-search"></i>
-                                <span>Search transactions</span></button>
+                                <span>Search</span></button>
                         </div>
                     </div>
                 </div>
@@ -61,8 +61,8 @@
                                 <th>Paid By</th>
                                 <th>Room</th>
                                 <th>Property</th>
-                                <th>Tenant Name</th>
-                                <th>Tenant Phone</th>
+                                <th>Tenant</th>
+                                <th>Phone</th>
                                 <th>Status</th>
                                 <th>Time</th>
                             </tr>

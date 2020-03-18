@@ -60,8 +60,8 @@
                                 <th>Paid By</th>
                                 <th>Room</th>
                                 <th>Property</th>
-                                <th>Tenant Name</th>
-                                <th>Tenant Phone</th>
+                                <th>Tenant</th>
+                                <th>Phone</th>
                                 <th>Status</th>
                                 <th>Time</th>
                                 <th>Action</th>
@@ -117,8 +117,8 @@
                                 <th>Paid By</th>
                                 <th>Room</th>
                                 <th>Property</th>
-                                <th>Tenant Name</th>
-                                <th>Tenant Phone</th>
+                                <th>Tenant</th>
+                                <th>Phone</th>
                                 <th>Status</th>
                                 <th>Time</th>
                             </tr>
