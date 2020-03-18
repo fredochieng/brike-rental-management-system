@@ -56,9 +56,9 @@
                         <thead>
                             <tr style="font-size:12px">
                                 <th>Name</th>
-                                <th>ID/Reg Number</th>
-                                <th>Phone Number</th>
-                                <th>Email Address</th>
+                                <th>ID/Reg No</th>
+                                <th>Phone</th>
+                                <th>Email</th>
                                 <th>Property</th>
                                 <th>Created At</th>
                                 <th>Action</th>
@@ -120,9 +120,9 @@
                         <thead>
                             <tr style="font-size:12px">
                                 <th>Name</th>
-                                <th>ID/Reg Number</th>
-                                <th>Phone Number</th>
-                                <th>Email Address</th>
+                                <th>ID/Reg No</th>
+                                <th>Phone</th>
+                                <th>Email</th>
                                 <th>Property</th>
                                 <th>Created At</th>
                                 <th>Action</th>
