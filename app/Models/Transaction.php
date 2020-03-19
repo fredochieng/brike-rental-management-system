@@ -87,6 +87,12 @@ class Transaction extends Model
 
 		$payments->map(function ($item) {
 			$item->trans_date = date("Y-m-d H:i:s", strtotime($item->trans_time));
+
+			// $item->tenant = DB::table('tenants')->select(
+			// 	DB::raw('tenants.t_phone'),
+			// 	DB::raw('tenants.t_name')
+			// )->where('t_phone', $item->phone_no)
+			// 	->first();
 			return $item;
 		});
 

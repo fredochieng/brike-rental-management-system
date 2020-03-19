@@ -87,7 +87,6 @@
                                             <a class="dropdown-item" href="/tenant/manage/&id={{$item->tenant_id}}"><i
                                                     class="icon-eye"></i> View
                                                 tenant</a>
-
                                             @if ($item->t_tenant_id == '')
                                             <a class="dropdown-item" href="#" data-toggle="modal" disabled
                                                 data-target="deleteTenantModal_{{$item->tenant_id}}"

@@ -87,9 +87,6 @@ class MonthlyPaymentController extends Controller
             $data['searched'] = 'yes';
             $data['payment_tracks'] = MonthlyPayment::getPaymentTracker()->where('prop_id', $property_id)->where('payment_status', 3);
             //->where($compare_field, $compare_operator, $compare_value);
-            echo "<pre>";
-            print_r($data['payment_tracks']);
-            exit;
             return view('rent-tracker.rent-arrears')->with($data);
         }
         $data['searched'] = 'no';
