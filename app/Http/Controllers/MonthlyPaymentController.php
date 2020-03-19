@@ -83,6 +83,7 @@ class MonthlyPaymentController extends Controller
         $compare_operator = '<';
         $compare_value = $current_date;
 
+
         if (isset($_GET['property_id'])) {
             $data['searched'] = 'yes';
             $data['payment_tracks'] = MonthlyPayment::getPaymentTracker()->where('prop_id', $property_id)->where('payment_status', 3)
