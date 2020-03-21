@@ -181,7 +181,7 @@ class TransactionsController extends Controller
         $data['tenant_name'] = $data['payments']->t_name;
         $data['tenant_phone'] = $data['payments']->t_phone;
         $data['tenant_room'] = $data['payments']->room_no;
-        $data['trans_Ped'] = $data['payments']->trans_confirmed;
+        $data['trans_confirmed'] = $data['payments']->trans_confirmed;
         $data['cron_processed'] = $data['payments']->cron_processed;
 
         if ($data['tenant_name'] == '') {
