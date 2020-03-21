@@ -70,10 +70,9 @@ class MonthlyPaymentController extends Controller
     public function rentArrears()
 
     {
-        $current_date = Carbon::now();
+        $current_date = Carbon::now()->toDateString();
         $current_date = new DateTime($current_date);
-
-        $current_date = $current_date->format('M Y');
+        $current_date = $current_date->format('Y-m-d H:i:s');
 
         $data['property'] = Property::getProperty();
         $property_id = Input::get('property_id');
@@ -88,7 +87,8 @@ class MonthlyPaymentController extends Controller
             $data['searched'] = 'yes';
             $data['payment_tracks'] = MonthlyPayment::getPaymentTracker()->where('prop_id', $property_id)->where('payment_status', 3)
                 //->where($compare_field, $compare_operator, $compare_value);
-                ->where('period', $current_date);
+                // ->where('period', $current_date);
+                ->where('formatted_period', '<=', $current_date);
             return view('rent-tracker.rent-arrears')->with($data);
         }
         $data['searched'] = 'no';

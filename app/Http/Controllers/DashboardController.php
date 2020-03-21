@@ -69,7 +69,7 @@ class DashboardController extends BaseController
         $current_date = $current_date->format('Y-m-d H:i:s');
         $rented = 'Yes';
 
-        $payment_tracks = MonthlyPayment::getPaymentTracker()->where('payment_status', 3)
+        $payment_tracks = MonthlyPayment::getPaymentTracker()->whereIn('payment_status', [2, 3])
             ->where('formatted_period', '<=', $current_date)->where('rented', $rented);
 
         $rent_arrears_amount = array();
