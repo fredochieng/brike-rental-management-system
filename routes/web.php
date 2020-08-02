@@ -40,12 +40,15 @@ Auth::routes();
 Route::get('property/categories', 'PropertyCategoriesController@index')->name('property.categories');
 Route::post('category/save', 'PropertyCategoriesController@store')->name('category.save');
 Route::post('property/categories/&id={id}', 'PropertyCategoriesController@update')->name('property.category-update');
+Route::post('property/category/delete/&id={id}', 'PropertyCategoriesController@deleteCategory');
 
 
 /* Property variations */
 Route::get('property/variations', 'PropertyVariationsController@index')->name('property.variations');
 Route::post('variation/save', 'PropertyVariationsController@store')->name('variation.save');
 Route::post('property/variations/&id={id}', 'PropertyVariationsController@update')->name('property.variation-update');
+Route::post('variation-value/update/&id={id}', 'PropertyVariationsController@updateVariationValue');
+Route::post('property/variations/delete/&id={id}', 'PropertyVariationsController@deleteVariation');
 
 
 /* Property */
@@ -59,6 +62,8 @@ Route::any('property/manage/&id={id}', 'PropertyController@manageProperty')->nam
 Route::get('property/get-variation-rooms', 'PropertyController@varRoomsSelector')->name('rooms.get-variation-rooms');
 Route::get('property/get-variation-rented-rooms', 'PropertyController@varRentedRoomsSelector')->name('rooms.get-variation-rooms');
 Route::get('property/get-variation-values', 'PropertyController@variationValuesSelector')->name('rooms.get-variation-values');
+Route::post('property/delete/&id={id}', 'PropertyController@deleteProperty');
+
 
 /* Rooms */
 Route::get('rooms/rooms-list', 'RoomsController@index')->name('rooms.rooms-list');

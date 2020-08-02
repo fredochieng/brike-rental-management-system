@@ -45,6 +45,7 @@
                                 </td>
                             </tr>
                             @include('property.categories.modals.modal-edit-category')
+                            @include('property.categories.modals.modal-delete-category')
                             @endforeach
                         </tbody>
                     </table>

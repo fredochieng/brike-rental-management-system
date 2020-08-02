@@ -22,6 +22,7 @@ use Illuminate\Support\Facades\Log;
 use DB;
 use Carbon\Carbon;
 use DateTime;
+use Prophecy\Prophet;
 
 class PropertyController extends Controller
 {
@@ -450,6 +451,18 @@ class PropertyController extends Controller
      * @param  \App\Models\Property  $property
      * @return \Illuminate\Http\Response
      */
+
+    public function deleteProperty(Request $request, $property_id)
+    {
+        // dd($property_id);
+        $delete_panel = Property::destroy($property_id);
+        $delete_var = DB::table('property_variations')->where('property_id', $property_id)->delete();
+
+        Toastr::success('Property deleted successfully');
+
+        return back();
+        // dd($property_id);
+    }
 
     public function destroy(Property $property)
     {

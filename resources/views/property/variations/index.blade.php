@@ -34,9 +34,10 @@
                                 <td>{{ $item->name}}</td>
                                 <td>{{ $item->created_at }}</td>
                                 <td>
-                                    <a class="btn btn-primary btn-sm" title="Edit " href="#" data-toggle="modal"
-                                        disabled data-target="#editVariationModal_{{$item->variation_id}}"
-                                        data-backdrop="static" data-keyboard="false"><i class="icon-eye"></i></a>
+                                    <a class="btn btn-primary btn-sm" title="Edit Variation " href="#"
+                                        data-toggle="modal" disabled
+                                        data-target="#editVariationModal_{{$item->variation_id}}" data-backdrop="static"
+                                        data-keyboard="false"><i class="icon-pencil"></i></a>
 
                                     @if ($item->prop_var_id == '')
                                     <a class="btn btn-danger btn-sm" title="Delete " href="#" data-toggle="modal"
@@ -45,9 +46,14 @@
                                     @else
 
                                     @endif
+                                    <a class="btn btn-success btn-sm" title="Edit Value " href="#" data-toggle="modal"
+                                        disabled data-target="#editVariationValueModal_{{$item->var_value_temp_id}}"
+                                        data-backdrop="static" data-keyboard="false"><i class="icon-pencil"></i></a>
                                 </td>
                             </tr>
                             @include('property.variations.modals.modal-edit-variation')
+                            @include('property.variations.modals.modal-edit-variation-value')
+                            @include('property.variations.modals.modal-delete-variation')
                             @endforeach
                         </tbody>
                     </table>

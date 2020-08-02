@@ -51,7 +51,9 @@
                                                 property</a>
 
                                             @if ($item->room_property_id == '')
-                                            <a class="dropdown-item" href=""><i class="icon-trash"></i> Delete
+                                            <a class="dropdown-item" href="#deletePropertyModal" data-toggle="modal"
+                                                data-target="#deletePropertyModal_{{ $item->property_id }}"><i
+                                                    class="icon-trash"></i> Delete
                                                 property</a>
                                             @else
 
@@ -60,6 +62,7 @@
                                     </div>
                                 </td>
                             </tr>
+                            @include('property.modals.modal-delete-property')
                             @endforeach
                         </tbody>
                     </table>
