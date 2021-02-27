@@ -30,7 +30,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-lg-6 col-md-6 col-sm-12">
+                        <div class="col-lg-4 col-md-6 col-sm-12">
                             <div class="form-group">
                                 <label for="phone-ex" class="control-label">Room Number <span
                                         class="text-danger">*</span></label>
@@ -39,7 +39,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-6 col-md-6 col-sm-12">
+                        <div class="col-lg-4 col-md-6 col-sm-12">
                             <div class="form-group">
                                 <label for="phone" class="control-label">Maximum Occupants <span
                                         class="text-danger">*</span></label>
@@ -56,6 +56,15 @@
                                     <option value='9'>9 people</option>
                                     <option value='No max'>No maximum number</option>
                                 </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label for="phone-ex" class="control-label">Rent p/mo <span
+                                        class="text-danger">*</span></label>
+                                <div class="form-group">
+                                    {{Form::number('room_rent', null, ['class' => 'form-control', 'required', 'placeholder' => 'Enter room rent p/mo' ])}}
+                                </div>
                             </div>
                         </div>
                     </div>

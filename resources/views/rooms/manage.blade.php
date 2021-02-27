@@ -9,7 +9,7 @@
     <div class="col-lg-12 col-md-12 col-sm-12">
         <div class="row clearfix">
 
-            <div class="col-lg-4 col-md-6 col-sm-12 text-center">
+            <div class="col-lg-3 col-md-6 col-sm-12 text-center">
                 <div class="card overflowhidden">
                     <div class="body">
                         <h5 class="m-t-0 m-b-5">{{ $tot_tenants }}</h5>
@@ -19,18 +19,29 @@
                 </div>
             </div>
 
-            <div class="col-lg-4 col-md-6 col-sm-12 text-center">
+            <div class="col-lg-3 col-md-6 col-sm-12 text-center">
+                <div class="card overflowhidden">
+                    <div class="body">
+                        <h5 class="m-t-0 m-b-5">{{ $currency_symbol }} {{ number_format($room->room_rent, 2, '.', ',') }}
+                        </h5>
+                        <p class="text-muted ">Rent p/mo</p>
+                    </div>
+                    <span id="linecustom2">2,9,5,5,8,5,4,2,6</span>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6 col-sm-12 text-center">
                 <div class="card overflowhidden">
                     <div class="body">
                         <h5 class="m-t-0 m-b-5">{{ $currency_symbol }} {{ number_format($tot_payments, 2, '.', ',') }}
                         </h5>
                         <p class="text-muted ">Revenue income</p>
                     </div>
-                    <span id="linecustom2">2,9,5,5,8,5,4,2,6</span>
+                    <span id="linecustom4">2,9,5,5,8,5,4,2,6</span>
                 </div>
             </div>
 
-            <div class="col-lg-4 col-md-6 col-sm-12 text-center">
+            <div class="col-lg-3 col-md-6 col-sm-12 text-center">
                 <div class="card overflowhidden">
                     <div class="body">
                         <h5 class="m-t-0 m-b-5">{{ $currency_symbol}} {{ $rent_arrears_amount }}</h5>

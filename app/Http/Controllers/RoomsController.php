@@ -24,6 +24,11 @@ class RoomsController extends Controller
      * @return \Illuminate\Http\Response
      */
 
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         $data['property'] = Property::getProperty();
@@ -90,6 +95,7 @@ class RoomsController extends Controller
         $variation_val_id = $request->input('variation_val_id');
         $room_no = strtoupper($request->input('room_no'));
         $max_occupants = $request->input('max_occupants');
+        $room_rent = $request->input('room_rent');
 
         /** Get the total number of added rooms for the selected variation from thr room table */
         $added_rooms_count = count(Rooms::getRooms()->where('property_id', $property_id)
@@ -112,6 +118,7 @@ class RoomsController extends Controller
             $room->variation_val_id = $variation_val_id;
             $room->room_no = $room_no;
             $room->max_occupants = $max_occupants;
+            $room->room_rent = $room_rent;
 
             $room->save();
 
@@ -210,10 +217,12 @@ class RoomsController extends Controller
         /** Get room data from edit room form **/
         $room_no = strtoupper($request->input('room_no'));
         $max_occupants = $request->input('max_occupants');
+        $room_rent = $request->input('room_rent');
 
         $room_data = array(
             'room_no' => $room_no,
-            'max_occupants' => $max_occupants
+            'max_occupants' => $max_occupants,
+            'room_rent' => $room_rent
         );
         $update_room = Rooms::where('id', $room_id)->update($room_data);
 

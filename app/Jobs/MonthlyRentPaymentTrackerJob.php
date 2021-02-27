@@ -57,6 +57,7 @@ class MonthlyRentPaymentTrackerJob
         $rooms = DB::table('rooms')->select(
             DB::raw('rooms.variation_val_id'),
             DB::raw('rooms.id as room_id'),
+            DB::raw('rooms.id as room_rent'),
             DB::raw('rooms.is_vacant'),
             DB::raw('variation_value_template.id as var_val_id'),
             DB::raw('variation_value_template.name as var_name'),
@@ -87,15 +88,6 @@ class MonthlyRentPaymentTrackerJob
 
                 foreach ($rooms as $key => $value) {
 
-                    // DB::table( 'tenant_monthly_payments' )->upsert(
-                    //     [
-                    //         'tenant_id' => 1, 'room_id' => $value->room_id,  'payment_status' => 3, 'period' => $period,'rented' => $value->rented,
-                    //         'rent_amount' => $value->monthly_rent, 'amount_paid' => '0.00', 'balance_due' => $value->monthly_rent
-                    //     ],
-                    //     ['period', 'room_id'],
-                    //     ['updated_at']
-                    // );
-
                     $existing_track = MonthlyPayment::where('period', $period)->where('room_id', $value->room_id)->first();
                     if (!empty($existing_track)) {
                         continue;
@@ -103,8 +95,8 @@ class MonthlyRentPaymentTrackerJob
 
                     $save_track_array = array(
                         'tenant_id' => 1, 'room_id' => $value->room_id,  'payment_status' => 3, 'period' => $period,
-                        'rented' => $value->rented, 'rent_amount' => $value->monthly_rent, 'amount_paid' => '0.00',
-                        'balance_due' => $value->monthly_rent
+                        'rented' => $value->rented, 'rent_amount' => $value->room_rent, 'amount_paid' => '0.00',
+                        'balance_due' => $value->room_rent
                     );
 
                     $insert_track = MonthlyPayment::insert($save_track_array);
