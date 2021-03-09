@@ -60,6 +60,7 @@
                                 <th>Phone</th>
                                 <th>Email</th>
                                 <th>Property</th>
+                                <th>Room No</th>
                                 <th>Created At</th>
                                 <th>Action</th>
                             </tr>
@@ -76,6 +77,7 @@
                                 <td>{{ $item->t_email }}</td>
                                 @endif
                                 <td>{{ $item->prop_name }}</td>
+                                <td>{{ $item->room_no }}</td>
                                 <td>{{ $item->t_created_at }}</td>
                                 <td>
                                     <div class="btn-group btn-group-sm role=" group">

@@ -30,11 +30,16 @@ class Tenants extends Model {
         DB::raw( 'tenants.created_at as t_created_at' ),
         DB::raw( 'properties.id as property_id' ),
         DB::raw( 'properties.prop_name' ),
+        //DB::raw('rooms.id as rm_idd'),
+       // DB::raw('rooms.room_no'),
         DB::raw( '(select tenant_id as t_id from room_assignments where tenant_id = tenants.id order by id asc limit 1) as t_tenant_id' )
         )
         ->leftJoin( 'properties', 'tenants.t_property_id', 'properties.id' )
+        //->join( 'rooms', 'rooms.id', 'tenants.t_room_id' )
         ->orderBy( 'tenants.id', 'desc' )
         ->get();
+
+        //dd($tenants);
         
         return $tenants;
     }

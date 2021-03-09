@@ -48,11 +48,13 @@ class TenantsController extends Controller
                 $r_end_date = '';
                 $data['searched_tenants'] = Tenants::getTenants()->where('property_id', $property_id)->where('t_status', $t_status)
                     ->where('room_assigned', $room_assigned)->where('r_end_date', '=', $r_end_date);
+                    
             } else {
                 $room_assigned = 0;
                 $r_end_date = !'';
                 $data['searched_tenants'] = Tenants::getTenants()->where('property_id', $property_id)->where('t_status', $t_status)
                     ->where('room_assigned', $room_assigned);
+
             }
 
             return view('tenants.index')->with($data);
