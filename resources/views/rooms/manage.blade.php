@@ -69,7 +69,10 @@
         <div class="card">
             <div class="header">
                 <h2>Rent Payments</h2>
-            </div>
+                <a href="#" data-toggle="modal" data-target="#EditRentPerMonthModal_{{ $room->room_id }}"
+                class="btn btn-info pull-right"><i class="icon-plus"></i> Edit Rent p/month
+            </a>
+            
             <div class="body">
                 <div class="table-responsive" style="font-size:10px">
                     <table class="table table-bordered table-striped table-hover dataTable js-exportable"
@@ -145,9 +148,12 @@
         </div>
     </div>
 </div>
+@include('rooms.modals.modal-edit-rent-per-month')
 
 @stop
+{{-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.js"></script> --}}
 @section('page-script')
+
 
 $('.knob').knob({
 draw: function() {
@@ -241,5 +247,6 @@ maxSpotColor: true,
 spotColor: '#e0b89d',
 spotRadius: 0
 });
+
 
 @stop

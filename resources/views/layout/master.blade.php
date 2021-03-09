@@ -22,6 +22,11 @@
         <link rel="stylesheet"
             href="{{ asset('assets/vendor/bootstrap-datepicker/css/bootstrap-datepicker3.min.css')}}" />
 
+            <link rel="stylesheet"
+            href="{{ asset('css/monthYearSelector.css')}}" />
+
+            <link id="themecss" rel="stylesheet" type="text/css" href="//www.shieldui.com/shared/components/latest/css/light/all.min.css" />
+
         <link rel="stylesheet"
             href="{{ asset('assets/vendor/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/css/ecommerce.css') }}" />
@@ -181,6 +186,13 @@
         <script src="{{ asset('/js/getVariationsSelector.js') }}"></script>
         <script src="{{ asset('/js/smsRoomSelector.js') }}"></script>
         <script src="{{ asset('/js/confirmPaymentRoomSelector.js') }}"></script>
+
+
+
+
+        {{-- <script type="text/javascript" src="//www.shieldui.com/shared/components/latest/js/jquery-1.11.1.min.js"></script> --}}
+        <script type="text/javascript" src="//www.shieldui.com/shared/components/latest/js/shieldui-all.min.js"></script>
+        <script src="{{ asset('/js/monthYearSelector.js') }}"></script>
 
         @if (Request::segment(1) === 'dashboard' )
         <script src="{{ asset('assets/bundles/chartist.bundle.js') }}"></script>

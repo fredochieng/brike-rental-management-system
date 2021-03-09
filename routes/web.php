@@ -72,6 +72,8 @@ Route::get('rooms/get-variation-values', 'RoomsController@variationValuesSelecto
 Route::post('rooms/save', 'RoomsController@store')->name('rooms.save');
 Route::any('room/manage/&id={id}', 'RoomsController@manageRoom')->name('rooms.manage-room');
 Route::post('rooms/update/&id={id}', 'RoomsController@update')->name('rooms.room-update');
+Route::post('rooms/update-rent-per-month/&id={id}', 'RoomsController@edit_rent_per_month')->name('rooms.update-rent-per-month');
+
 
 /** Room assignments */
 Route::get('assignments/room-assignments', 'RoomAssignmentController@index')->name('assignments.room-assignments');

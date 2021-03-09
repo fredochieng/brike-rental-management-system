@@ -8,6 +8,7 @@ use App\Models\Property;
 use App\Models\Transaction;
 use App\Models\RoomAssignment;
 use App\Models\MonthlyPayment;
+use App\Models\RentPaymentTracker;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Kamaln7\Toastr\Facades\Toastr;
@@ -230,6 +231,27 @@ class RoomsController extends Controller
         Log::info('Room of ID ' . $room_id .  ' updated' .
             ' at ' . $now);
         Toastr::success('Room updated successfully');
+
+        return back();
+    }
+
+    public function edit_rent_per_month(Request $request, $room_id){
+
+        $month_year = $request->monthYear;
+        $rent_amount = $request->rent_amount;
+
+        $month_year = new DateTime($month_year);
+        $month_year = $month_year->format('M Y');
+        
+        $month_rent_array = array(
+            'rent_amount' => $rent_amount,
+            'balance_due' => $rent_amount
+        );
+
+        $update_amount = RentPaymentTracker::where('room_id', $room_id)
+        ->where('period', $month_year)->update($month_rent_array);
+
+        Toastr::success('Room rent updated successfully');
 
         return back();
     }
