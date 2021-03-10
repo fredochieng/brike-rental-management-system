@@ -11,6 +11,7 @@ class PropertyVariations extends Model {
     * otherwise just use it the way it is */
 
     protected $table = 'variation_template';
+    
 
     public static function getPropertyVariations() {
 

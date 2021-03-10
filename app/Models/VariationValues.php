@@ -36,4 +36,16 @@ class VariationValues extends Model {
 
         return $variation_values;
     }
+
+    /** USed to edit room variation value */
+    public static function getVars() {
+        $variation_values = DB::table( 'variation_value_template' )->select(
+            DB::raw( 'variation_value_template.id' ),
+            DB::raw( 'variation_value_template.variation_temp_id' ),
+            DB::raw( 'variation_value_template.name as var_value_name' )
+        )
+        ->get();
+
+        return $variation_values;
+    }
 }

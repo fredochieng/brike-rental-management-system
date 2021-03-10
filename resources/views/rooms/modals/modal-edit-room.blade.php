@@ -26,10 +26,10 @@
                         <div class="form-group">
                             <label for="phone" class="control-label">Variation <span
                                     class="text-danger">*</span></label>
-                            <select class="custom-select" name="variation_val_id" disabled required>
+                            <select class="custom-select" name="variation_val_id" required>
                                 <option value="{{ $room->var_val_id }}">{{ $room->var_name }}</option>
-                                @foreach($property as $item)
-                                <option value='{{ $item->property_id }}'>{{ $item->prop_name }}</option>
+                                @foreach($vars as $item)
+                                <option value='{{ $item->variation_temp_id }}'>{{ $item->var_value_name }}</option>
                                 @endforeach
                             </select>
                         </div>

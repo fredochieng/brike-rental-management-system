@@ -81,7 +81,7 @@ class Transaction extends Model
 			->join('tenants', 'tenants.t_phone', '=', 'rent_payments.phone_no', 'left outer')
 			->leftJoin('rooms', 'tenants.t_room_id', '=', 'rooms.id')
 			->leftJoin('properties', 'rooms.property_id', '=', 'properties.id')
-			->where('rent_payments.trans_type', '=', 'Pay Bill')
+			//->whereIn('rent_payments.trans_type', '=', array('Pay Bill', 'Mpesa', 'Bank', 'Cash'))
 			->orderBy('rent_payments.id', 'asc')
 			->get();
 

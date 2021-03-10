@@ -280,6 +280,40 @@ class TenantsController extends Controller
         return back();
     }
 
+    public function add_manual_payment(Request $request){
+
+        $payments = new Transaction();
+        $payments->trans_type = $request->payment_method;
+        $payments->trans_id = $request->trans_id;
+        $payments->trans_time = Carbon::now()->toDateTimeString();
+        $payments->trans_amount = $request->trans_amount;
+        $payments->bus_shortcode = $request->msisdn;
+        $payments->bill_ref_no = $request->bill_ref_no;
+        $payments->org_account_bal = 1000;
+        $payments->msisdn = $request->msisdn;
+        $payments->phone_no = $request->msisdn;
+        $payments->first_name = $request->first_name;
+        $payments->middle_name = $request->first_name;
+        $payments->last_name = $request->first_name;
+        $payments->payment_method = $request->payment_method;
+        $payments->trans_confirmed = 1;
+
+        $exist_trans_id = Transaction::where('trans_id', $request->trans_id)->first();
+
+        if(empty($exist_trans_id)){
+
+            $payments->save();
+            Toastr::success('Payment made successfully');
+
+        }else{
+
+            Toastr::error('Transaction ID already saved');
+        }
+
+        return back();
+       
+    }
+
     /**
      * Display the specified resource.
      *

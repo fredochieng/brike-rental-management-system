@@ -158,6 +158,9 @@
         <div class="card">
             <div class="header">
                 <h2>Rent Payments</h2>
+                <a href="#" data-toggle="modal" data-target="#AddManualPayment{{ $tenant->tenant_id }}"
+                    class="btn btn-info pull-right"><i class="icon-plus"></i> New Manual Payment
+                </a>
             </div>
             <div class="body">
                 <div class="table-responsive" style="font-size:10px">
@@ -197,6 +200,7 @@
 </div>
 @include('tenants.modals.modal-unassign-room')
 @include('tenants.modals.modal-reactivate-tenant')
+@include('tenants.modals.modal-add-manual-payment')
 @stop
 @section('page-script')
 

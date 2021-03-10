@@ -9,6 +9,7 @@ use App\Models\Transaction;
 use App\Models\RoomAssignment;
 use App\Models\MonthlyPayment;
 use App\Models\RentPaymentTracker;
+use App\Models\VariationValues;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Kamaln7\Toastr\Facades\Toastr;
@@ -34,6 +35,7 @@ class RoomsController extends Controller
     {
         $data['property'] = Property::getProperty();
         $data['rooms'] = Rooms::getRooms();
+        $data['vars'] = VariationValues::getVars();
 
         $data['searched_rooms'] = array();
         $property_id = Input::get('property_id');
@@ -219,11 +221,13 @@ class RoomsController extends Controller
         $room_no = strtoupper($request->input('room_no'));
         $max_occupants = $request->input('max_occupants');
         $room_rent = $request->input('room_rent');
+        $variation_val_id = $request->input('variation_val_id');
 
         $room_data = array(
             'room_no' => $room_no,
             'max_occupants' => $max_occupants,
-            'room_rent' => $room_rent
+            'room_rent' => $room_rent,
+            'variation_val_id' => $variation_val_id
         );
         $update_room = Rooms::where('id', $room_id)->update($room_data);
 
